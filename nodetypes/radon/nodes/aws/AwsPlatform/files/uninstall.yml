@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  tasks:
+    - name: "Uninstall Python module : boto3"
+      pip:
+        name: boto3
+        state: absent
+    - name: "Uninstall Python module : awscli"
+      pip:
+        name: awscli
+        state: absent
