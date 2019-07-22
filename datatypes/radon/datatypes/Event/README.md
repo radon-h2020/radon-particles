@@ -1,42 +1,21 @@
-## Display Name
+## Event
 
-This is an abstract event data type. It represents an abstract event based on the CNCF cloud events schema.
+Data type representing an event based on the CNCF CloudEvents schema.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| Event | radon.datatypes.Event | 1.0.0 | tosca.datatypes.Root |
+| Event | `radon.datatypes.Event` | 1.0.0 | `tosca.datatypes.Root` |
+
+In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
-| Name | Required | Type | Constraint | Description |
-|:---- |:-------- |:---- |:---------- |:----------- |
-| `specversion` | `false` | `string` | N/A | CNCF CloudEvents spec version |
-| `type` | `true` | `string` | N/A | Event type, e.g., `s3:ObjectCreated:Put` |
-| `source` | `false` | `string` | N/A | Event source |
-| `subject` | `false` | `string` | N/A | The subject of the event, e.g., `mynewfile.jpg` |
-| `id` | `false` | `string` | N/A | Event's unique identifier |
-| `time` | `false` | `string` | N/A | The time when event occurred |
-| `datacontenttype` | `false` | `string` | N/A | Type of event's data content, e.g., `text/xml` |
-| `data` | `false` | `string` | N/A | Event's payload |
-
-### Attributes
-
-| Name | Required | Type | Constraint | Description |
-|:---- |:-------- |:---- |:---------- |:----------- |
-
-### Capabilities
-
-| Name | Type | Valid Source Types |
-|:---- |:---- |:------------------ |
-
-### Requirements
-
-| Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
-|:---- |:--------------- |:-------------------- |:----------------- |:------------|
-
-### Notes
-
-* Arbitrary list of additional notes
-* ...
+| Name | Required | Type | Constraint | Default Value | Description |
+|:---- |:-------- |:---- |:---------- |:------------- |:----------- |
+| `type` | `true` | `string` | N/A | N/A | Event type, e.g., `s3:ObjectCreated:Put` |
+| `spec_version` | `false` | `string` | N/A | 0.3 | CloudEvents spec version |
+| `data_content_encoding` | `false` | `string` | N/A | |
+| `data_content_type` | `false` | `string` | N/A | | Type of event's data content, e.g., `text/xml` |
+| `schema_url` | `false` | `string` | N/A |  |
 
 ---

@@ -1,0 +1,59 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+#---------------------------------------------------------------------------
+# Copyright (c) 2019 Contributors to the RADON project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+
+node_types:
+  radon.nodes.compute.OpenstackCompute:
+    derived_from: tosca.nodes.Compute
+    properties:
+      name:
+        type: string
+        description: Name that should be given to the VM in OpenStack
+        required: true
+      image_id:
+        type: string
+        description: OpenStack image ID (image names are not accepted)
+        required: true
+      flavor_id:
+        type: string
+        description: OpenStack flavor ID (flavor names are not accepted)
+        required: true
+      network_id:
+        type: string
+        description: OpenStack network ID (network names are not accepted)
+        required: true
+      key_name:
+        type: string
+        description: OpenStack SSH key name that should be placed on the VM
+        required: true
+    attributes:
+      id:
+        type: string
+        description: OpenStack ID of the VM
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          inputs:
+            NAME: { get_property: [ SELF, name ] }
+            IMAGE: { get_property: [ SELF, image_id ] }
+            FLAVOR: { get_property: [ SELF, flavor_id ] }
+            NETWORK: { get_property: [ SELF, network_id ] }
+            KEY_NAME: { get_property: [ SELF, key_name ] }
+        delete:
+          inputs:
+            ID: { default: { get_attribute: [ SELF, id ] } }

@@ -1,26 +1,16 @@
-## Display Name
+## Function
 
-This is an abstract function Node Type. It represents an abstract FaaS-hosted function independently of the underlying provider.
+Abstract function type representing a FaaS-hosted function independently of the underlying provider.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| Function | radon.nodes.abstract.Function | 1.0.0 | tosca.nodes.Root |
+| `Function` | `radon.nodes.abstract.Function` | 1.0.0 | `tosca.nodes.Root` |
 
 ### Properties
 
 | Name | Required | Type | Constraint | Description |
 |:---- |:-------- |:---- |:---------- |:----------- |
 | `name` | `true` | `string` | N/A | Name of the function |
-
-### Attributes
-
-| Name | Required | Type | Constraint | Description |
-|:---- |:-------- |:---- |:---------- |:----------- |
-
-### Capabilities
-
-| Name | Type | Valid Source Types |
-|:---- |:---- |:------------------ |
 
 ### Requirements
 
@@ -30,7 +20,6 @@ This is an abstract function Node Type. It represents an abstract FaaS-hosted fu
 
 ### Notes
 
-* Arbitrary list of additional notes
-* ...
+* A `deployment_package` artifact can be supplied of type `radon.artifacts.archive.Zip` in the node template.
 
 ---

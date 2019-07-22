@@ -15,16 +15,6 @@ This is Node Type represents an AWS FaaS platform, i.e., AWS Lambda.
 | `secret_access_key` | `true` | `string` | N/A | TBD |
 | `name` | `true` | `string` | N/A | TBD |
 
-### Attributes
-
-| Name | Required | Type | Constraint | Description |
-|:---- |:-------- |:---- |:---------- |:----------- |
-
-### Capabilities
-
-| Name | Type | Valid Source Types |
-|:---- |:---- |:------------------ |
-
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
