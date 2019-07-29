@@ -35,5 +35,8 @@ node_types:
       Standard:
         configure:
           inputs:
-            DBMS_ROOT_PASSWORD: { get_property: [SELF, root_password] }
-            DBMS_PORT: { get_property: [SELF, port] }
+            DBMS_ROOT_PASSWORD:
+              default: { get_property: [SELF, root_password] }
+            DBMS_PORT:
+              type: integer
+              default: { get_property: [SELF, port] }

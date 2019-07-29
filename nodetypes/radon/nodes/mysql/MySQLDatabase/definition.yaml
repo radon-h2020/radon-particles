@@ -32,15 +32,12 @@ node_types:
           node: radon.nodes.mysql.MySQLDBMS
     interfaces:
       Standard:
-        create:
-          inputs:
-            DB_NAME: { get_property: [SELF, name]}
-            DB_USER: { get_property: [SELF, user]}
-            DB_PASSWORD: { get_property: [SELF, password]}
-            DBMS_ROOT_PASSWORD: { get_property: [HOST, root_password]}
-        configure:
-          inputs:
-            DB_NAME: { get_property: [SELF, name]}
-            DB_USER: { get_property: [SELF, user]}
-            DB_PASSWORD: { get_property: [SELF, password]}
-            DBMS_ROOT_PASSWORD: { get_property: [HOST, root_password]}
+        inputs:
+          DB_NAME:
+            default: { get_property: [SELF, name] }
+          DB_USER:
+            default: { get_property: [SELF, user] }
+          DB_PASSWORD:
+            default: { get_property: [SELF, password] }
+          DBMS_ROOT_PASSWORD:
+            default: { get_property: [HOST, root_password] }

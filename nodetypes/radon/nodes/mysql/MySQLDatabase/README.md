@@ -29,8 +29,7 @@ In the following, the properties, attributes, capabilities, and requirements cha
 
 ### Notes
 
-* Inputs added to the `Standard` interface operations:
-    * `create`: `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DBMS_ROOT_PASSWORD`
-    * `configure`: `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DBMS_ROOT_PASSWORD`
+* Inputs added to the `Standard` interface:
+    * `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DBMS_ROOT_PASSWORD`
 
 ---

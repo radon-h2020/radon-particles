@@ -21,8 +21,8 @@ In the following, the properties, attributes, capabilities, and requirements cha
 ### Attributes
 
 | Name | Type | Default Value | Description |
-|:---- |:---- |:---------- |:------------- |:----------- |
-| `url` | `string` | N/A | The URL used to formulate the connection string |
+|:---- |:---- |:---------- |:------------- |
+| `url` | `string` | `concat: ["http://", get_attribute: [HOST, public_address], get_attribute: [SELF, port] ]` | The URL used to formulate the connection string |
 
 ### Capabilities
 
@@ -30,10 +30,6 @@ In the following, the properties, attributes, capabilities, and requirements cha
 |:---- |:---- |:------------------ |:----------- |
 | `host` | `tosca.capabilities.Compute` | `radon.nodes.mongodb.MongoDBDatabase` | [1, UNBOUNDED]|
 
-### Requirements
-
-| Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
-|:---- |:--------------- |:-------------------- |:----------------- |:------------|
 
 ### Notes
 

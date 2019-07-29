@@ -33,8 +33,7 @@ node_types:
       host:
         type: tosca.capabilities.Container
         valid_source_types:
-          - radon.nodes.aws.LambdaFunction
-          - radon.nodes.aws.LambdaInvocableFunction
+          - radon.nodes.aws.LambdaFunction # This already covers child types
           - radon.nodes.aws.S3Bucket
     interfaces:
       Standard:

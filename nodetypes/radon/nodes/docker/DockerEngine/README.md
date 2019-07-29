@@ -8,11 +8,11 @@ Type that represents a Docker runtime to run multiple Docker container applicati
 
 In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
-### Properties
+### Attributes
 
-| Name | Required | Type | Constraint | Default Value | Description |
-|:---- |:-------- |:---- |:---------- |:------------- |:----------- |  
-| `port` | `true` | `integer` | N/A | 2375 | Exposed port of the Docker daemon |
+| Name | Type | Default Value | Description |
+|:---- |:---- |:------------- |:----------- |
+| `port` | `integer` | The port value exposed by the `docker` capability | Exposed port of the Docker daemon |
 
 ### Capabilities
 

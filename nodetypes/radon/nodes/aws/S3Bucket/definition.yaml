@@ -32,7 +32,7 @@ node_types:
     capabilities:
       invoke:
         type: radon.capabilities.Invocable
-        relationship: radon.relationships.aws.ConveysEventTo
+        relationship: radon.relationships.aws.Triggers
         valid_source_types:
           - radon.nodes.aws.LambdaInvocableFunction
     interfaces:

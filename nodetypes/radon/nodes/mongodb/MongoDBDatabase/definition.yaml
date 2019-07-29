@@ -30,15 +30,13 @@ radon.nodes.mysql.MongoDBDatabase:
         node: radon.nodes.mysql.MongoDBMS
   interfaces:
     Standard:
-      create:
-        inputs:
-          DB_NAME: { get_property: [SELF, name]}
-          DB_USER: { get_property: [SELF, user]}
-          DB_PASSWORD: { get_property: [SELF, password]}
-          DB_USER_AUTH_DB: { get_property: [SELF, authentication_database]}
-      configure:
-        inputs:
-          DB_NAME: { get_property: [SELF, name]}
-          DB_USER: { get_property: [SELF, user]}
-          DB_PASSWORD: { get_property: [SELF, password]}
-          DB_USER_AUTH_DB: { get_property: [SELF, authentication_database]}
+      inputs:
+        DB_NAME:
+          default: { get_property: [SELF, name] }
+        DB_USER:
+          default: { get_property: [SELF, user] }
+        DB_PASSWORD:
+          default: { get_property: [SELF, password] }
+        DB_USER_AUTH_DB:
+          default: { get_property: [SELF, authentication_database] }
+          required: false

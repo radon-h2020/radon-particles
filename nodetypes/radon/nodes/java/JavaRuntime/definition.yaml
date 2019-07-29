@@ -20,10 +20,18 @@ node_types:
   radon.nodes.java.JavaRuntime:
     derived_from: tosca.nodes.SoftwareComponent
     attributes:
-      java_home: { get_operation_output: [SELF, Standard, create, JAVA_HOME] }
-      component_version: { get_attribute: [SELF, host, java_version] }
-      only_jre: { get_attribute: [SELF, host, only_jre] }
-      headless: { get_attribute: [SELF, host, headless] }
+      java_home:
+        type: string
+        default: { get_operation_output: [SELF, Standard, create, JAVA_HOME] }
+      component_version:
+        type: version
+        default: { get_attribute: [SELF, host, java_version] }
+      only_jre:
+        type: boolean
+        default: { get_attribute: [SELF, host, only_jre] }
+      headless:
+        type: boolean
+        default: { get_attribute: [SELF, host, headless] }
     capabilities:
       host:
         type: radon.capabilities.container.JavaRuntime
@@ -32,10 +40,19 @@ node_types:
       Standard:
         create:
           inputs:
-            JAVA_VERSION: { get_attribute: [SELF, component_version] }
-            JAVA_IS_JRE: { get_attribute: [SELF, only_jre] }
-            JAVA_IS_HEADLESS: { get_attribute: [SELF, headless] }
+            JAVA_VERSION:
+              type: version
+              default: { get_attribute: [SELF, component_version] }
+            JAVA_IS_JRE:
+              type: boolean
+              default: { get_attribute: [SELF, only_jre] }
+            JAVA_IS_HEADLESS:
+              type: boolean
+              default: { get_attribute: [SELF, headless] }
         delete:
           inputs:
-            JAVA_VERSION: { get_attribute: [SELF, component_version] }
-            JAVA_HOME: { get_attribute: [SELF, java_home] }
+            JAVA_VERSION:
+              type: version
+              default: { get_attribute: [SELF, component_version] }
+            JAVA_HOME:
+              default: { get_attribute: [SELF, java_home] }

@@ -12,10 +12,10 @@ In the following, the properties, attributes, capabilities, and requirements cha
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
-| `java_home` | `string` | N/A | The location where JAVA binaries are located |
-| `component_version` | `version` | N/A | The version of the Java language (value taken from the `host` capability). |
-| `only_jre` | `boolean` | N/A | Indicates whether only the JRE is required (value taken from the `host` capability).|
-| `headless` | `boolean`  | N/A | Specifies whether headless mode is enough as the components are run on a server and do not need equipment such as display or keyboard (value taken from the `host` capability). |
+| `java_home` | `string` | The `java_home` attribute exposed by the `host` capability | The location where JAVA binaries are located |
+| `component_version` | `version` | The `java_version` attribute exposed by the `host` capability | The version of the Java language (value taken from the `host` capability). |
+| `only_jre` | `boolean` | The `only_jre` attribute exposed by the `host` capability | Indicates whether only the JRE is required (value taken from the `host` capability).|
+| `headless` | `boolean`  | The `headless` attribute exposed by the `host` capability | Specifies whether headless mode is enough as the components are run on a server and do not need equipment such as display or keyboard (value taken from the `host` capability). |
 
 ### Capabilities
 

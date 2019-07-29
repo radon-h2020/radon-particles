@@ -16,6 +16,7 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 # limitations under the License.
 #---------------------------------------------------------------------------
 
+# todo missing readme.md
 node_types:
   radon.nodes.aws.LambdaFunction:
     derived_from: radon.nodes.abstract.Function
@@ -33,14 +34,14 @@ node_types:
         type: string
       memory:
         description: Size in megabytes
-        type: integer
+        type: scalar-unit.size
         constraints:
-          - in_range: [ 128, 3008 ]
+          - in_range: [128 MB, 3008 MB]
       timeout:
         description: Time in seconds
-        type: integer
+        type: scalar-unit.time
         constraints:
-          - in_range: [ 1, 900 ]
+          - in_range: [1 s, 900 s]
       schedule:
         type: string
     interfaces:
@@ -57,11 +58,13 @@ node_types:
           function_handler:
             default: { get_property: [ SELF, handler ] }
           function_memory:
+            type: scalar-unit.size
             default: { get_property: [ SELF, memory ] }
           function_timeout:
+            type: scalar-unit.time
             default: { get_property: [ SELF, timeout ] }
-          function_code:
-            default: { get_artifact: [ SELF, deployment_package ] }
+          function_code_location:
+            type: string
           aws_access_key_id:
             default: { get_property: [ SELF, host, access_key_id ] }
           aws_secret_access_key:

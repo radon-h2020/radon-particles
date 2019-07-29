@@ -23,10 +23,6 @@ node_types:
       id:
         type: string
         description: Unique ID of the pipeline
-    artifacts:
-      pipeline_template:
-        description: The pipeline template XML file
-        type: tosca.artifacts.File
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -36,10 +32,10 @@ node_types:
           capability: tosca.capabilities.Endpoint
           node: radon.nodes.nifi.NifiPipeline
           relationship: tosca.relationships.ConnectsTo
-          occurances: [0, 1]
+          occurrences: [0, 1]
     capabilities:
       connect:
         type: tosca.capabilities.Endpoint
         description: Capability to receive data from other pipeline nodes
         valid_source_type: [ radon.nodes.nifi.NifiPipeline ]
-        occurances: [0, UNBOUNDED]
+        occurrences: [0, UNBOUNDED]

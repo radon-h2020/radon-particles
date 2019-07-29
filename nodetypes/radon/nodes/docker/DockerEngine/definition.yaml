@@ -20,7 +20,9 @@ node_types:
   radon.nodes.docker.DockerEngine:
     derived_from: tosca.nodes.Container.Runtime
     attributes:
-      port: { get_attribute: [SELF, docker, port] }
+      port:
+        type: integer
+        default: { get_attribute: [SELF, docker, port] }
     capabilities:
       docker:
         type: radon.capabilities.container.DockerRuntime

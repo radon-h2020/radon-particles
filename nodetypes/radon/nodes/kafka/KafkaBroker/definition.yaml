@@ -1,0 +1,92 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+#---------------------------------------------------------------------------
+# Copyright (c) 2019 Contributors to the RADON project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+
+node_types:
+  radon.nodes.kafka.KafkaBroker:
+    derived_from: radon.nodes.java.JavaApplication
+    properties:
+      component_version:
+        type: version
+        default: 0.10.2.2
+        constraints:
+          - valid_values: [0.10.2.2, 0.11.0.3]
+      scala_version:
+        type: version
+        default: 2.11
+        constraints:
+          - valid_values: [2.11, 2.12]
+      kf_heap_size:
+        type: scalar-unit.size
+        default: 1 GB
+      zk_heap_size:
+        type: scalar-unit.size
+        default: 500 M
+      log_cleaner_enable:
+        type: boolean
+        default: false
+    attributes:
+      java_home:
+        type: string
+        default: { get_attribute: [ HOST, java_home ] }
+      kafka_home:
+        type: string
+        default: { get_operation_output: [ SELF, Standard, create, KAFKA_HOME ] }
+    capabilities:
+      host:
+        type: radon.capabilities.kafka.KafkaHosting
+        valid_source_types: [radon.nodes.kafka.KafkaTopic]
+        occurrences: [0, UNBOUNDED]
+    interfaces:
+      Standard:
+        create:
+          inputs:
+            KAFKA_VERSION:
+              type: version
+              default: { get_property: [SELF, component_version] }
+            SCALA_VERSION:
+              type: version
+              default: { get_property: [SELF, scala_version] }
+        configure:
+          inputs:
+            IP_ADDRESS:
+              default: { get_attribute: [HOST, public_address] }
+            LOG_CLEANER_ENABLE:
+              type: boolean
+              default: { get_property: [SELF, log_cleaner_enable] }
+            JAVA_HOME:
+              default: { get_attribute: [SELF, java_home] }
+            KAFKA_HOME:
+              default: { get_attribute: [SELF, kafka_home] }
+            KF_HEAP_SIZE:
+              type: scalar-unit.size
+              default: { get_property: [SELF, kf_heap_size] }
+            ZK_HEAP_SIZE:
+              type: scalar-unit.size
+              default: { get_property: [SELF, zk_heap_size] }
+        start:
+          inputs:
+            KAFKA_HOME:
+              default: { get_attribute: [SELF, kafka_home] }
+            JAVA_HOME:
+              default: { get_attribute: [SELF, java_home] }
+        stop:
+          inputs:
+            KAFKA_HOME:
+              default: { get_attribute: [SELF, kafka_home] }
+            JAVA_HOME:
+              default: { get_attribute: [SELF, java_home] }

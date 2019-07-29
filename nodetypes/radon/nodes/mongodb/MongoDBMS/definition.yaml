@@ -20,7 +20,9 @@ node_types:
   radon.nodes.mongodb.MongoDBMS:
     derived_from: tosca.nodes.DBMS
     attributes:
-      url: { concat: ["http://", get_attribute: [HOST, public_address], get_property: [SELF, port] ] }
+      url:
+        type: string
+        default: { concat: ["http://", get_attribute: [HOST, public_address], get_attribute: [SELF, port] ] }
     properties:
       component_version:
         type: version
@@ -48,10 +50,21 @@ node_types:
       Standard:
         create:
           inputs:
-            IP_ADDRESS: { get_attribute: [HOST, private_address] }
-            MONGODB_VERSION: { get_property: [SELF, component_version] }
-            MONGODB_PORT: { get_property: [SELF, port] }
-            MONGODB_DB_PATH: { get_property: [SELF, db_path] }
-            MONGODB_AUTHORIZATION: { get_property: [SELF, authorization_enabled] }
-            MONGODB_ADMIN: {get_property: [SELF, administrator]}
-            MONGODB_ROOT_PASSWORD: { get_property: [SELF, root_password] }
+            IP_ADDRESS:
+              default: { get_attribute: [HOST, private_address] }
+            MONGODB_VERSION:
+              type: version
+              default: { get_property: [SELF, component_version] }
+            MONGODB_PORT:
+              type: integer
+              default: { get_property: [SELF, port] }
+            MONGODB_DB_PATH:
+              default: { get_property: [SELF, db_path] }
+            MONGODB_AUTHORIZATION:
+              type: boolean
+              default: { get_property: [SELF, authorization_enabled] }
+            MONGODB_ADMIN:
+              default: {get_property: [SELF, administrator]}
+              required: false
+            MONGODB_ROOT_PASSWORD:
+              default: { get_property: [SELF, root_password] }

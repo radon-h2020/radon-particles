@@ -49,11 +49,17 @@ node_types:
         type: tosca.interfaces.node.lifecycle.Standard
         create:
           inputs:
-            NAME: { get_property: [ SELF, name ] }
-            IMAGE: { get_property: [ SELF, image_id ] }
-            FLAVOR: { get_property: [ SELF, flavor_id ] }
-            NETWORK: { get_property: [ SELF, network_id ] }
-            KEY_NAME: { get_property: [ SELF, key_name ] }
+            NAME:
+              default: { get_property: [ SELF, name ] }
+            IMAGE:
+              default: { get_property: [ SELF, image_id ] }
+            FLAVOR:
+              default: { get_property: [ SELF, flavor_id ] }
+            NETWORK:
+              default: { get_property: [ SELF, network_id ] }
+            KEY_NAME:
+              default: { get_property: [ SELF, key_name ] }
         delete:
           inputs:
-            ID: { default: { get_attribute: [ SELF, id ] } }
+            ID:
+              default: { get_attribute: [ SELF, id ] }

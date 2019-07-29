@@ -29,8 +29,7 @@ In the following, the properties, attributes, capabilities, and requirements cha
 ### Notes
 
 * If authorization is enabled by the host, the properties: `user`, `password`, and `authentication_database` must be assigned values.    
-* Inputs added to the `Standard` interface operations:
-    * `create`: `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_USER_AUTH_DB`
-    * `configure`: `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_USER_AUTH_DB`
+* Inputs added to the `Standard` interface:
+    * `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_USER_AUTH_DB`
 
 ---

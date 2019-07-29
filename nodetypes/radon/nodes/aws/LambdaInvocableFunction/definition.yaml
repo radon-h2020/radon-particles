@@ -16,6 +16,7 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 # limitations under the License.
 #---------------------------------------------------------------------------
 
+# todo missing readme.md
 node_types:
   radon.nodes.aws.LambdaInvocableFunction:
     derived_from: radon.nodes.aws.LambdaFunction

@@ -29,6 +29,6 @@ In the following, the properties, attributes, capabilities, and requirements cha
 
 ### Notes
 
-* An `pipeline_template` artifact can be supplied of type `tosca.artifacts.File`
+* An `pipeline_template` artifact can be supplied of type `tosca.artifacts.File` in the node template definition.
 
 ---
