@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install Java 8
+      package:
+        name: "java-1.8.0-openjdk.x86_64"
+        state: present
+
+    - name: Download and unpack NiFi binary distribution
+      unarchive:
+        src: https://www-eu.apache.org/dist/nifi/{{ tarball_version }}/nifi-{{ tarball_version }}-bin.tar.gz
+        dest: /usr/local/bin
+        remote_src: yes
+        creates: /usr/local/bin/nifi-{{ tarball_version }}/LICENSE
+
+    - name: Install nifi service
+      shell: "/usr/local/bin/nifi-{{ tarball_version }}/bin/nifi.sh install"
+      args: 
+        executable: /bin/bash
+

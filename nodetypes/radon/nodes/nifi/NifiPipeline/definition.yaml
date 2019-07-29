@@ -19,6 +19,13 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 node_types:
   radon.nodes.nifi.NifiPipeline:
     derived_from: radon.nodes.abstract.DataPipeline
+    properties:
+      template_file:
+        type: string
+        description: XML implementation of the pipeline
+      name:
+        type: string
+        description: name of the pipeline
     attributes:
       id:
         type: string
@@ -39,3 +46,27 @@ node_types:
         description: Capability to receive data from other pipeline nodes
         valid_source_type: [ radon.nodes.nifi.NifiPipeline ]
         occurrences: [0, UNBOUNDED]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          inputs: 
+            template_file:  { default: { get_property: [ SELF, template_file ] } }  
+            template_name:  { default: { get_property: [ SELF, name ] } }  
+          implementation: files/pipeline/create.yml
+        start:
+          inputs: 
+            pipeline_id: { default: { get_attribute: [ SELF, id ] } }  
+          implementation: files/pipeline/start.yml
+        stop:
+          inputs: 
+            pipeline_id: { default: { get_attribute: [ SELF, id ] } }
+          implementation: files/pipeline/stop.yml
+        configure: 
+          inputs: 
+            pipeline_id: { default: { get_attribute: [ SELF, id ] } }
+          implementation: files/pipeline/configure.yml
+        delete:
+          inputs: 
+            pipeline_id: { default: { get_attribute: [ SELF, id ] } }
+          implementation: files/pipeline/delete.yml
