@@ -53,20 +53,20 @@ node_types:
           inputs: 
             template_file:  { default: { get_property: [ SELF, template_file ] } }  
             template_name:  { default: { get_property: [ SELF, name ] } }  
-          implementation: files/pipeline/create.yml
+          implementation: files/create.yml
         start:
           inputs: 
             pipeline_id: { default: { get_attribute: [ SELF, id ] } }  
-          implementation: files/pipeline/start.yml
+          implementation: files/start.yml
         stop:
           inputs: 
             pipeline_id: { default: { get_attribute: [ SELF, id ] } }
-          implementation: files/pipeline/stop.yml
+          implementation: files/stop.yml
         configure: 
           inputs: 
             pipeline_id: { default: { get_attribute: [ SELF, id ] } }
-          implementation: files/pipeline/configure.yml
+          implementation: files/configure.yml
         delete:
           inputs: 
             pipeline_id: { default: { get_attribute: [ SELF, id ] } }
-          implementation: files/pipeline/delete.yml
+          implementation: files/delete.yml
