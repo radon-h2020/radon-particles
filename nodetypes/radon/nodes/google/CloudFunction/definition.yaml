@@ -28,15 +28,15 @@ node_types:
           - valid_values: [nodejs8, nodejs10, python37, go111, nodejs6]
       memory:
         description: Limit on the amount of memory the function can use.
-        type: scalar-unit.size
-        default: 256 MB
+        type: integer
+        default: 256
         constraints:
-          - valid_values: [128 MB, 256 MB, 512 MB, 1024 MB, 2048 MB]
+          - valid_values: [128, 256, 512, 1024, 2048]
       timeout:
-        type: scalar-unit.time
-        default: 60 s
+        type: integer
+        default: 60
         constraints:
-          - in_range: [1 s, 540 s]
+          - in_range: [1, 540]
       entry_point:
         type: string
         required: false

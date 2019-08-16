@@ -14,10 +14,9 @@ In the following, the properties, attributes, capabilities, and requirements cha
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `function_name` | `true` | `string` | N/A | The name of the function.
 | `function_runtime` | `true` | `string` | `valid_values: [nodejs8, nodejs10, python37, go111, nodejs6]` | The runtime environment to execute the function. |
-| `memory` | `true` | `scalar-unit.size` | 256 MB | `valid_values: [ 128 MB, 256 MB, 512 MB, 1024 MB, 2048 MB]` | The limit on the amount of memory the function can use. |
-| `timeout` | `true` | `scalar-unit.time` | 60 s | `in_range: [1 s, 540 s]` | The limit on time this function is allowed to execute. |
+| `memory` | `true` | `integer` | 256 | `valid_values: [ 128, 256, 512, 1024, 2048]` | The limit (in MB) on the amount of memory the function can use. |
+| `timeout` | `true` | `integer` | 60 | `in_range: [1, 540]` | The limit (in seconds) on time this function is allowed to execute. |
 | `enttry_point`| `false` | `string` | N/A | N/A | Name of a Google Cloud Function (as defined in source code) that will be executed. Defaults to the resource name suffix, if not specified. For backward compatibility, if function with given name is not found, then the system will try to use function named "function". For Node.js this is name of a function exported by the module specified in source_location. |
-
 
 ### Requirements
 

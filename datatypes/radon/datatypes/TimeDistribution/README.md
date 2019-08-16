@@ -12,7 +12,7 @@ In the following, the properties, attributes, capabilities, and requirements cha
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `mean` | `true` | `scalar-unit.time` | `greater_or_equal: 0 s` | N/A |  |
+| `mean` | `true` | `integer` | `greater_or_equal: 0` | N/A |  |
 | `scv` | `true` | `float` | `greater_or_equal: 0.0` | N/A |  |
 
 ---

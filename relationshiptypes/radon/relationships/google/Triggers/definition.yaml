@@ -29,6 +29,6 @@ relationship_types:
         inputs:
           EVENT:
             type: radon.datatypes.Event
-            default: { get_property [SELF, events, 1] }
+            default: { get_property: [SELF, events, 1] }
           RESOURCE:
-            default: { get_property [SOURCE, name] }
+            default: { get_property: [SOURCE, name] }

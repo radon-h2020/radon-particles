@@ -22,7 +22,7 @@ In the following, the properties, attributes, capabilities, and requirements cha
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:---------- |:------------- |
-| `url` | `string` | `concat: ["http://", get_attribute: [HOST, public_address], get_attribute: [SELF, port] ]` | The URL used to formulate the connection string |
+| `url` | `string` | `concat: ["http://", get_attribute: [HOST, public_address], get_property: [SELF, port] ]` | The URL used to formulate the connection string |
 
 ### Capabilities
 

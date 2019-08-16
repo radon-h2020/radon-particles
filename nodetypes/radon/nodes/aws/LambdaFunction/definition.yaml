@@ -16,7 +16,9 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-# todo missing readme.md
+# todo add missing descriptions to README.md
+# todo make sure what is a required property and what is not (default is required!)
+# todo can we give a default value for the arn attribute?
 node_types:
   radon.nodes.aws.LambdaFunction:
     derived_from: radon.nodes.abstract.Function
@@ -34,16 +36,21 @@ node_types:
         type: string
       memory:
         description: Size in megabytes
-        type: scalar-unit.size
+        type: integer
         constraints:
-          - in_range: [128 MB, 3008 MB]
+          - in_range: [128, 3008]
       timeout:
         description: Time in seconds
-        type: scalar-unit.time
+        type: integer
         constraints:
-          - in_range: [1 s, 900 s]
+          - in_range: [1, 900]
       schedule:
         type: string
+        required: false
+      capabilities:
+        invocable:
+          capability: radon.capabilities.Invocable
+          occurrences: [0, UNBOUDED]
     interfaces:
       Standard:
         inputs:
@@ -58,18 +65,21 @@ node_types:
           function_handler:
             default: { get_property: [ SELF, handler ] }
           function_memory:
-            type: scalar-unit.size
+            type: integer
             default: { get_property: [ SELF, memory ] }
           function_timeout:
-            type: scalar-unit.time
+            type: integer
             default: { get_property: [ SELF, timeout ] }
           function_code_location:
             type: string
           aws_access_key_id:
-            default: { get_property: [ SELF, host, access_key_id ] }
+            default: { get_property: [ HOST, access_key_id ] }
           aws_secret_access_key:
-            default: { get_property: [ SELF, host, secret_access_key ] }
+            default: { get_property: [ HOST, secret_access_key ] }
           aws_region:
-            default: { get_property: [ SELF, host, region ] }
+            default: { get_property: [ HOST, region ] }
+          schedule:
+            type: string
+            default: { get_property: [SELF, schedule] }
         create: files/create.yml
         delete: files/delete.yml
