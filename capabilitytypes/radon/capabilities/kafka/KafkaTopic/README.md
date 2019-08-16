@@ -1,4 +1,4 @@
-## Kafka Topic
+## Kafka Topic Capability
 
 This capability type describes a node that represents a Kafka Topic
 
@@ -7,6 +7,5 @@ This capability type describes a node that represents a Kafka Topic
 | `KafkaTopic` | `radon.capabilities.kafka.KafkaTopic` | 1.0.0 | `tosca.capabilities.Root` |
 
 ### Notes
-* A node template that uses this capability should provide values for the the `ip_address` and `port` properties so that topic consumers can establish connection to the suitable Kafka bootstrap server.
 
----
+* A node template that uses this capability should provide values for the the `ip_address` and `port` properties so that topic consumers can establish connection to the suitable Kafka bootstrap server.

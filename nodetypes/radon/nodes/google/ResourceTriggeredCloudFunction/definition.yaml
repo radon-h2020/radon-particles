@@ -23,4 +23,6 @@ node_types:
     capabilities:
       invocable:
         capability: radon.capabilities.Invocable
+        valid_source_types:
+          - radon.nodes.google.GoogleCloudResource
         occurrences: [1, 1]

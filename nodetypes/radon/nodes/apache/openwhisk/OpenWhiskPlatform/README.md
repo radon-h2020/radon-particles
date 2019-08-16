@@ -1,12 +1,10 @@
-## OpenWhisk Platform
+## OpenWhisk Platform Node Type
 
 A node type that represents an externally managed OpenWhisk Platform.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `OpenWhiskPlatform` | `radon.nodes.apache.openwhisk.OpenWhiskPlatform` | 1.0.0 | `radon.nodes.abstract.CloudPlatform` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -37,5 +35,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 * Parameters added to the `Standard` interface operations:
     * `create`: `KUBERNETES_VERSION`
     * `configure`: `API_URL`, `AUTH_KEY`
-
----

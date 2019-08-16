@@ -1,12 +1,10 @@
-## OpenFaaS Platform
+## OpenFaaS Platform Node Type
 
 A node type that represents an externally managed OpenFaaS Platform.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `OpenFaaSPlatform` | `radon.nodes.opefaas.OpenFaaSPlatform` | 1.0.0 | `radon.nodes.abstract.CloudPlatform` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -36,5 +34,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 * Parameters added to the `Standard` interface operations:
     * `create`: `KUBERNETES_VERSION`
     * `configure`: `URL`, `BASIC_AUTH_USER`, `BASIC_AUTH_PASSWORD`
-
----

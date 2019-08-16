@@ -1,12 +1,10 @@
-## OpenWhisk Function
+## OpenWhisk Function Node Type
 
 A node type that represents a function hosted on an OpenWhisk Platform
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `OpenWhiskFunction` | `radon.nodes.apache.openWhisk.OpenWhiskFunction` | 1.0.0 | `radon.nodes.abstract.Function` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -41,5 +39,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
     * `FUNCTION_NAME`
     * `FUNCTION_RUNTIME`
     * `ENTRY_POINT`
-
----

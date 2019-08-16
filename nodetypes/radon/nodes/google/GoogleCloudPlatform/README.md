@@ -1,12 +1,10 @@
-## Google Cloud Platform
+## Google Cloud Platform Node Type
 
-A node type representing the Goolge Cloud Platform which capable of hosting resources and functions.
+A node type representing the Google Cloud Platform which capable of hosting resources and functions.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `GoogleCloudPlatform` | `radon.nodes.google.GoogleCloudPlatform` | 1.0.0 | `radon.nodes.abstract.CloudPlatform` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -20,7 +18,6 @@ In the following, the properties, attributes, capabilities, and requirements cha
 | `region` | `true` | `string` | N/A | N/A | Indicates the default region of the project. |
 | `zone` | `true` | `string` | N/A | N/A | Indicates the default zone of the project.|
 
-
 ### Capabilities
 
 | Name | Type | Valid Source Types | Occurrences |
@@ -33,5 +30,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
     * `create`: `SDK_VERSION`
     * `configure`: `PROJECT_ID`, `AUTHENTICATION_MODE`, `USER_ACCOUNT`, `API_KEY`, `REGION`, `ZONE`
 * If the selected `authentication_mode` is `service-account`, the implementing node template should provide an artifact with the service account key.
-
----

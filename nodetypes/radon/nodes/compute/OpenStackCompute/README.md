@@ -1,12 +1,10 @@
-## OpenStack Compute
+## OpenStack Compute Node Type
 
 A type representing a virtual machine on OpenStack.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `VM` | `radon.nodes.openstack.VM` | 1.0.0 | `tosca.nodes.Compute` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
+| `OpenstackCompute` | `radon.nodes.compute.OpenstackCompute` | 1.0.0 | `tosca.nodes.Compute` |
 
 ### Properties
 
@@ -29,5 +27,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 * Inputs added to the `Standard` interface operations:
     * `create`: `NAME`, `IMAGE`, `FLAVOR`, `NETWORK`, `KEY_NAME`
     * `delete`: `ID`
-
----

@@ -1,4 +1,4 @@
-## Data Pipeline
+## Data Pipeline Node Type (Abstract)
 
 Abstract data pipeline type.
 
@@ -17,5 +17,3 @@ Abstract data pipeline type.
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
 | `host` | `tosca.capabilities.Container` | N/A | `tosca.relationships.HostedOn` | N/A |
-
----

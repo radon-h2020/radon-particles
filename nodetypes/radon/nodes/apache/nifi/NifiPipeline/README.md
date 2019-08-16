@@ -1,12 +1,10 @@
-## Nifi Pipeline
+## NiFi Pipeline Node Type
 
-A type representing a data pipeline hosted on Apache Nifi.
+A type representing a data pipeline hosted on Apache NiFi.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `NifiPipeline` | `radon.nodes.apache.nifi.NifiPipeline` | 1.0.0 | `radon.nodes.abstract.DataPipeline` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Attributes
 
@@ -30,5 +28,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 ### Notes
 
 * An `pipeline_template` artifact can be supplied of type `tosca.artifacts.File` in the node template definition.
-
----

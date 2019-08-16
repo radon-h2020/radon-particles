@@ -1,12 +1,10 @@
-## MongoDB DBMS
+## MongoDB DBMS Node Type
 
-A nodetype that describes a MongoDB DBMS.
+A node type that describes a MongoDB DBMS.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `MongoDBMS` | `radon.nodes.mongodb.MongoDBMS` | 1.0.0 | `tosca.nodes.DBMS` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -30,10 +28,7 @@ In the following, the properties, attributes, capabilities, and requirements cha
 |:---- |:---- |:------------------ |:----------- |
 | `host` | `tosca.capabilities.Compute` | `radon.nodes.mongodb.MongoDBDatabase` | [1, UNBOUNDED]|
 
-
 ### Notes
 
 * Inputs added to the `Standard` interface operations:
   * `create`: `IP_ADDRESS`, `MONGODB_VERSION`, `MONGODB_PORT`, `MONGODB_DB_PATH`, `MONGODB_AUTHORIZATION`, `MONGODB_ADMIN`, `MONGODB_ROOT_PASSWORD`
-
----

@@ -1,12 +1,10 @@
-## S3 Bucket
+## S3 Bucket Node Type
 
 A node type that represents an AWS S3 Bucket.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `S3Bucket` | `radon.nodes.aws.S3Bucket` | 1.0.0 | `tosca.nodes.Storage.ObjectStorage` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -34,5 +32,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
     * `aws_secret_access_key`
     * `aws_region`
     * `bucket_name`
-
----

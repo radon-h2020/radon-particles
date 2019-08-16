@@ -10,6 +10,13 @@
 ./nodetypes/radon/nodes/aws/AwsPlatform/README.md
 ./nodetypes/radon/nodes/aws/LambdaFunction/README.md
 ./nodetypes/radon/nodes/aws/S3Bucket/README.md
+./nodetypes/radon/nodes/azure/AzureFunction/README.md
+./nodetypes/radon/nodes/azure/AzurePlatform/README.md
+./nodetypes/radon/nodes/azure/AzureResource/README.md
+./nodetypes/radon/nodes/azure/CosmosDB/README.md
+./nodetypes/radon/nodes/azure/HttpTriggeredAzureFunction/README.md
+./nodetypes/radon/nodes/azure/ResourceTriggeredAzureFunction/README.md
+./nodetypes/radon/nodes/azure/TimerTriggeredAzureFunction/README.md
 ./nodetypes/radon/nodes/compute/OpenStackCompute/README.md
 ./nodetypes/radon/nodes/docker/DockerApplication/README.md
 ./nodetypes/radon/nodes/docker/DockerEngine/README.md
@@ -30,6 +37,8 @@
 ./relationshiptypes/radon/relationships/apache/kafka/PublishToKafkaTopic/README.md
 ./relationshiptypes/radon/relationships/apache/openwhisk/KafkaTriggers/README.md
 ./relationshiptypes/radon/relationships/aws/Triggers/README.md
+./relationshiptypes/radon/relationships/azure/CosmosDBTriggers/README.md
+./relationshiptypes/radon/relationships/azure/Triggers/README.md
 ./relationshiptypes/radon/relationships/google/Triggers/README.md
 ./relationshiptypes/radon/relationships/openfaas/KafkaTriggers/README.md
 ./policytypes/radon/policies/performance/AverageResponseTime/README.md

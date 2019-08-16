@@ -1,12 +1,10 @@
-## Docker Runtime
+## Docker Runtime Capability
 
 The type indicates capabilities of a Docker runtime environment. 
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `DockerRuntime` | `radon.capabilities.container.DockerRuntime` | 1.0.0 | `tosca.capabilities.Container` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -21,5 +19,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 ### Notes
 
 * When the expose_ports property is used, only the source and source_range properties of PortSpec would be valid for supplying port numbers or ranges, the target and target_range properties would be ignored.
-
----

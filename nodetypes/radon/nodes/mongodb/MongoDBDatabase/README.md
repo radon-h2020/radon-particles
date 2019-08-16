@@ -1,12 +1,10 @@
-## MongoDB Database
+## MongoDB Database Node Type
 
-A nodetype that describes a MongoDB database.
+A node type that describes a MongoDB database.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `MongoDBDatabase` | `radon.nodes.mysql.MongoDBDatabase` | 1.0.0 | `tosca.nodes.Database` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -31,5 +29,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 * If authorization is enabled by the host, the properties: `user`, `password`, and `authentication_database` must be assigned values.    
 * Inputs added to the `Standard` interface:
     * `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_USER_AUTH_DB`
-
----

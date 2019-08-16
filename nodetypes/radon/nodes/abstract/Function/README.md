@@ -1,4 +1,4 @@
-## Function
+## Function Node Type (Abstract)
 
 Abstract function type representing a FaaS-hosted function independently of the underlying provider.
 
@@ -21,5 +21,3 @@ Abstract function type representing a FaaS-hosted function independently of the 
 ### Notes
 
 * A `deployment_package` artifact can be supplied of type `radon.artifacts.archive.Zip` in the node template.
-
----

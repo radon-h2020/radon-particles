@@ -1,4 +1,4 @@
-## Lambda Function
+## Lambda Function Node Type
 
 A node type that represents an AWS Lambda Function that can be triggered by an AWS resource, a fixed schedule or via an API gateway.
 
@@ -6,19 +6,17 @@ A node type that represents an AWS Lambda Function that can be triggered by an A
 |:---- |:--- |:------- |:------------ |
 | `LambdaFunction` | `radon.nodes.aws.LambdaFunction` | 1.0.0 | `radon.nodes.abstract.Function` |
 
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
-
 ### Properties
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `role_name` | `true` | `string` | N/A | N/A |  |
-| `role_description` | `true` | `string` | N/A | N/A |  |
-| `runtime` | `true` | `string` | N/A | N/A |  |
-| `handler` | `true` | `string` | N/A | N/A |  |
-| `memory` | `true` | `integer` | `in_range: [128, 3008]` | N/A | Size in megabytes. |
-| `timeout` | `true` | `integer` | `in_range: [1, 900]` | N/A | Time in seconds |
-| `schedule` | `false` | `string` | N/A | N/A | The schedule in which the platform will invoke this function, can be a rate or a cron. |
+| `role_name` | `true` | `string` | N/A | N/A | The Amazon Resource Name (ARN) of the function's execution role |
+| `role_description` | `true` | `string` | N/A | N/A | Description of the function's execution role |
+| `runtime` | `true` | `string` | `valid_values: [nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5]` | N/A | The identifier of the function's runtime |
+| `handler` | `true` | `string` | N/A | `index.handler` | The name of the method within your code that Lambda calls to execute your function |
+| `memory` | `true` | `integer` | `in_range: [128, 3008]` | N/A | The amount of memory in megabytes that your function has access to |
+| `timeout` | `true` | `integer` | `in_range: [1, 900]` | 3 | The amount of time that Lambda allows a function to run before stopping it |
+| `schedule` | `false` | `string` | N/A | N/A | The schedule in which the platform will invoke this function, can be a rate or a cron |
 
 ### Attributes
 
@@ -31,7 +29,6 @@ In the following, the properties, attributes, capabilities, and requirements cha
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
 | `invocable` | `radon.capabilities.Invocable` | N/A | [0, UNBOUNDED] |
-
 
 ### Notes
 
@@ -47,5 +44,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
     * `aws_secret_access_key`
     * `aws_region`
     * `schedule`
-
----

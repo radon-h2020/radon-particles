@@ -1,12 +1,10 @@
-## Java Application
+## Java Application Node Type
 
 An abstract type that defines a Java application
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `JavaApplication` | `radon.nodes.java.JavaApplication` | 1.0.0 | `tosca.nodes.SoftwareComponent` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Requirements
 
@@ -17,5 +15,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 ### Notes:
 
 * A `deployment_package` artifact can be supplied of type `radon.artifacts.archive.JAR` in the node template.
-
----

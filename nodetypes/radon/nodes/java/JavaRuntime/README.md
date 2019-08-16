@@ -1,12 +1,10 @@
-## Java Runtime
+## Java Runtime Node Type
 
 A type that describes a node capable of installing JRE/JDK and hosting Java applications.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `Java` | `radon.nodes.java.Java` | 1.0.0 | `tosca.nodes.SoftwareComponent` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Attributes
 
@@ -28,5 +26,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 * Inputs added to the `Standard` interface operations:
     * `create`: `JAVA_VERSION`, `JAVA_IS_JRE`, `JAVA_IS_HEADLESS`
     * `delete`: `JAVA_VERSION`, `JAVA_HOME`
-
----

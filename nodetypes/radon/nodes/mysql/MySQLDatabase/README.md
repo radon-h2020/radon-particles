@@ -1,12 +1,10 @@
-## MySQL Database
+## MySQL Database Node Type
 
 Node type to represent the logical database that can be managed and hosted on MySQL.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `MySQLDatabase` | `radon.nodes.mysql.MySQLDatabase` | 1.0.0 | `tosca.nodes.Database` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -31,5 +29,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 
 * Inputs added to the `Standard` interface:
     * `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DBMS_ROOT_PASSWORD`
-
----

@@ -1,12 +1,10 @@
 ## Google Cloud Triggers Relationship
 
-Goolge Cloud-specific relationship type representing GCResource-to-GCFunction communication.
+Google Cloud-specific relationship type representing GCResource-to-GCFunction communication.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `Triggers` | `radon.relationships.google.Triggers` | 1.0.0 | `radon.relationships.abstract.Triggers` |
-
-In the following, the content changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -17,8 +15,6 @@ In the following, the content changed from / added to the parent type are listed
 ### Notes
 
 * The following parameters are added to tht inputs of the `Configure` interface:
-  * `EVENT`: taken from the `events` property
-  * `RESOURCE`: the `name` of the `SOURCE` Google Cloud Resource
+    * `EVENT`: taken from the `events` property
+    * `RESOURCE`: the `name` of the `SOURCE` Google Cloud Resource
 * A template of this type should provide implementation artifacts that deploy the Cloud Function specified at the `TARGET` side.
-
----

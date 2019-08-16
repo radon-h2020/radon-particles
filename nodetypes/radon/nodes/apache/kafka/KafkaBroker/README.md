@@ -1,12 +1,10 @@
-## Kafka Broker
+## Kafka Broker Node Type
 
 This node type represents a Kafka broker that can be scaled out into a Kafka cluster.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `KafkaBroker` | `radon.nodes.apache.kafka.KafkaBroker` | 1.0.0 | `radon.nodes.java.JavaApplication` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -39,4 +37,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
   * `configure`: `IP_ADDRESS`, `LOG_CLEANER_ENABLE`, `JAVA_HOME`, `KAFKA_HOME`, `KF_HEAP_SIZE`, `ZK_HEAP_SIZE`
   * `start`:  `JAVA_HOME`, `KAFKA_HOME`
   * `stop`: `JAVA_HOME`, `KAFKA_HOME`
----

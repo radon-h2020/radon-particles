@@ -16,9 +16,6 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-# todo add missing descriptions to README.md
-# todo make sure what is a required property and what is not (default is required!)
-# todo can we give a default value for the arn attribute?
 node_types:
   radon.nodes.aws.LambdaFunction:
     derived_from: radon.nodes.abstract.Function
@@ -30,18 +27,25 @@ node_types:
         type: string
       role_description:
         type: string
+        required: false
       runtime:
         type: string
+        default: nodejs
+        constraints:
+          - valid_values: [nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5]
       handler:
         type: string
+        default: index.handler
       memory:
         description: Size in megabytes
         type: integer
+        default: 128
         constraints:
           - in_range: [128, 3008]
       timeout:
         description: Time in seconds
         type: integer
+        default: 3
         constraints:
           - in_range: [1, 900]
       schedule:

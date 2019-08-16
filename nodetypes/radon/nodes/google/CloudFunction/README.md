@@ -1,12 +1,10 @@
-## Cloud Function
+## Cloud Function Node Type
 
 An abstract node type that describes a generic Google Cloud Function.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `CloudFunction` | `radon.nodes.google.CloudFunction` | 1.0.0 | `radon.nodes.abstract.Function` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -27,5 +25,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 ### Notes
 
 * All type-specific Google Cloud Functions should derive from this type.
-
----

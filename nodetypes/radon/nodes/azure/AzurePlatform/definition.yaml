@@ -1,0 +1,44 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+#---------------------------------------------------------------------------
+# Copyright (c) 2019 Contributors to the RADON project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+
+node_types:
+  radon.nodes.azure.AzurePlatform:
+    derived_from: radon.nodes.abstract.CloudPlatform
+    properties:
+      user_name:
+        type: string
+      password:
+        type: string
+      region:
+        type: string
+        required: false
+    capabilities:
+      host:
+        type: tosca.capabilities.Container
+        valid_source_types:
+          - radon.nodes.azure.AzureFunction # This already covers child types
+          - radon.nodes.azure.AzureResource # This already covers child types
+    interfaces:
+      Standard:
+        inputs:
+          USER_NAME:
+            type: string
+            default: { get_property: [SELF, user_name] }
+          PASSWORD:
+            type: string
+            default: { get_property: [SELF, password] }

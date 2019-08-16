@@ -1,10 +1,8 @@
-## Docker Application
+## Docker Application Node Type
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `DockerApplication` | `radon.nodes.docker.DockerApplication` | 1.0.0 | `tosca.nodes.Container.Application` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Requirements
 
@@ -15,5 +13,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 ### Notes
 
 * An `image` artifact can be supplied of type `radon.artifacts.docker.DockerImage` in the node template
-
----

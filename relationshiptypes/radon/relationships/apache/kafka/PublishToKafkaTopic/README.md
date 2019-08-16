@@ -1,10 +1,10 @@
-## Publish to Kaka Topic
+## Publish to Kaka Topic Relationship
 
 This type represents the relationship between a Kafka producer and a Kafka topic.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `PublishToKafkaTopic`   | `radon.relationships.apache.kafka.PublishToKafkaTopic`   | 1.0.0   | `tosca.relationships.ConnectsTo`          |
+| `PublishToKafkaTopic` | `radon.relationships.apache.kafka.PublishToKafkaTopic` | 1.0.0 | `tosca.relationships.ConnectsTo` |
 
 ### Valid Target types
 
@@ -18,5 +18,3 @@ This type represents the relationship between a Kafka producer and a Kafka topic
 | `message_send_max_retries` | `false` | `integer` | `greater_or_equal: 0` | 3 | This property will cause the producer to automatically retry a failed send request. May result in duplicates |
 | `retry_backoff` | `false` | `integer` | `greater_or_equal: 0` | 100 | This property specifies the amount of time (in ms) that the producer waits before refreshing the metadata of relevant topics to allow for potential leader election.|
 | `request_timeout` | `false` | `integer` | `greater_or_equal: 0` | 10000 | This property specifies the amount of time (in ms) that the producer waits before refreshing the metadata of relevant topics to allow for potential leader election.The amount of time the broker will wait trying to meet the request.required.acks requirement before sending back an error to the client.|
-
----

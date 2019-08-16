@@ -1,12 +1,10 @@
-## NodeJS Application
+## NodeJS Application Node Type
 
 The type of a node that represents a Node.js application, and that installs Node.js runtime if necessary.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `radon.nodes.nodejs.NodeJSApplication` | `radon.nodes.nodejs.NodeJSApplication` | 1.0.0 | `tosca.nodes.SoftwareComponent` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Properties
 
@@ -18,5 +16,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 
 * Inputs added to the `Standard` interface operations:
     * `create`: `NODE_VERSION`
-
----

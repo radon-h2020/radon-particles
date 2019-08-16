@@ -3,7 +3,7 @@
 ## Prerequisites
 
 * Bash environment
-* [Pandoc](https://pandoc.org) is required as universal document converter
+* [Pandoc](https://pandoc.org) 2.7.x is required as universal document converter
 
 ## Create the specification
 
@@ -13,8 +13,8 @@ This file is the input to Pandoc in order to create the specification
 * Open a bash-enabled command-prompt
 * Execute the following command from the root of the repository:
   ```shell
-  cat ./docs/pandoc/pandoc-input.txt | xargs -I{} sh -c "cat {}; echo ''; echo'';" | pandoc -f markdown -t docx -s -o appendix.docx
+  cat ./docs/pandoc/pandoc-input.txt | xargs -I{} sh -c "cat {}; echo ''; echo'';" | pandoc -f markdown -t docx --data-dir=./docs/pandoc -s -o spec.docx
   ```
 * There will be a new file called `appendix.docx` containing RADON's type specification
 
-> *Note:* By modifying the `-t` parameter of the command above you basically can change the output format, e.g., change `docx` to `html` 
+> *Note:* By modifying the `-t` parameter of the command above you can change the output format, e.g., change `docx` to `html`.

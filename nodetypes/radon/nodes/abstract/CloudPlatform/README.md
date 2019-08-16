@@ -1,4 +1,4 @@
-## Cloud Platform
+## Cloud Platform Node Type (Abstract)
 
 Abstract cloud platform type representing an abstract, provider-managed platform.
 
@@ -17,5 +17,3 @@ Abstract cloud platform type representing an abstract, provider-managed platform
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
 | `host` | `tosca.capabilities.Container` | N/A | N/A | N/A |
-
----
