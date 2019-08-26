@@ -10,7 +10,7 @@ A node type that represents an Azure function that is triggered by a timer.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `schedule` | `true` | `string` | N/A | N/A | CRON expression or timespan to describe when and at which frequency the function will be triggered. |
+| `schedule` | `true` | `string` |   |   | CRON expression or timespan to describe when and at which frequency the function will be triggered. |
 
 ### Notes
 

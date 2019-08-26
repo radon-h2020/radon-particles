@@ -10,13 +10,13 @@ A node type representing the Google Cloud Platform which capable of hosting reso
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `sdk_version` | `false` | `version` | N/A | N/A | Specifies the SDK version required to manage Google Cloud resources. |
-| `project_id` | `true` | `string` | N/A | N/A | Specifies the unique project-id to be used. |
-| `user_account` | `false` | `string` | N/A | N/A | Specifies the user account used to log-in if a service account is not used. |
-| `api_key` | `false` | `string` | N/A | N/A | Encrypted key that can be used to access certain APIs that do not need to access private user data. |
-| `authentication_mode` | `true` | `string` | `valid_values: [user-account, service-account, api-key]` | N/A | Indicates whether user-account, service-account or api-key authentication should be used.|
-| `region` | `true` | `string` | N/A | N/A | Indicates the default region of the project. |
-| `zone` | `true` | `string` | N/A | N/A | Indicates the default zone of the project.|
+| `sdk_version` | `false` | `version` |   |   | Specifies the SDK version required to manage Google Cloud resources. |
+| `project_id` | `true` | `string` |   |   | Specifies the unique project-id to be used. |
+| `user_account` | `false` | `string` |   |   | Specifies the user account used to log-in if a service account is not used. |
+| `api_key` | `false` | `string` |   |   | Encrypted key that can be used to access certain APIs that do not need to access private user data. |
+| `authentication_mode` | `true` | `string` | `valid_values: [user-account, service-account, api-key]` |   | Indicates whether user-account, service-account or api-key authentication should be used.|
+| `region` | `true` | `string` |   |   | Indicates the default region of the project. |
+| `zone` | `true` | `string` |   |   | Indicates the default zone of the project.|
 
 ### Capabilities
 

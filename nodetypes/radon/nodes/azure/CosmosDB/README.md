@@ -10,10 +10,10 @@ A node type that represents a Cosmos DB hosted by the Azure platform
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-|`collection_name`|`true`|`string`|N/A| The name of the collection. |
-|`connection_string_setting`|`true`|`string`|N/A| The name of an app setting that contains the connection string used to connect to the Azure Cosmos DB account. |
-|`account_name`|`true`|`string`|N/A| The Azure Cosmos account name. |
-|`resource_group`|`true`|`string`|N/A| The name of the resource group. |
+| `collection_name` | `true` | `string`|   |   | The name of the collection. |
+| `connection_string_setting` | `true` | `string` |   |   | The name of an app setting that contains the connection string used to connect to the Azure Cosmos DB account. |
+| `account_name` | `true` | `string` |  |   | The Azure Cosmos account name. |
+| `resource_group` | `true` | `string` |   |   | The name of the resource group. |
 
 ### Notes
 

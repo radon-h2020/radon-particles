@@ -10,9 +10,9 @@ A MySQL database management system.
 
 | Name | Required | Type | Constraint | Default Value | Description | 
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `root_password`  | `true`  | `string` | N/A | N/A | The root password of the DBMS  |
-| `port` | `false` | `integer` | N/A | 3306 | The listening port of the DBMS |
-| `component_version` | `true` | `version` | N/A | 5.6 | The version of the MySQL DBMS |
+| `root_password`  | `true`  | `string` |   |   | The root password of the DBMS  |
+| `port` | `false` | `integer` |   | 3306 | The listening port of the DBMS |
+| `component_version` | `true` | `version` |   | 5.6 | The version of the MySQL DBMS |
 
 ### Capabilities
 

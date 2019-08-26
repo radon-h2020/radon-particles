@@ -10,11 +10,11 @@ The type indicates capabilities of a Docker runtime environment.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |  
-| `version` | `false` | `version` | N/A | N/A | The supported Docker version |
-| `publish_ports` | `false` | `list` of `PortSpec` | N/A | List of ports mappings from source (Docker container) to target (host) ports to publish |
-| `expose_ports` | `fasle` | `list` of `PortSpec` | N/A | List of ports mappings from source (Docker container) to expose to other Docker containers (not accessible outside host) |   
-| `volumes` | `false` | `list` of `string` | List of volume mappings to enable access from the Docker container to a directory on the host machine |
-| `port` | `true` | `integer` | N/A | 2375 | Port number of the exposed Docker API | 
+| `version` | `false` | `version` |   |   | The supported Docker version |
+| `publish_ports` | `false` | `list` of `PortSpec` |   | List of ports mappings from source (Docker container) to target (host) ports to publish |
+| `expose_ports` | `fasle` | `list` of `PortSpec` |   | List of ports mappings from source (Docker container) to expose to other Docker containers (not accessible outside host) |   
+| `volumes` | `false` | `list` of `string` | |  List of volume mappings to enable access from the Docker container to a directory on the host machine |
+| `port` | `true` | `integer` |   | 2375 | Port number of the exposed Docker API | 
 
 ### Notes
 

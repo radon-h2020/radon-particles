@@ -1,4 +1,4 @@
-## Resource-triggered Cloud Function Node Type
+## Google Resource-triggered Cloud Function Node Type
 
 A node type that represents a Google Cloud Function that can be triggered by a Google Cloud Resource, such as, a `Bucket` or a `Topic`
 

@@ -10,7 +10,7 @@ Google Cloud-specific relationship type representing GCResource-to-GCFunction co
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-|`events`|`true`|list of `radon.datatypes.Event`|`length: 1`| N/A | The event associated with this relationship |
+|`events`|`true`|list of `radon.datatypes.Event`|`length: 1`|   | The event associated with this relationship |
 
 ### Notes
 

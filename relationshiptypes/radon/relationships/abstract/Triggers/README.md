@@ -14,4 +14,4 @@ This is an abstract Relationship Type that represents a binding between an event
 
 | Name | Required | Type | Constraint | Default Value| Description |
 |:---- |:-------- |:---- |:---------- |:-----------  |:----------- |
-| `events` | `false` | `list` | N/A | N/A | A list of events of type `radon.datatypes.Event` that are conveyed to the target |
+| `events` | `false` | `list` |   |   | A list of events of type `radon.datatypes.Event` that are conveyed to the target |

@@ -10,17 +10,17 @@ A type representing a virtual machine on OpenStack.
 
 | Name | Required | Type | Constraint | Default Value | Description | 
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `name`  | `true`  | `string` | N/A | N/A | Name that should be given to the VM in OpenStack |
-| `image_id` | `true` | `string` | N/A | N/A | OpenStack image ID (image names are not accepted) |
-| `flavor_id` | `true` | `string` | N/A | N/A | OpenStack flavor ID (flavor names are not accepted) |
-| `network_id` | `true` | `string` | N/A | N/A | OpenStack network ID (network names are not accepted) |
-| `key_name` | `true` | `string` | N/A | N/A | OpenStack SSH key name that should be placed on the VM |
+| `name`  | `true`  | `string` |   |   | Name that should be given to the VM in OpenStack |
+| `image_id` | `true` | `string` |   |   | OpenStack image ID (image names are not accepted) |
+| `flavor_id` | `true` | `string` |   |   | OpenStack flavor ID (flavor names are not accepted) |
+| `network_id` | `true` | `string` |   |   | OpenStack network ID (network names are not accepted) |
+| `key_name` | `true` | `string` |   |   | OpenStack SSH key name that should be placed on the VM |
 
 ### Attributes
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
-| `id` | `string` | N/A | OpenStack ID of the VM |
+| `id` | `string` |   | OpenStack ID of the VM |
 
 ### Notes
 

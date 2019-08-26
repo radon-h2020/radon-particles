@@ -10,7 +10,7 @@ The type of a node that represents a Node.js application, and that installs Node
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `node_version` | `true` | `version` | N/A | 10.16.0 | The version of the NodeJS runtime this application uses. |
+| `node_version` | `true` | `version` |   | 10.16.0 | The version of the NodeJS runtime this application uses. |
 
 ### Notes
 

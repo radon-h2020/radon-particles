@@ -10,7 +10,7 @@ A type representing a data pipeline hosted on Apache NiFi.
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
-| `id` | `string` | N/A | Unique ID of the pipeline |
+| `id` | `string` |   | Unique ID of the pipeline |
 
 ### Capabilities
 
@@ -22,8 +22,8 @@ A type representing a data pipeline hosted on Apache NiFi.
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `tosca.capabilities.Container` | `radon.nodes.apache.nifi.Nifi` | `tosca.relationships.HostedOn` | [1,1] |
-| `connect` | `tosca.capabilities.Endpoint` | `radon.nodes.apache.nifi.NifiPipeline` | `tosca.relationships.ConnectsTo` | [0,1] | 
+| `host` | `tosca.capabilities.Container` | `radon.nodes.apache.nifi.Nifi` | `tosca.relationships.HostedOn` | [1, 1] |
+| `connect` | `tosca.capabilities.Endpoint` | `radon.nodes.apache.nifi.NifiPipeline` | `tosca.relationships.ConnectsTo` | [0, 1] | 
 
 ### Notes
 

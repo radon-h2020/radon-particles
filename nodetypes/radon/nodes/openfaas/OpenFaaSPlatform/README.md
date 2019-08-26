@@ -10,12 +10,12 @@ A node type that represents an externally managed OpenFaaS Platform.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `kubernetes_version` | `false` | `version` | N/A | 1.8 | The version of the Kubernetes cluster hosting this platform. |
-| `basic_auth_user` | `true` | `string` | N/A | N/A | The username used for basic authentication. |
-| `basic_auth_password` | `true` | `string` | N/A | N/A | The password used for basic authentication. |
-| `api_gateway_host` | `true` | `string` | N/A | N/A | The host name to access OpenFaaS API gateway at. |
-| `api_gateway_port` | `true` | `integer` | N/A | 31112 | The port to access OpenFaaS API gateway at. |
-| `prometheus_port` | `true` | `integer` | N/A | 31119 | The port to access the Prometheus service at. |
+| `kubernetes_version` | `false` | `version` |   | 1.8 | The version of the Kubernetes cluster hosting this platform. |
+| `basic_auth_user` | `true` | `string` |   |   | The username used for basic authentication. |
+| `basic_auth_password` | `true` | `string` |   |   | The password used for basic authentication. |
+| `api_gateway_host` | `true` | `string` |   |   | The host name to access OpenFaaS API gateway at. |
+| `api_gateway_port` | `true` | `integer` |   | 31112 | The port to access OpenFaaS API gateway at. |
+| `prometheus_port` | `true` | `integer` |   | 31119 | The port to access the Prometheus service at. |
 
 ### Attributes
 
@@ -27,7 +27,7 @@ A node type that represents an externally managed OpenFaaS Platform.
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-|`host`| `tosca.capabilities.Container` | `radon.nodes.openfaas.OpenFaasFunction` | [0,UNBOUNDED]
+|`host`| `tosca.capabilities.Container` | `radon.nodes.openfaas.OpenFaasFunction` | [0, UNBOUNDED]
 
 ### Notes
 

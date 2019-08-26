@@ -14,7 +14,7 @@ OpenFaaS-specific relationship type representing Kafka-to-OpenFaaS Function comm
 
 | Name | Required | Type | Constraint | Default Value| Description |
 |:---- |:-------- |:---- |:---------- |:-----------  |:----------- |
-| `events` | `true` | `list` of `radon.datatypes.Event` | `length: 1` | N/A | A list of events (1 in this case) of type `radon.datatypes.Event` that are conveyed to the target |
+| `events` | `true` | `list` of `radon.datatypes.Event` | `length: 1` |   | A list of events (1 in this case) of type `radon.datatypes.Event` that are conveyed to the target |
 
 ### Notes
 

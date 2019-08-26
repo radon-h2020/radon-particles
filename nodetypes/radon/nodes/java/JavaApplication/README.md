@@ -10,7 +10,7 @@ An abstract type that defines a Java application
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `radon.capabilities.container.JavaRuntime` | `tosca.nodes.Compute` | `tosca.relationships.HostedOn` | [1,1] |
+| `host` | `radon.capabilities.container.JavaRuntime` | `tosca.nodes.Compute` | `tosca.relationships.HostedOn` | [1, 1] |
 
 ### Notes:
 

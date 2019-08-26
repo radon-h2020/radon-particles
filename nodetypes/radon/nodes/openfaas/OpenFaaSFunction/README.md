@@ -10,8 +10,8 @@ A node type that represents a function hosted on an OpenFaas Platform
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-|`function_name`| `true` | `string` | N/A | N/A | The name of the function. |
-|`function_language_template`| `true` | `string` | `valid_values: [csharp, dockerfile, docekrfile-armhf, go-armhf, go, java8, node-arm64, node-armhf, node, php7, python-armhf, python, python3-armhf, python3, ruby]` | N/A | The runtime of this function. |
+|`function_name`| `true` | `string` |   |   | The name of the function. |
+|`function_language_template`| `true` | `string` | `valid_values: [csharp, dockerfile, docekrfile-armhf, go-armhf, go, java8, node-arm64, node-armhf, node, php7, python-armhf, python, python3-armhf, python3, ruby]` |   | The runtime of this function. |
 
 ### Attributes
 
@@ -24,13 +24,13 @@ A node type that represents a function hosted on an OpenFaas Platform
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-|`invocable`| `radon.capabilities.Invocable` | N/A | [0, UNBOUNDED] |
+|`invocable`| `radon.capabilities.Invocable` |   | [0, UNBOUNDED] |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | N/A | `radon.nodes.openfaas.OpenFaaSPlatform` | N/A | [1,1] |
+| `host` |   | `radon.nodes.openfaas.OpenFaaSPlatform` |   | [1, 1] |
 
 ### Notes
 

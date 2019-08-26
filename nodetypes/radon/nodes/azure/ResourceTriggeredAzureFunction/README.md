@@ -17,7 +17,7 @@ A node type that represents a function that is triggered by an Azure-specific re
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-|`invocable`|`radon.capabilities.Invocable`|
+|`invocable`|`radon.capabilities.Invocable`| `radon.nodes.azure.AzureResource` | [1, 1]|
 
 ### Notes
 

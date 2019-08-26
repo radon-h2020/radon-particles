@@ -10,14 +10,14 @@ An abstract node type to describe a generic Google Cloud Resource. All specific 
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-|`name`|`true`|`string`|N/A|N/A| The name of the resource |
+|`name`|`true`|`string`| | | The name of the resource |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `tosca.capabilities.Container` | `radon.nodes.google.GoogleCloudPlatform` | `HostedOn` | [1,1] |
-| `invoker` | `radon.capabilities.Invocable` | `radon.nodes.google.CloudFunctioN` | `radon.relationships.google.Triggers` | [0,UNBOUNDED] |
+| `host` | `tosca.capabilities.Container` | `radon.nodes.google.GoogleCloudPlatform` | `HostedOn` | [1, 1] |
+| `invoker` | `radon.capabilities.Invocable` | `radon.nodes.google.CloudFunctioN` | `radon.relationships.google.Triggers` | [0, UNBOUNDED] |
 
 ### Notes
 

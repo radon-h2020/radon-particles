@@ -10,10 +10,10 @@ Abstract cloud platform type representing an abstract, provider-managed platform
 
 | Name | Required | Type | Constraint | Description |
 |:---- |:-------- |:---- |:---------- |:----------- |
-| `name` | `false` | `string` | N/A | Name of the cloud platform |
+| `name` | `false` | `string` |   | Name of the cloud platform |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `tosca.capabilities.Container` | N/A | N/A | N/A |
+| `host` | `tosca.capabilities.Container` |   |   |   |

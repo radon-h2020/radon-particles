@@ -8,7 +8,7 @@
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `radon.capabilities.container.DockerRuntime` | N/A | `tosca.relationships.HostedOn` | [1,1] | 
+| `host` | `radon.capabilities.container.DockerRuntime` |   | `tosca.relationships.HostedOn` | [1, 1] | 
 
 ### Notes
 

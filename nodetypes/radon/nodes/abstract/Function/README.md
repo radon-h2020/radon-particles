@@ -10,13 +10,13 @@ Abstract function type representing a FaaS-hosted function independently of the 
 
 | Name | Required | Type | Constraint | Description |
 |:---- |:-------- |:---- |:---------- |:----------- |
-| `name` | `true` | `string` | N/A | Name of the function |
+| `name` | `true` | `string` |   | Name of the function |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `tosca.capabilities.Container` | N/A | `tosca.relationships.HostedOn` | N/A |
+| `host` | `tosca.capabilities.Container` |   | `tosca.relationships.HostedOn` |   |
 
 ### Notes
 

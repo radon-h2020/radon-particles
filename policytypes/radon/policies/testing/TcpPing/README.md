@@ -10,4 +10,4 @@ Policy type representing a test case specification for a TCP ping test.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `port` | `true` | `integer` | N/A | N/A | The port to ping during the test |
+| `port` | `true` | `integer` |   |   | The port to ping during the test |

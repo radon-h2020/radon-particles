@@ -12,9 +12,9 @@ A node type that describes a MongoDB DBMS.
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `component_version` | `true` | `version` | `valid_values: [3.2,3.4,3.6]` | 3.6 | The version of the MongoDB DBMS |
 | `port` | `true` | `integer` | `equal: 27017` | 27017 | The listening port of the DBMS |
-| `db_path` | `true` | `string` | N/A |  `/var/lib/mongo` | The path where database files will be stored |
-| `authorization_enabled` | `true` | `boolean` | N/A | `false` | Identifies whether users should be authenticated |
-| `administrator` | `false` | `string` | N/A | N/A | The username of the administrator |
+| `db_path` | `true` | `string` |   |  `/var/lib/mongo` | The path where database files will be stored |
+| `authorization_enabled` | `true` | `boolean` |   | `false` | Identifies whether users should be authenticated |
+| `administrator` | `false` | `string` |   |   | The username of the administrator |
 
 ### Attributes
 

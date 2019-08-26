@@ -10,19 +10,19 @@ A node type that describes a MongoDB database.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `authentication_database` | `false` | `string` | N/A | N/A | If authorization is enabled by the host, defines the database where the user authentication data is stored |
+| `authentication_database` | `false` | `string` |   |   | If authorization is enabled by the host, defines the database where the user authentication data is stored |
 
 ### Capabilities
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-| `database_endpoint` | `tosca.capabilities.Endpoint.Database` | N/A | [0, UNBOUNDED] |
+| `database_endpoint` | `tosca.capabilities.Endpoint.Database` |   | [0, UNBOUNDED] |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `tosca.capabilities.Compute` | `radon.nodes.mongodb.MongoDBMS` | `tosca.relationships.HostedOn` | [1,1] |
+| `host` | `tosca.capabilities.Compute` | `radon.nodes.mongodb.MongoDBMS` | `tosca.relationships.HostedOn` | [1, 1] |
 
 ### Notes
 

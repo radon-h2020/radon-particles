@@ -10,8 +10,8 @@ A type representing an Apache NiFi middleware component.
 
 | Name | Required | Type | Constraint | Default Value | Description | 
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `component_version` | `true` | `version` | N/A | N/A | The version of Apache NiFi |
-| `port` | `true` | `integer` | N/A | 8080 | The listening port of Apache NiFi |
+| `component_version` | `true` | `version` |   |   | The version of Apache NiFi |
+| `port` | `true` | `integer` |   | 8080 | The listening port of Apache NiFi |
 
 ### Capabilities
 

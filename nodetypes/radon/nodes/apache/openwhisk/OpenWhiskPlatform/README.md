@@ -10,12 +10,12 @@ A node type that represents an externally managed OpenWhisk Platform.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `kubernetes_version` | `false` | `version` | N/A | 1.8 | The version of the Kubernetes cluster hosting this platform. |
-| `auth_username` | `true` | `string` | N/A | N/A | The username used for basic authentication. |
-| `auth_password` | `true` | `string` | N/A | N/A | The password used for basic authentication. |
-| `api_host` | `true` | `string` | N/A | N/A | The host name to access OpenWhisk API gateway at. |
-| `api_port` | `true` | `integer` | N/A | 31112 | The port to access OpenWhisk API gateway at. |
-| `default_namespace` | `true` | `string` | N/A | N/A | The default namespace in which resources are deployed. |
+| `kubernetes_version` | `false` | `version` |   | 1.8 | The version of the Kubernetes cluster hosting this platform. |
+| `auth_username` | `true` | `string` |   |   | The username used for basic authentication. |
+| `auth_password` | `true` | `string` |   |   | The password used for basic authentication. |
+| `api_host` | `true` | `string` |   |   | The host name to access OpenWhisk API gateway at. |
+| `api_port` | `true` | `integer` |   | 31112 | The port to access OpenWhisk API gateway at. |
+| `default_namespace` | `true` | `string` |   |   | The default namespace in which resources are deployed. |
 
 ### Attributes
 
@@ -28,7 +28,7 @@ A node type that represents an externally managed OpenWhisk Platform.
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-|`host`| `tosca.capabilities.Container` | `radon.nodes.openfaas.OpenWhiskFunction` | [0,UNBOUNDED]
+|`host`| `tosca.capabilities.Container` | `radon.nodes.openfaas.OpenWhiskFunction` | [0, UNBOUNDED]
 
 ### Notes
 

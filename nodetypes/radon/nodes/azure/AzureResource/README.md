@@ -10,14 +10,14 @@ An abstract node type to describe a generic Azure Resource. All specific Azure R
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-|`name`|`true`|`string`|N/A|N/A| The name of the resource. |
+|`name`|`true`|`string`| | | The name of the resource. |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `tosca.capabilities.Container` | `radon.nodes.azure.AzurePlatform` | `HostedOn` | [1,1] |
-| `invoker` | `radon.capabilities.Invocable` | `radon.nodes.azure.AzureFunction` | `radon.relationships.azure.Triggers` | [0,UNBOUNDED] |
+| `host` | `tosca.capabilities.Container` | `radon.nodes.azure.AzurePlatform` | `HostedOn` | [1, 1] |
+| `invoker` | `radon.capabilities.Invocable` | `radon.nodes.azure.AzureFunction` | `radon.relationships.azure.Triggers` | [0, UNBOUNDED] |
 
 ### Notes
 

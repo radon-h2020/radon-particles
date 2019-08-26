@@ -10,12 +10,12 @@ A node type that represents an Azure function which is triggered with an HTTP ca
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-|`auth_level`| `false` | `string` | `valid_values: [anonymous, function, admin]` | N/A | Determines what keys, if any, need to be present on the request in order to invoke the function.|
-|`methods`| `false` | `list` of `string` | N/A | N/A | An array of the HTTP methods to which the function responds. If not specified, the function responds to all HTTP methods. |
-|`route` | `false` | `string` | N/A | N/A | Defines the route template, controlling to which request URLs your function responds. The default value if none is provided is `function_name`.|
-|`route_prefix` | `true` | `string` | `api` | N/A | The route prefix that applies to all routes. Use an empty string to remove the default prefix. |
-|`max_outstanding_requests` | `true` | `integer` | 200 | N/A | The maximum number of outstanding requests that are held at any given time. |
-|`max_concurrent_requests` | `true` | `integer` | 100 | N/A | The maximum number of http functions that will be executed in parallel.  |
+|`auth_level`| `false` | `string` | `valid_values: [anonymous, function, admin]` |   | Determines what keys, if any, need to be present on the request in order to invoke the function.|
+|`methods`| `false` | `list` of `string` |   |   | An array of the HTTP methods to which the function responds. If not specified, the function responds to all HTTP methods. |
+|`route` | `false` | `string` |   |   | Defines the route template, controlling to which request URLs your function responds. The default value if none is provided is `function_name`.|
+|`route_prefix` | `true` | `string` |  |  `api` | The route prefix that applies to all routes. Use an empty string to remove the default prefix. |
+|`max_outstanding_requests` | `true` | `integer` |  |  200 | The maximum number of outstanding requests that are held at any given time. |
+|`max_concurrent_requests` | `true` | `integer` |  |  100 | The maximum number of http functions that will be executed in parallel.  |
 
 ### Attributes
 
