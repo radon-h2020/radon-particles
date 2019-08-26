@@ -16,17 +16,10 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-node_types:
-  radon.nodes.azure.TimerTriggeredAzureFunction:
-    derived_from: radon.nodes.azure.AzureFunction
-    schedule:
-      description: CRON expression or timespan to describe when and at which frequency the function will be triggered.
-      type: string
-      required: true
-    interfaces:
-      Standard:
-        create:
-          inputs:
-            SCHEDULE:
-              type: string
-              default: { get_property: [SELF, schedule] }
+policy_types:
+  radon.policies.testing.TcpPing:
+    derived_from: radon.policies.testing.TestCase
+    properties:
+      port:
+        type: integer
+        required: true

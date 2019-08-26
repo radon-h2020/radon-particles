@@ -16,7 +16,7 @@ A node type that represents an AWS S3 Bucket.
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
-| `arn` | `string` | N/A | |
+| `arn` | `string` | N/A | Amazon's resource name for this bucket |
 
 ### Requirements
 

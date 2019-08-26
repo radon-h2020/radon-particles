@@ -18,3 +18,6 @@ This file is the input to Pandoc in order to create the specification
 * There will be a new file called `appendix.docx` containing RADON's type specification
 
 > *Note:* By modifying the `-t` parameter of the command above you can change the output format, e.g., change `docx` to `html`.
+
+> To update the `pandoc-input.txt` file you could use the following command:
+>   `find . -name README.md > docs/pandoc/pandoc-input.txt`

@@ -46,12 +46,15 @@
 ./policytypes/radon/policies/scaling/AutoScale/README.md
 ./policytypes/radon/policies/scaling/ScaleIn/README.md
 ./policytypes/radon/policies/scaling/ScaleOut/README.md
+./policytypes/radon/policies/testing/TestCase/README.md
+./policytypes/radon/policies/testing/HttpEndpoint/README.md
+./policytypes/radon/policies/testing/TcpPing/README.md
 ./artifacttypes/radon/artifacts/archive/JAR/README.md
 ./artifacttypes/radon/artifacts/archive/Zip/README.md
 ./artifacttypes/radon/artifacts/docker/DockerImage/README.md
+./capabilitytypes/radon/capabilities/Invocable/README.md
 ./capabilitytypes/radon/capabilities/container/DockerRuntime/README.md
 ./capabilitytypes/radon/capabilities/container/JavaRuntime/README.md
-./capabilitytypes/radon/capabilities/Invocable/README.md
 ./capabilitytypes/radon/capabilities/kafka/KafkaHosting/README.md
 ./capabilitytypes/radon/capabilities/kafka/KafkaTopic/README.md
 ./datatypes/radon/datatypes/Event/README.md

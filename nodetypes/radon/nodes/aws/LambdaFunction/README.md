@@ -22,7 +22,7 @@ A node type that represents an AWS Lambda Function that can be triggered by an A
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
-| `arn` | `string` | N/A | |
+| `arn` | `string` | N/A | Amazon's resource name for this Lambda function |
 
 ### Capabilities
 

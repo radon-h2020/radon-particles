@@ -10,7 +10,7 @@ Abstract cloud platform type representing an abstract, provider-managed platform
 
 | Name | Required | Type | Constraint | Description |
 |:---- |:-------- |:---- |:---------- |:----------- |
-| `name` | `true` | `string` | N/A | Name of the cloud platform |
+| `name` | `false` | `string` | N/A | Name of the cloud platform |
 
 ### Requirements
 
