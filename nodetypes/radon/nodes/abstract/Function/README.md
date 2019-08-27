@@ -11,6 +11,7 @@ Abstract function type representing a FaaS-hosted function independently of the 
 | Name | Required | Type | Constraint | Description |
 |:---- |:-------- |:---- |:---------- |:----------- |
 | `name` | `true` | `string` |   | Name of the function |
+| `environment` | `false` | `map of string` |  | Environment variables to set during the deployment |
 
 ### Requirements
 

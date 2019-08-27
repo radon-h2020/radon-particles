@@ -22,6 +22,11 @@ node_types:
     properties:
       name:
         type: string
+      environment:
+        type: map
+        entry_schema:
+          type: string
+        required: false
     requirements:
       - host:
           capability: tosca.capabilities.Container
