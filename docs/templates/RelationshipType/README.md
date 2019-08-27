@@ -6,7 +6,7 @@ Description...
 |:---- |:--- |:------- |:------------ |
 | ``   | ``   | 1.0.0   | ``          |
 
-### Valid Target types
+### Valid Target Types
 
 * ``
 
@@ -25,5 +25,3 @@ Description...
 ### Notes
 
 *  Interfaces can be described here + other notes
-
----

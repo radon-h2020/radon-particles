@@ -57,21 +57,21 @@ node_types:
         create:
           inputs:
             SDK_VERSION:
-              default: { get_property [SELF, sdk_version] }
+              default: { get_property: [SELF, sdk_version] }
               required: false
         configure:
           inputs:
             PROJECT_ID:
-              default: { get_property [SELF, project_id] }
+              default: { get_property: [SELF, project_id] }
             AUTHENTICATION_MODE:
-              default: { get_property [SELF, authentication_mode] }
+              default: { get_property: [SELF, authentication_mode] }
             USER_ACCOUNT:
-              default: { get_property [SELF, user_account] }
+              default: { get_property: [SELF, user_account] }
               required: false
             API_KEY:
-              default: { get_property [SELF, api_key] }
+              default: { get_property: [SELF, api_key] }
               required: false
             REGION:
-              default: { get_property [SELF, region] }
+              default: { get_property: [SELF, region] }
             ZONE:
-              default: { get_property [SELF, zone] }
+              default: { get_property: [SELF, zone] }

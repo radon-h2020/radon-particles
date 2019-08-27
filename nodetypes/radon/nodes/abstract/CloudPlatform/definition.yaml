@@ -22,6 +22,7 @@ node_types:
     properties:
       name:
         type: string
+        required: false
     capabilities:
       host:
         type: tosca.capabilities.Container

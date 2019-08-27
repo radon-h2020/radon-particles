@@ -1,29 +1,20 @@
-## Display Name
+## AWS Platform  Node Type
 
-This is Node Type represents an AWS FaaS platform, i.e., AWS Lambda.
+This is node type represents AWS as a platform.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| Lambda | radon.nodes.aws.Lambda | 1.0.0 | radon.nodes.abstract.CloudPlatform |
+| `AwsPlatform` | `radon.nodes.aws.AwsPlatform` | 1.0.0 | `radon.nodes.abstract.CloudPlatform` |
 
 ### Properties
 
-| Name | Required | Type | Constraint | Description |
-|:---- |:-------- |:---- |:---------- |:----------- |
-| `name` | `true` | `string` | N/A | TBD |
-| `access_key_id` | `true` | `string` | N/A | TBD |
-| `secret_access_key` | `true` | `string` | N/A | TBD |
-| `name` | `true` | `string` | N/A | TBD |
+| Name | Required | Type | Constraint | Default Value | Description |
+|:---- |:-------- |:---- |:---------- |:------------- |:----------- |
+| `access_key_id` | `true` | `string` |   |   | The identifier of your AWS access key |
+| `secret_access_key` | `true` | `string` |   |   | The secret access key associated to your access key |
+| `region` | `true` | `string` |   |   | The region identifier, e.g., us-west-1 |
 
-### Requirements
-
-| Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
-|:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `tosca.capabilities.Container` | N/A | N/A | N/A |
-
-### Notes
-
-* Arbitrary list of additional notes
-* ...
-
----
+### Capabilities
+| Name | Type | Valid Source Types | Occurrences |
+|:---- |:---- |:------------------ |:----------- |
+|`host`|`tosca.capabilities.Container`| `[radon.nodes.aws.LambdaFunction, radon.nodes.aws.S3Bucket]`| [0, UNBOUNDED] |

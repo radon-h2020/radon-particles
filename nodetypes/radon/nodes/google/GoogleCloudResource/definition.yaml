@@ -35,4 +35,4 @@ node_types:
       Standard:
         inputs:
           NAME:
-            default: { get_property [SELF, name]}
+            default: { get_property: [SELF, name]}

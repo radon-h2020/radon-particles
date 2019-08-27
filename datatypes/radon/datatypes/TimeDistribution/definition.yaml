@@ -21,9 +21,9 @@ data_types:
     derived_from: tosca.datatypes.Root
     properties:
       mean:
-        type: scalar-unit.time
+        type: integer
         constraints:
-          - greater_or_equal: 0 s
+          - greater_or_equal: 0
       scv:
         type: float
         constraints:

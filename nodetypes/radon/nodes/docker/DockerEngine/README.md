@@ -1,12 +1,10 @@
-## Docker Engine
+## Docker Engine Node Type
 
 Type that represents a Docker runtime to run multiple Docker container applications on a single host.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `DockerRuntime` | `radon.nodes.docker.DockerRuntime` | 1.0.0 | `tosca.nodes.Container.Runtime` |
-
-In the following, the properties, attributes, capabilities, and requirements changed from / added to the parent type are listed:
 
 ### Attributes
 
@@ -19,5 +17,3 @@ In the following, the properties, attributes, capabilities, and requirements cha
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
 | `docker` | `radon.capabilities.container.DockerRuntime` | `radon.nodes.docker.DockerApplication` | [1, UNBOUNDED] |
-
----

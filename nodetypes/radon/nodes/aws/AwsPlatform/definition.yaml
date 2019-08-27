@@ -22,13 +22,10 @@ node_types:
     properties:
       access_key_id:
         type: string
-        required: false
       secret_access_key:
         type: string
-        required: false
       region:
         type: string
-        required: false
     capabilities:
       host:
         type: tosca.capabilities.Container

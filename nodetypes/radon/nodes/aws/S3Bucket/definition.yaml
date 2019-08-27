@@ -29,21 +29,21 @@ node_types:
       - host:
           capability: tosca.capabilities.Container
           relationship: tosca.relationships.HostedOn
-    capabilities:
-      invoke:
-        type: radon.capabilities.Invocable
-        relationship: radon.relationships.aws.Triggers
-        valid_source_types:
-          - radon.nodes.aws.LambdaInvocableFunction
+      - invoker:
+          type: radon.capabilities.Invocable
+          relationship: radon.relationships.aws.Triggers
+          valid_source_types:
+            - radon.nodes.aws.LambdaFunction
+          occurrences: [0,UNBOUNDED]
     interfaces:
       Standard:
         inputs:
           aws_access_key_id:
-            default: { get_property: [ SELF, host, access_key_id ] }
+            default: { get_property: [ HOST, access_key_id ] }
           aws_secret_access_key:
-            default: { get_property: [ SELF, host, secret_access_key ] }
+            default: { get_property: [ HOST, secret_access_key ] }
           aws_region:
-            default: { get_property: [ SELF, host, region ] }
+            default: { get_property: [ HOST, region ] }
           bucket_name:
             default: { get_property: [ SELF, name ] }
         create: files/create.yml

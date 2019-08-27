@@ -22,7 +22,7 @@ node_types:
     attributes:
       url:
         type: string
-        default: { concat: ["http://", get_attribute: [HOST, public_address], get_attribute: [SELF, port] ] }
+        default: { concat: ["http://", get_attribute: [HOST, public_address], get_property: [SELF, port] ] }
     properties:
       component_version:
         type: version
