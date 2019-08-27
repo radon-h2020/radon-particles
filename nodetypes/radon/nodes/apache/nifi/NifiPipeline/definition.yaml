@@ -39,3 +39,27 @@ node_types:
         description: Capability to receive data from other pipeline nodes
         valid_source_type: [ radon.nodes.apache.nifi.NifiPipeline ]
         occurrences: [0, UNBOUNDED]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          inputs:
+            template_file:  { default: { get_artifact: [ SELF, pipeline_template ] } }
+            template_name:  { default: { get_property: [ SELF, name ] } }
+          implementation: files/create.yml
+        start:
+          inputs:
+            pipeline_id: { default: { get_attribute: [ SELF, id ] } }
+          implementation: files/start.yml
+        stop:
+          inputs:
+            pipeline_id: { default: { get_attribute: [ SELF, id ] } }
+          implementation: files/stop.yml
+        configure:
+          inputs:
+            pipeline_id: { default: { get_attribute: [ SELF, id ] } }
+          implementation: files/configure.yml
+        delete:
+          inputs:
+            pipeline_id: { default: { get_attribute: [ SELF, id ] } }
+          implementation: files/delete.yml

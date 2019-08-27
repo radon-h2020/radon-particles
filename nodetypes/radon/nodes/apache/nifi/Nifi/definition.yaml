@@ -31,3 +31,20 @@ node_types:
       host:
         type: tosca.capabilities.Container
         valid_source_types: [ radon.nodes.apache.nifi.NifiPipeline ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        create:
+          inputs:
+            tarball_version: { default: { get_property: [ SELF, component_version ] } }
+          implementation: files/create.yml
+        start:
+          implementation: files/start.yml
+        stop:
+          implementation: files/stop.yml
+        configure:
+          implementation: files/configure.yml
+        delete:
+          inputs:
+            tarball_version: { default: { get_property: [ SELF, component_version ] } }
+          implementation: files/delete.yml

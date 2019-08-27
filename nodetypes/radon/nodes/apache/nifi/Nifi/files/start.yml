@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Start nifi service
+      service:
+        name: nifi
+        enabled: yes
+        state: started
