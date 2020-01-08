@@ -7,7 +7,7 @@ node_types:
       broker_urls:
         description: represents a list of one or more urls that corresponds to the brokers of the kafka cluster this topic is hosted on
         type: list
-        entry-schema:
+        entry_schema:
           type: string
         default: { get_attribute: [HOST, broker_urls] }
     properties:

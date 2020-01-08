@@ -21,7 +21,7 @@ node_types:
       connect:
         type: tosca.capabilities.Endpoint
         description: Capability to receive data from other pipeline nodes
-        valid_source_type: [ radon.nodes.apache.nifi.NifiPipeline ]
+        valid_source_types: [ radon.nodes.apache.nifi.NifiPipeline ]
         occurrences: [0, UNBOUNDED]
     interfaces:
       Standard:

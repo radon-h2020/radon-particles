@@ -17,7 +17,7 @@ A node type that represents a function hosted on an OpenFaas Platform
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
-| `function_url` | `string` | `concat [ get_attribute: [SELF, gateway_url], "/function/", get_property: [SELF, function_name] ]` | The URL at which the function can be addressed via a REST call. |
+| `function_url` | `string` | `concat: [ get_attribute: [SELF, gateway_url], "/function/", get_property: [SELF, function_name] ]` | The URL at which the function can be addressed via a REST call. |
 | `gateway_url` | `string` | `get_attribute: [HOST, url]` | The URL of the underlying platform. |
 
 ### Capabilities

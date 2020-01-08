@@ -35,10 +35,10 @@ node_types:
       schedule:
         type: string
         required: false
-      capabilities:
-        invocable:
-          capability: radon.capabilities.Invocable
-          occurrences: [0, UNBOUDED]
+    capabilities:
+      invocable:
+        type: radon.capabilities.Invocable
+        occurrences: [0, UNBOUNDED]
     interfaces:
       Standard:
         inputs:

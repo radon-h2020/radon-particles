@@ -6,7 +6,7 @@ node_types:
     attributes:
       function_url:
         type: string
-        default: { concat [ get_attribute: [SELF, gateway_url], "/function/", get_property: [SELF, function_name] ] }
+        default: { concat: [ get_attribute: [SELF, gateway_url], "/function/", get_property: [SELF, function_name] ] }
       gateway_url:
         type: string
         default: { get_attribute: [HOST, url]}
@@ -22,7 +22,7 @@ node_types:
           node: radon.nodes.openfaas.OpenFaaSPlatform
     capabilities:
       invocable:
-        capability: radon.capabilities.Invocable
+        type: radon.capabilities.Invocable
         occurrences: [0, UNBOUNDED]
     interfaces:
       Standard:

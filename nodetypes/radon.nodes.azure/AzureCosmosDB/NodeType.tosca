@@ -18,15 +18,16 @@ node_types:
     interfaces:
       Standard:
         create:
-          COLLECTION_NAME:
-            type: string
-            default: { get_property: [collection_name]}
-          CONNECTION_STRING_SETTING:
-            type: string
-            default: { get_property: [connection_string_setting]}
-          ACCOUNT_NAME:
-            type: string
-            default: { get_property: [account_name]}
-          RESOURCE_GROUP:
-            type: string
-            default: { get_property: [resource_group]}
+          inputs:
+            COLLECTION_NAME:
+              type: string
+              default: { get_property: [collection_name]}
+            CONNECTION_STRING_SETTING:
+              type: string
+              default: { get_property: [connection_string_setting]}
+            ACCOUNT_NAME:
+              type: string
+              default: { get_property: [account_name]}
+            RESOURCE_GROUP:
+              type: string
+              default: { get_property: [resource_group]}

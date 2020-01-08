@@ -14,10 +14,8 @@ node_types:
           capability: tosca.capabilities.Container
           relationship: tosca.relationships.HostedOn
       - invoker:
-          type: radon.capabilities.Invocable
+          capability: radon.capabilities.Invocable
           relationship: radon.relationships.aws.AwsTriggers
-          valid_source_types:
-            - radon.nodes.aws.AwsLambdaFunction
           occurrences: [0,UNBOUNDED]
     interfaces:
       Standard:

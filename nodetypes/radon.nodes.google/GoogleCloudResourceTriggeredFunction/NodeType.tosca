@@ -5,7 +5,7 @@ node_types:
     derived_from: radon.nodes.google.CloudFunction
     capabilities:
       invocable:
-        capability: radon.capabilities.Invocable
+        type: radon.capabilities.Invocable
         valid_source_types:
           - radon.nodes.google.GoogleCloudResource
         occurrences: [1, 1]
