@@ -1,0 +1,32 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+node_types:
+  radon.nodes.azure.AzureCosmosDB:
+    derived_from: radon.nodes.azure.AzureResource
+    properties:
+      collection_name:
+        type: string
+      connection_string_setting:
+        type: string
+      account_name:
+        type: string
+      resource_group:
+        type: string
+    requirements:
+      - invoker:
+          relationship: radon.relationships.azure.AzureCosmosDBTriggers
+    interfaces:
+      Standard:
+        create:
+          COLLECTION_NAME:
+            type: string
+            default: { get_property: [collection_name]}
+          CONNECTION_STRING_SETTING:
+            type: string
+            default: { get_property: [connection_string_setting]}
+          ACCOUNT_NAME:
+            type: string
+            default: { get_property: [account_name]}
+          RESOURCE_GROUP:
+            type: string
+            default: { get_property: [resource_group]}

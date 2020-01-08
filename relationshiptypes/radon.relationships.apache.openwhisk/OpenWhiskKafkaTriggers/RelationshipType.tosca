@@ -1,0 +1,43 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+# see https://github.com/apache/openwhisk-package-kafka#creating-a-trigger-that-listens-to-a-generic-kafka-instance
+
+relationship_types:
+  radon.relationships.apache.openwhisk.OpenWhiskKafkaTriggers:
+    derived_from: radon.relationships.abstract.Triggers
+    description: OpenWhisk-specific relationship type representing Kafka-to-OpenWhisk Function communication
+    properties:
+      events:
+        constraints:
+          - length: 1
+      trigger_name:
+        description: the name of the trigger created by this relationship. Used for proper cleanup when the relationship is removed.
+        type: string
+    interfaces:
+      Configure:
+        post_configure_target:
+          description: creates an OpenWhisk trigger based on the Kafka feed, and associates the trigger with the function via a rule.
+          inputs:
+            BROKERS:
+              type: list
+              entry_schema: string
+              default: { get_attribute: [SOURCE, broker_urls]}
+            TOPIC_NAME:
+              type: string
+              default: { get_attribute: [SOURCE, topic_name]}
+            IS_JSON_DATA:
+              type: boolean
+              required: false
+            IS_BINARY_KEY:
+              type: boolean
+              required: false
+            IS_BINARY_VALUE:
+              type: boolean
+              required: false
+        inputs:
+          EVENT:
+            type: radon.datatypes.Event
+            default: { get_property: [SELF, events, 1] }
+          TRIGGER_NAME:
+            type: string
+            default: { get_property: [SELF, trigger_name]}
