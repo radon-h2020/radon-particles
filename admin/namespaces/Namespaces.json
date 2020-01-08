@@ -1,0 +1,11 @@
+{
+  "radon.relationships.abstract" : {
+    "namespace" : "radon.relationships.abstract",
+    "prefix" : "radonrelationshipsabstract",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "generatedNamespace" : false,
+    "secureCollection" : false,
+    "patternCollection" : false
+  }
+}
