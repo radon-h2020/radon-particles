@@ -1,0 +1,14 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+
+node_types:
+  radon.nodes.docker.DockerApplication:
+    derived_from: tosca.nodes.Container.Application
+    requirements:
+      - host:
+          capability: radon.capabilities.container.DockerRuntime
+          relationship: tosca.relationships.HostedOn
+      - storage:
+          occurrences: [0,1]
+      - network:
+          occurrences: [0,1]

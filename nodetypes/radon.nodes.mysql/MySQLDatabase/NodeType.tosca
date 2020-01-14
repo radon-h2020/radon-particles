@@ -1,0 +1,27 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.mysql.MySQLDatabase:
+    derived_from: tosca.nodes.Database
+    properties:
+      user:
+        required: true
+      password:
+        required: true
+    capabilities:
+      database_endpoint:
+        occurrences: [0, UNBOUNDED]
+    requirements:
+      - host:
+          node: radon.nodes.mysql.MySQLDBMS
+    interfaces:
+      Standard:
+        inputs:
+          DB_NAME:
+            default: { get_property: [SELF, name] }
+          DB_USER:
+            default: { get_property: [SELF, user] }
+          DB_PASSWORD:
+            default: { get_property: [SELF, password] }
+          DBMS_ROOT_PASSWORD:
+            default: { get_property: [HOST, root_password] }

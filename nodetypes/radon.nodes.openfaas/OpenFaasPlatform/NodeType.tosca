@@ -1,0 +1,59 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.opefaas.OpenFaasPlatform:
+    derived_from: radon.nodes.abstract.CloudPlatform
+    attributes:
+      url:
+        type: string
+        default:  { concat: ["http://", get_property: [SELF, api_gateway_host], get_property: [SELF, api_gateway_port] ] }
+    properties:
+      kubernetes_version:
+        type: version
+        required: false
+        default: 1.8
+      basic_auth_user:
+        type: string
+        required: true
+        description: username used for basic authentication
+      basic_auth_password:
+        type: string
+        required: true
+        description: password used for basic authentication
+      api_gateway_port:
+        type: integer
+        required: true
+        default: 31112
+        description: port to access OpenFAAS API gateway at
+      api_gateway_host:
+        type: string
+        required: true
+        description: host name to access OpenFAAS API gateway at
+      prometheus_port:
+        type: integer
+        required: true
+        default: 31119
+    capabilities:
+      host:
+        type: tosca.capabilities.Container
+        valid_source_types:
+          - radon.nodes.openfaas.OpenFaasFunction
+    interfaces:
+      Standard:
+        create:
+          inputs:
+            KUBERNETES_VERSION:
+              type: version
+              default: { get_property: [SELF, kubernetes_version] }
+              required: false
+        configure:
+          inputs:
+            URL:
+              type: string
+              default: { get_attribute: [SELF, url]}
+            BASIC_AUTH_USER:
+              type: string
+              default: { get_property: [SELF, basic_auth_user]}
+            BASIC_AUTH_PASSWORD:
+              type: string
+              default: { get_property: [SELF, basic_auth_password]}

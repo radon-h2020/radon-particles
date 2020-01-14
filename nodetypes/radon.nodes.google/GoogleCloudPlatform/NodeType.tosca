@@ -1,0 +1,61 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.google.GoogleCloudPlatform:
+    derived_from: radon.nodes.abstract.CloudPlatform
+    properties:
+      sdk_version:
+        type: version
+        required: false
+        description: Used to sepcify the SDK version required to manage Google Cloud resources
+      project_id:
+        type: string
+        required: true
+        description: specifies the unique project-id to be used
+      user_account:
+        type: string
+        required: false
+        description: specifies the user account used to log-in if a service account is not used
+      api_key:
+        type: string
+        required: false
+        description: encrypted key that can be used to access certain APIs that don't need to access private user data
+      authentication_mode:
+        type: string
+        required: true
+        constraints:
+          - valid_values: [user-account, service-account, api-key]
+        description: indicates whether user-account, service-account or api-key authentication should be used.
+      region:
+        type: string
+      zone:
+        type: string
+    capabilities:
+      host:
+        type: tosca.capabilities.Container
+        valid_source_types:
+          - radon.nodes.google.GoogleCloudFunction
+          - radon.nodes.google.GoogleCloudResource
+    interfaces:
+      Standard:
+        create:
+          inputs:
+            SDK_VERSION:
+              default: { get_property: [SELF, sdk_version] }
+              required: false
+        configure:
+          inputs:
+            PROJECT_ID:
+              default: { get_property: [SELF, project_id] }
+            AUTHENTICATION_MODE:
+              default: { get_property: [SELF, authentication_mode] }
+            USER_ACCOUNT:
+              default: { get_property: [SELF, user_account] }
+              required: false
+            API_KEY:
+              default: { get_property: [SELF, api_key] }
+              required: false
+            REGION:
+              default: { get_property: [SELF, region] }
+            ZONE:
+              default: { get_property: [SELF, zone] }

@@ -1,0 +1,28 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.azure.AzurePlatform:
+    derived_from: radon.nodes.abstract.CloudPlatform
+    properties:
+      user_name:
+        type: string
+      password:
+        type: string
+      region:
+        type: string
+        required: false
+    capabilities:
+      host:
+        type: tosca.capabilities.Container
+        valid_source_types:
+          - radon.nodes.azure.AzureFunction
+          - radon.nodes.azure.AzureResource
+    interfaces:
+      Standard:
+        inputs:
+          USER_NAME:
+            type: string
+            default: { get_property: [SELF, user_name] }
+          PASSWORD:
+            type: string
+            default: { get_property: [SELF, password] }
