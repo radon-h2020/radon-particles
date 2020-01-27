@@ -1,0 +1,30 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+capability_types:
+  tosca.capabilities.Compute:
+    derived_from: tosca.capabilities.Container
+    # shortname field is not defined in the CapabilityType structure
+    # shortname: Compute
+    properties:
+      name:
+        type: string
+        required: false
+      num_cpus:
+        type: integer
+        required: false
+        constraints:
+          - greater_or_equal: 1
+      cpu_frequency:
+        type: scalar-unit.frequency
+        required: false
+        constraints:
+          - greater_or_equal: 0.1 GHz
+      disk_size:
+        type: scalar-unit.size
+        required: false
+        constraints:
+          - greater_or_equal: 0 MB
+      mem_size:
+        type: scalar-unit.size
+        required: false
+        constraints:
+          - greater_or_equal: 0 MB

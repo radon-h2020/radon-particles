@@ -1,0 +1,11 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+capability_types:
+  tosca.capabilities.Endpoint.Admin:
+    derived_from: tosca.capabilities.Endpoint
+    # Change Endpoint secure indicator to true from its default of false
+    properties:
+      secure:
+        type: boolean
+        default: true
+        constraints:
+          - equal: true
