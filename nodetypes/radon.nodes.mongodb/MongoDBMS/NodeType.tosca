@@ -29,6 +29,7 @@ node_types:
         required: false
     capabilities:
       host:
+        type: tosca.capabilities.Compute
         valid_source_types: [radon.nodes.mongodb.MongoDBDatabase]
     interfaces:
       Standard:

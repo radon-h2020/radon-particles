@@ -21,5 +21,5 @@ relationship_types:
             default: { get_property: [ TARGET, host, region ] }
           event_types:
             default: { get_property: [ SELF, event_types ] }
-        add_target: files/add_target.yml
-        add_source: files/add_source.yml
+        # add_target: files/add_target.yml
+        # add_source: files/add_source.yml

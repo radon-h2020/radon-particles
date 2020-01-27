@@ -10,6 +10,7 @@ node_types:
         required: true
     capabilities:
       database_endpoint:
+        type: tosca.capabilities.Endpoint.Database
         occurrences: [0, UNBOUNDED]
     requirements:
       - host:
