@@ -20,6 +20,8 @@ node_types:
     requirements:
       - host:
           node: radon.nodes.openfaas.OpenFaaSPlatform
+          capability: tosca.capabilities.Container
+          relationship: tosca.relationships.HostedOn
     capabilities:
       invocable:
         type: radon.capabilities.Invocable

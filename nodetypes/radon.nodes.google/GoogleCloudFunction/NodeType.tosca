@@ -27,3 +27,5 @@ node_types:
     requirements:
       - host:
           node: radon.nodes.google.GoogleCloudPlatform
+          capability: tosca.capabilities.Container
+          relationship: tosca.relationships.HostedOn

@@ -7,8 +7,11 @@ node_types:
     requirements:
       - host:
           capability: radon.capabilities.container.DockerRuntime
+          node: tosca.nodes.Container.Runtime
           relationship: tosca.relationships.HostedOn
       - storage:
+          capability: tosca.capabilities.Storage
           occurrences: [0,1]
       - network:
+          capability: tosca.capabilities.EndPoint
           occurrences: [0,1]

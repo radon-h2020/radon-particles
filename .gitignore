@@ -1,3 +1,4 @@
 .idea/
 /*.docx
 docs/pandoc/spec.docx
+*.iml
