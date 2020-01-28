@@ -19,7 +19,7 @@ node_types:
           - valid_values: [csharp, dockerfile, docekrfile-armhf, go-armhf, go, java8, node-arm64, node-armhf, node, php7, python-armhf, python, python3-armhf, python3, ruby]
     requirements:
       - host:
-          node: radon.nodes.openfaas.OpenFaaSPlatform
+          node: radon.nodes.openfaas.OpenFaasPlatform
           capability: tosca.capabilities.Container
           relationship: tosca.relationships.HostedOn
     capabilities:

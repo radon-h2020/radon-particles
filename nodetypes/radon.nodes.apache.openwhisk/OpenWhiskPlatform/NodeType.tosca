@@ -37,7 +37,7 @@ node_types:
       host:
         type: tosca.capabilities.Container
         valid_source_types:
-          - radon.nodes.openwhisk.OpenWhiskFunction
+          - radon.nodes.apache.openwhisk.OpenWhiskFunction
     interfaces:
       Standard:
         create:

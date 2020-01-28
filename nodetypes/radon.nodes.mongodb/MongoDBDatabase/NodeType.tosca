@@ -14,7 +14,7 @@ node_types:
     requirements:
       - host:
           capability: tosca.capabilities.Compute
-          node: radon.nodes.mysql.MongoDBMS
+          node: radon.nodes.mongodb.MongoDBMS
           relationship: tosca.relationships.HostedOn
     interfaces:
       Standard:

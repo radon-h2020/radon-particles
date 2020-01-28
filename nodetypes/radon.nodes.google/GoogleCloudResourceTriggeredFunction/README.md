@@ -4,10 +4,10 @@ A node type that represents a Google Cloud Function that can be triggered by a G
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `GoogleCloudResourceTriggeredFunction` | `radon.nodes.google.GoogleCloudResourceTriggeredFunction` | 1.0.0 | `radon.nodes.google.CloudFunction` |
+| `GoogleCloudResourceTriggeredFunction` | `radon.nodes.google.GoogleCloudResourceTriggeredFunction` | 1.0.0 | `radon.nodes.google.GoogleCloudFunction` |
 
 ### Capabilities
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-| `inovcable` | `radon.capabilities.Invocable` | `radon.nodes.google.CloudResource`| [1, 1] |
+| `inovcable` | `radon.capabilities.Invocable` | `radon.nodes.google.GoogleCloudResource`| [1, 1] |
