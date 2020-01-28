@@ -10,6 +10,7 @@ node_types:
       - host:
           capability: tosca.capabilities.Container
           node: radon.nodes.google.GoogleCloudPlatform
+          relationship: tosca.relationships.HostedOn
       - invoker:
           capability: radon.capabilities.Invocable
           relationship: radon.relationships.google.GoogleTriggers

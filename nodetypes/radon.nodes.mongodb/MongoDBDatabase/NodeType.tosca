@@ -13,7 +13,9 @@ node_types:
         occurrences: [0, UNBOUNDED]
     requirements:
       - host:
-          node: radon.nodes.mysql.MongoDBMS
+          capability: tosca.capabilities.Compute
+          node: radon.nodes.mongodb.MongoDBMS
+          relationship: tosca.relationships.HostedOn
     interfaces:
       Standard:
         inputs:

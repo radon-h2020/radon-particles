@@ -41,3 +41,5 @@ node_types:
     requirements:
       - host:
           node: radon.nodes.azure.AzurePlatform
+          capability: tosca.capabilities.Container
+          relationship: tosca.relationships.HostedOn

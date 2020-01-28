@@ -10,7 +10,7 @@ node_types:
     requirements:
       - host:
           capability: tosca.capabilities.Container
-          node: radon.nodes.apache.nifi.Nifi
+          node: radon.nodes.apache.nifi.NifiRuntime
           relationship: tosca.relationships.HostedOn
       - connect:
           capability: tosca.capabilities.Endpoint

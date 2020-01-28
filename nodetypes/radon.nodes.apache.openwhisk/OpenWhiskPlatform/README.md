@@ -28,7 +28,7 @@ A node type that represents an externally managed OpenWhisk Platform.
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-|`host`| `tosca.capabilities.Container` | `radon.nodes.openfaas.OpenWhiskFunction` | [0, UNBOUNDED]
+|`host`| `tosca.capabilities.Container` | `radon.nodes.apache.openwhisk.OpenWhiskFunction` | [0, UNBOUNDED]
 
 ### Notes
 

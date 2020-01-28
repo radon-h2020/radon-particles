@@ -5,4 +5,5 @@ node_types:
     derived_from: tosca.nodes.SoftwareComponent
     requirements:
       - host:
-        capability: radon.capabilities.container.JavaRuntime
+          capability: radon.capabilities.container.JavaRuntime
+          relationship: tosca.relationships.HostedOn

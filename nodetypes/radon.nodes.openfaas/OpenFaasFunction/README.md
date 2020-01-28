@@ -30,7 +30,7 @@ A node type that represents a function hosted on an OpenFaas Platform
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` |   | `radon.nodes.openfaas.OpenFaaSPlatform` |   | [1, 1] |
+| `host` |   | `radon.nodes.openfaas.OpenFaasPlatform` |   | [1, 1] |
 
 ### Notes
 

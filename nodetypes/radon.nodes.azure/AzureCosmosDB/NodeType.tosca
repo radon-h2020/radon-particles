@@ -15,6 +15,9 @@ node_types:
     requirements:
       - invoker:
           relationship: radon.relationships.azure.AzureCosmosDBTriggers
+          capability: radon.capabilities.Invocable
+          node: radon.nodes.azure.AzureResourceTriggeredFunction
+          occurrences: [0,UNBOUNDED]
     interfaces:
       Standard:
         create:
