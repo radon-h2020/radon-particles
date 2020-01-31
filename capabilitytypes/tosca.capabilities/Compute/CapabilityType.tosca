@@ -2,8 +2,6 @@ tosca_definitions_version: tosca_simple_yaml_1_2
 capability_types:
   tosca.capabilities.Compute:
     derived_from: tosca.capabilities.Container
-    # shortname field is not defined in the CapabilityType structure
-    # shortname: Compute
     properties:
       name:
         type: string
