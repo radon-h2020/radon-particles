@@ -1,4 +1,4 @@
-tosca_definitions_version: tosca_simple_yaml_1_2
+tosca_definitions_version: tosca_simple_yaml_1_3
 interface_types:
   tosca.interfaces.node.lifecycle.Standard:
     derived_from: tosca.interfaces.Root

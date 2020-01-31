@@ -1,32 +1,7 @@
-tosca_definitions_version: tosca_simple_yaml_1_2
+tosca_definitions_version: tosca_simple_yaml_1_3
 
 metadata:
   targetNamespace: radon.demos
-imports:
-  - AwsS3Bucket:
-      file: C:\work\radon\radon-particles\nodetypes\radon.nodes.aws\AwsS3Bucket
-      namespace_uri: radon.nodes.aws
-      namespace_prefix: radonnodesaws
-  - AwsLambdaFunction:
-      file: C:\work\radon\radon-particles\nodetypes\radon.nodes.aws\AwsLambdaFunction
-      namespace_uri: radon.nodes.aws
-      namespace_prefix: radonnodesaws
-  - AwsPlatform:
-      file: C:\work\radon\radon-particles\nodetypes\radon.nodes.aws\AwsPlatform
-      namespace_uri: radon.nodes.aws
-      namespace_prefix: radonnodesaws
-  - HostedOn:
-      file: C:\work\radon\radon-particles\relationshiptypes\tosca.relationships\HostedOn
-      namespace_uri: tosca.relationships
-      namespace_prefix: tr
-  - ConnectsTo:
-      file: C:\work\radon\radon-particles\relationshiptypes\tosca.relationships\ConnectsTo
-      namespace_uri: tosca.relationships
-      namespace_prefix: tr
-  - AwsTriggers:
-      file: C:\work\radon\radon-particles\relationshiptypes\radon.relationships.aws\AwsTriggers
-      namespace_uri: radon.relationships.aws
-      namespace_prefix: radonrelationshipsaws
 topology_template:
   node_templates:
     AwsS3Bucket:
