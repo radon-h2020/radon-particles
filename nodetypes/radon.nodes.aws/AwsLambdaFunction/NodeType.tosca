@@ -34,6 +34,12 @@ node_types:
       schedule:
         type: string
         required: false
+    requirements:
+      - endpoint:
+          capability: tosca.capabilities.Endpoint
+          relationship:
+            type: tosca.relationships.ConnectsTo
+          occurrences: [ 0, UNBOUNDED ]
     capabilities:
       invocable:
         type: radon.capabilities.Invocable

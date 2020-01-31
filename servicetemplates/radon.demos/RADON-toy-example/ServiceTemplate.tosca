@@ -1,0 +1,153 @@
+tosca_definitions_version: tosca_simple_yaml_1_2
+
+metadata:
+  targetNamespace: radon.demos
+imports:
+  - AwsS3Bucket:
+      file: C:\work\radon\radon-particles\nodetypes\radon.nodes.aws\AwsS3Bucket
+      namespace_uri: radon.nodes.aws
+      namespace_prefix: radonnodesaws
+  - AwsLambdaFunction:
+      file: C:\work\radon\radon-particles\nodetypes\radon.nodes.aws\AwsLambdaFunction
+      namespace_uri: radon.nodes.aws
+      namespace_prefix: radonnodesaws
+  - AwsPlatform:
+      file: C:\work\radon\radon-particles\nodetypes\radon.nodes.aws\AwsPlatform
+      namespace_uri: radon.nodes.aws
+      namespace_prefix: radonnodesaws
+  - HostedOn:
+      file: C:\work\radon\radon-particles\relationshiptypes\tosca.relationships\HostedOn
+      namespace_uri: tosca.relationships
+      namespace_prefix: tr
+  - ConnectsTo:
+      file: C:\work\radon\radon-particles\relationshiptypes\tosca.relationships\ConnectsTo
+      namespace_uri: tosca.relationships
+      namespace_prefix: tr
+  - AwsTriggers:
+      file: C:\work\radon\radon-particles\relationshiptypes\radon.relationships.aws\AwsTriggers
+      namespace_uri: radon.relationships.aws
+      namespace_prefix: radonrelationshipsaws
+topology_template:
+  node_templates:
+    AwsS3Bucket:
+      type: radon.nodes.aws.AwsS3Bucket
+      metadata:
+        x: 227
+        y: 188
+      properties:
+        size: "null"
+        name: "radon-img-input"
+        maxsize: "null"
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship:
+              type: con_HostedOn_0
+            capability: host
+        - invoker:
+            node: AwsLambdaFunction
+            relationship:
+              type: con_AwsTriggers_0
+            capability: invocable
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
+    AwsLambdaFunction:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: 654
+        y: 108
+      properties:
+        role_name: "radon_role"
+        schedule: "null"
+        handler: "index.handler"
+        environment: ""
+        memory: "128"
+        name: "resize"
+        runtime: "nodejs"
+        timeout: "3"
+        role_description: ""
+      requirements:
+        - endpoint:
+            node: AwsS3Bucket_2
+            relationship:
+              type: con_ConnectsTo_0
+            capability: storage_endpoint
+        - host:
+            node: AwsPlatform
+            relationship:
+              type: con_HostedOn_2
+            capability: host
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
+    AwsS3Bucket_2:
+      type: radon.nodes.aws.AwsS3Bucket
+      metadata:
+        x: 1109
+        y: 189
+      properties:
+        size: "null"
+        name: "radon-image-output"
+        maxsize: "null"
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship:
+              type: con_HostedOn_1
+            capability: host
+        - invoker:
+            relationship:
+              type: radon.relationships.aws.AwsTriggers
+            capability: radon.capabilities.Invocable
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
+      capabilities:
+        storage_endpoint:
+          properties:
+            port_name: ""
+            protocol: "tcp"
+            port: ""
+            initiator: "source"
+            network_name: "PRIVATE"
+            ports: ""
+            secure: "false"
+            url_path: ""
+    AwsPlatform:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: 653
+        y: 446
+      properties:
+        access_key_id: "TBD"
+        secret_access_key: "TBD"
+        name: "null"
+        region: "eu-west-1"
+      requirements:
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectsTo_0:
+      type: tosca.relationships.ConnectsTo
+      properties:
+        credential: ""
+    con_AwsTriggers_0:
+      type: radon.relationships.aws.AwsTriggers
+      properties:
+        events: ""

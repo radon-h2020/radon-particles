@@ -53,6 +53,15 @@
     "generatedNamespace" : false,
     "patternCollection" : false
   },
+  "radon.demos" : {
+    "namespace" : "radon.demos",
+    "prefix" : "radondemos",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
   "tosca.datatypes" : {
     "namespace" : "tosca.datatypes",
     "prefix" : "td",
@@ -155,6 +164,15 @@
   "tosca.artifacts.Deployment" : {
     "namespace" : "tosca.artifacts.Deployment",
     "prefix" : "taD",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "radon.nodes.aws" : {
+    "namespace" : "radon.nodes.aws",
+    "prefix" : "radonnodesaws",
     "readableName" : "",
     "upstreamRepository" : "",
     "secureCollection" : false,
