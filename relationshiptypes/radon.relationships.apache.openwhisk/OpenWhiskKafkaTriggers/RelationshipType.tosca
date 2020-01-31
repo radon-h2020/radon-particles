@@ -1,7 +1,4 @@
-tosca_definitions_version: tosca_simple_yaml_1_3
-
-# see https://github.com/apache/openwhisk-package-kafka#creating-a-trigger-that-listens-to-a-generic-kafka-instance
-
+tosca_definitions_version: tosca_simple_yaml_1_2
 relationship_types:
   radon.relationships.apache.openwhisk.OpenWhiskKafkaTriggers:
     derived_from: radon.relationships.abstract.Triggers
