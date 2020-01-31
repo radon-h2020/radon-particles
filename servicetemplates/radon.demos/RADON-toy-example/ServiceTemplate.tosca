@@ -65,8 +65,8 @@ topology_template:
         x: 307
         y: 236
       properties:
-        size: "0 MB"
-        name: "radon-img-"
+        size: "null"
+        name: "radon-img-input"
         maxsize: "null"
       requirements:
         - host:
