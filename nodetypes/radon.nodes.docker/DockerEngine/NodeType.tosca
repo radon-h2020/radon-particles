@@ -7,6 +7,6 @@ node_types:
         type: integer
         default: { get_attribute: [SELF, docker, port] }
     capabilities:
-      docker:
+      host:
         type: radon.capabilities.container.DockerRuntime
         valid_source_types: [ radon.nodes.docker.DockerApplication ]

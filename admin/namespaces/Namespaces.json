@@ -1,7 +1,7 @@
 {
-  "tosca.capabilities" : {
-    "namespace" : "tosca.capabilities",
-    "prefix" : "tc",
+  "radon" : {
+    "namespace" : "radon",
+    "prefix" : "radon",
     "readableName" : "",
     "upstreamRepository" : "",
     "secureCollection" : false,
@@ -11,24 +11,6 @@
   "tosca.artifacts.Deployment.Image" : {
     "namespace" : "tosca.artifacts.Deployment.Image",
     "prefix" : "taDI",
-    "readableName" : "",
-    "upstreamRepository" : "",
-    "secureCollection" : false,
-    "generatedNamespace" : false,
-    "patternCollection" : false
-  },
-  "tosca.capabilities.network" : {
-    "namespace" : "tosca.capabilities.network",
-    "prefix" : "tcn",
-    "readableName" : "",
-    "upstreamRepository" : "",
-    "secureCollection" : false,
-    "generatedNamespace" : false,
-    "patternCollection" : false
-  },
-  "radon.servicetemplates" : {
-    "namespace" : "radon.servicetemplates",
-    "prefix" : "steIgeneral1",
     "readableName" : "",
     "upstreamRepository" : "",
     "secureCollection" : false,
@@ -53,15 +35,6 @@
     "generatedNamespace" : false,
     "patternCollection" : false
   },
-  "tosca.artifacts.Deployment" : {
-    "namespace" : "tosca.artifacts.Deployment",
-    "prefix" : "taD",
-    "readableName" : "",
-    "upstreamRepository" : "",
-    "secureCollection" : false,
-    "generatedNamespace" : false,
-    "patternCollection" : false
-  },
   "tosca.policies" : {
     "namespace" : "tosca.policies",
     "prefix" : "tp",
@@ -74,6 +47,114 @@
   "tosca.capabilities.Endpoint" : {
     "namespace" : "tosca.capabilities.Endpoint",
     "prefix" : "tcE",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "tosca.datatypes" : {
+    "namespace" : "tosca.datatypes",
+    "prefix" : "td",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "tosca.artifacts" : {
+    "namespace" : "tosca.artifacts",
+    "prefix" : "ta",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "tosca.relationships" : {
+    "namespace" : "tosca.relationships",
+    "prefix" : "tr",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "tosca.datatypes.network" : {
+    "namespace" : "tosca.datatypes.network",
+    "prefix" : "tdn",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "radon.relationships.aws" : {
+    "namespace" : "radon.relationships.aws",
+    "prefix" : "radonrelationshipsaws",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "tosca.nodes.Abstract" : {
+    "namespace" : "tosca.nodes.Abstract",
+    "prefix" : "tnA",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "tosca.grouptypes" : {
+    "namespace" : "tosca.grouptypes",
+    "prefix" : "tg",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "tosca.artifacts.Implementation" : {
+    "namespace" : "tosca.artifacts.Implementation",
+    "prefix" : "taI",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "tosca.capabilities" : {
+    "namespace" : "tosca.capabilities",
+    "prefix" : "tc",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "tosca.capabilities.network" : {
+    "namespace" : "tosca.capabilities.network",
+    "prefix" : "tcn",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "radon.servicetemplates" : {
+    "namespace" : "radon.servicetemplates",
+    "prefix" : "steIgeneral1",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "secureCollection" : false,
+    "generatedNamespace" : false,
+    "patternCollection" : false
+  },
+  "tosca.artifacts.Deployment" : {
+    "namespace" : "tosca.artifacts.Deployment",
+    "prefix" : "taD",
     "readableName" : "",
     "upstreamRepository" : "",
     "secureCollection" : false,
@@ -107,45 +188,9 @@
     "generatedNamespace" : false,
     "patternCollection" : false
   },
-  "tosca.datatypes" : {
-    "namespace" : "tosca.datatypes",
-    "prefix" : "td",
-    "readableName" : "",
-    "upstreamRepository" : "",
-    "secureCollection" : false,
-    "generatedNamespace" : false,
-    "patternCollection" : false
-  },
-  "tosca.artifacts" : {
-    "namespace" : "tosca.artifacts",
-    "prefix" : "ta",
-    "readableName" : "",
-    "upstreamRepository" : "",
-    "secureCollection" : false,
-    "generatedNamespace" : false,
-    "patternCollection" : false
-  },
   "tosca.nodes.Container" : {
     "namespace" : "tosca.nodes.Container",
     "prefix" : "tnC",
-    "readableName" : "",
-    "upstreamRepository" : "",
-    "secureCollection" : false,
-    "generatedNamespace" : false,
-    "patternCollection" : false
-  },
-  "tosca.relationships" : {
-    "namespace" : "tosca.relationships",
-    "prefix" : "tr",
-    "readableName" : "",
-    "upstreamRepository" : "",
-    "secureCollection" : false,
-    "generatedNamespace" : false,
-    "patternCollection" : false
-  },
-  "tosca.datatypes.network" : {
-    "namespace" : "tosca.datatypes.network",
-    "prefix" : "tdn",
     "readableName" : "",
     "upstreamRepository" : "",
     "secureCollection" : false,
@@ -161,45 +206,9 @@
     "generatedNamespace" : false,
     "patternCollection" : false
   },
-  "radon.relationships.aws" : {
-    "namespace" : "radon.relationships.aws",
-    "prefix" : "radonrelationshipsaws",
-    "readableName" : "",
-    "upstreamRepository" : "",
-    "secureCollection" : false,
-    "generatedNamespace" : false,
-    "patternCollection" : false
-  },
   "tosca.interfacetypes.relationship" : {
     "namespace" : "tosca.interfacetypes.relationship",
     "prefix" : "tir",
-    "readableName" : "",
-    "upstreamRepository" : "",
-    "secureCollection" : false,
-    "generatedNamespace" : false,
-    "patternCollection" : false
-  },
-  "tosca.nodes.Abstract" : {
-    "namespace" : "tosca.nodes.Abstract",
-    "prefix" : "tnA",
-    "readableName" : "",
-    "upstreamRepository" : "",
-    "secureCollection" : false,
-    "generatedNamespace" : false,
-    "patternCollection" : false
-  },
-  "tosca.grouptypes" : {
-    "namespace" : "tosca.grouptypes",
-    "prefix" : "tg",
-    "readableName" : "",
-    "upstreamRepository" : "",
-    "secureCollection" : false,
-    "generatedNamespace" : false,
-    "patternCollection" : false
-  },
-  "tosca.artifacts.Implementation" : {
-    "namespace" : "tosca.artifacts.Implementation",
-    "prefix" : "taI",
     "readableName" : "",
     "upstreamRepository" : "",
     "secureCollection" : false,
