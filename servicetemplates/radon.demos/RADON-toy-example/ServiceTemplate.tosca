@@ -7,67 +7,11 @@ topology_template:
     AwsS3Bucket:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
-        x: 227
-        y: 188
+        x: 1303
+        y: 248
       properties:
         size: "null"
-        name: "radon-img-input"
-        maxsize: "null"
-      requirements:
-        - host:
-            node: AwsPlatform
-            relationship:
-              type: con_HostedOn_0
-            capability: host
-        - invoker:
-            node: AwsLambdaFunction
-            relationship:
-              type: con_AwsTriggers_0
-            capability: invocable
-        - dependency:
-            node: tosca.nodes.Root
-            relationship:
-              type: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
-    AwsLambdaFunction:
-      type: radon.nodes.aws.AwsLambdaFunction
-      metadata:
-        x: 654
-        y: 108
-      properties:
-        role_name: "radon_role"
-        schedule: "null"
-        handler: "index.handler"
-        environment: ""
-        memory: "128"
-        name: "resize"
-        runtime: "nodejs"
-        timeout: "3"
-        role_description: ""
-      requirements:
-        - endpoint:
-            node: AwsS3Bucket_2
-            relationship:
-              type: con_ConnectsTo_0
-            capability: storage_endpoint
-        - host:
-            node: AwsPlatform
-            relationship:
-              type: con_HostedOn_2
-            capability: host
-        - dependency:
-            node: tosca.nodes.Root
-            relationship:
-              type: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
-    AwsS3Bucket_2:
-      type: radon.nodes.aws.AwsS3Bucket
-      metadata:
-        x: 1109
-        y: 189
-      properties:
-        size: "null"
-        name: "radon-image-output"
+        name: "radon-img-output"
         maxsize: "null"
       requirements:
         - host:
@@ -84,26 +28,71 @@ topology_template:
             relationship:
               type: tosca.relationships.DependsOn
             capability: tosca.capabilities.Node
-      capabilities:
-        storage_endpoint:
-          properties:
-            port_name: ""
-            protocol: "tcp"
-            port: ""
-            initiator: "source"
-            network_name: "PRIVATE"
-            ports: ""
-            secure: "false"
-            url_path: ""
+    AwsLambdaFunction:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: 653
+        y: 102
+      properties:
+        role_name: "resize"
+        handler: "index.handler"
+        schedule: ""
+        environment: ""
+        memory: "256"
+        name: "resize"
+        runtime: "nodejs"
+        timeout: "3"
+        role_description: "resize"
+      requirements:
+        - endpoint:
+            node: AwsS3Bucket
+            relationship:
+              type: con_ConnectsTo_0
+            capability: storage_endpoint
+        - host:
+            node: AwsPlatform
+            relationship:
+              type: con_HostedOn_0
+            capability: host
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
+    AwsS3Bucket_2:
+      type: radon.nodes.aws.AwsS3Bucket
+      metadata:
+        x: 307
+        y: 236
+      properties:
+        size: "0 MB"
+        name: "radon-img-"
+        maxsize: "null"
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship:
+              type: con_HostedOn_2
+            capability: host
+        - invoker:
+            node: AwsLambdaFunction
+            relationship:
+              type: con_AwsTriggers_0
+            capability: invocable
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
     AwsPlatform:
       type: radon.nodes.aws.AwsPlatform
       metadata:
         x: 653
-        y: 446
+        y: 461
       properties:
         access_key_id: "TBD"
         secret_access_key: "TBD"
-        name: "null"
+        name: ""
         region: "eu-west-1"
       requirements:
         - dependency:
