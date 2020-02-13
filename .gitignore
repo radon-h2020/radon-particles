@@ -2,3 +2,5 @@
 /*.docx
 docs/pandoc/spec.docx
 *.iml
+
+admin/namespaces/Namespaces.json

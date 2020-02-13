@@ -1,0 +1,83 @@
+{
+  "radon.nodes" : {
+    "namespace" : "radon.nodes",
+    "prefix" : "radonnodes",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "patternCollection" : false,
+    "generatedNamespace" : false,
+    "secureCollection" : false
+  },
+  "tosca.nodes" : {
+    "namespace" : "tosca.nodes",
+    "prefix" : "toscanodes",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "patternCollection" : false,
+    "generatedNamespace" : false,
+    "secureCollection" : false
+  },
+  "radon.blueprints" : {
+    "namespace" : "radon.blueprints",
+    "prefix" : "radonblueprints",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "patternCollection" : false,
+    "generatedNamespace" : false,
+    "secureCollection" : false
+  },
+  "radon.policies.testing/propertiesDefinition/LoadTest" : {
+    "namespace" : "radon.policies.testing/propertiesDefinition/LoadTest",
+    "prefix" : "LoadTest",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "patternCollection" : false,
+    "generatedNamespace" : false,
+    "secureCollection" : false
+  },
+  "null/propertiesDefinition/tosca.nodes.SoftwareComponent" : {
+    "namespace" : "null/propertiesDefinition/tosca.nodes.SoftwareComponent",
+    "prefix" : "toscanodesSoftwareComponent",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "patternCollection" : false,
+    "generatedNamespace" : false,
+    "secureCollection" : false
+  },
+  "radon.policies.testing" : {
+    "namespace" : "radon.policies.testing",
+    "prefix" : "radonpoliciestesting",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "patternCollection" : false,
+    "generatedNamespace" : false,
+    "secureCollection" : false
+  },
+  "radon.policies.testing/propertiesdefinition/winery" : {
+    "namespace" : "radon.policies.testing/propertiesdefinition/winery",
+    "prefix" : "pdIradonpoliciestesting",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "patternCollection" : false,
+    "generatedNamespace" : false,
+    "secureCollection" : false
+  },
+  "radon.artifacts.Implementation" : {
+    "namespace" : "radon.artifacts.Implementation",
+    "prefix" : "radonartifactsImplementation",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "patternCollection" : false,
+    "generatedNamespace" : false,
+    "secureCollection" : false
+  },
+  "tosca.artifacts.Implementation" : {
+    "namespace" : "tosca.artifacts.Implementation",
+    "prefix" : "toscaartifactsImplementation",
+    "readableName" : "",
+    "upstreamRepository" : "",
+    "patternCollection" : false,
+    "generatedNamespace" : false,
+    "secureCollection" : false
+  }
+}

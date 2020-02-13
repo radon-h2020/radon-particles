@@ -1,0 +1,8 @@
+- name: create
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: clone
+      shell: git clone https://github.com/microservices-demo/microservices-demo.git
+    - name: run
+      shell: docker-compose -f ./microservices-demo/deploy/docker-compose/docker-compose.yml up -d front-end edge-router catalogue catalogue-db carts carts-db orders orders-db shipping queue-master rabbitmq payment user user-db
