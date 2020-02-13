@@ -46,6 +46,7 @@ node_types:
         occurrences: [0, UNBOUNDED]
     interfaces:
       Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
         inputs:
           function_name:
             default: { get_property: [ SELF, name ] }
@@ -74,5 +75,3 @@ node_types:
           schedule:
             type: string
             default: { get_property: [SELF, schedule] }
-        create: files/create.yml
-        delete: files/delete.yml

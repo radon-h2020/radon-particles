@@ -8,13 +8,8 @@ node_types:
         default: 10.16.0
     interfaces:
       Standard:
-        create:
-          description: Operation to install Node.js
-          inputs:
-            NODE_VERSION:
-              type: version
-              default: { get_property: [SELF, node_version] }
-        configure:
-          description: Operation to set up the deployment package
-        start:
-          description: Operation to start the application
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          NODE_VERSION:
+            type: version
+            default: { get_property: [SELF, node_version] }

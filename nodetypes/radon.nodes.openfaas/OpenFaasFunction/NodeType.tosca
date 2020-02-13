@@ -27,6 +27,7 @@ node_types:
         occurrences: [0, UNBOUNDED]
     interfaces:
       Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
         inputs:
           FUNCTION_NAME:
             default: { get_property: [ SELF, functiom_name ] }

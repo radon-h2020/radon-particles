@@ -15,7 +15,3 @@ node_types:
         valid_source_types:
           - radon.nodes.aws.AwsLambdaFunction
           - radon.nodes.aws.AwsS3Bucket
-    interfaces:
-      Standard:
-        create: files/install.yml
-        delete: files/uninstall.yml

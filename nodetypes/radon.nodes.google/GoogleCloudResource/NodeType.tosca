@@ -17,6 +17,7 @@ node_types:
           occurrences: [0,UNBOUNDED]
     interfaces:
       Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
         inputs:
           NAME:
             default: { get_property: [SELF, name]}

@@ -5,6 +5,7 @@ relationship_types:
     description: Azure-specific relationship type representing CosmosDB-to-AzureFunction communication
     interfaces:
       Configure:
+        type: tosca.interfaces.relationship.Configure
         inputs:
           COLLECTION_NAME:
             default: { get_property: [SOURCE, collection_name] }

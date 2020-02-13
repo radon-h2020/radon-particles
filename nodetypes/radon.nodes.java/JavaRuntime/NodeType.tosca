@@ -21,21 +21,16 @@ node_types:
         occurrences: [0, UNBOUNDED]
     interfaces:
       Standard:
-        create:
-          inputs:
-            JAVA_VERSION:
-              type: version
-              default: { get_attribute: [SELF, component_version] }
-            JAVA_IS_JRE:
-              type: boolean
-              default: { get_attribute: [SELF, only_jre] }
-            JAVA_IS_HEADLESS:
-              type: boolean
-              default: { get_attribute: [SELF, headless] }
-        delete:
-          inputs:
-            JAVA_VERSION:
-              type: version
-              default: { get_attribute: [SELF, component_version] }
-            JAVA_HOME:
-              default: { get_attribute: [SELF, java_home] }
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          JAVA_VERSION:
+            type: version
+            default: { get_attribute: [SELF, component_version] }
+          JAVA_IS_JRE:
+            type: boolean
+            default: { get_attribute: [SELF, only_jre] }
+          JAVA_IS_HEADLESS:
+            type: boolean
+            default: { get_attribute: [SELF, headless] }
+          JAVA_HOME:
+            default: { get_attribute: [SELF, java_home] }

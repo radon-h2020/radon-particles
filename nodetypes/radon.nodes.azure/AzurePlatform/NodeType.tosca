@@ -18,6 +18,7 @@ node_types:
           - radon.nodes.azure.AzureResource
     interfaces:
       Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
         inputs:
           USER_NAME:
             type: string

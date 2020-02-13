@@ -17,10 +17,10 @@ node_types:
         valid_source_types: [ radon.nodes.mysql.MySQLDatabase ]
     interfaces:
       Standard:
-        configure:
-          inputs:
-            DBMS_ROOT_PASSWORD:
-              default: { get_property: [SELF, root_password] }
-            DBMS_PORT:
-              type: integer
-              default: { get_property: [SELF, port] }
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          DBMS_ROOT_PASSWORD:
+            default: { get_property: [SELF, root_password] }
+          DBMS_PORT:
+            type: integer
+            default: { get_property: [SELF, port] }

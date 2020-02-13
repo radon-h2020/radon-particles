@@ -67,25 +67,26 @@ node_types:
           occurrences: [0,UNBOUNDED]
     interfaces:
       Standard:
-        create:
-          inputs:
-            TOPIC_NAME:
-              default: { get_property: [SELF, topic_name] }
-            PARTITIONS:
-              type: integer
-              default: { get_property: [SELF, partitions] }
-            REPLICAS:
-              type: integer
-              default: { get_property: [SELF, replicas] }
-            MIN_INSYNC_REPLICAS:
-              type: integer
-              default: { get_property: [SELF, min_insync_replicas] }
-            RETENTION:
-              type: integer
-              default: { get_property: [SELF, retention] }
-            SEGMENT_SIZE:
-              type: integer
-              default: { get_property: [SELF, segment_size] }
-            ROLL_TIME:
-              type: integer
-              default: { get_property: [SELF, roll_time] }
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          TOPIC_NAME:
+            type: string
+            default: { get_property: [SELF, topic_name] }
+          PARTITIONS:
+            type: integer
+            default: { get_property: [SELF, partitions] }
+          REPLICAS:
+            type: integer
+            default: { get_property: [SELF, replicas] }
+          MIN_INSYNC_REPLICAS:
+            type: integer
+            default: { get_property: [SELF, min_insync_replicas] }
+          RETENTION:
+            type: integer
+            default: { get_property: [SELF, retention] }
+          SEGMENT_SIZE:
+            type: integer
+            default: { get_property: [SELF, segment_size] }
+          ROLL_TIME:
+            type: integer
+            default: { get_property: [SELF, roll_time] }

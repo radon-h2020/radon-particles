@@ -17,6 +17,7 @@ node_types:
           relationship: tosca.relationships.HostedOn
     interfaces:
       Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
         inputs:
           DB_NAME:
             default: { get_property: [SELF, name] }

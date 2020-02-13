@@ -9,22 +9,24 @@ relationship_types:
           - length: 1
     interfaces:
       Configure:
+        type: tosca.interfaces.relationship.Configure
         inputs:
           EVENT:
             type: radon.datatypes.Event
             default: { get_property: [SELF, events, 1] }
-        post_configure_target:
-          description: >
-            Updates the target function by adding an annotation with the topic name, deploys an OpenFaaS Kafka connector,
-            and configures the connector to forward message from the topic to the function.
-          inputs:
-            BROKERS:
-              type: list
-              entry_schema: string
-              default: { get_attribute: [SOURCE, broker_urls] }
-            TOPIC_NAME:
-              type: string
-              default: { get_attribute: [SOURCE, topic_name] }
-            GATEWAY_URL:
-              type: string
-              default: { get_attribute: [TARGET, gateway_url] }
+        operations:
+          post_configure_target:
+            description: >
+              Updates the target function by adding an annotation with the topic name, deploys an OpenFaaS Kafka connector,
+              and configures the connector to forward message from the topic to the function.
+            inputs:
+              BROKERS:
+                type: list
+                entry_schema: string
+                default: { get_attribute: [SOURCE, broker_urls] }
+              TOPIC_NAME:
+                type: string
+                default: { get_attribute: [SOURCE, topic_name] }
+              GATEWAY_URL:
+                type: string
+                default: { get_attribute: [TARGET, gateway_url] }

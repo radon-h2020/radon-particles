@@ -30,26 +30,26 @@ node_types:
         default: 100
     interfaces:
       Standard:
-        create:
-          inputs:
-            AUTH_LEVEL:
-              type: string
-              required: false
-              default: { get_property: [SELF, auth_level] }
-            METHODS:
-              type: string
-              required: false
-              default: { get_property: [SELF, methods] }
-            ROUTE:
-              type: string
-              required: false
-              default: { get_property: [SELF, route] }
-            ROUTE_PREFIX:
-              type: string
-              default: { get_property: [SELF, route_prefix] }
-            MAX_OUTSTANDING_REQUESTS:
-              type: string
-              default: { get_property: [SELF, max_outstanding_requests] }
-            MAX_CONCURRENT_REQUESTS:
-              type: string
-              default: { get_property: [SELF, max_concurrent_requests] }
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          AUTH_LEVEL:
+            type: string
+            required: false
+            default: { get_property: [SELF, auth_level] }
+          METHODS:
+            type: string
+            required: false
+            default: { get_property: [SELF, methods] }
+          ROUTE:
+            type: string
+            required: false
+            default: { get_property: [SELF, route] }
+          ROUTE_PREFIX:
+            type: string
+            default: { get_property: [SELF, route_prefix] }
+          MAX_OUTSTANDING_REQUESTS:
+            type: string
+            default: { get_property: [SELF, max_outstanding_requests] }
+          MAX_CONCURRENT_REQUESTS:
+            type: string
+            default: { get_property: [SELF, max_concurrent_requests] }

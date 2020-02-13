@@ -9,6 +9,7 @@ relationship_types:
           - length: 1
     interfaces:
       Configure:
+        type: tosca.interfaces.relationship.Configure
         inputs:
           EVENT:
             type: radon.datatypes.Event

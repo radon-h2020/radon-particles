@@ -17,17 +17,18 @@ node_types:
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
-        create:
-          inputs:
-            tarball_version: { default: { get_property: [ SELF, component_version ] } }
-          implementation: files/create.yml
-        start:
-          implementation: files/start.yml
-        stop:
-          implementation: files/stop.yml
-        configure:
-          implementation: files/configure.yml
-        delete:
-          inputs:
-            tarball_version: { default: { get_property: [ SELF, component_version ] } }
-          implementation: files/delete.yml
+        operations:
+          create:
+            inputs:
+              tarball_version: { default: { get_property: [ SELF, component_version ] } }
+            implementation: files/create.yml
+          start:
+            implementation: files/start.yml
+          stop:
+            implementation: files/stop.yml
+          configure:
+            implementation: files/configure.yml
+          delete:
+            inputs:
+              tarball_version: { default: { get_property: [ SELF, component_version ] } }
+            implementation: files/delete.yml

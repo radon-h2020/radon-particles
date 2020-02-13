@@ -41,40 +41,49 @@ node_types:
         occurrences: [0, UNBOUNDED]
     interfaces:
       Standard:
-        create:
-          inputs:
-            KAFKA_VERSION:
-              type: version
-              default: { get_property: [SELF, component_version] }
-            SCALA_VERSION:
-              type: version
-              default: { get_property: [SELF, scala_version] }
-        configure:
-          inputs:
-            IP_ADDRESS:
-              default: { get_attribute: [HOST, public_address] }
-            LOG_CLEANER_ENABLE:
-              type: boolean
-              default: { get_property: [SELF, log_cleaner_enable] }
-            JAVA_HOME:
-              default: { get_attribute: [SELF, java_home] }
-            KAFKA_HOME:
-              default: { get_attribute: [SELF, kafka_home] }
-            KF_HEAP_SIZE:
-              type: integer
-              default: { get_property: [SELF, kf_heap_size] }
-            ZK_HEAP_SIZE:
-              type: integer
-              default: { get_property: [SELF, zk_heap_size] }
-        start:
-          inputs:
-            KAFKA_HOME:
-              default: { get_attribute: [SELF, kafka_home] }
-            JAVA_HOME:
-              default: { get_attribute: [SELF, java_home] }
-        stop:
-          inputs:
-            KAFKA_HOME:
-              default: { get_attribute: [SELF, kafka_home] }
-            JAVA_HOME:
-              default: { get_attribute: [SELF, java_home] }
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              KAFKA_VERSION:
+                type: version
+                default: { get_property: [SELF, component_version] }
+              SCALA_VERSION:
+                type: version
+                default: { get_property: [SELF, scala_version] }
+          configure:
+            inputs:
+              IP_ADDRESS:
+                type: string
+                default: { get_attribute: [HOST, public_address] }
+              LOG_CLEANER_ENABLE:
+                type: boolean
+                default: { get_property: [SELF, log_cleaner_enable] }
+              JAVA_HOME:
+                type: string
+                default: { get_attribute: [SELF, java_home] }
+              KAFKA_HOME:
+                type: string
+                default: { get_attribute: [SELF, kafka_home] }
+              KF_HEAP_SIZE:
+                type: integer
+                default: { get_property: [SELF, kf_heap_size] }
+              ZK_HEAP_SIZE:
+                type: integer
+                default: { get_property: [SELF, zk_heap_size] }
+          start:
+            inputs:
+              KAFKA_HOME:
+                type: string
+                default: { get_attribute: [SELF, kafka_home] }
+              JAVA_HOME:
+                type: string
+                default: { get_attribute: [SELF, java_home] }
+          stop:
+            inputs:
+              KAFKA_HOME:
+                type: string
+                default: { get_attribute: [SELF, kafka_home] }
+              JAVA_HOME:
+                type: string
+                default: { get_attribute: [SELF, java_home] }

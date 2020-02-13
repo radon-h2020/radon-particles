@@ -5,6 +5,7 @@ relationship_types:
     description: AWS-specific relationship type representing AWS-to-AWS communication
     interfaces:
       Configure:
+        type: tosca.interfaces.relationship.Configure
         inputs:
           source_aws_access_key_id:
             default: { get_property: [ SOURCE, host, access_key_id ] }
@@ -20,5 +21,3 @@ relationship_types:
             default: { get_property: [ TARGET, host, region ] }
           event_types:
             default: { get_property: [ SELF, event_types ] }
-        # add_target: files/add_target.yml
-        # add_source: files/add_source.yml

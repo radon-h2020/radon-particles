@@ -37,24 +37,22 @@ node_types:
           - radon.nodes.google.GoogleCloudResource
     interfaces:
       Standard:
-        create:
-          inputs:
-            SDK_VERSION:
-              default: { get_property: [SELF, sdk_version] }
-              required: false
-        configure:
-          inputs:
-            PROJECT_ID:
-              default: { get_property: [SELF, project_id] }
-            AUTHENTICATION_MODE:
-              default: { get_property: [SELF, authentication_mode] }
-            USER_ACCOUNT:
-              default: { get_property: [SELF, user_account] }
-              required: false
-            API_KEY:
-              default: { get_property: [SELF, api_key] }
-              required: false
-            REGION:
-              default: { get_property: [SELF, region] }
-            ZONE:
-              default: { get_property: [SELF, zone] }
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          SDK_VERSION:
+            default: { get_property: [SELF, sdk_version] }
+            required: false
+          PROJECT_ID:
+            default: { get_property: [SELF, project_id] }
+          AUTHENTICATION_MODE:
+            default: { get_property: [SELF, authentication_mode] }
+          USER_ACCOUNT:
+            default: { get_property: [SELF, user_account] }
+            required: false
+          API_KEY:
+            default: { get_property: [SELF, api_key] }
+            required: false
+          REGION:
+            default: { get_property: [SELF, region] }
+          ZONE:
+            default: { get_property: [SELF, zone] }

@@ -39,20 +39,18 @@ node_types:
           - radon.nodes.openfaas.OpenFaasFunction
     interfaces:
       Standard:
-        create:
-          inputs:
-            KUBERNETES_VERSION:
-              type: version
-              default: { get_property: [SELF, kubernetes_version] }
-              required: false
-        configure:
-          inputs:
-            URL:
-              type: string
-              default: { get_attribute: [SELF, url]}
-            BASIC_AUTH_USER:
-              type: string
-              default: { get_property: [SELF, basic_auth_user]}
-            BASIC_AUTH_PASSWORD:
-              type: string
-              default: { get_property: [SELF, basic_auth_password]}
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          KUBERNETES_VERSION:
+            type: version
+            default: { get_property: [SELF, kubernetes_version] }
+            required: false
+          URL:
+            type: string
+            default: { get_attribute: [SELF, url]}
+          BASIC_AUTH_USER:
+            type: string
+            default: { get_property: [SELF, basic_auth_user]}
+          BASIC_AUTH_PASSWORD:
+            type: string
+            default: { get_property: [SELF, basic_auth_password]}

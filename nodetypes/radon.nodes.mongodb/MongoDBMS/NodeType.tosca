@@ -32,23 +32,23 @@ node_types:
         valid_source_types: [radon.nodes.mongodb.MongoDBDatabase]
     interfaces:
       Standard:
-        create:
-          inputs:
-            IP_ADDRESS:
-              default: { get_attribute: [HOST, private_address] }
-            MONGODB_VERSION:
-              type: version
-              default: { get_property: [SELF, component_version] }
-            MONGODB_PORT:
-              type: integer
-              default: { get_property: [SELF, port] }
-            MONGODB_DB_PATH:
-              default: { get_property: [SELF, db_path] }
-            MONGODB_AUTHORIZATION:
-              type: boolean
-              default: { get_property: [SELF, authorization_enabled] }
-            MONGODB_ADMIN:
-              default: {get_property: [SELF, administrator]}
-              required: false
-            MONGODB_ROOT_PASSWORD:
-              default: { get_property: [SELF, root_password] }
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          IP_ADDRESS:
+            default: { get_attribute: [HOST, private_address] }
+          MONGODB_VERSION:
+            type: version
+            default: { get_property: [SELF, component_version] }
+          MONGODB_PORT:
+            type: integer
+            default: { get_property: [SELF, port] }
+          MONGODB_DB_PATH:
+            default: { get_property: [SELF, db_path] }
+          MONGODB_AUTHORIZATION:
+            type: boolean
+            default: { get_property: [SELF, authorization_enabled] }
+          MONGODB_ADMIN:
+            default: {get_property: [SELF, administrator]}
+            required: false
+          MONGODB_ROOT_PASSWORD:
+            default: { get_property: [SELF, root_password] }

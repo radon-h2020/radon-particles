@@ -9,8 +9,8 @@ node_types:
         required: true
     interfaces:
       Standard:
-        create:
-          inputs:
-            SCHEDULE:
-              type: string
-              default: { get_property: [SELF, schedule] }
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          SCHEDULE:
+            type: string
+            default: { get_property: [SELF, schedule] }

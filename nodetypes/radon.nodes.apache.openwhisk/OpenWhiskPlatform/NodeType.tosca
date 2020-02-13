@@ -39,17 +39,19 @@ node_types:
           - radon.nodes.apache.openwhisk.OpenWhiskFunction
     interfaces:
       Standard:
-        create:
-          inputs:
-            KUBERNETES_VERSION:
-              type: version
-              default: { get_property: [SELF, kubernetes_version] }
-              required: false
-        configure:
-          inputs:
-            API_URL:
-              type: string
-              default: { get_attribute: [SELF, api_url] }
-            AUTH_KEY:
-              type: string
-              default: { get_attribute: [SELF, auth_key] }
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              KUBERNETES_VERSION:
+                type: version
+                default: { get_property: [SELF, kubernetes_version] }
+                required: false
+          configure:
+            inputs:
+              API_URL:
+                type: string
+                default: { get_attribute: [SELF, api_url] }
+              AUTH_KEY:
+                type: string
+                default: { get_attribute: [SELF, auth_key] }

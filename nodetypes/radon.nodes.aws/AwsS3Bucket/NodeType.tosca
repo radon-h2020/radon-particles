@@ -18,6 +18,7 @@ node_types:
           occurrences: [0,UNBOUNDED]
     interfaces:
       Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
         inputs:
           aws_access_key_id:
             default: { get_property: [ HOST, access_key_id ] }
@@ -27,5 +28,3 @@ node_types:
             default: { get_property: [ HOST, region ] }
           bucket_name:
             default: { get_property: [ SELF, name ] }
-        create: files/create.yml
-        delete: files/delete.yml
