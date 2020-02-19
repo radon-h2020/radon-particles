@@ -7,8 +7,8 @@ topology_template:
     AwsS3Bucket:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
-        x: 382
-        y: 265
+        x: 622
+        y: 269
         displayName: uploads_2
       properties:
         size: "0 MB"
@@ -33,8 +33,8 @@ topology_template:
     Database:
       type: tosca.nodes.Database
       metadata:
-        x: 1106
-        y: 130
+        x: 1346
+        y: 134
         displayName: Database
       properties:
         password: ""
@@ -55,13 +55,13 @@ topology_template:
     AwsPlatform_2:
       type: radon.nodes.aws.AwsPlatform
       metadata:
-        x: 108
-        y: 424
+        x: 348
+        y: 428
         displayName: eu-west-2
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        name: "London"
         secret_access_key: "{ get_input: secret_access_key }"
+        name: "London"
         region: "eu-west-2"
       requirements:
         - dependency:
@@ -72,13 +72,13 @@ topology_template:
     AwsLambdaFunction:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: 735
-        y: 133
+        x: 975
+        y: 137
         displayName: create_thumbnail
       properties:
         role_name: ""
-        schedule: "~"
         handler: "index.handler"
+        schedule: "~"
         environment: "prod"
         memory: "512"
         name: "resize"
@@ -104,13 +104,13 @@ topology_template:
     AwsPlatform:
       type: radon.nodes.aws.AwsPlatform
       metadata:
-        x: 735
-        y: 426
+        x: 975
+        y: 430
         displayName: eu-west-1
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        name: "Ireland"
         secret_access_key: "{ get_input: secret_access_key }"
+        name: "Ireland"
         region: "eu-west-1"
       requirements:
         - dependency:
@@ -121,8 +121,8 @@ topology_template:
     AwsS3Bucket_2:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
-        x: 108
-        y: 203
+        x: 348
+        y: 207
         displayName: uploads_1
       properties:
         size: "0 MB"
