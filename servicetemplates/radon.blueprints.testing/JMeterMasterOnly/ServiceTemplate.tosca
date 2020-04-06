@@ -2,3 +2,29 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 metadata:
   targetNamespace: radon.blueprints.testing
+topology_template:
+  node_templates:
+    JMeter:
+      type: radon.nodes.testing.agent.JMeter
+      metadata:
+        x: 619
+        y: 407
+        displayName: JMeter
+      properties:
+        jmeter_properties: ""
+        worker_hostnames: ""
+      requirements:
+        - host:
+            node: tosca.nodes.Container.Runtime
+            relationship:
+              type: tosca.relationships.HostedOn
+            capability: radon.capabilities.container.DockerRuntime
+        - storage:
+            capability: tosca.capabilities.Storage
+        - network:
+            capability: tosca.capabilities.EndPoint
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
