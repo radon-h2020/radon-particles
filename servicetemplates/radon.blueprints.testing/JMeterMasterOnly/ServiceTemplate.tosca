@@ -4,21 +4,57 @@ metadata:
   targetNamespace: radon.blueprints.testing
 topology_template:
   node_templates:
+    Workstation:
+      type: radon.nodes.Workstation
+      metadata:
+        x: 967
+        y: 519
+        displayName: Workstation
+      requirements:
+        - local_storage:
+            node: tosca.nodes.Storage.BlockStorage
+            relationship:
+              type: tosca.relationships.AttachesTo
+            capability: tosca.capabilities.Attachment
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
+    DockerEngine:
+      type: radon.nodes.docker.DockerEngine
+      metadata:
+        x: 965
+        y: 178
+        displayName: DockerEngine
+      properties:
+        component_version: ""
+      requirements:
+        - host:
+            node: Workstation
+            relationship:
+              type: con_HostedOn_0
+            capability: host
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
     JMeter:
       type: radon.nodes.testing.agent.JMeter
       metadata:
-        x: 619
-        y: 407
+        x: 570
+        y: 180
         displayName: JMeter
       properties:
         jmeter_properties: ""
         worker_hostnames: ""
       requirements:
         - host:
-            node: tosca.nodes.Container.Runtime
+            node: DockerEngine
             relationship:
-              type: tosca.relationships.HostedOn
-            capability: radon.capabilities.container.DockerRuntime
+              type: con_HostedOn_1
+            capability: host
         - storage:
             capability: tosca.capabilities.Storage
         - network:
@@ -28,3 +64,8 @@ topology_template:
             relationship:
               type: tosca.relationships.DependsOn
             capability: tosca.capabilities.Node
+  relationship_templates:
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn

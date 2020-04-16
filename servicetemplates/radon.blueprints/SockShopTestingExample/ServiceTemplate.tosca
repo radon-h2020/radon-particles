@@ -4,6 +4,23 @@ metadata:
   targetNamespace: radon.blueprints
 topology_template:
   node_templates:
+    Workstation:
+      type: radon.nodes.Workstation
+      metadata:
+        x: 1025
+        y: 303
+        displayName: Workstation
+      requirements:
+        - local_storage:
+            node: tosca.nodes.Storage.BlockStorage
+            relationship:
+              type: tosca.relationships.AttachesTo
+            capability: tosca.capabilities.Attachment
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
     SockShop:
       type: radon.nodes.SockShop
       metadata:
@@ -14,21 +31,24 @@ topology_template:
         component_version: ""
       requirements:
         - host:
-            node: tosca.nodes.Compute
+            node: Workstation
             relationship:
-              type: tosca.relationships.HostedOn
-            capability: tosca.capabilities.Compute
+              type: con_HostedOn_0
+            capability: host
         - dependency:
             node: tosca.nodes.Root
             relationship:
               type: tosca.relationships.DependsOn
             capability: tosca.capabilities.Node
+  relationship_templates:
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
   policies:
     - SimpleJMeterLoadTest:
         type: radon.policies.testing.JMeterLoadTest
         properties:
-          hostname: "localhost"
           jmx_file: "sockshop.jmx"
+          hostname: "localhost"
           port: "8080"
           ti_blueprint: "radon.blueprints.testing.JMeterMasterOnly"
           user.properties: ""
@@ -43,10 +63,10 @@ topology_template:
           path: "/cart/"
           hostname: "localhost"
           method: "GET"
-          port: "80"
           expected_status: "200"
+          port: "80"
           expected_body: ""
           use_https: "true"
-          test_body: ""
           test_header: ""
+          test_body: ""
         targets: [ SockShop ]
