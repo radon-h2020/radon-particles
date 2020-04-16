@@ -14,4 +14,3 @@ relationship_types:
     metadata:
       abstract: "false"
       final: "false"
-    interfaces:

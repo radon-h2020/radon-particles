@@ -2,7 +2,6 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 metadata:
   targetNamespace: "radon.blueprints"
-description: test
 topology_template:
   node_templates:
     AwsS3Bucket:
@@ -56,8 +55,8 @@ topology_template:
         displayName: "eu-west-2"
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        secret_access_key: "{ get_input: secret_access_key }"
         name: "London"
+        secret_access_key: "{ get_input: secret_access_key }"
         region: "eu-west-2"
       requirements:
         - dependency:
@@ -72,8 +71,8 @@ topology_template:
         displayName: "create_thumbnail"
       properties:
         role_name: ""
-        handler: "index.handler"
         schedule: "~"
+        handler: "index.handler"
         environment: "prod"
         memory: "512"
         name: "resize"
@@ -101,8 +100,8 @@ topology_template:
         displayName: "eu-west-1"
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        secret_access_key: "{ get_input: secret_access_key }"
         name: "Ireland"
+        secret_access_key: "{ get_input: secret_access_key }"
         region: "eu-west-1"
       requirements:
         - dependency:
