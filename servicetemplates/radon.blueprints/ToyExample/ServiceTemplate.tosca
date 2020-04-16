@@ -55,8 +55,8 @@ topology_template:
         displayName: "eu-west-2"
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        name: "London"
         secret_access_key: "{ get_input: secret_access_key }"
+        name: "London"
         region: "eu-west-2"
       requirements:
         - dependency:
@@ -71,8 +71,8 @@ topology_template:
         displayName: "create_thumbnail"
       properties:
         role_name: ""
-        schedule: "~"
         handler: "index.handler"
+        schedule: "~"
         environment: "prod"
         memory: "512"
         name: "resize"
@@ -100,8 +100,8 @@ topology_template:
         displayName: "eu-west-1"
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        name: "Ireland"
         secret_access_key: "{ get_input: secret_access_key }"
+        name: "Ireland"
         region: "eu-west-1"
       requirements:
         - dependency:
