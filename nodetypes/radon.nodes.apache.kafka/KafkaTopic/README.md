@@ -10,7 +10,7 @@ A node type that describes a Kafka topic
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `topic_name` | `true` | `string` | `pattern: "[-_A-Za-z0-9]+"` |   |  The name of the topic. |
+| `topic_name` | `true` | `string` |   |   |  The name of the topic. |
 | `partitions` | `false` | `integer` |   | 1 | The number of partitions. |
 | `replicas` | `false` | `integer` |   | 1 | The number of replicas. |
 | `min_insync_replicas` | `false` | `integer` | `greater_or_equal: 0` | 1 | When a producer sets `request_required_acks` to `in_syncs`, this value specifies the minimum number of replicas that must acknowledge a write for the write to be considered successful. |

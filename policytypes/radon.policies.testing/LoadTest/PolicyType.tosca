@@ -15,14 +15,13 @@ policy_types:
       threads:
         type: string
         required: true
-        default: 5
+        default: "5"
         status: supported
       upper_bound:
         type: string
         required: true
         status: supported
     metadata:
-      targetNamespace: radon.policies.testing
-      abstract: no
-      final: no
+      abstract: "false"
+      final: "false"
     targets: [ tosca.nodes.SoftwareComponent ]

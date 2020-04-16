@@ -1,30 +1,45 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.aws.AwsS3Bucket:
     derived_from: tosca.nodes.Storage.ObjectStorage
-    attributes:
-      arn:
-        type: string
     properties:
       name:
         type: string
+        required: true
+        status: supported
+    attributes:
+      arn:
+        type: string
+    metadata:
+      abstract: "false"
+      final: "false"
     requirements:
       - host:
           capability: tosca.capabilities.Container
           relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
       - invoker:
           capability: radon.capabilities.Invocable
           relationship: radon.relationships.aws.AwsTriggers
-          occurrences: [0,UNBOUNDED]
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
           aws_access_key_id:
-            default: { get_property: [ HOST, access_key_id ] }
-          aws_secret_access_key:
-            default: { get_property: [ HOST, secret_access_key ] }
+            type: string
+            required: true
+            default: "{ get_property: [HOST, access_key_id] }"
           aws_region:
-            default: { get_property: [ HOST, region ] }
+            type: string
+            required: true
+            default: "{ get_property: [HOST, region] }"
+          aws_secret_access_key:
+            type: string
+            required: true
+            default: "{ get_property: [HOST, secret_access_key] }"
           bucket_name:
-            default: { get_property: [ SELF, name ] }
+            type: string
+            required: true
+            default: "{ get_property: [SELF, name] }"

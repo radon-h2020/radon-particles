@@ -1,39 +1,36 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 metadata:
-  targetNamespace: radon.blueprints
+  targetNamespace: "radon.blueprints"
 topology_template:
   node_templates:
     Workstation:
       type: radon.nodes.Workstation
       metadata:
-        x: 640
-        y: 413
-        displayName: Workstation
+        x: "640"
+        y: "413"
+        displayName: "Workstation"
       requirements:
         - dependency:
             node: tosca.nodes.Root
-            relationship:
-              type: tosca.relationships.DependsOn
+            relationship: tosca.relationships.DependsOn
             capability: tosca.capabilities.Node
     SockShop:
       type: radon.nodes.SockShop
       metadata:
-        x: 638
-        y: 101
-        displayName: SockShop
+        x: "638"
+        y: "101"
+        displayName: "SockShop"
       properties:
         component_version: "1"
       requirements:
         - host:
             node: Workstation
-            relationship:
-              type: con_HostedOn_0
+            relationship: con_HostedOn_0
             capability: host
         - dependency:
             node: tosca.nodes.Root
-            relationship:
-              type: tosca.relationships.DependsOn
+            relationship: tosca.relationships.DependsOn
             capability: tosca.capabilities.Node
   relationship_templates:
     con_HostedOn_0:

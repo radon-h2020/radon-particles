@@ -4,7 +4,6 @@ artifact_types:
   tosca.artifacts.Implementation.Ansible:
     derived_from: tosca.artifacts.Implementation
     metadata:
-      targetNamespace: tosca.artifacts.Implementation
-      abstract: no
-      final: no
+      abstract: "false"
+      final: "false"
     file_ext: [ yml, yaml ]

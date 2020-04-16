@@ -1,4 +1,5 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 capability_types:
   tosca.capabilities.Network:
     derived_from: tosca.capabilities.Root
@@ -6,3 +7,7 @@ capability_types:
       name:
         type: string
         required: false
+        status: supported
+    metadata:
+      abstract: "false"
+      final: "false"

@@ -1,28 +1,37 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 capability_types:
   tosca.capabilities.Compute:
     derived_from: tosca.capabilities.Container
     properties:
-      name:
-        type: string
-        required: false
       num_cpus:
         type: integer
         required: false
+        status: supported
         constraints:
           - greater_or_equal: 1
-      cpu_frequency:
-        type: scalar-unit.frequency
+      name:
+        type: string
         required: false
+        status: supported
+      disk_size:
+        type: size
+        required: false
+        status: supported
+        constraints:
+          - greater_or_equal: 0 MB
+      cpu_frequency:
+        type: frequency
+        required: false
+        status: supported
         constraints:
           - greater_or_equal: 0.1 GHz
-      disk_size:
-        type: scalar-unit.size
-        required: false
-        constraints:
-          - greater_or_equal: 0 MB
       mem_size:
-        type: scalar-unit.size
+        type: size
         required: false
+        status: supported
         constraints:
           - greater_or_equal: 0 MB
+    metadata:
+      abstract: "false"
+      final: "false"

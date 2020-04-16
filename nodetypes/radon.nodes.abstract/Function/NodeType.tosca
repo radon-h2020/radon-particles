@@ -1,17 +1,23 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.abstract.Function:
     derived_from: tosca.nodes.Root
     properties:
-      name:
-        type: string
       environment:
         type: map
-        entry_schema:
-          type: string
         required: false
+        status: supported
+      name:
+        type: string
+        required: true
+        status: supported
+    metadata:
+      abstract: "false"
+      final: "false"
     requirements:
       - host:
           capability: tosca.capabilities.Container
-          relationship: tosca.relationships.HostedOn
           node: radon.nodes.abstract.CloudPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]

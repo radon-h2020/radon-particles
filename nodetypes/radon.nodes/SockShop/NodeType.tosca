@@ -4,9 +4,9 @@ node_types:
   radon.nodes.SockShop:
     derived_from: tosca.nodes.SoftwareComponent
     metadata:
-      targetNamespace: radon.nodes
-      abstract: no
-      final: no
+      targetNamespace: "radon.nodes"
+      abstract: "false"
+      final: "false"
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
