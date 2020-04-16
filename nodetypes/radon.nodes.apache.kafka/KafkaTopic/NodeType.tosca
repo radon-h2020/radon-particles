@@ -13,8 +13,6 @@ node_types:
       topic_name:
         type: string
         required: true
-        constraints:
-          - pattern: "[-_A-Za-z0-9]+"
       partitions:
         type: integer
         required: false

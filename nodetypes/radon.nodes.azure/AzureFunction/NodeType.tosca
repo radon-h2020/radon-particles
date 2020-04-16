@@ -12,8 +12,6 @@ node_types:
           - in_range: [1, 600]
       app_name:
         type: string
-        constraints:
-          - pattern: "[-a-z0-9]+"
       app_runtime:
         description: if empty, assumes app already existing
         type: string
