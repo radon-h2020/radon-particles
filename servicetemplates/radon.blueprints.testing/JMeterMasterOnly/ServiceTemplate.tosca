@@ -24,10 +24,10 @@ topology_template:
             relationship: con_HostedOn_0
             capability: host
     JMeter:
-      type: radon.nodes.testing.agent.JMeter
+      type: radon.nodes.testing.JMeter
       metadata:
-        x: "570"
-        y: "180"
+        x: "592"
+        y: "176"
         displayName: "JMeter"
       properties:
         jmeter_properties: ""
