@@ -1,7 +1,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 policy_types:
-  radon.policies.testing.LoadTest:
+  radon.policies.testing.radon.policies.testing.LoadTest:
     derived_from: radon.policies.testing.TestCase
     properties:
       repeats:
@@ -15,14 +15,14 @@ policy_types:
       threads:
         type: string
         required: true
-        default: 5
+        default: "5"
         status: supported
       upper_bound:
         type: string
         required: true
         status: supported
     metadata:
-      targetNamespace: radon.policies.testing
-      abstract: no
-      final: no
+      targetNamespace: "radon.policies.testing"
+      abstract: "false"
+      final: "false"
     targets: [ tosca.nodes.SoftwareComponent ]

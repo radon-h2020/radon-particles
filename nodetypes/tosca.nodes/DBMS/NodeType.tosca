@@ -1,17 +1,24 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   tosca.nodes.DBMS:
     derived_from: tosca.nodes.SoftwareComponent
     properties:
-      root_password:
-        type: string
-        required: false
-        description: the optional root password for the DBMS service
       port:
         type: integer
-        required: false
         description: the port the DBMS service will listen to for data and requests
+        required: false
+        status: supported
+      root_password:
+        type: string
+        description: the optional root password for the DBMS service
+        required: false
+        status: supported
+    metadata:
+      abstract: "false"
+      final: "false"
     capabilities:
       host:
-        type: tosca.capabilities.Compute
+        occurrences: [ 1, UNBOUNDED ]
         valid_source_types: [ tosca.nodes.Database ]
+        type: tosca.capabilities.Compute

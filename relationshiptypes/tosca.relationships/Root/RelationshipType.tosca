@@ -1,15 +1,17 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 relationship_types:
   tosca.relationships.Root:
     description: The TOSCA root Relationship Type all other TOSCA base Relationship Types derive from
     attributes:
-      tosca_id:
-        type: string
       tosca_name:
         type: string
       state:
         type: string
-        default: initial
+        default: "initial"
+      tosca_id:
+        type: string
+    metadata:
+      abstract: "false"
+      final: "false"
     interfaces:
-      Configure:
-        type: tosca.interfaces.relationship.Configure

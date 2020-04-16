@@ -1,77 +1,112 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.aws.AwsLambdaFunction:
     derived_from: radon.nodes.abstract.Function
-    attributes:
-      arn:
-        type: string
     properties:
       role_name:
         type: string
-      role_description:
-        type: string
-        required: false
-      runtime:
-        type: string
-        default: nodejs
-        constraints:
-          - valid_values: [nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5]
+        required: true
+        status: supported
       handler:
         type: string
-        default: index.handler
-      memory:
-        description: Size in megabytes
-        type: integer
-        default: 128
-        constraints:
-          - in_range: [128, 3008]
-      timeout:
-        description: Time in seconds
-        type: integer
-        default: 3
-        constraints:
-          - in_range: [1, 900]
+        required: true
+        default: "index.handler"
+        status: supported
       schedule:
         type: string
         required: false
+        status: supported
+      memory:
+        type: integer
+        description: Size in megabytes
+        required: true
+        default: "128"
+        status: supported
+        constraints:
+          - in_range: [ 128,3008 ]
+      runtime:
+        type: string
+        required: true
+        default: "nodejs"
+        status: supported
+        constraints:
+          - valid_values: [ nodejs,nodejs4.3,nodejs6.10,nodejs8.10,nodejs10.x,java8,python2.7,python3.6,python3.7,dotnetcore1.0,dotnetcore2.0,dotnetcore2.1,nodejs4.3-edge,go1.x,ruby2.5 ]
+      timeout:
+        type: integer
+        description: Time in seconds
+        required: true
+        default: "3"
+        status: supported
+        constraints:
+          - in_range: [ 1,900 ]
+      role_description:
+        type: string
+        required: false
+        status: supported
+    attributes:
+      arn:
+        type: string
+    metadata:
+      abstract: "false"
+      final: "false"
     requirements:
       - endpoint:
           capability: tosca.capabilities.Endpoint
-          relationship:
-            type: tosca.relationships.ConnectsTo
+          relationship: tosca.relationships.ConnectsTo
           occurrences: [ 0, UNBOUNDED ]
     capabilities:
       invocable:
+        occurrences: [ 0, UNBOUNDED ]
         type: radon.capabilities.Invocable
-        occurrences: [0, UNBOUNDED]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          function_name:
-            default: { get_property: [ SELF, name ] }
-          function_role_name:
-            default: { get_property: [ SELF, role_name ] }
-          function_role_description:
-            default: { get_property: [ SELF, role_description ] }
-          function_runtime:
-            default: { get_property: [ SELF, runtime ] }
-          function_handler:
-            default: { get_property: [ SELF, handler ] }
-          function_memory:
-            type: integer
-            default: { get_property: [ SELF, memory ] }
-          function_timeout:
-            type: integer
-            default: { get_property: [ SELF, timeout ] }
           function_code_location:
             type: string
-          aws_access_key_id:
-            default: { get_property: [ HOST, access_key_id ] }
-          aws_secret_access_key:
-            default: { get_property: [ HOST, secret_access_key ] }
-          aws_region:
-            default: { get_property: [ HOST, region ] }
+            required: true
+          function_memory:
+            type: integer
+            required: true
+            default: "{ get_property: [SELF, memory] }"
           schedule:
             type: string
-            default: { get_property: [SELF, schedule] }
+            required: true
+            default: "{ get_property: [SELF, schedule] }"
+          function_timeout:
+            type: integer
+            required: true
+            default: "{ get_property: [SELF, timeout] }"
+          aws_access_key_id:
+            type: string
+            required: true
+            default: "{ get_property: [HOST, access_key_id] }"
+          aws_region:
+            type: string
+            required: true
+            default: "{ get_property: [HOST, region] }"
+          function_role_name:
+            type: string
+            required: true
+            default: "{ get_property: [SELF, role_name] }"
+          function_handler:
+            type: string
+            required: true
+            default: "{ get_property: [SELF, handler] }"
+          aws_secret_access_key:
+            type: string
+            required: true
+            default: "{ get_property: [HOST, secret_access_key] }"
+          function_name:
+            type: string
+            required: true
+            default: "{ get_property: [SELF, name] }"
+          function_runtime:
+            type: string
+            required: true
+            default: "{ get_property: [SELF, runtime] }"
+          function_role_description:
+            type: string
+            required: true
+            default: "{ get_property: [SELF, role_description] }"

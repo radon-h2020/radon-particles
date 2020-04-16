@@ -1,42 +1,52 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 capability_types:
   tosca.capabilities.Endpoint:
     derived_from: tosca.capabilities.Root
     properties:
-      protocol:
-        type: string
-        required: true
-        default: tcp
-      port:
-        type: PortDef
-        required: false
-      secure:
-        type: boolean
-        required: false
-        default: false
-      url_path:
-        type: string
-        required: false
       port_name:
         type: string
         required: false
-      network_name:
+        status: supported
+      protocol:
         type: string
+        required: true
+        default: "tcp"
+        status: supported
+      port:
+        type: PortDef
         required: false
-        default: PRIVATE
+        status: supported
       initiator:
         type: string
         required: false
-        default: source
+        default: "source"
+        status: supported
         constraints:
-          - valid_values: [ source, target, peer ]
+          - valid_values: [ source,target,peer ]
+      network_name:
+        type: string
+        required: false
+        default: "PRIVATE"
+        status: supported
+      secure:
+        type: boolean
+        required: false
+        default: "false"
+        status: supported
       ports:
         type: map
         required: false
+        status: supported
         constraints:
           - min_length: 1
-        entry_schema:
-          type: PortSpec
+      url_path:
+        type: string
+        required: false
+        status: supported
     attributes:
       ip_address:
         type: string
+    metadata:
+      abstract: "false"
+      final: "false"

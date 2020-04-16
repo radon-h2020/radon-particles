@@ -1,49 +1,82 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.apache.nifi.NifiPipeline:
     derived_from: radon.nodes.abstract.DataPipeline
     attributes:
       id:
-        type: string
         description: Unique ID of the pipeline
+        type: string
+    metadata:
+      abstract: "false"
+      final: "false"
     requirements:
       - host:
           capability: tosca.capabilities.Container
           node: radon.nodes.apache.nifi.NifiRuntime
           relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
       - connect:
           capability: tosca.capabilities.Endpoint
           node: radon.nodes.apache.nifi.NifiPipeline
           relationship: tosca.relationships.ConnectsTo
-          occurrences: [0, 1]
+          occurrences: [ 0, 1 ]
     capabilities:
       connect:
-        type: tosca.capabilities.Endpoint
         description: Capability to receive data from other pipeline nodes
+        occurrences: [ 0, UNBOUNDED ]
         valid_source_types: [ radon.nodes.apache.nifi.NifiPipeline ]
-        occurrences: [0, UNBOUNDED]
+        type: tosca.capabilities.Endpoint
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
-          create:
-            inputs:
-              template_file:  { default: { get_artifact: [ SELF, pipeline_template ] } }
-              template_name:  { default: { get_property: [ SELF, name ] } }
-            implementation: files/create.yml
-          start:
-            inputs:
-              pipeline_id: { default: { get_attribute: [ SELF, id ] } }
-            implementation: files/start.yml
           stop:
             inputs:
-              pipeline_id: { default: { get_attribute: [ SELF, id ] } }
-            implementation: files/stop.yml
+              pipeline_id:
+                type: string
+                required: true
+                default: "{ get_attribute: [SELF, id] }"
+            implementation:
+              primary: files/stop.yml
+              timeout: 0
+          start:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: "{ get_attribute: [SELF, id] }"
+            implementation:
+              primary: files/start.yml
+              timeout: 0
+          create:
+            inputs:
+              template_name:
+                type: string
+                required: true
+                default: "{ get_property: [SELF, name] }"
+              template_file:
+                type: string
+                required: true
+                default: "{ get_artifact: [SELF, pipeline_template] }"
+            implementation:
+              primary: files/create.yml
+              timeout: 0
           configure:
             inputs:
-              pipeline_id: { default: { get_attribute: [ SELF, id ] } }
-            implementation: files/configure.yml
+              pipeline_id:
+                type: string
+                required: true
+                default: "{ get_attribute: [SELF, id] }"
+            implementation:
+              primary: files/configure.yml
+              timeout: 0
           delete:
             inputs:
-              pipeline_id: { default: { get_attribute: [ SELF, id ] } }
-            implementation: files/delete.yml
+              pipeline_id:
+                type: string
+                required: true
+                default: "{ get_attribute: [SELF, id] }"
+            implementation:
+              primary: files/delete.yml
+              timeout: 0

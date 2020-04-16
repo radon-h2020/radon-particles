@@ -6,11 +6,11 @@ node_types:
     attributes:
       private_address:
         type: string
-        default: localhost
+        default: "localhost"
       public_address:
         type: string
-        default: localhost
+        default: "localhost"
     metadata:
-      targetNamespace: radon.nodes
-      abstract: no
-      final: no
+      targetNamespace: "radon.nodes"
+      abstract: "false"
+      final: "false"
