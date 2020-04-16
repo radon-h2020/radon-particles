@@ -1,7 +1,11 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 policy_types:
-  Test:
+  radon.policies.testing.radon.policies.testing.radon.policies.testing.Test:
+    metadata:
+      targetNamespace: "radon.policies.testing"
+      abstract: "true"
+      final: "false"
     properties:
       ti_blueprint:
         type: string
@@ -12,7 +16,3 @@ policy_types:
         type: string
         required: false
         status: supported
-    metadata:
-      targetNamespace: radon.policies.testing
-      abstract: no
-      final: no

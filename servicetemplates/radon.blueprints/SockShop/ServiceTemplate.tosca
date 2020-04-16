@@ -10,11 +10,6 @@ topology_template:
         x: "640"
         y: "413"
         displayName: "Workstation"
-      requirements:
-        - dependency:
-            node: tosca.nodes.Root
-            relationship: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
     SockShop:
       type: radon.nodes.SockShop
       metadata:
@@ -28,10 +23,6 @@ topology_template:
             node: Workstation
             relationship: con_HostedOn_0
             capability: host
-        - dependency:
-            node: tosca.nodes.Root
-            relationship: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
   relationship_templates:
     con_HostedOn_0:
       type: tosca.relationships.HostedOn

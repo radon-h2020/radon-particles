@@ -1,69 +1,42 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 metadata:
-  targetNamespace: radon.blueprints.testing
+  targetNamespace: "radon.blueprints.testing"
 topology_template:
   node_templates:
     Workstation:
       type: radon.nodes.Workstation
       metadata:
-        x: 967
-        y: 519
-        displayName: Workstation
-      requirements:
-        - local_storage:
-            node: tosca.nodes.Storage.BlockStorage
-            relationship:
-              type: tosca.relationships.AttachesTo
-            capability: tosca.capabilities.Attachment
-        - dependency:
-            node: tosca.nodes.Root
-            relationship:
-              type: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
+        x: "967"
+        y: "519"
+        displayName: "Workstation"
     DockerEngine:
       type: radon.nodes.docker.DockerEngine
       metadata:
-        x: 965
-        y: 178
-        displayName: DockerEngine
+        x: "965"
+        y: "178"
+        displayName: "DockerEngine"
       properties:
         component_version: ""
       requirements:
         - host:
             node: Workstation
-            relationship:
-              type: con_HostedOn_0
+            relationship: con_HostedOn_0
             capability: host
-        - dependency:
-            node: tosca.nodes.Root
-            relationship:
-              type: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
     JMeter:
       type: radon.nodes.testing.agent.JMeter
       metadata:
-        x: 570
-        y: 180
-        displayName: JMeter
+        x: "570"
+        y: "180"
+        displayName: "JMeter"
       properties:
         jmeter_properties: ""
         worker_hostnames: ""
       requirements:
         - host:
             node: DockerEngine
-            relationship:
-              type: con_HostedOn_1
+            relationship: con_HostedOn_1
             capability: host
-        - storage:
-            capability: tosca.capabilities.Storage
-        - network:
-            capability: tosca.capabilities.EndPoint
-        - dependency:
-            node: tosca.nodes.Root
-            relationship:
-              type: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
   relationship_templates:
     con_HostedOn_0:
       type: tosca.relationships.HostedOn

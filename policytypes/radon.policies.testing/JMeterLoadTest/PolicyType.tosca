@@ -1,8 +1,12 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 policy_types:
-  JMeterLoadTest:
+  radon.policies.testing.JMeterLoadTest:
     derived_from: radon.policies.testing.LoadTestCTT
+    metadata:
+      targetNamespace: "radon.policies.testing"
+      abstract: "false"
+      final: "false"
     properties:
       jmx_file:
         type: string
@@ -14,7 +18,3 @@ policy_types:
         description: Location and filename of a file with properties for the test plan (optional)
         required: false
         status: supported
-    metadata:
-      targetNamespace: radon.policies.testing
-      abstract: no
-      final: no
