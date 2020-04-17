@@ -14,5 +14,6 @@ policy_types:
         status: supported
       test_id:
         type: string
+        description: Identifier for this test case
         required: false
         status: supported

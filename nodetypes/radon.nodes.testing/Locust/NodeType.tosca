@@ -7,3 +7,9 @@ node_types:
       targetNamespace: "radon.nodes.testing"
       abstract: "false"
       final: "false"
+    properties:
+      worker_hostnames:
+        type: string
+        description: Comma-separated list of worker hostnames
+        required: false
+        status: supported
