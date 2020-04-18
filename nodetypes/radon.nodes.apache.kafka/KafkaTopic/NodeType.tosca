@@ -3,35 +3,44 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.apache.kafka.KafkaTopic:
     derived_from: tosca.nodes.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.apache.kafka"
+    attributes:
+      broker_urls:
+        description: represents a list of one or more urls that corresponds to the brokers of the kafka cluster this topic is hosted on
+        type: list
+        default: "{ get_attribute: [HOST, broker_urls] }"
     properties:
       partitions:
         type: integer
         required: false
-        default: "1"
+        default: 1
         status: supported
       min_insync_replicas:
         type: integer
         required: false
-        default: "1"
+        default: 1
         status: supported
         constraints:
           - greater_or_equal: 0
       segment_size:
         type: integer
         required: false
-        default: "1000000"
+        default: 1000000
         status: supported
         constraints:
           - greater_or_equal: 1
       replicas:
         type: integer
         required: false
-        default: "1"
+        default: 1
         status: supported
       roll_time:
         type: integer
         required: false
-        default: "10080"
+        default: 10080
         status: supported
         constraints:
           - greater_or_equal: 1
@@ -42,16 +51,8 @@ node_types:
       retention:
         type: integer
         required: false
-        default: "10080"
+        default: 10080
         status: supported
-    attributes:
-      broker_urls:
-        description: represents a list of one or more urls that corresponds to the brokers of the kafka cluster this topic is hosted on
-        type: list
-        default: "{ get_attribute: [HOST, broker_urls] }"
-    metadata:
-      abstract: "false"
-      final: "false"
     requirements:
       - host:
           capability: radon.capabilities.kafka.KafkaHosting

@@ -3,6 +3,10 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   tosca.nodes.Compute:
     derived_from: tosca.nodes.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.nodes"
     attributes:
       private_address:
         type: string
@@ -12,9 +16,6 @@ node_types:
         type: map
       ports:
         type: map
-    metadata:
-      abstract: "false"
-      final: "false"
     requirements:
       - local_storage:
           capability: tosca.capabilities.Attachment

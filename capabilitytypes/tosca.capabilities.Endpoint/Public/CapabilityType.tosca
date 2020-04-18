@@ -3,13 +3,17 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 capability_types:
   tosca.capabilities.Endpoint.Public:
     derived_from: tosca.capabilities.Endpoint
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.capabilities.Endpoint"
     properties:
       floating:
         type: boolean
         description: >
           Indicates that the public address should be allocated from a pool of floating IPs that are associated with the network.
         required: true
-        default: "false"
+        default: false
         status: supported
       network_name:
         type: string
@@ -24,6 +28,3 @@ capability_types:
         description: The optional name to register with DNS
         required: false
         status: supported
-    metadata:
-      abstract: "false"
-      final: "false"

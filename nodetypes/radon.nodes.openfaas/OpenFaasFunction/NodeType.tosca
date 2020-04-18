@@ -3,6 +3,17 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.openfaas.OpenFaasFunction:
     derived_from: radon.nodes.abstract.Function
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.openfaas"
+    attributes:
+      function_url:
+        type: string
+        default: "{ concat: [{get_attribute=[SELF, gateway_url]}, /function/, {get_property=[SELF, function_name]}] }"
+      gateway_url:
+        type: string
+        default: "{ get_attribute: [HOST, url] }"
     properties:
       function_language_template:
         type: string
@@ -14,16 +25,6 @@ node_types:
         type: string
         required: true
         status: supported
-    attributes:
-      function_url:
-        type: string
-        default: "{ concat: [{get_attribute=[SELF, gateway_url]}, /function/, {get_property=[SELF, function_name]}] }"
-      gateway_url:
-        type: string
-        default: "{ get_attribute: [HOST, url] }"
-    metadata:
-      abstract: "false"
-      final: "false"
     requirements:
       - host:
           capability: tosca.capabilities.Container

@@ -6,4 +6,5 @@ artifact_types:
     metadata:
       abstract: "false"
       final: "false"
+      targetNamespace: "tosca.artifacts.Implementation"
     file_ext: [ yml, yaml ]

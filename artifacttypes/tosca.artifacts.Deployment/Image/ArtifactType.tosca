@@ -6,3 +6,4 @@ artifact_types:
     metadata:
       abstract: "false"
       final: "false"
+      targetNamespace: "tosca.artifacts.Deployment"

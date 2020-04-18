@@ -3,6 +3,10 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.azure.AzurePlatform:
     derived_from: radon.nodes.abstract.CloudPlatform
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.azure"
     properties:
       password:
         type: string
@@ -16,9 +20,6 @@ node_types:
         type: string
         required: false
         status: supported
-    metadata:
-      abstract: "false"
-      final: "false"
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]

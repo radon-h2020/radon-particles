@@ -3,21 +3,35 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.apache.kafka.KafkaBroker:
     derived_from: radon.nodes.java.JavaApplication
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.apache.kafka"
+    attributes:
+      broker_urls:
+        description: represents a list of one or more urls that corresponds to the brokers of this kafka cluster
+        type: list
+      java_home:
+        type: string
+        default: "{ get_attribute: [HOST, java_home] }"
+      kafka_home:
+        type: string
+        default: "{ get_operation_output: [SELF, Standard, create, KAFKA_HOME] }"
     properties:
       log_cleaner_enable:
         type: boolean
         required: true
-        default: "false"
+        default: false
         status: supported
       zk_heap_size:
         type: integer
         required: true
-        default: "500"
+        default: 500
         status: supported
       scala_version:
         type: version
         required: true
-        default: "2.11"
+        default: 2.11
         status: supported
         constraints:
           - valid_values: [ 2.11,2.12 ]
@@ -31,21 +45,8 @@ node_types:
       kf_heap_size:
         type: integer
         required: true
-        default: "1024"
+        default: 1024
         status: supported
-    attributes:
-      broker_urls:
-        description: represents a list of one or more urls that corresponds to the brokers of this kafka cluster
-        type: list
-      java_home:
-        type: string
-        default: "{ get_attribute: [HOST, java_home] }"
-      kafka_home:
-        type: string
-        default: "{ get_operation_output: [SELF, Standard, create, KAFKA_HOME] }"
-    metadata:
-      abstract: "false"
-      final: "false"
     capabilities:
       host:
         occurrences: [ 0, UNBOUNDED ]

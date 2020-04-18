@@ -6,4 +6,5 @@ relationship_types:
     metadata:
       abstract: "false"
       final: "false"
+      targetNamespace: "tosca.relationships"
     valid_target_types: [ tosca.capabilities.Endpoint ]

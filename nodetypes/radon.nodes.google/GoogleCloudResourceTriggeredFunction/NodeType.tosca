@@ -6,6 +6,7 @@ node_types:
     metadata:
       abstract: "false"
       final: "false"
+      targetNamespace: "radon.nodes.google"
     capabilities:
       invocable:
         occurrences: [ 1, 1 ]

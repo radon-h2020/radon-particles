@@ -3,6 +3,17 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.apache.openwhisk.OpenWhiskPlatform:
     derived_from: radon.nodes.abstract.CloudPlatform
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.apache.openwhisk"
+    attributes:
+      api_url:
+        type: string
+        default: "{ concat: [http://, {get_property=[SELF, api_host]}, {get_property=[SELF, api_port]}] }"
+      auth_key:
+        type: string
+        default: "{ concat: [{get_property=[SELF, auth_username]}, {get_property=[SELF, auth_password]}] }"
     properties:
       auth_username:
         type: string
@@ -12,7 +23,7 @@ node_types:
       kubernetes_version:
         type: version
         required: false
-        default: "1.8"
+        default: 1.8
         status: supported
       auth_password:
         type: string
@@ -30,18 +41,8 @@ node_types:
       api_port:
         type: integer
         required: true
-        default: "31001"
+        default: 31001
         status: supported
-    attributes:
-      api_url:
-        type: string
-        default: "{ concat: [http://, {get_property=[SELF, api_host]}, {get_property=[SELF, api_port]}] }"
-      auth_key:
-        type: string
-        default: "{ concat: [{get_property=[SELF, auth_username]}, {get_property=[SELF, auth_password]}] }"
-    metadata:
-      abstract: "false"
-      final: "false"
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]

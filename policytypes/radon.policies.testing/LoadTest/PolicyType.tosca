@@ -3,6 +3,10 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 policy_types:
   radon.policies.testing.LoadTest:
     derived_from: radon.policies.testing.TestCase
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.policies.testing"
     properties:
       repeats:
         type: string
@@ -15,13 +19,10 @@ policy_types:
       threads:
         type: string
         required: true
-        default: "5"
+        default: 5
         status: supported
       upper_bound:
         type: string
         required: true
         status: supported
-    metadata:
-      abstract: "false"
-      final: "false"
     targets: [ tosca.nodes.SoftwareComponent ]

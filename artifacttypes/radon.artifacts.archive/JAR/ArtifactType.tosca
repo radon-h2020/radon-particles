@@ -6,5 +6,6 @@ artifact_types:
     metadata:
       abstract: "false"
       final: "false"
+      targetNamespace: "radon.artifacts.archive"
     mime_type: application/java-archive
     file_ext: [ jar ]

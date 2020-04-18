@@ -3,6 +3,10 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   tosca.nodes.Storage.ObjectStorage:
     derived_from: tosca.nodes.Abstract.Storage
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.nodes.Storage"
     properties:
       maxsize:
         type: size
@@ -10,9 +14,6 @@ node_types:
         status: supported
         constraints:
           - greater_or_equal: 0 GB
-    metadata:
-      abstract: "false"
-      final: "false"
     capabilities:
       storage_endpoint:
         occurrences: [ 1, UNBOUNDED ]
