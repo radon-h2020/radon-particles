@@ -13,7 +13,7 @@ topology_template:
       properties:
         size: "0 MB"
         name: "input"
-        maxsize: "null"
+        maxsize: null
       requirements:
         - host:
             node: AwsPlatform
@@ -30,10 +30,10 @@ topology_template:
         y: "134"
         displayName: "Database"
       properties:
-        password: "null"
-        port: "null"
-        name: "null"
-        user: "null"
+        password: null
+        port: null
+        name: null
+        user: null
     AwsPlatform_2:
       type: radon.nodes.aws.AwsPlatform
       metadata:
@@ -42,25 +42,25 @@ topology_template:
         displayName: "eu-west-2"
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        name: "London"
         secret_access_key: "{ get_input: secret_access_key }"
+        name: "London"
         region: "eu-west-2"
     AwsLambdaFunction:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "975"
-        y: "137"
+        x: "979"
+        y: "72"
         displayName: "create_thumbnail"
       properties:
-        role_name: "null"
-        schedule: "~"
+        role_name: null
         handler: "index.handler"
+        schedule: "~"
         environment: "prod"
         memory: 512
         name: "resize"
         runtime: "nodejs"
         timeout: 3
-        role_description: "null"
+        role_description: null
       requirements:
         - endpoint:
             node: Database
@@ -78,8 +78,8 @@ topology_template:
         displayName: "eu-west-1"
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        name: "Ireland"
         secret_access_key: "{ get_input: secret_access_key }"
+        name: "Ireland"
         region: "eu-west-1"
     AwsS3Bucket_2:
       type: radon.nodes.aws.AwsS3Bucket
@@ -90,7 +90,7 @@ topology_template:
       properties:
         size: "0 MB"
         name: "output"
-        maxsize: "null"
+        maxsize: null
       requirements:
         - host:
             node: AwsPlatform_2
@@ -110,12 +110,12 @@ topology_template:
     con_ConnectsTo_0:
       type: tosca.relationships.ConnectsTo
       properties:
-        credential: "null"
+        credential: null
     con_AwsTriggers_0:
       type: radon.relationships.aws.AwsTriggers
       properties:
-        events: "null"
+        events: null
     con_AwsTriggers_1:
       type: radon.relationships.aws.AwsTriggers
       properties:
-        events: "null"
+        events: null

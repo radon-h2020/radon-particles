@@ -10,10 +10,8 @@ relationship_types:
     attributes:
       tosca_name:
         type: string
-        default: "null"
       state:
         type: string
         default: "initial"
       tosca_id:
         type: string
-        default: "null"
