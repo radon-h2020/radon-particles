@@ -1,8 +1,13 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   tosca.nodes.Abstract.Compute:
     derived_from: tosca.nodes.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.nodes.Abstract"
     capabilities:
       host:
+        occurrences: [ 1, UNBOUNDED ]
         type: tosca.capabilities.Compute
-        valid_source_types: []

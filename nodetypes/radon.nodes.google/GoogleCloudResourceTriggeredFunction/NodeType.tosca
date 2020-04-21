@@ -1,10 +1,14 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.google.GoogleCloudResourceTriggeredFunction:
     derived_from: radon.nodes.google.GoogleCloudFunction
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.google"
     capabilities:
       invocable:
+        occurrences: [ 1, 1 ]
+        valid_source_types: [ radon.nodes.google.GoogleCloudResource ]
         type: radon.capabilities.Invocable
-        valid_source_types:
-          - radon.nodes.google.GoogleCloudResource
-        occurrences: [1, 1]

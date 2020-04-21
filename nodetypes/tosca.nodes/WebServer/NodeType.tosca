@@ -1,10 +1,20 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   tosca.nodes.WebServer:
     derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.nodes"
     capabilities:
-      data_endpoint: tosca.capabilities.Endpoint
-      admin_endpoint: tosca.capabilities.Endpoint.Admin
+      data_endpoint:
+        occurrences: [ 1, UNBOUNDED ]
+        type: tosca.capabilities.Endpoint
+      admin_endpoint:
+        occurrences: [ 1, UNBOUNDED ]
+        type: tosca.capabilities.Endpoint.Admin
       host:
-        type: tosca.capabilities.Compute
+        occurrences: [ 1, UNBOUNDED ]
         valid_source_types: [ tosca.nodes.WebApplication ]
+        type: tosca.capabilities.Compute

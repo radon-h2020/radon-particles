@@ -1,5 +1,10 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 relationship_types:
   tosca.relationships.DependsOn:
     derived_from: tosca.relationships.ConnectsTo
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.relationships"
     valid_target_types: [ tosca.capabilities.Endpoint ]

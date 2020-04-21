@@ -1,25 +1,31 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   tosca.nodes.Root:
-    derived_from: tosca.entity.Root
     description: The TOSCA Node Type all other TOSCA base Node Types derive from
+    derived_from: tosca.entity.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.nodes"
     attributes:
-      tosca_id:
-        type: string
       tosca_name:
         type: string
       state:
         type: string
-        default: initial
-    capabilities:
-      feature:
-        type: tosca.capabilities.Node
+        default: "initial"
+      tosca_id:
+        type: string
     requirements:
       - dependency:
           capability: tosca.capabilities.Node
           node: tosca.nodes.Root
           relationship: tosca.relationships.DependsOn
           occurrences: [ 0, UNBOUNDED ]
+    capabilities:
+      feature:
+        occurrences: [ 1, UNBOUNDED ]
+        type: tosca.capabilities.Node
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
