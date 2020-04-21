@@ -42,8 +42,8 @@ topology_template:
         displayName: "eu-west-2"
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        secret_access_key: "{ get_input: secret_access_key }"
         name: "London"
+        secret_access_key: "{ get_input: secret_access_key }"
         region: "eu-west-2"
     AwsLambdaFunction:
       type: radon.nodes.aws.AwsLambdaFunction
@@ -53,8 +53,8 @@ topology_template:
         displayName: "create_thumbnail"
       properties:
         role_name: null
+        schedule: null
         handler: "index.handler"
-        schedule: "~"
         environment: "prod"
         memory: 512
         name: "resize"
@@ -78,8 +78,8 @@ topology_template:
         displayName: "eu-west-1"
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        secret_access_key: "{ get_input: secret_access_key }"
         name: "Ireland"
+        secret_access_key: "{ get_input: secret_access_key }"
         region: "eu-west-1"
     AwsS3Bucket_2:
       type: radon.nodes.aws.AwsS3Bucket
