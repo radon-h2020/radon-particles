@@ -1,0 +1,28 @@
+---
+swagger: "2.0"
+info:
+  version: "2020-02-05T12:17:38Z"
+  title: "{{ api_gateway_title }}"
+host: "h8xiq5rvv8.execute-api.{{ aws_region }}.amazonaws.com"
+basePath: "/production"
+schemes:
+  - "https"
+paths:
+  /:
+    post:
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "200 response"
+      x-amazon-apigateway-integration:
+        uri: "{{ api_gateway_resource_uri_override|default(api_gateway_resource_uri) }}"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+        credentials: "{{ aws_role }}"
+...

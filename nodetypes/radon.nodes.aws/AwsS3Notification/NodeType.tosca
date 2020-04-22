@@ -1,0 +1,27 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  radon.nodes.triggers.AwsS3Notification:
+      derived_from: tosca.nodes.SoftwareComponent
+      properties:
+        aws_region:
+          type: string
+      interfaces:
+        Standard:
+          type: tosca.interfaces.node.lifecycle.Standard
+          inputs:
+            event_name: {default: radon_on_jpg_add, type: string }
+            bucket_name: {default: { get_property: [SELF, bucket, bucket_name] }, type: string }
+            lambda_function_arn: {default:  {get_attribute: [SELF, receives_notification, function_arn] }, type: string }
+            events: {default: "s3:ObjectCreated:*", type: string }
+            suffix: {default: ".jpg", type: string }
+            region: {default: { get_property: [SELF, aws_region] }, type: string }
+          operations:
+            create:  files/create.yml
+      requirements:
+        - receives_notification:
+            capability: tosca.capabilities.Compute
+            relationship: tosca.relationships.DependsOn
+        - bucket:
+            capability: tosca.capabilities.Compute
+            relationship: tosca.relationships.DependsOn
+

@@ -1,15 +1,23 @@
 ---
 - hosts: localhost
-  environment:
-    AWS_ACCESS_KEY_ID: "{{ aws_access_key_id }}"
-    AWS_SECRET_ACCESS_KEY: "{{ aws_secret_access_key }}"
-    AWS_REGION: "{{ aws_region }}"
   tasks:
-    - name: "Delete Lambda function on AWS : {{ function_name }}"
-      lambda:
-        name: "{{ function_name }}"
-        state: absent
     - name: "Delete role of Lambda function on AWS : {{ function_name }}"
       iam_role:
-        name: "{{ function_role_name }}"
+        name: "{{ aws_role }}"
+        state: absent
+
+    - name: "Remove function alias name"
+      lambda_alias:
+        function_name: "{{ function_name }}"
+        name: "{{ func_alias }}"
+        region: "{{ aws_region }}"
+        state: absent
+      ignore_errors: yes
+
+    - name: "Lambda {{ function_name }} undeploy"
+      lambda:
+        name: "{{ function_name }}"
+        region: "{{ aws_region }}"
+        role: "{{ aws_role }}"
+        handler: image_resize.lambda_handler
         state: absent
