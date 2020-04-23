@@ -1,14 +1,22 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   tosca.nodes.Storage.BlockStorage:
     derived_from: tosca.nodes.Abstract.Storage
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.nodes.Storage"
     properties:
       volume_id:
         type: string
         required: false
+        status: supported
       snapshot_id:
         type: string
         required: false
+        status: supported
     capabilities:
       attachment:
+        occurrences: [ 1, UNBOUNDED ]
         type: tosca.capabilities.Attachment

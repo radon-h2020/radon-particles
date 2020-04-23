@@ -3,14 +3,14 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.Workstation:
     derived_from: tosca.nodes.Compute
+    metadata:
+      targetNamespace: "radon.nodes"
+      abstract: "false"
+      final: "false"
     attributes:
       private_address:
         type: string
-        default: localhost
+        default: "localhost"
       public_address:
         type: string
-        default: localhost
-    metadata:
-      targetNamespace: radon.nodes
-      abstract: no
-      final: no
+        default: "localhost"

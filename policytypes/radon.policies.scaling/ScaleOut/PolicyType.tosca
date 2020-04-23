@@ -1,23 +1,31 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 policy_types:
   radon.policies.scaling.ScaleOut:
     derived_from: tosca.policies.Scaling
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.policies.scaling"
     properties:
-      cpu_lower_bound:
-        description: The lower bound for the CPU
-        type: float
-        required: false
-        constraints:
-          - greater_or_equal: 0.0
       cpu_upper_bound:
-        description: The upper bound for the CPU
         type: float
+        description: The upper bound for the CPU
         required: false
+        status: supported
         constraints:
           - less_or_equal: 100.0
       adjustment:
-        description: The amount by which to scale
         type: integer
+        description: The amount by which to scale
         required: false
+        status: supported
         constraints:
           - greater_or_equal: 1
+      cpu_lower_bound:
+        type: float
+        description: The lower bound for the CPU
+        required: false
+        status: supported
+        constraints:
+          - greater_or_equal: 0.0

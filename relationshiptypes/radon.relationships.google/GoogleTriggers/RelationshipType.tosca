@@ -1,18 +1,17 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 relationship_types:
   radon.relationships.google.GoogleTriggers:
-    derived_from: radon.relationships.abstract.Triggers
     description: Google Cloud-specific relationship type representing GCResource-to-GCFunction communication
+    derived_from: radon.relationships.abstract.Triggers
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.relationships.google"
     properties:
       events:
+        type: string
+        required: true
+        status: supported
         constraints:
           - length: 1
-    interfaces:
-      Configure:
-        type: tosca.interfaces.relationship.Configure
-        inputs:
-          EVENT:
-            type: radon.datatypes.Event
-            default: { get_property: [SELF, events, 1] }
-          RESOURCE:
-            default: { get_property: [SOURCE, name] }

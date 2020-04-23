@@ -1,30 +1,45 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.google.GoogleCloudFunction:
     derived_from: radon.nodes.abstract.Function
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.google"
     properties:
+      memory:
+        type: integer
+        description: Limit on the amount of memory the function can use.
+        required: true
+        default: 256
+        status: supported
+        constraints:
+          - valid_values: [ 128,256,512,1024,2048 ]
       function_name:
         type: string
+        required: true
+        status: supported
       function_runtime:
         type: string
+        required: true
+        status: supported
         constraints:
-          - valid_values: [nodejs8, nodejs10, python37, go111, nodejs6]
-      memory:
-        description: Limit on the amount of memory the function can use.
-        type: integer
-        default: 256
-        constraints:
-          - valid_values: [128, 256, 512, 1024, 2048]
-      timeout:
-        type: integer
-        default: 60
-        constraints:
-          - in_range: [1, 540]
+          - valid_values: [ nodejs8,nodejs10,python37,go111,nodejs6 ]
       entry_point:
         type: string
         required: false
+        status: supported
+      timeout:
+        type: integer
+        required: true
+        default: 60
+        status: supported
+        constraints:
+          - in_range: [ 1,540 ]
     requirements:
       - host:
-          node: radon.nodes.google.GoogleCloudPlatform
           capability: tosca.capabilities.Container
+          node: radon.nodes.google.GoogleCloudPlatform
           relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]

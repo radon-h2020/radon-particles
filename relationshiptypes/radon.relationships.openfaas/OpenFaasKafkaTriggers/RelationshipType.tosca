@@ -1,32 +1,17 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 relationship_types:
   radon.relationships.openfaas.OpenFaasKafkaTriggers:
-    derived_from: radon.relationships.abstract.Triggers
     description: OpenFaaS-specific relationship type representing Kafka-to-OpenFaaS Function communication
+    derived_from: radon.relationships.abstract.Triggers
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.relationships.openfaas"
     properties:
       events:
+        type: string
+        required: true
+        status: supported
         constraints:
           - length: 1
-    interfaces:
-      Configure:
-        type: tosca.interfaces.relationship.Configure
-        inputs:
-          EVENT:
-            type: radon.datatypes.Event
-            default: { get_property: [SELF, events, 1] }
-        operations:
-          post_configure_target:
-            description: >
-              Updates the target function by adding an annotation with the topic name, deploys an OpenFaaS Kafka connector,
-              and configures the connector to forward message from the topic to the function.
-            inputs:
-              BROKERS:
-                type: list
-                entry_schema: string
-                default: { get_attribute: [SOURCE, broker_urls] }
-              TOPIC_NAME:
-                type: string
-                default: { get_attribute: [SOURCE, topic_name] }
-              GATEWAY_URL:
-                type: string
-                default: { get_attribute: [TARGET, gateway_url] }

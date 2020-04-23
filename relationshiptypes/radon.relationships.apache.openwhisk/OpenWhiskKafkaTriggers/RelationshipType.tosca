@@ -1,38 +1,22 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 relationship_types:
   radon.relationships.apache.openwhisk.OpenWhiskKafkaTriggers:
-    derived_from: radon.relationships.abstract.Triggers
     description: OpenWhisk-specific relationship type representing Kafka-to-OpenWhisk Function communication
+    derived_from: radon.relationships.abstract.Triggers
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.relationships.apache.openwhisk"
     properties:
+      trigger_name:
+        type: string
+        description: the name of the trigger created by this relationship. Used for proper cleanup when the relationship is removed.
+        required: true
+        status: supported
       events:
+        type: string
+        required: true
+        status: supported
         constraints:
           - length: 1
-      trigger_name:
-        description: the name of the trigger created by this relationship. Used for proper cleanup when the relationship is removed.
-        type: string
-    interfaces:
-      Configure:
-        type: tosca.interfaces.relationship.Configure
-        inputs:
-          EVENT:
-            type: radon.datatypes.Event
-            default: { get_property: [SELF, events, 1] }
-          TRIGGER_NAME:
-            type: string
-            default: { get_property: [SELF, trigger_name]}
-          BROKERS:
-            type: list
-            entry_schema: string
-            default: { get_attribute: [SOURCE, broker_urls]}
-          TOPIC_NAME:
-            type: string
-            default: { get_attribute: [SOURCE, topic_name]}
-          IS_JSON_DATA:
-            type: boolean
-            required: false
-          IS_BINARY_KEY:
-            type: boolean
-            required: false
-          IS_BINARY_VALUE:
-            type: boolean
-            required: false

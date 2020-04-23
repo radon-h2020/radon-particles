@@ -3,18 +3,18 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   tosca.nodes.SoftwareComponent:
     derived_from: tosca.nodes.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.nodes"
     properties:
       component_version:
         type: version
         required: false
         status: supported
-    metadata:
-      abstract: no
-      final: no
     requirements:
       - host:
           capability: tosca.capabilities.Compute
           node: tosca.nodes.Compute
-          relationship:
-            type: tosca.relationships.HostedOn
+          relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
