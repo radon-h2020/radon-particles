@@ -1,44 +1,44 @@
 ---
 - hosts: localhost
-  environment:
-    AWS_ACCESS_KEY_ID: "{{ aws_access_key_id }}"
-    AWS_SECRET_ACCESS_KEY: "{{ aws_secret_access_key }}"
-    AWS_REGION: "{{ aws_region }}"
   tasks:
-    - name: "Create role of Lambda function on AWS : {{ function_name }}"
-      vars:
-        assume_role_policy_document: ../../../templates/aws/lambda-function/assume_role_policy_document.json.j2
-      iam_role:
-        name: "{{ function_role_name }}"
-        state: present
-        description: "{{ function_role_description }}"
-        assume_role_policy_document: "{{ lookup('template', assume_role_policy_document) }}"
-        managed_policy:
-          - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-        purge_policies: no
-      register: function_role_information
-    - name: "Create Lambda function on AWS : {{ function_name }}"
+    - name: Lambda "{{ function_name }}" deploy
       lambda:
         name: "{{ function_name }}"
+        zip_file: "{{ zip_file }}"
+        runtime: "{{ lambda_runtime }}"
+        region: "{{ aws_region }}"
+        role: "{{ aws_role }}"
+        handler: "{{ lambda_handler }}"
+        timeout: "{{ lambda_timeout }}"
+        memory_size: "{{ lambda_memory }}"
+      register: lambda_info
+
+    - name: Create function alias name
+      lambda_alias:
+        function_name: "{{ function_name }}"
+        name: "{{ func_alias }}"
+        region: "{{ aws_region }}"
         state: present
-        role: "{{ function_role_information.arn }}"
-        runtime: "{{ function_runtime }}"
-        zip_file: "{{ function_deployment_package }}"
-        handler: "{{ function_handler }}"
-        memory_size: "{{ function_memory }}"
-        timeout: "{{ function_timeout }}"
-      register: function_information
-      retries: 5
-      delay: 3
-      until: function_information is not failed
-    - name: "Return ARN of Lambda function on AWS : {{ function_name }}"
+      register: alias_info
+
+    - name: "Add invocation permission of Lambda function on AWS : {{ permission_id }}"
+      lambda_policy:
+        function_name: "{{ function_name }}"
+        statement_id: "{{ permission_id }}"
+        action: lambda:InvokeFunction
+        region: "{{ aws_region }}"
+        alias: "{{ func_alias }}"
+        principal: "s3.amazonaws.com"
+
+    - name: Set attributes
       set_stats:
         data:
-          id: "{{ function_information.configuration.function_arn }}"
+          function_arn: "{{alias_info.alias_arn}}"
+
     - name: "Put concurrency of Lambda function on AWS : {{ function_name }}"
       command: >-
         aws lambda put-function-concurrency
           --function-name {{ function_name }}
           --reserved-concurrent-executions {{ function_concurrency }}
-          --region {{ ansible_env.AWS_REGION }}
+          --region {{ aws_region }}
       when: function_concurrency is defined

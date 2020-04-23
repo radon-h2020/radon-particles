@@ -1,0 +1,67 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+imports:
+  - ../../../nodetypes/radon.nodes.aws/AwsLambdaFunction/NodeType.tosca
+  - ../../../nodetypes/radon.nodes.aws/AwsS3Notification/NodeType.tosca
+  - ../../../nodetypes/radon.nodes.aws/AwsS3Bucket/NodeType.tosca
+
+
+metadata:
+  targetNamespace: radon.blueprints
+topology_template:
+  node_templates:
+    my-workstation:
+      type: tosca.nodes.Compute
+      attributes:
+        private_address: localhost
+        public_address: localhost
+
+    AwsCreateRole:
+      type: radon.policies.AwsCreateRole
+      properties:
+        aws_region: eu-central-1
+        role_name: RadonLambda
+        role_description: Lambda role
+      requirements:
+        - host: my-workstation
+
+    AwsLambdaFunction:
+      type: radon.nodes.function.AwsLambdaFunction
+      properties:
+        aws_region: eu-central-1
+        function_name: radon-particle-test
+        zip_file: /tmp/X-test-ImageRes.zip
+        function_alias: test
+        permission_id: lambda_test_permission01
+        lambda_runtime: python3.6
+        lambda_handler: image_resize.lambda_handler
+        lambda_timeout: 3
+        lambda_memory: 128
+      requirements:
+        - host: my-workstation
+        - requires_role: AwsCreateRole
+
+    AwsS3BucketIn:
+      type: radon.nodes.AwsS3Bucket
+      properties:
+        bucket_name: radon-particles
+        aws_region: eu-central-1
+      requirements:
+        - host: my-workstation
+
+    AwsS3BucketOut:
+      type: radon.nodes.AwsS3Bucket
+      properties:
+        bucket_name: radon-particles-resized
+        aws_region: eu-central-1
+      requirements:
+        - host: my-workstation
+
+    AwsS3Notification:
+      type: radon.nodes.triggers.AwsS3Notification
+      properties:
+        aws_region: eu-central-1
+      requirements:
+        - host: my-workstation
+        - receives_notification: AwsLambdaFunction
+        - bucket: AwsS3BucketIn
