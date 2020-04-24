@@ -6,21 +6,31 @@ topology_template:
   node_templates:
     my-workstation:
       type: tosca.nodes.Compute
+      metadata:
+        x: "540"
+        y: "413"
+        displayName: "my-workstation"
       attributes:
         private_address: localhost
         public_address: localhost
-
     AwsCreateRole:
       type: radon.nodes.legacy.AwsCreateRole
+      metadata:
+        x: "580"
+        y: "413"
+        displayName: "AwsCreateRole"
       properties:
         aws_region: eu-central-1
         role_name: RadonLambda
         role_description: Lambda role
       requirements:
         - host: my-workstation
-
     AwsLambdaFunction:
       type: radon.nodes.legacy.AwsLambdaFunction
+      metadata:
+        x: "620"
+        y: "413"
+        displayName: "AwsLambdaFunction"
       properties:
         aws_region: eu-central-1
         function_name: radon-particle-test
@@ -34,25 +44,34 @@ topology_template:
       requirements:
         - host: my-workstation
         - requires_role: AwsCreateRole
-
     AwsS3BucketIn:
       type: radon.nodes.legacy.AwsS3Bucket
+      metadata:
+        x: "660"
+        y: "413"
+        displayName: "AwsS3BucketIn"
       properties:
         bucket_name: radon-particles
         aws_region: eu-central-1
       requirements:
         - host: my-workstation
-
     AwsS3BucketOut:
       type: radon.nodes.legacy.AwsS3Bucket
+      metadata:
+        x: "680"
+        y: "413"
+        displayName: "AwsS3BucketOut"
       properties:
         bucket_name: radon-particles-resized
         aws_region: eu-central-1
       requirements:
         - host: my-workstation
-
     AwsS3Notification:
       type: radon.nodes.legacy.AwsS3Notification
+      metadata:
+        x: "720"
+        y: "413"
+        displayName: "AwsS3Notification"
       properties:
         aws_region: eu-central-1
       requirements:
