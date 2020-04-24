@@ -1,6 +1,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
-  radon.nodes.triggers.AwsS3Notification:
+  radon.nodes.legacy.AwsS3Notification:
       derived_from: tosca.nodes.SoftwareComponent
       properties:
         aws_region:
@@ -16,7 +17,14 @@ node_types:
             suffix: {default: ".jpg", type: string }
             region: {default: { get_property: [SELF, aws_region] }, type: string }
           operations:
-            create:  files/create.yml
+            create:
+              implementation:
+                primary: create
+                timeout: 0
+      artifacts:
+        create:
+          type: radon.artifacts.Ansible
+          file: create.yml
       requirements:
         - receives_notification:
             capability: tosca.capabilities.Compute

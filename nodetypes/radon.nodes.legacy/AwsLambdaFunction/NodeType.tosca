@@ -1,0 +1,78 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.legacy.AwsLambdaFunction:
+      derived_from: tosca.nodes.SoftwareComponent
+      metadata:
+        targetNamespace: "radon.nodes.legacy"
+        abstract: "false"
+        final: "false"
+      properties:
+        aws_region:
+          type: string
+        function_name:
+          type: string
+        zip_file:
+          type: string
+          description: path to a function zip file
+        function_alias:
+          type: string
+        permission_id:
+          type: string
+        lambda_runtime:
+          type: string
+          description: Runtime for lambda (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
+        lambda_handler:
+          type: string
+          description: Handler for lambda function
+        lambda_timeout:
+          type: string
+          description: Function timeout in seconds
+        lambda_memory:
+          type: string
+          description: Function memory in MB
+      attributes:
+        function_arn:
+          type: string
+          description: AWS function arn
+      interfaces:
+        Standard:
+          type: tosca.interfaces.node.lifecycle.Standard
+          inputs:
+            function_name: {default: { get_property: [SELF, function_name] }, type: string }
+            zip_file: {default: { get_property: [SELF, zip_file] }, type: string }
+            aws_region: {default: { get_property: [SELF, aws_region] }, type: string }
+            aws_role: {default: {get_attribute: [SELF, requires_role, role_arn] }, type: string }
+            func_alias: {default: { get_property: [SELF, function_alias] }, type: string }
+            permission_id: {default: { get_property: [SELF, permission_id] }, type: string }
+            lambda_runtime: {default: { get_property: [SELF, lambda_runtime] }, type: string }
+            lambda_handler: {default: { get_property: [SELF, lambda_handler] }, type: string }
+            lambda_timeout: {default: { get_property: [SELF, lambda_timeout] }, type: string }
+            lambda_memory: {default: { get_property: [SELF, lambda_memory] }, type: string }
+          operations:
+            create:
+              implementation:
+                primary: create
+                timeout: 0
+            delete:
+              implementation:
+                primary: delete
+                timeout: 0
+      artifacts:
+        create:
+          type: radon.artifacts.Ansible
+          file: create.yml
+        delete:
+          type: radon.artifacts.Ansible
+          file: delete.yml
+      capabilities:
+        receives_notification:
+          type: tosca.capabilities.Compute
+          valid_source_types: [radon.nodes.legacy.AwsS3Notification]
+      requirements:
+        - bucket:
+            capability: tosca.capabilities.Compute
+            relationship: tosca.relationships.DependsOn
+        - requires_role:
+            capability: tosca.capabilities.Compute
+            relationship: tosca.relationships.DependsOn

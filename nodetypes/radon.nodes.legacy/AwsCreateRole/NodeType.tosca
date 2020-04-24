@@ -1,0 +1,40 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.legacy.AwsCreateRole:
+      derived_from: tosca.nodes.SoftwareComponent
+      metadata:
+        targetNamespace: "radon.nodes.legacy"
+        abstract: "false"
+        final: "false"
+      properties:
+        aws_region:
+          type: string
+        role_name:
+          type: string
+        role_description:
+          type: string
+      attributes:
+        role_arn:
+          type: string
+          description: AWS role arn identifier
+      interfaces:
+        Standard:
+          type: tosca.interfaces.node.lifecycle.Standard
+          inputs:
+            aws_region: {default: { get_property: [SELF, aws_region] }, type: string}
+            role_name: {default: { get_property: [SELF, role_name] }, type: string }
+            role_description: {default: { get_property: [SELF, role_description] }, type: string }
+          operations:
+            create:
+              implementation:
+                primary: create
+                timeout: 0
+      artifacts:
+        create:
+          type: radon.artifacts.Ansible
+          file: create_role.yml
+      capabilities:
+        requires_role:
+          type: tosca.capabilities.Compute
+          valid_source_types: [radon.nodes.legacy.AwsLambdaFunction]
