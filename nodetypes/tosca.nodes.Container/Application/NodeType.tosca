@@ -17,5 +17,5 @@ node_types:
           capability: tosca.capabilities.Storage
           occurrences: [ 1, 1 ]
       - network:
-          capability: tosca.capabilities.EndPoint
+          capability: tosca.capabilities.Endpoint
           occurrences: [ 1, 1 ]
