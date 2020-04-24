@@ -28,10 +28,10 @@ node_types:
           operations:
             create:
               implementation:
-                primary: create
+                primary: create_role
                 timeout: 0
       artifacts:
-        create:
+        create_role:
           type: radon.artifacts.Ansible
           file: create_role.yml
       capabilities:
