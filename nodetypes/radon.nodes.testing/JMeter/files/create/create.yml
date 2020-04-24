@@ -1,0 +1,33 @@
+- name: create
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Install Python pip module prerequisites (Linux)
+      package:
+        name:
+          - python3-pip
+          - python3-virtualenv
+          - python3-setuptools
+        state: present
+        when: ansible_distribution != "Arch Linux"
+
+    - name: Install Python pip module prerequisites (Arch Linux)
+      package:
+        name:
+          - python-pip
+          - python-virtualenv
+          - python-setuptools
+        state: present
+        when: ansible_distribution == "Arch Linux"
+
+    - name: Install Ansible module dependencies
+      pip:
+        name: docker-py
+
+    - name: Run JMeterAgent Docker image
+      docker_container:
+        name: JMeterAgent
+        image: radonconsortium/radon-ctt-agent:jmeter
+        ports: 
+          - "5000:5000"
+

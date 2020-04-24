@@ -18,3 +18,15 @@ node_types:
         description: Comma-separated list of worker hostnames
         required: false
         status: supported
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            implementation:
+              primary: create
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
