@@ -3,6 +3,14 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.mongodb.MongoDBMS:
     derived_from: tosca.nodes.DBMS
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.mongodb"
+    attributes:
+      url:
+        type: string
+        default: "{ concat: [http://, {get_attribute=[HOST, public_address]}, {get_property=[SELF, port]}] }"
     properties:
       administrator:
         type: string
@@ -11,17 +19,17 @@ node_types:
       port:
         type: string
         required: true
-        default: "27017"
+        default: 27017
         status: supported
       authorization_enabled:
         type: boolean
         required: true
-        default: "false"
+        default: false
         status: supported
       component_version:
         type: version
         required: true
-        default: "3.6"
+        default: 3.6
         status: supported
         constraints:
           - valid_values: [ 3.2,3.4,3.6 ]
@@ -30,13 +38,6 @@ node_types:
         required: true
         default: "/var/lib/mongo"
         status: supported
-    attributes:
-      url:
-        type: string
-        default: "{ concat: [http://, {get_attribute=[HOST, public_address]}, {get_property=[SELF, port]}] }"
-    metadata:
-      abstract: "false"
-      final: "false"
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]

@@ -6,6 +6,7 @@ policy_types:
     metadata:
       abstract: "false"
       final: "false"
+      targetNamespace: "radon.policies.testing"
     properties:
       repeats:
         type: string
@@ -18,7 +19,7 @@ policy_types:
       threads:
         type: string
         required: true
-        default: "5"
+        default: 5
         status: supported
       upper_bound:
         type: string

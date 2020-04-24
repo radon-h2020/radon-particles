@@ -6,6 +6,7 @@ node_types:
     metadata:
       abstract: "false"
       final: "false"
+      targetNamespace: "tosca.nodes"
     capabilities:
       data_endpoint:
         occurrences: [ 1, UNBOUNDED ]

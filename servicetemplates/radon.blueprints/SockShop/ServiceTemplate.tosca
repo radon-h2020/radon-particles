@@ -17,7 +17,7 @@ topology_template:
         y: "101"
         displayName: "SockShop"
       properties:
-        component_version: "1"
+        component_version: 1
       requirements:
         - host:
             node: Workstation
@@ -27,11 +27,11 @@ topology_template:
     con_HostedOn_0:
       type: tosca.relationships.HostedOn
   policies:
-    - load_test:
-        type: radon.policies.testing.LoadTest
-        properties:
-          repeats: "15"
-          lower_bound: "50"
-          threads: "5"
-          upper_bound: "1000"
-        targets: [ SockShop ]
+    load_test:
+      type: radon.policies.testing.LoadTest
+      properties:
+        repeats: 15
+        lower_bound: 50
+        threads: 5
+        upper_bound: 1000
+      targets: [ SockShop ]

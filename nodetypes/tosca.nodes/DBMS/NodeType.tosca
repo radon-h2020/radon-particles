@@ -3,6 +3,10 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   tosca.nodes.DBMS:
     derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.nodes"
     properties:
       port:
         type: integer
@@ -14,9 +18,6 @@ node_types:
         description: the optional root password for the DBMS service
         required: false
         status: supported
-    metadata:
-      abstract: "false"
-      final: "false"
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]

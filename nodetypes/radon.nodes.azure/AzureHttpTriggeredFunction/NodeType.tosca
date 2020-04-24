@@ -3,16 +3,24 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.azure.AzureHttpTriggeredFunction:
     derived_from: radon.nodes.azure.AzureFunction
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.azure"
+    attributes:
+      url:
+        type: string
+        default: "{ get_operation_output: [SELF, Standard, create, URL] }"
     properties:
       max_outstanding_requests:
         type: integer
         required: true
-        default: "200"
+        default: 200
         status: supported
       max_concurrent_requests:
         type: integer
         required: true
-        default: "100"
+        default: 100
         status: supported
       route:
         type: string
@@ -33,13 +41,6 @@ node_types:
         required: true
         default: "api"
         status: supported
-    attributes:
-      url:
-        type: string
-        default: "{ get_operation_output: [SELF, Standard, create, URL] }"
-    metadata:
-      abstract: "false"
-      final: "false"
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

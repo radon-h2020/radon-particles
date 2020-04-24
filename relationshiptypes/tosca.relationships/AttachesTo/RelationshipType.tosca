@@ -3,6 +3,10 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 relationship_types:
   tosca.relationships.DependsOn:
     derived_from: tosca.relationships.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.relationships"
     properties:
       location:
         type: string
@@ -14,7 +18,4 @@ relationship_types:
         type: string
         required: false
         status: supported
-    metadata:
-      abstract: "false"
-      final: "false"
     valid_target_types: [ tosca.capabilities.Attachment ]

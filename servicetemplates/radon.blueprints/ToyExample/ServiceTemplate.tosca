@@ -13,7 +13,7 @@ topology_template:
       properties:
         size: "0 MB"
         name: "input"
-        maxsize: ""
+        maxsize: null
       requirements:
         - host:
             node: AwsPlatform
@@ -23,10 +23,6 @@ topology_template:
             node: AwsLambdaFunction
             relationship: con_AwsTriggers_0
             capability: invocable
-        - dependency:
-            node: tosca.nodes.Root
-            relationship: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
     Database:
       type: tosca.nodes.Database
       metadata:
@@ -34,19 +30,10 @@ topology_template:
         y: "134"
         displayName: "Database"
       properties:
-        password: ""
-        port: ""
-        name: ""
-        user: ""
-      requirements:
-        - host:
-            node: tosca.nodes.DBMS
-            relationship: tosca.relationships.HostedOn
-            capability: tosca.capabilities.Compute
-        - dependency:
-            node: tosca.nodes.Root
-            relationship: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
+        password: null
+        port: null
+        name: null
+        user: null
     AwsPlatform_2:
       type: radon.nodes.aws.AwsPlatform
       metadata:
@@ -55,30 +42,25 @@ topology_template:
         displayName: "eu-west-2"
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        secret_access_key: "{ get_input: secret_access_key }"
         name: "London"
+        secret_access_key: "{ get_input: secret_access_key }"
         region: "eu-west-2"
-      requirements:
-        - dependency:
-            node: tosca.nodes.Root
-            relationship: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
     AwsLambdaFunction:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "975"
-        y: "137"
+        x: "979"
+        y: "72"
         displayName: "create_thumbnail"
       properties:
-        role_name: ""
+        role_name: null
+        schedule: null
         handler: "index.handler"
-        schedule: "~"
         environment: "prod"
-        memory: "512"
+        memory: 512
         name: "resize"
         runtime: "nodejs"
-        timeout: "3"
-        role_description: ""
+        timeout: 3
+        role_description: null
       requirements:
         - endpoint:
             node: Database
@@ -88,10 +70,6 @@ topology_template:
             node: AwsPlatform
             relationship: con_HostedOn_2
             capability: host
-        - dependency:
-            node: tosca.nodes.Root
-            relationship: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
     AwsPlatform:
       type: radon.nodes.aws.AwsPlatform
       metadata:
@@ -100,14 +78,9 @@ topology_template:
         displayName: "eu-west-1"
       properties:
         access_key_id: "{ get_input: access_key_id }"
-        secret_access_key: "{ get_input: secret_access_key }"
         name: "Ireland"
+        secret_access_key: "{ get_input: secret_access_key }"
         region: "eu-west-1"
-      requirements:
-        - dependency:
-            node: tosca.nodes.Root
-            relationship: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
     AwsS3Bucket_2:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
@@ -117,7 +90,7 @@ topology_template:
       properties:
         size: "0 MB"
         name: "output"
-        maxsize: ""
+        maxsize: null
       requirements:
         - host:
             node: AwsPlatform_2
@@ -127,10 +100,6 @@ topology_template:
             node: AwsLambdaFunction
             relationship: con_AwsTriggers_1
             capability: invocable
-        - dependency:
-            node: tosca.nodes.Root
-            relationship: tosca.relationships.DependsOn
-            capability: tosca.capabilities.Node
   relationship_templates:
     con_HostedOn_2:
       type: tosca.relationships.HostedOn
@@ -141,12 +110,12 @@ topology_template:
     con_ConnectsTo_0:
       type: tosca.relationships.ConnectsTo
       properties:
-        credential: ""
+        credential: null
     con_AwsTriggers_0:
       type: radon.relationships.aws.AwsTriggers
       properties:
-        events: ""
+        events: null
     con_AwsTriggers_1:
       type: radon.relationships.aws.AwsTriggers
       properties:
-        events: ""
+        events: null

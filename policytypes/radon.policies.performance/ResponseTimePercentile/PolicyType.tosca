@@ -3,6 +3,10 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 policy_types:
   radon.policies.performance.ResponseTimePercentile:
     derived_from: tosca.policies.Performance
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.policies.performance"
     properties:
       lower_bound:
         type: float
@@ -32,6 +36,3 @@ policy_types:
         status: supported
         constraints:
           - greater_or_equal: 0.0
-    metadata:
-      abstract: "false"
-      final: "false"

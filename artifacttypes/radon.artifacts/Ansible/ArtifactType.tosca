@@ -6,5 +6,5 @@ artifact_types:
     metadata:
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.artifacts.Ansible"
+      targetNamespace: "radon.artifacts"
     file_ext: [ yml, yaml ]

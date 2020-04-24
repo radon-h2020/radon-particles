@@ -3,21 +3,22 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.apache.nifi.NifiRuntime:
     derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.apache.nifi"
     properties:
       port:
         type: string
         description: The port exposed by Apache Nifi
         required: true
-        default: "8080"
+        default: 8080
         status: supported
       component_version:
         type: string
         description: The version of Apache Nifi
         required: true
         status: supported
-    metadata:
-      abstract: "false"
-      final: "false"
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]

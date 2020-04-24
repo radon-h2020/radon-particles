@@ -3,12 +3,13 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 relationship_types:
   radon.relationships.abstract.Triggers:
     derived_from: tosca.relationships.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.relationships.abstract"
     properties:
       events:
         type: list
         required: true
         status: supported
-    metadata:
-      abstract: "false"
-      final: "false"
     valid_target_types: [ radon.capabilities.Invocable ]

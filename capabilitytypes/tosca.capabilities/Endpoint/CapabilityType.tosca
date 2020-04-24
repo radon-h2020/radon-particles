@@ -3,6 +3,13 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 capability_types:
   tosca.capabilities.Endpoint:
     derived_from: tosca.capabilities.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.capabilities"
+    attributes:
+      ip_address:
+        type: string
     properties:
       port_name:
         type: string
@@ -32,7 +39,7 @@ capability_types:
       secure:
         type: boolean
         required: false
-        default: "false"
+        default: false
         status: supported
       ports:
         type: map
@@ -44,9 +51,3 @@ capability_types:
         type: string
         required: false
         status: supported
-    attributes:
-      ip_address:
-        type: string
-    metadata:
-      abstract: "false"
-      final: "false"

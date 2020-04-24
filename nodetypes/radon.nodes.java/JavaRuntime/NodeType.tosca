@@ -3,6 +3,10 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.java.JavaRuntime:
     derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.java"
     attributes:
       headless:
         type: boolean
@@ -16,9 +20,6 @@ node_types:
       component_version:
         type: version
         default: "{ get_attribute: [SELF, host, java_version] }"
-    metadata:
-      abstract: "false"
-      final: "false"
     capabilities:
       host:
         occurrences: [ 0, UNBOUNDED ]

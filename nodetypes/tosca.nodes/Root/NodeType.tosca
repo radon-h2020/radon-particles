@@ -4,6 +4,10 @@ node_types:
   tosca.nodes.Root:
     description: The TOSCA Node Type all other TOSCA base Node Types derive from
     derived_from: tosca.entity.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.nodes"
     attributes:
       tosca_name:
         type: string
@@ -12,9 +16,6 @@ node_types:
         default: "initial"
       tosca_id:
         type: string
-    metadata:
-      abstract: "false"
-      final: "false"
     requirements:
       - dependency:
           capability: tosca.capabilities.Node

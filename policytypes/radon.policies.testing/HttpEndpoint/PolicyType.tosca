@@ -3,6 +3,10 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 policy_types:
   radon.policies.testing.HttpEndpoint:
     derived_from: radon.policies.testing.TestCase
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.policies.testing"
     properties:
       path:
         type: string
@@ -20,12 +24,12 @@ policy_types:
       port:
         type: integer
         required: true
-        default: "80"
+        default: 80
         status: supported
       expected_status:
         type: integer
         required: true
-        default: "200"
+        default: 200
         status: supported
       expected_body:
         type: json
@@ -34,7 +38,7 @@ policy_types:
       use_https:
         type: boolean
         required: true
-        default: "true"
+        default: true
         status: supported
       test_body:
         type: json
@@ -44,6 +48,3 @@ policy_types:
         type: map
         required: false
         status: supported
-    metadata:
-      abstract: "false"
-      final: "false"
