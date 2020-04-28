@@ -10,6 +10,7 @@ node_types:
     attributes:
       url:
         type: string
+        default: { concat: [ "http://", { get_property: [ SELF, api_gateway_host ] }, ":", { get_property: [ SELF, api_gateway_port ] } ] }
     properties:
       api_gateway_port:
         type: integer
