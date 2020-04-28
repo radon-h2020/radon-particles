@@ -10,10 +10,9 @@ node_types:
     attributes:
       function_url:
         type: string
-        default: "{ concat: [{get_attribute=[SELF, gateway_url]}, /function/, {get_property=[SELF, function_name]}] }"
       gateway_url:
         type: string
-        default: "{ get_attribute: [HOST, url] }"
+        default: { get_attribute: [HOST, url] }
     properties:
       function_language_template:
         type: string
@@ -42,12 +41,12 @@ node_types:
           GATEWAY:
             type: string
             required: true
-            default: "{ get_attribute: [HOST, url] }"
+            default: { get_attribute: [HOST, url] }
           FUNCTION_NAME:
             type: string
             required: true
-            default: "{ get_property: [SELF, functiom_name] }"
+            default: { get_property: [SELF, functiom_name] }
           FUNCTION_LANGUAGE_TEMPLATE:
             type: string
             required: true
-            default: "{ get_property: [SELF, function_language_template] }"
+            default: { get_property: [SELF, function_language_template] }

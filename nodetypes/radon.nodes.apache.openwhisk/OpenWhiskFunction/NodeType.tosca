@@ -10,7 +10,6 @@ node_types:
     attributes:
       rest_api_endpoint:
         type: string
-        default: "{ concat: [{get_attribute=[HOST, api_url]}, /api/v1/namespaces/, {get_property=[HOST, default_namespace]}, /actions/, {get_property=[SELF, function_package_name]}, /, {get_property=[SELF, function_name]}] }"
     properties:
       function_name:
         type: string
@@ -47,12 +46,12 @@ node_types:
           FUNCTION_NAME:
             type: string
             required: true
-            default: "{ get_property: [SELF, function_name] }"
+            default: { get_property: [SELF, function_name] }
           FUNCTION_RUNTIME:
             type: string
             required: true
-            default: "{ get_property: [SELF, function_runtime] }"
+            default: { get_property: [SELF, function_runtime] }
           ENTRY_POINT:
             type: string
             required: false
-            default: "{ get_property: [SELF, entry_point] }"
+            default: { get_property: [SELF, entry_point] }

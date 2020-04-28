@@ -37,16 +37,16 @@ node_types:
           COLLECTION_NAME:
             type: string
             required: true
-            default: "{ get_property: [collection_name] }"
+            default: { get_property: [collection_name] }
           ACCOUNT_NAME:
             type: string
             required: true
-            default: "{ get_property: [account_name] }"
+            default: { get_property: [account_name] }
           RESOURCE_GROUP:
             type: string
             required: true
-            default: "{ get_property: [resource_group] }"
+            default: { get_property: [resource_group] }
           CONNECTION_STRING_SETTING:
             type: string
             required: true
-            default: "{ get_property: [connection_string_setting] }"
+            default: { get_property: [connection_string_setting] }

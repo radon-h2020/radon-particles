@@ -44,24 +44,24 @@ node_types:
           NETWORK:
             type: string
             required: true
-            default: "{ get_property: [SELF, network_id] }"
+            default: { get_property: [SELF, network_id] }
           IMAGE:
             type: string
             required: true
-            default: "{ get_property: [SELF, image_id] }"
+            default: { get_property: [SELF, image_id] }
           ID:
             type: string
             required: true
-            default: "{ get_attribute: [SELF, id] }"
+            default: { get_attribute: [SELF, id] }
           NAME:
             type: string
             required: true
-            default: "{ get_property: [SELF, name] }"
+            default: { get_property: [SELF, name] }
           FLAVOR:
             type: string
             required: true
-            default: "{ get_property: [SELF, flavor_id] }"
+            default: { get_property: [SELF, flavor_id] }
           KEY_NAME:
             type: string
             required: true
-            default: "{ get_property: [SELF, key_name] }"
+            default: { get_property: [SELF, key_name] }
