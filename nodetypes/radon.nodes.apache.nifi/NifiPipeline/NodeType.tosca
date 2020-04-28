@@ -37,7 +37,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: files/stop.yml
               timeout: 0
@@ -46,7 +46,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: files/start.yml
               timeout: 0
@@ -55,11 +55,11 @@ node_types:
               template_name:
                 type: string
                 required: true
-                default: { get_property: [SELF, name] }
+                default: { get_property: [ SELF, name ] }
               template_file:
                 type: string
                 required: true
-                default: { get_artifact: [SELF, pipeline_template] }
+                default: { get_artifact: [ SELF, pipeline_template ] }
             implementation:
               primary: files/create.yml
               timeout: 0
@@ -68,7 +68,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: files/configure.yml
               timeout: 0
@@ -77,7 +77,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: files/delete.yml
               timeout: 0

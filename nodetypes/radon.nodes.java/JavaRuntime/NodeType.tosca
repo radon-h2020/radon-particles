@@ -10,16 +10,16 @@ node_types:
     attributes:
       headless:
         type: boolean
-        default: { get_attribute: [SELF, host, headless] }
+        default: { get_attribute: [ SELF, host, headless ] }
       java_home:
         type: string
-        default: { get_operation_output: [SELF, Standard, create, JAVA_HOME] }
+        default: { get_operation_output: [ SELF, Standard, create, JAVA_HOME ] }
       only_jre:
         type: boolean
-        default: { get_attribute: [SELF, host, only_jre] }
+        default: { get_attribute: [ SELF, host, only_jre ] }
       component_version:
         type: version
-        default: { get_attribute: [SELF, host, java_version] }
+        default: { get_attribute: [ SELF, host, java_version ] }
     capabilities:
       host:
         occurrences: [ 0, UNBOUNDED ]
@@ -31,16 +31,16 @@ node_types:
           JAVA_HOME:
             type: string
             required: true
-            default: { get_attribute: [SELF, java_home] }
+            default: { get_attribute: [ SELF, java_home ] }
           JAVA_VERSION:
             type: version
             required: true
-            default: { get_attribute: [SELF, component_version] }
+            default: { get_attribute: [ SELF, component_version ] }
           JAVA_IS_JRE:
             type: boolean
             required: true
-            default: { get_attribute: [SELF, only_jre] }
+            default: { get_attribute: [ SELF, only_jre ] }
           JAVA_IS_HEADLESS:
             type: boolean
             required: true
-            default: { get_attribute: [SELF, headless] }
+            default: { get_attribute: [ SELF, headless ] }

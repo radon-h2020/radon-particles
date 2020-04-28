@@ -10,7 +10,7 @@ node_types:
     attributes:
       port:
         type: integer
-        default: { get_attribute: [SELF, docker, port] }
+        default: { get_attribute: [ SELF, docker, port ] }
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]

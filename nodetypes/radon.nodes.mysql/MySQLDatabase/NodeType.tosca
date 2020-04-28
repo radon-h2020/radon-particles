@@ -33,16 +33,16 @@ node_types:
           DB_USER:
             type: string
             required: true
-            default: { get_property: [SELF, user] }
+            default: { get_property: [ SELF, user ] }
           DB_NAME:
             type: string
             required: true
-            default: { get_property: [SELF, name] }
+            default: { get_property: [ SELF, name ] }
           DBMS_ROOT_PASSWORD:
             type: string
             required: true
-            default: { get_property: [HOST, root_password] }
+            default: { get_property: [ HOST, root_password ] }
           DB_PASSWORD:
             type: string
             required: true
-            default: { get_property: [SELF, password] }
+            default: { get_property: [ SELF, password ] }

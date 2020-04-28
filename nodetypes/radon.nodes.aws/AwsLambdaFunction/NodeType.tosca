@@ -70,44 +70,44 @@ node_types:
           function_memory:
             type: integer
             required: true
-            default: { get_property: [SELF, memory] }
+            default: { get_property: [ SELF, memory ] }
           schedule:
             type: string
             required: true
-            default: { get_property: [SELF, schedule] }
+            default: { get_property: [ SELF, schedule ] }
           function_timeout:
             type: integer
             required: true
-            default: { get_property: [SELF, timeout] }
+            default: { get_property: [ SELF, timeout ] }
           aws_access_key_id:
             type: string
             required: true
-            default: { get_property: [HOST, access_key_id] }
+            default: { get_property: [ HOST, access_key_id ] }
           aws_region:
             type: string
             required: true
-            default: { get_property: [HOST, region] }
+            default: { get_property: [ HOST, region ] }
           function_role_name:
             type: string
             required: true
-            default: { get_property: [SELF, role_name] }
+            default: { get_property: [ SELF, role_name ] }
           function_handler:
             type: string
             required: true
-            default: { get_property: [SELF, handler] }
+            default: { get_property: [ SELF, handler ] }
           aws_secret_access_key:
             type: string
             required: true
-            default: { get_property: [HOST, secret_access_key] }
+            default: { get_property: [ HOST, secret_access_key ] }
           function_name:
             type: string
             required: true
-            default: { get_property: [SELF, name] }
+            default: { get_property: [ SELF, name ] }
           function_runtime:
             type: string
             required: true
-            default: { get_property: [SELF, runtime] }
+            default: { get_property: [ SELF, runtime ] }
           function_role_description:
             type: string
             required: true
-            default: { get_property: [SELF, role_description] }
+            default: { get_property: [ SELF, role_description ] }

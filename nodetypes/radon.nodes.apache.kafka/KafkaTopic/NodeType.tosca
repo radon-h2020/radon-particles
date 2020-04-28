@@ -11,7 +11,7 @@ node_types:
       broker_urls:
         description: represents a list of one or more urls that corresponds to the brokers of the kafka cluster this topic is hosted on
         type: list
-        default: { get_attribute: [HOST, broker_urls] }
+        default: { get_attribute: [ HOST, broker_urls ] }
     properties:
       partitions:
         type: integer
@@ -79,28 +79,28 @@ node_types:
           MIN_INSYNC_REPLICAS:
             type: integer
             required: true
-            default: { get_property: [SELF, min_insync_replicas] }
+            default: { get_property: [ SELF, min_insync_replicas ] }
           RETENTION:
             type: integer
             required: true
-            default: { get_property: [SELF, retention] }
+            default: { get_property: [ SELF, retention ] }
           REPLICAS:
             type: integer
             required: true
-            default: { get_property: [SELF, replicas] }
+            default: { get_property: [ SELF, replicas ] }
           PARTITIONS:
             type: integer
             required: true
-            default: { get_property: [SELF, partitions] }
+            default: { get_property: [ SELF, partitions ] }
           TOPIC_NAME:
             type: string
             required: true
-            default: { get_property: [SELF, topic_name] }
+            default: { get_property: [ SELF, topic_name ] }
           ROLL_TIME:
             type: integer
             required: true
-            default: { get_property: [SELF, roll_time] }
+            default: { get_property: [ SELF, roll_time ] }
           SEGMENT_SIZE:
             type: integer
             required: true
-            default: { get_property: [SELF, segment_size] }
+            default: { get_property: [ SELF, segment_size ] }

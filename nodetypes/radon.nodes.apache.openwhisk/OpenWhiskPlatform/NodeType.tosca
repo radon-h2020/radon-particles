@@ -55,14 +55,14 @@ node_types:
               KUBERNETES_VERSION:
                 type: version
                 required: false
-                default: { get_property: [SELF, kubernetes_version] }
+                default: { get_property: [ SELF, kubernetes_version ] }
           configure:
             inputs:
               AUTH_KEY:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, auth_key] }
+                default: { get_attribute: [ SELF, auth_key ] }
               API_URL:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, api_url] }
+                default: { get_attribute: [ SELF, api_url ] }

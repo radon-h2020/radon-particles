@@ -34,8 +34,8 @@ node_types:
           DBMS_PORT:
             type: integer
             required: true
-            default: { get_property: [SELF, port] }
+            default: { get_property: [ SELF, port ] }
           DBMS_ROOT_PASSWORD:
             type: string
             required: true
-            default: { get_property: [SELF, root_password] }
+            default: { get_property: [ SELF, root_password ] }

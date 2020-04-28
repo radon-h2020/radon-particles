@@ -46,12 +46,12 @@ node_types:
           FUNCTION_NAME:
             type: string
             required: true
-            default: { get_property: [SELF, function_name] }
+            default: { get_property: [ SELF, function_name ] }
           FUNCTION_RUNTIME:
             type: string
             required: true
-            default: { get_property: [SELF, function_runtime] }
+            default: { get_property: [ SELF, function_runtime ] }
           ENTRY_POINT:
             type: string
             required: false
-            default: { get_property: [SELF, entry_point] }
+            default: { get_property: [ SELF, entry_point ] }

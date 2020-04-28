@@ -55,28 +55,28 @@ node_types:
           API_KEY:
             type: string
             required: false
-            default: { get_property: [SELF, api_key] }
+            default: { get_property: [ SELF, api_key ] }
           ZONE:
             type: string
             required: true
-            default: { get_property: [SELF, zone] }
+            default: { get_property: [ SELF, zone ] }
           SDK_VERSION:
             type: string
             required: false
-            default: { get_property: [SELF, sdk_version] }
+            default: { get_property: [ SELF, sdk_version ] }
           AUTHENTICATION_MODE:
             type: string
             required: true
-            default: { get_property: [SELF, authentication_mode] }
+            default: { get_property: [ SELF, authentication_mode ] }
           PROJECT_ID:
             type: string
             required: true
-            default: { get_property: [SELF, project_id] }
+            default: { get_property: [ SELF, project_id ] }
           USER_ACCOUNT:
             type: string
             required: false
-            default: { get_property: [SELF, user_account] }
+            default: { get_property: [ SELF, user_account ] }
           REGION:
             type: string
             required: true
-            default: { get_property: [SELF, region] }
+            default: { get_property: [ SELF, region ] }
