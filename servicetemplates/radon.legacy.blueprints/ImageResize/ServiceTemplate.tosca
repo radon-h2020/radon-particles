@@ -7,42 +7,42 @@ topology_template:
     AwsS3Notification:
       type: radon.nodes.legacy.AwsS3Notification
       metadata:
-        x: "992"
-        y: "422"
-        displayName: "AwsS3Notification"
+        x: "644"
+        y: "128"
+        displayName: "Event"
       properties:
         aws_region: "eu-central-1"
-    my-workstation:
+    Compute:
       type: tosca.nodes.Compute
       metadata:
-        x: "511"
-        y: "365"
-        displayName: "my-workstation"
+        x: "775"
+        y: "363"
+        displayName: "Workstation"
     AwsS3BucketOut:
       type: radon.nodes.legacy.AwsS3Bucket
       metadata:
-        x: "914"
-        y: "561"
-        displayName: "AwsS3BucketOut"
+        x: "1018"
+        y: "224"
+        displayName: "Bucket Out"
       properties:
         aws_region: "eu-central-1"
         bucket_name: "radon-particles-resized"
     AwsLambdaFunction:
       type: radon.nodes.legacy.AwsLambdaFunction
       metadata:
-        x: "509"
-        y: "526"
-        displayName: "AwsLambdaFunction"
+        x: "776"
+        y: "225"
+        displayName: "ImageResize"
       properties:
         aws_region: "eu-central-1"
         lambda_runtime: "python3.6"
         function_name: "radon-particle-test"
-        lambda_timeout: 3
         lambda_memory: 128
-        function_alias: "test"
+        lambda_timeout: 3
         permission_id: "lambda_test_permission01"
-        zip_file: "/tmp/X-test-ImageRes.zip"
+        function_alias: "test"
         lambda_handler: "image_resize.lambda_handler"
+        zip_file: "/servicetemplates/radon.legacy.blueprints/ImageResize/files/AwsLambdaFunction/X-test-ImageRes/X-test-ImageRes.zip"
       artifacts:
         X-test-ImageRes:
           type: radon.artifacts.archive.Zip
@@ -52,16 +52,16 @@ topology_template:
       metadata:
         x: "530"
         y: "226"
-        displayName: "AwsS3BucketIn"
+        displayName: "Bucket In"
       properties:
         aws_region: "eu-central-1"
         bucket_name: "radon-particles"
     AwsCreateRole:
       type: radon.nodes.legacy.AwsCreateRole
       metadata:
-        x: "853"
-        y: "251"
-        displayName: "AwsCreateRole"
+        x: "904"
+        y: "128"
+        displayName: "AWS Create Role"
       properties:
         role_name: "RadonLambda"
         aws_region: "eu-central-1"
