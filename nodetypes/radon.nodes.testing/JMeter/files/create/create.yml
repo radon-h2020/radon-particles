@@ -11,7 +11,8 @@
           - python3-docker
         state: present
       when: ansible_os_family == "Debian"
-    
+      become: yes
+
     - name: Install Python pip module prerequisites (Arch Linux)
       pacman:
         name:
@@ -21,6 +22,7 @@
           - python-docker
         state: present
       when: ansible_os_family == "Archlinux"
+      become: yes
 
     - name: Run JMeterAgent Docker image
       docker_container:
