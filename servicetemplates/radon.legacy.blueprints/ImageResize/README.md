@@ -1,23 +1,17 @@
-### Prerequisites:
+## ImageResize Function
 
-##### 1. Install boto3, botocore:
-
+Install `opera`, `boto3`, and `botocore`:
 ```
 pip install opera
 pip install boto3
 pip install botocore
 ```
 
-##### 2. Move policy.json and function zip to /tmp/ folder
+Export the CSAR using Eclipse Winery
 
-##### 3. Set AWS credentials:
+Set AWS credentials by running `aws configure`
 
-`aws configure` \
-or
+Run deployment with `opera`:
 ```
-export AWS_ACCESS_KEY_ID=EXAMPLEACCESSKEY
-export AWS_SECRET_ACCESS_KEY=EXAMPLESECRETKEY
+opera deploy <csar root directory>
 ```
-
-#### Run with:
-`opera deploy servicetemplates/radon.blueprints/ImageResize/ServiceTemplate.tosca`
