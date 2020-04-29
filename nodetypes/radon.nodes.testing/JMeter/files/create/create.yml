@@ -8,21 +8,19 @@
           - python3-pip
           - python3-virtualenv
           - python3-setuptools
+          - python3-docker
         state: present
-        when: ansible_distribution != "Arch Linux"
-
+      when: ansible_os_family == "Debian"
+    
     - name: Install Python pip module prerequisites (Arch Linux)
-      package:
+      pacman:
         name:
           - python-pip
           - python-virtualenv
           - python-setuptools
+          - python-docker
         state: present
-        when: ansible_distribution == "Arch Linux"
-
-    - name: Install Ansible module dependencies
-      pip:
-        name: docker-py
+      when: ansible_os_family == "Archlinux"
 
     - name: Run JMeterAgent Docker image
       docker_container:
