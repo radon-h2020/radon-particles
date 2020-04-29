@@ -1,0 +1,68 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.legacy.blueprints"
+topology_template:
+  node_templates:
+    AwsS3Notification:
+      type: radon.nodes.legacy.AwsS3Notification
+      metadata:
+        x: "992"
+        y: "422"
+        displayName: "AwsS3Notification"
+      properties:
+        aws_region: "eu-central-1"
+    my-workstation:
+      type: tosca.nodes.Compute
+      metadata:
+        x: "511"
+        y: "365"
+        displayName: "my-workstation"
+    AwsS3BucketOut:
+      type: radon.nodes.legacy.AwsS3Bucket
+      metadata:
+        x: "914"
+        y: "561"
+        displayName: "AwsS3BucketOut"
+      properties:
+        aws_region: "eu-central-1"
+        bucket_name: "radon-particles-resized"
+    AwsLambdaFunction:
+      type: radon.nodes.legacy.AwsLambdaFunction
+      metadata:
+        x: "509"
+        y: "526"
+        displayName: "AwsLambdaFunction"
+      properties:
+        aws_region: "eu-central-1"
+        lambda_runtime: "python3.6"
+        function_name: "radon-particle-test"
+        lambda_timeout: 3
+        lambda_memory: 128
+        function_alias: "test"
+        permission_id: "lambda_test_permission01"
+        zip_file: "/tmp/X-test-ImageRes.zip"
+        lambda_handler: "image_resize.lambda_handler"
+      artifacts:
+        X-test-ImageRes:
+          type: radon.artifacts.archive.Zip
+          file: X-test-ImageRes.zip
+    AwsS3BucketIn:
+      type: radon.nodes.legacy.AwsS3Bucket
+      metadata:
+        x: "530"
+        y: "226"
+        displayName: "AwsS3BucketIn"
+      properties:
+        aws_region: "eu-central-1"
+        bucket_name: "radon-particles"
+    AwsCreateRole:
+      type: radon.nodes.legacy.AwsCreateRole
+      metadata:
+        x: "853"
+        y: "251"
+        displayName: "AwsCreateRole"
+      properties:
+        role_name: "RadonLambda"
+        aws_region: "eu-central-1"
+        role_description: "Lambda role"

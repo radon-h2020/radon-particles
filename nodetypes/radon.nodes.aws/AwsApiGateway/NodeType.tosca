@@ -1,0 +1,56 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.aws.APIGateway:
+    derived_from: tosca.nodes.SoftwareComponent
+    properties:
+      api_gateway_title:
+        type: string
+        description: Name of the API gateway region
+      aws_region:
+        type: string
+        description: AWS region
+      role_name:
+        type: string
+        description: The name of the aws role
+      function_name:
+        type: string
+        description: The name of the lambda function
+      api_gateway_resource_uri:
+        type: string
+        description: URI of the resource to connect to API Gateway
+    attributes:
+      api_gateway_title:
+        type: string
+      aws_region:
+        type: string
+      role_name:
+        type: string
+      function_name:
+        type: string
+      api_gateway_resource_uri:
+        type: string
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          api_gateway_title: {default: { get_property: [SELF, api_gateway_title] }, type: string }
+          aws_region: {default: { get_property: [SELF, aws_region] }, type: string }
+          role_name: {default: { get_property: [SELF, role_name] }, type: string }
+          aws_role: {default: {get_attribute: [SELF, requires_role, role_arn] }, type: string }
+          function_name: {default:  {get_property: [SELF, function_name] }, type: string }
+          api_gateway_resource_uri: {default:  {get_property: [SELF, api_gateway_resource_uri] }, type: string }
+          lambda_function_arn: {default:  {get_attribute: [SELF, receives_notification, function_arn] }, type: string }
+        operations:
+          create:
+            implementation:
+              primary: files/create.yml
+              dependencies:
+                - files/swagger
+    requirements:
+      - requires_role:
+          capability: tosca.capabilities.Node
+          relationship: tosca.relationships.DependsOn
+      - receives_notification:
+          capability: tosca.capabilities.Compute
+          relationship: tosca.relationships.DependsOn
