@@ -29,16 +29,16 @@ node_types:
           DB_USER_AUTH_DB:
             type: string
             required: false
-            default: "{ get_property: [SELF, authentication_database] }"
+            default: { get_property: [ SELF, authentication_database ] }
           DB_USER:
             type: string
             required: true
-            default: "{ get_property: [SELF, user] }"
+            default: { get_property: [ SELF, user ] }
           DB_NAME:
             type: string
             required: true
-            default: "{ get_property: [SELF, name] }"
+            default: { get_property: [ SELF, name ] }
           DB_PASSWORD:
             type: string
             required: true
-            default: "{ get_property: [SELF, password] }"
+            default: { get_property: [ SELF, password ] }

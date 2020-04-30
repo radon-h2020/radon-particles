@@ -1,0 +1,93 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.aws.APIGateway:
+    derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      targetNamespace: "radon.nodes.aws"
+      abstract: "false"
+      final: "false"
+    attributes:
+      role_name:
+        type: string
+      aws_region:
+        type: string
+      function_name:
+        type: string
+      api_gateway_title:
+        type: string
+      api_gateway_resource_uri:
+        type: string
+    properties:
+      role_name:
+        type: string
+        description: The name of the aws role
+        required: true
+        status: supported
+      aws_region:
+        type: string
+        description: AWS region
+        required: true
+        status: supported
+      function_name:
+        type: string
+        description: The name of the lambda function
+        required: true
+        status: supported
+      api_gateway_title:
+        type: string
+        description: Name of the API gateway region
+        required: true
+        status: supported
+      api_gateway_resource_uri:
+        type: string
+        description: URI of the resource to connect to API Gateway
+        required: true
+        status: supported
+    requirements:
+      - requires_role:
+          capability: tosca.capabilities.Node
+          relationship: tosca.relationships.DependsOn
+          occurrences: [ 1, 1 ]
+      - receives_notification:
+          capability: tosca.capabilities.Compute
+          relationship: tosca.relationships.DependsOn
+          occurrences: [ 1, 1 ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          role_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, role_name ] }
+          lambda_function_arn:
+            type: string
+            required: true
+            default: { get_attribute: [ SELF, receives_notification, function_arn ] }
+          aws_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, aws_region ] }
+          function_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, function_name ] }
+          api_gateway_title:
+            type: string
+            required: true
+            default: { get_property: [ SELF, api_gateway_title ] }
+          api_gateway_resource_uri:
+            type: string
+            required: true
+            default: { get_property: [ SELF, api_gateway_resource_uri ] }
+          aws_role:
+            type: string
+            required: true
+            default: { get_attribute: [ SELF, requires_role, role_arn ] }
+        operations:
+          create:
+            implementation:
+              primary: files/create.yml
+              dependencies: [ files/swagger ]
+              timeout: 0

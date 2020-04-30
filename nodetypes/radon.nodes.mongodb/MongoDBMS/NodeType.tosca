@@ -10,7 +10,6 @@ node_types:
     attributes:
       url:
         type: string
-        default: "{ concat: [http://, {get_attribute=[HOST, public_address]}, {get_property=[SELF, port]}] }"
     properties:
       administrator:
         type: string
@@ -50,28 +49,28 @@ node_types:
           MONGODB_VERSION:
             type: version
             required: true
-            default: "{ get_property: [SELF, component_version] }"
+            default: { get_property: [ SELF, component_version ] }
           MONGODB_ADMIN:
             type: string
             required: false
-            default: "{ get_property: [SELF, administrator] }"
+            default: { get_property: [ SELF, administrator ] }
           MONGODB_AUTHORIZATION:
             type: boolean
             required: true
-            default: "{ get_property: [SELF, authorization_enabled] }"
+            default: { get_property: [ SELF, authorization_enabled ] }
           IP_ADDRESS:
             type: string
             required: true
-            default: "{ get_attribute: [HOST, private_address] }"
+            default: { get_attribute: [ HOST, private_address ] }
           MONGODB_DB_PATH:
             type: string
             required: true
-            default: "{ get_property: [SELF, db_path] }"
+            default: { get_property: [ SELF, db_path ] }
           MONGODB_ROOT_PASSWORD:
             type: string
             required: true
-            default: "{ get_property: [SELF, root_password] }"
+            default: { get_property: [ SELF, root_password ] }
           MONGODB_PORT:
             type: integer
             required: true
-            default: "{ get_property: [SELF, port] }"
+            default: { get_property: [ SELF, port ] }

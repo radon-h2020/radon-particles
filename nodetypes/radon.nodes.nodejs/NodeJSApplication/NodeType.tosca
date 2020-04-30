@@ -20,4 +20,4 @@ node_types:
           NODE_VERSION:
             type: version
             required: true
-            default: "{ get_property: [SELF, node_version] }"
+            default: { get_property: [ SELF, node_version ] }

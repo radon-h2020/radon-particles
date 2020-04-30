@@ -1,0 +1,12 @@
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Set bucket notification
+      s3_bucket_notification:
+        state: present
+        event_name: "{{ event_name }}"
+        bucket_name: "{{ bucket_name }}"
+        lambda_function_arn: "{{ lambda_function_arn }}"
+        events:  [ "{{ events }}" ]
+        suffix: "{{ suffix }}"
+        region: "{{ region }}"

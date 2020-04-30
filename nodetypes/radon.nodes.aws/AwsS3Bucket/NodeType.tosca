@@ -31,16 +31,16 @@ node_types:
           aws_access_key_id:
             type: string
             required: true
-            default: "{ get_property: [HOST, access_key_id] }"
+            default: { get_property: [ HOST, access_key_id ] }
           aws_region:
             type: string
             required: true
-            default: "{ get_property: [HOST, region] }"
+            default: { get_property: [ HOST, region ] }
           aws_secret_access_key:
             type: string
             required: true
-            default: "{ get_property: [HOST, secret_access_key] }"
+            default: { get_property: [ HOST, secret_access_key ] }
           bucket_name:
             type: string
             required: true
-            default: "{ get_property: [SELF, name] }"
+            default: { get_property: [ SELF, name ] }

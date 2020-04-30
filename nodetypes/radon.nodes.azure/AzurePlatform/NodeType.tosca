@@ -32,8 +32,8 @@ node_types:
           PASSWORD:
             type: string
             required: true
-            default: "{ get_property: [SELF, password] }"
+            default: { get_property: [ SELF, password ] }
           USER_NAME:
             type: string
             required: true
-            default: "{ get_property: [SELF, user_name] }"
+            default: { get_property: [ SELF, user_name ] }

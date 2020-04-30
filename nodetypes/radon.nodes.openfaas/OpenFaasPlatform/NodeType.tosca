@@ -10,7 +10,7 @@ node_types:
     attributes:
       url:
         type: string
-        default: "{ concat: [http://, {get_property=[SELF, api_gateway_host]}, {get_property=[SELF, api_gateway_port]}] }"
+        default: { concat: [ "http://", { get_property: [ SELF, api_gateway_host ] }, ":", { get_property: [ SELF, api_gateway_port ] } ] }
     properties:
       api_gateway_port:
         type: integer
@@ -55,16 +55,16 @@ node_types:
           BASIC_AUTH_PASSWORD:
             type: string
             required: true
-            default: "{ get_property: [SELF, basic_auth_password] }"
+            default: { get_property: [ SELF, basic_auth_password ] }
           KUBERNETES_VERSION:
             type: version
             required: false
-            default: "{ get_property: [SELF, kubernetes_version] }"
+            default: { get_property: [ SELF, kubernetes_version ] }
           URL:
             type: string
             required: true
-            default: "{ get_attribute: [SELF, url] }"
+            default: { get_attribute: [ SELF, url ] }
           BASIC_AUTH_USER:
             type: string
             required: true
-            default: "{ get_property: [SELF, basic_auth_user] }"
+            default: { get_property: [ SELF, basic_auth_user ] }

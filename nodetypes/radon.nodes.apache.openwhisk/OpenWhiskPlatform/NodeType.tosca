@@ -10,10 +10,8 @@ node_types:
     attributes:
       api_url:
         type: string
-        default: "{ concat: [http://, {get_property=[SELF, api_host]}, {get_property=[SELF, api_port]}] }"
       auth_key:
         type: string
-        default: "{ concat: [{get_property=[SELF, auth_username]}, {get_property=[SELF, auth_password]}] }"
     properties:
       auth_username:
         type: string
@@ -57,14 +55,14 @@ node_types:
               KUBERNETES_VERSION:
                 type: version
                 required: false
-                default: "{ get_property: [SELF, kubernetes_version] }"
+                default: { get_property: [ SELF, kubernetes_version ] }
           configure:
             inputs:
               AUTH_KEY:
                 type: string
                 required: true
-                default: "{ get_attribute: [SELF, auth_key] }"
+                default: { get_attribute: [ SELF, auth_key ] }
               API_URL:
                 type: string
                 required: true
-                default: "{ get_attribute: [SELF, api_url] }"
+                default: { get_attribute: [ SELF, api_url ] }

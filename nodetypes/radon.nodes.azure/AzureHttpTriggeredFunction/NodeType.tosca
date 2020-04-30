@@ -10,7 +10,7 @@ node_types:
     attributes:
       url:
         type: string
-        default: "{ get_operation_output: [SELF, Standard, create, URL] }"
+        default: { get_operation_output: [ SELF, Standard, create, URL ] }
     properties:
       max_outstanding_requests:
         type: integer
@@ -48,24 +48,24 @@ node_types:
           AUTH_LEVEL:
             type: string
             required: false
-            default: "{ get_property: [SELF, auth_level] }"
+            default: { get_property: [ SELF, auth_level ] }
           ROUTE:
             type: string
             required: false
-            default: "{ get_property: [SELF, route] }"
+            default: { get_property: [ SELF, route ] }
           ROUTE_PREFIX:
             type: string
             required: true
-            default: "{ get_property: [SELF, route_prefix] }"
+            default: { get_property: [ SELF, route_prefix ] }
           MAX_OUTSTANDING_REQUESTS:
             type: string
             required: true
-            default: "{ get_property: [SELF, max_outstanding_requests] }"
+            default: { get_property: [ SELF, max_outstanding_requests ] }
           METHODS:
             type: string
             required: false
-            default: "{ get_property: [SELF, methods] }"
+            default: { get_property: [ SELF, methods ] }
           MAX_CONCURRENT_REQUESTS:
             type: string
             required: true
-            default: "{ get_property: [SELF, max_concurrent_requests] }"
+            default: { get_property: [ SELF, max_concurrent_requests ] }

@@ -41,7 +41,7 @@ node_types:
               tarball_version:
                 type: string
                 required: true
-                default: "{ get_property: [SELF, component_version] }"
+                default: { get_property: [ SELF, component_version ] }
             implementation:
               primary: files/create.yml
               timeout: 0
@@ -54,7 +54,7 @@ node_types:
               tarball_version:
                 type: string
                 required: true
-                default: "{ get_property: [SELF, component_version] }"
+                default: { get_property: [ SELF, component_version ] }
             implementation:
               primary: files/delete.yml
               timeout: 0
