@@ -54,3 +54,6 @@ node_types:
       create_role:
         type: radon.artifacts.Ansible
         file: create_role.yml
+      policy:
+        type: tosca.artifacts.File
+        file: policy.json

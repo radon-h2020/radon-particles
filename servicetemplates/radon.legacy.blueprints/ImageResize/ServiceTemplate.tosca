@@ -7,22 +7,21 @@ topology_template:
     AwsS3Notification:
       type: radon.nodes.legacy.AwsS3Notification
       metadata:
-        x: "644"
-        y: "128"
+        x: "516"
+        y: "121"
         displayName: "Event"
       properties:
         aws_region: "eu-central-1"
-    Compute:
-      type: tosca.nodes.Compute
-      metadata:
-        x: "775"
-        y: "363"
-        displayName: "Workstation"
+      requirements:
+        - receives_notification:
+            node: AwsLambdaFunction
+            relationship: con_DependsOn_1
+            capability: receives_notification
     AwsS3BucketOut:
       type: radon.nodes.legacy.AwsS3Bucket
       metadata:
-        x: "1018"
-        y: "224"
+        x: "1202"
+        y: "297"
         displayName: "Bucket Out"
       properties:
         aws_region: "eu-central-1"
@@ -30,8 +29,8 @@ topology_template:
     AwsLambdaFunction:
       type: radon.nodes.legacy.AwsLambdaFunction
       metadata:
-        x: "776"
-        y: "225"
+        x: "820"
+        y: "295"
         displayName: "ImageResize"
       properties:
         aws_region: "eu-central-1"
@@ -43,15 +42,28 @@ topology_template:
         function_alias: "test"
         lambda_handler: "image_resize.lambda_handler"
         zip_file: "/servicetemplates/radon.legacy.blueprints/ImageResize/files/AwsLambdaFunction/X-test-ImageRes/X-test-ImageRes.zip"
+      requirements:
+        - requires_role:
+            node: AwsCreateRole
+            relationship: con_DependsOn_0
+            capability: requires_role
+        - dependency:
+            node: AwsS3BucketOut
+            relationship: con_DependsOn_2
+            capability: feature
+        - bucket:
+            node: AwsS3BucketIn
+            relationship: con_DependsOn_3
+            capability: bucket
       artifacts:
         X-test-ImageRes:
-          type: radon.artifacts.archive.Zip
+          type: radon.artifacts.Ansible
           file: X-test-ImageRes.zip
     AwsS3BucketIn:
       type: radon.nodes.legacy.AwsS3Bucket
       metadata:
-        x: "530"
-        y: "226"
+        x: "407"
+        y: "306"
         displayName: "Bucket In"
       properties:
         aws_region: "eu-central-1"
@@ -59,10 +71,19 @@ topology_template:
     AwsCreateRole:
       type: radon.nodes.legacy.AwsCreateRole
       metadata:
-        x: "904"
-        y: "128"
+        x: "1123"
+        y: "126"
         displayName: "AWS Create Role"
       properties:
         role_name: "RadonLambda"
         aws_region: "eu-central-1"
         role_description: "Lambda role"
+  relationship_templates:
+    con_DependsOn_0:
+      type: tosca.relationships.DependsOn
+    con_DependsOn_1:
+      type: tosca.relationships.DependsOn
+    con_DependsOn_2:
+      type: tosca.relationships.DependsOn
+    con_DependsOn_3:
+      type: tosca.relationships.DependsOn

@@ -121,6 +121,9 @@ node_types:
               primary: delete
               timeout: 0
     artifacts:
+      X-test-ImageRes:
+        type: radon.artifacts.archive.Zip
+        file: X-test-ImageRes.zip
       create:
         type: radon.artifacts.Ansible
         file: create.yml
