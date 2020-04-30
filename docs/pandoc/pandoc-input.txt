@@ -46,9 +46,8 @@
 ./policytypes/radon/policies/scaling/ScaleOut/README.md
 ./policytypes/radon/policies/performance/AverageResponseTime/README.md
 ./policytypes/radon/policies/performance/ResponseTimePercentile/README.md
-./policytypes/radon/policies/testing/TestCase/README.md
-./policytypes/radon/policies/testing/HttpEndpoint/README.md
-./policytypes/radon/policies/testing/TcpPing/README.md
+./policytypes/radon/policies/testing/HttpEndpointTest/README.md
+./policytypes/radon/policies/testing/TcpPingTest/README.md
 ./artifacttypes/radon/artifacts/archive/Zip/README.md
 ./artifacttypes/radon/artifacts/archive/JAR/README.md
 ./artifacttypes/radon/artifacts/docker/DockerImage/README.md

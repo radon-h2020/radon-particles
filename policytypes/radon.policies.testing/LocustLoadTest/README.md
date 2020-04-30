@@ -4,7 +4,7 @@ This policy type represents a load test case for the Apache JMeter tool.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `LocustLoadTest` | `radon.policies.testing.LocustLoadTest` | 1.0.0 | `radon.policies.testing.LoadTestCTT` |
+| `LocustLoadTest` | `radon.policies.testing.LocustLoadTest` | 1.0.0 | `radon.policies.testing.LoadTest` |
 
 ### Properties
 

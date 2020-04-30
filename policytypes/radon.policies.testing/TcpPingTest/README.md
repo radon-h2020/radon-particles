@@ -4,7 +4,7 @@ Policy type representing a test case specification for a TCP ping test.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `TcpPing` | `radon.policies.testing.TcpPing` | 1.0.0 | `radon.policies.testing.TestCase` |
+| `TcpPingTest` | `radon.policies.testing.TcpPingTest` | 1.0.0 | `radon.policies.testing.Test` |
 
 ### Properties
 

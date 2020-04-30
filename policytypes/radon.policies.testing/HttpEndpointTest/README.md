@@ -4,7 +4,7 @@ Policy type representing a test case specification for a HTTP endpoint test.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `HttpEndpoint` | `radon.policies.testing.HttpEndpoint` | 1.0.0 | `radon.policies.testing.TestCase` |
+| `HttpEndpointTest` | `radon.policies.testing.HttpEndpointTest` | 1.0.0 | `radon.policies.testing.Test` |
 
 ### Properties
 

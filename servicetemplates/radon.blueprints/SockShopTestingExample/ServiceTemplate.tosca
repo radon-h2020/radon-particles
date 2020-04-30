@@ -38,10 +38,10 @@ topology_template:
         test_id: "loadtest213"
       targets: [ SockShop ]
     SimplePingTest:
-      type: radon.policies.testing.TcpPing
+      type: radon.policies.testing.TcpPingTest
       targets: [ SockShop ]
     SimpleEndpointTest:
-      type: radon.policies.testing.HttpEndpoint
+      type: radon.policies.testing.HttpEndpointTest
       properties:
         path: "/cart/"
         hostname: "localhost"
