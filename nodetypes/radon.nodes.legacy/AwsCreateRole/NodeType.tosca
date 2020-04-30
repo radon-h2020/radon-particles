@@ -49,6 +49,7 @@ node_types:
           create:
             implementation:
               primary: create_role
+              dependencies: [ policy ]
               timeout: 0
     artifacts:
       create_role:
