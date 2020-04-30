@@ -1,6 +1,6 @@
-## TCP Ping Test Policy
+## Ping Test Policy
 
-Policy type representing a test case specification for a TCP ping test.
+Policy type representing a test case specification for a ping test.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
@@ -10,5 +10,4 @@ Policy type representing a test case specification for a TCP ping test.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `port` | `true` | `integer` |   |   | The port to ping during the test |
-| `hostname` | `true` | `string` |   |   | The host to ping during the test |
+| `hostname` | `true` | `string` |   |   | The hostname to be used as the destination for the ping test |
