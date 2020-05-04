@@ -4,7 +4,7 @@ A type representing an Apache NiFi middleware component.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `NifiRuntime` | `radon.nodes.apache.nifi.NifiRuntime` | 1.0.0 | `tosca.nodes.SoftwareComponent` |
+| `Nifi` | `radon.nodes.nifi.Nifi` | 1.0.0 | `tosca.nodes.SoftwareComponent` |
 
 ### Properties
 

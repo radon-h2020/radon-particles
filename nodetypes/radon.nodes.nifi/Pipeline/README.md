@@ -4,7 +4,7 @@ A type representing a data pipeline hosted on Apache NiFi.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `NifiPipeline` | `radon.nodes.apache.nifi.NifiPipeline` | 1.0.0 | `radon.nodes.abstract.DataPipeline` |
+| `Pipeline` | `radon.nodes.nifi.Pipeline` | 1.0.0 | `radon.nodes.abstract.DataPipeline` |
 
 ### Attributes
 

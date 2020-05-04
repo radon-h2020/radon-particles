@@ -1,12 +1,12 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  radon.nodes.apache.nifi.NifiRuntime:
+  radon.nodes.nifi.Nifi:
     derived_from: tosca.nodes.SoftwareComponent
     metadata:
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.apache.nifi"
+      targetNamespace: "radon.nodes.nifi"
     properties:
       port:
         type: string
@@ -22,7 +22,7 @@ node_types:
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.apache.nifi.NifiPipeline ]
+        valid_source_types: [ radon.nodes.nifi.Pipeline ]
         type: tosca.capabilities.Container
     interfaces:
       Standard:
@@ -30,11 +30,11 @@ node_types:
         operations:
           stop:
             implementation:
-              primary: files/stop.yml
+              primary: stop
               timeout: 0
           start:
             implementation:
-              primary: files/start.yml
+              primary: start
               timeout: 0
           create:
             inputs:
@@ -43,18 +43,39 @@ node_types:
                 required: true
                 default: { get_property: [ SELF, component_version ] }
             implementation:
-              primary: files/create.yml
+              primary: create
               timeout: 0
           configure:
+            inputs:
+              tarball_version:
+                type: string
+                required: true
+                default: { get_property: [ SELF, component_version ] }          
             implementation:
-              primary: files/configure.yml
+              primary: configure
               timeout: 0
           delete:
             inputs:
               tarball_version:
                 type: string
                 required: true
-                default: { get_property: [ SELF, component_version ] }
+                default: { get_property: [ SELF, component_version ] }          
             implementation:
-              primary: files/delete.yml
+              primary: delete
               timeout: 0
+    artifacts:
+      stop:
+        type: radon.artifacts.Ansible
+        file: stop.yml
+      start:
+        type: radon.artifacts.Ansible
+        file: start.yml
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml

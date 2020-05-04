@@ -6,7 +6,7 @@ node_types:
     metadata:
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.compute"
+      targetNamespace: "radon.nodes.VM"
     attributes:
       public_address:
         description: OpenStack public IP address of the VM
