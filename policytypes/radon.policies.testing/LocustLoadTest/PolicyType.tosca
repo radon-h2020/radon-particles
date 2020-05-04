@@ -1,0 +1,20 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+policy_types:
+  radon.policies.testing.LocustLoadTest:
+    derived_from: radon.policies.testing.LoadTest
+    metadata:
+      targetNamespace: "radon.policies.testing"
+      abstract: "false"
+      final: "false"
+    properties:
+      locust_conf:
+        type: string
+        description: Location and filename of a file with properties (optional)
+        required: false
+        status: supported
+      locust_file:
+        type: string
+        description: Location and filename of the Locust script
+        required: true
+        status: supported

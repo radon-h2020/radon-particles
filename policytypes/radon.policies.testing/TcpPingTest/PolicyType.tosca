@@ -1,0 +1,19 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+policy_types:
+  radon.policies.testing.TcpPingTest:
+    derived_from: radon.policies.testing.Test
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.policies.testing"
+    properties:
+      hostname:
+        type: string
+        description: The host to ping during the test
+        required: false
+        status: supported
+      port:
+        type: integer
+        required: true
+        status: supported

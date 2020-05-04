@@ -1,0 +1,20 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+policy_types:
+  radon.policies.testing.JMeterLoadTest:
+    derived_from: radon.policies.testing.LoadTest
+    metadata:
+      targetNamespace: "radon.policies.testing"
+      abstract: "false"
+      final: "false"
+    properties:
+      jmx_file:
+        type: string
+        description: Location and filename of the JMeter test plan
+        required: true
+        status: supported
+      user.properties:
+        type: string
+        description: Location and filename of a file with properties for the test plan (optional)
+        required: false
+        status: supported

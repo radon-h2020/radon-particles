@@ -14,6 +14,9 @@ node_types:
         status: supported
         constraints:
           - greater_or_equal: 0 GB
+    metadata:
+      abstract: "false"
+      final: "false"
     capabilities:
       storage_endpoint:
         occurrences: [ 1, UNBOUNDED ]

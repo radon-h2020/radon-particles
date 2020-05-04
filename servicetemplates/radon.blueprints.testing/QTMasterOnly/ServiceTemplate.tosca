@@ -1,0 +1,41 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.testing"
+topology_template:
+  node_templates:
+    Workstation:
+      type: radon.nodes.Workstation
+      metadata:
+        x: "1089"
+        y: "283"
+        displayName: "Workstation"
+    QT:
+      type: radon.nodes.testing.QT
+      metadata:
+        x: "452"
+        y: "284"
+        displayName: "QT"
+      requirements:
+        - host:
+            node: DockerEngine
+            relationship: con_HostedOn_0
+            capability: host
+    DockerEngine:
+      type: radon.nodes.docker.DockerEngine
+      metadata:
+        x: "766"
+        y: "283"
+        displayName: "DockerEngine"
+      properties:
+        component_version: null
+      requirements:
+        - host:
+            node: Workstation
+            relationship: con_HostedOn_1
+            capability: host
+  relationship_templates:
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
