@@ -26,4 +26,3 @@ topology_template:
   relationship_templates:
     con_HostedOn_0:
       type: tosca.relationships.HostedOn
-
