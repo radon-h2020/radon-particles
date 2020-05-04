@@ -4,7 +4,7 @@ A type representing a virtual machine on OpenStack.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `OpenStackCompute` | `radon.nodes.openstack.OpenStackCompute` | 1.0.0 | `tosca.nodes.Compute` |
+| `OpenStack` | `radon.nodes.VM.OpenStack` | 1.0.0 | `tosca.nodes.Compute` |
 
 ### Properties
 
@@ -21,6 +21,7 @@ A type representing a virtual machine on OpenStack.
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
 | `id` | `string` |   | OpenStack ID of the VM |
+| `public_address` | `string` |   | OpenStack public IP address of the VM |
 
 ### Notes
 
