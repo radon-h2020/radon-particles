@@ -1,0 +1,49 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.examples"
+topology_template:
+  inputs:
+    ssh_key_name:
+      type: string
+      required: true
+    vpc_subnet_id:
+      type: string
+      required: true
+    ssh_key_file:
+      type: string
+      required: true
+    ssh_user:
+      type: string
+      required: true
+  node_templates:
+    EC2:
+      type: radon.nodes.VM.EC2
+      metadata:
+        x: "712"
+        y: "69"
+        displayName: "vm"
+      properties:
+        image: "ami-00890f614e48ce866"
+        ssh_key_name: { get_input: ssh_key_name }
+        vpc_subnet_id: { get_input: vpc_subnet_id }
+        instance_type: "t2.micro"
+        ssh_key_file: { get_input: ssh_key_file }
+        ssh_user: { get_input: ssh_user }
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_0
+            capability: host
+    AwsPlatform:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "713"
+        y: "406"
+        displayName: "platform"
+      properties:
+        name: null
+        region: "eu-west-1"
+  relationship_templates:
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn

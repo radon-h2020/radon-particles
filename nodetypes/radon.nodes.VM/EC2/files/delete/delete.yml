@@ -1,0 +1,9 @@
+- name: delete
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: terminate instance
+      ec2:
+        state: absent
+        region: "{{ region }}"
+        instance_id: "{{ id }}"

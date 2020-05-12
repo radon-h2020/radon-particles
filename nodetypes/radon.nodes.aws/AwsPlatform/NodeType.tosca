@@ -8,14 +8,6 @@ node_types:
       final: "false"
       targetNamespace: "radon.nodes.aws"
     properties:
-      access_key_id:
-        type: string
-        required: true
-        status: supported
-      secret_access_key:
-        type: string
-        required: true
-        status: supported
       region:
         type: string
         required: true
@@ -23,5 +15,17 @@ node_types:
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket ]
+        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket, radon.nodes.VM.EC2 ]
         type: tosca.capabilities.Container
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            implementation:
+              primary: configure
+              timeout: 0
+    artifacts:
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml

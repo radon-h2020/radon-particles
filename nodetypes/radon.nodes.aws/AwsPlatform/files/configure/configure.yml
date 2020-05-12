@@ -1,0 +1,21 @@
+- name: configure AWS
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: install awscli
+      become: yes
+      package:
+        name: awscli
+        state: present
+    - name: install boto
+      pip:
+        name: boto
+        state: present
+    - name: install boto3
+      pip:
+        name: boto3
+        state: present        
+    - name: install botocore
+      pip:
+        name: botocore
+        state: present

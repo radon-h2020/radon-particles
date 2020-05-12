@@ -1,0 +1,30 @@
+- name: create
+  hosts: localhost
+  gather_facts: False
+  remote_user: "{{ ssh_user }}"
+
+  vars:
+    ansible_ssh_private_key_file: "{{ ssh_key_file }}"
+
+  tasks:
+    - name: provision instance
+      ec2:
+        key_name: "{{ ssh_key_name }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ image }}"
+        region: "{{ region }}"
+        wait: yes
+        vpc_subnet_id: "{{ vpc_subnet_id }}"
+        assign_public_ip: yes
+      register: ec2
+    - name: wait for instance to come up
+      delegate_to: "{{ ec2.instances[0].public_dns_name }}"
+      wait_for_connection:
+        delay: 60
+        timeout: 320
+    - name: set outputs
+      set_stats:
+        data:
+          public_address: "{{ ec2.instances[0].public_dns_name }}"
+          private_address: "{{ ec2.instances[0].private_dns_name }}"
+          id: "{{ ec2.instance_ids[0] }}"
