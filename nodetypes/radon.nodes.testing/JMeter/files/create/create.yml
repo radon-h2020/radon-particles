@@ -18,6 +18,7 @@
       docker_container:
         name: JMeterAgent
         image: radonconsortium/radon-ctt-agent:jmeter
+        pull: yes
         ports: 
           - "5000:5000"
 
