@@ -1,0 +1,104 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.source.S3Bucket_1.0-w1-wip1:
+    derived_from: radon.nodes.datapipeline.source.ConsumeRemote_1.0-w1-wip1
+    properties:
+      ContinuousFetch:
+        type: boolean
+        description: Indicates if new objects need to be fetched automatically.
+        required: false
+        default: true
+        status: supported
+      BucketName:
+        type: string
+        description: Name of the S3 bucket.
+        required: true
+        status: supported
+      Region:
+        type: string
+        description: Specify region, if it is different from eu-central-1 region.
+        required: false
+        default: eu-central-1
+        status: supported
+      ObjectName:
+        type: string
+        description: Name of the object to be fetched. Leave blank if ContinuousFetch is True.
+        required: false
+        default: ${filename}
+        status: supported
+    attributes:
+      id:
+        type: string
+    metadata:
+      targetNamespace: radon.nodes.datapipeline.source
+      abstract: no
+      final: no
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.apache.nifi.NifiRuntime
+          relationship:
+            type: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - ConnectToPipeline:
+          capability: radon.capabilities.datapipeline.ConnectToPipeline_w1-wip1
+          node: radon.nodes.datapipeline.MidwayPB_1.0-w1-wip1
+          relationship:
+            type: radon.relationships.datapipeline.ConnectNifiLocal_w1-wip1
+          occurrences: [ 0, UNBOUNDED ]
+    capabilities:
+      ConnectToPipeline:
+        occurrences: [ 1, unbounded ]
+        valid_source_types: [ radon.nodes.datapipeline.DestinationPB_1.0-w1-wip1, radon.nodes.datapipeline.MidwayPB_1.0-w1-wip1 ]
+        type: radon.capabilities.datapipeline.ConnectToPipeline_w1-wip1
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          stop:
+          start:
+          create:
+            inputs:
+              template_name:
+                type: string
+                description: Name of the template.
+                required: true
+              template_file:
+                type: string
+                description: path to the template file
+                required: true
+                default: { get_artifact: [SELF, templateFile_localConn, file] }
+            implementation:
+              primary: create
+              timeout: 0
+          configure:
+            implementation:
+              primary: configure
+              timeout: 0
+          delete:
+    artifacts:
+      templateFile_localConn:
+        type: tosca.artifacts.File
+        description: This Nifi template file is only for the local connection.
+        file: S3Bucket_SRC_PG_LocalConn.xml
+      start:
+        type: tosca.artifacts.Implementation.Ansible
+        description: ansible script to start s3bucket data pipline node
+        file: start.yml
+      create:
+        type: tosca.artifacts.Implementation.Ansible
+        description: script to creating the pipeline.
+        file: create.yml
+      configure:
+        type: tosca.artifacts.Implementation.Ansible
+        description: Ansible script to configure S3Bucket
+        file: configure.yml
+      templateFile_RmtConn:
+        type: tosca.artifacts.File
+        description: This nifi template file is for remote connect.
+        file: S3Bucket_SRC_PG_RmtConn.xml
+      credFile:
+        type: tosca.artifacts.File
+        deploy_path: /tmp/
+        file: credentials
