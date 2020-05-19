@@ -61,7 +61,20 @@ node_types:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
           stop:
+            inputs:
+              id:
+                type: string
+                required: false
+                default: { get_attribute: [SELF, id] }
+            implementation:
+              primary: stop
+              timeout: 0
           start:
+            inputs:
+              pipeline_id:
+                type: string
+                required: false
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: start
               timeout: 0
@@ -69,8 +82,8 @@ node_types:
             inputs:
               template_name:
                 type: string
-                description: Name of the template.
                 required: true
+                default: { get_property: [SELF, template_name] }
               template_file:
                 type: string
                 description: path to the template file
@@ -83,21 +96,28 @@ node_types:
             inputs:
               BucketName:
                 type: string
-                required: false
-                default: { default: { get_property: [ SELF, BucketName ] } }
+                required: true
+                default: { get_property: [SELF, BucketName] }
               cred_file_path:
                 type: string
                 required: false
-                default: { default: { get_property: [ SELF, cred_file_path ] } }
+                default: { get_property: [SELF, cred_file_path] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [SELF, id] }
               Region:
                 type: string
                 required: false
-                default: { default: { get_property: [ SELF, Region ] } }
+                default: { get_property: [SELF, Region] }
             implementation:
               primary: configure
               timeout: 0
           delete:
     artifacts:
+      stop:
+        type: tosca.artifacts.Implementation.Ansible
+        file: stop.yml
       templateFile_localConn:
         type: tosca.artifacts.File
         description: This Nifi template file is only for the local connection.
@@ -107,7 +127,6 @@ node_types:
         file: start.yml
       create:
         type: tosca.artifacts.Implementation.Ansible
-        description: script to creating the pipeline.
         file: create.yml
       configure:
         type: tosca.artifacts.Implementation.Ansible
