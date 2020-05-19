@@ -58,6 +58,11 @@ node_types:
         operations:
           stop:
           start:
+            inputs:
+              pipeline_id:
+                type: string
+                required: false
+                default: { default: { get_attribute: [ SELF, id ] } }
             implementation:
               primary: start
               timeout: 0
