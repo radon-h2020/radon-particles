@@ -4,6 +4,10 @@ node_types:
   radon.nodes.datapipeline.source.S3Bucket_1.0-w1-wip1:
     derived_from: radon.nodes.datapipeline.source.ConsumeRemote_1.0-w1-wip1
     properties:
+      cred_file_path:
+        type: string
+        required: true
+        status: supported
       ContinuousFetch:
         type: boolean
         description: Indicates if new objects need to be fetched automatically.
@@ -58,11 +62,6 @@ node_types:
         operations:
           stop:
           start:
-            inputs:
-              pipeline_id:
-                type: string
-                required: false
-                default: { default: {get_attribute=[SELF, id]} }
             implementation:
               primary: start
               timeout: 0
@@ -82,10 +81,18 @@ node_types:
               timeout: 0
           configure:
             inputs:
-              pipeline_id:
+              BucketName:
                 type: string
                 required: false
-                default: { default: { get_attribute: [ SELF, id ] } }
+                default: { default: { get_property: [ SELF, BucketName ] } }
+              cred_file_path:
+                type: string
+                required: false
+                default: { default: { get_property: [ SELF, cred_file_path ] } }
+              Region:
+                type: string
+                required: false
+                default: { default: { get_property: [ SELF, Region ] } }
             implementation:
               primary: configure
               timeout: 0
