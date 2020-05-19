@@ -18,11 +18,8 @@
 ---
 - hosts: all
   vars: 
-    query_ListS3: "resources[?name=='ListS3'].identifier"
-    query_fetchS3: "resources[?name=='FetchS3Object'].identifier"
-    # query_putS3: "resources[?name=='PutS3Object'].identifier"
-    # query_PutLambda: "resources[?name=='PutLambda'].identifier"
-    # Below variable indicates where to store the credential file in the remote machine
+    get_id1: "processors[0].id" 
+    get_id2: "processors[1].id" 
     dest_cred_file_path: "/tmp/.opera/aws/cred"
   
   tasks:
@@ -37,97 +34,55 @@
         dest: "{{dest_cred_file_path}}/credentials"
       when: cred_file_path != "none" or cred_file_path != "None"
 
-    - name: Get list of available NiFi resources for fetching the id of the listS3 and FetchS3Object
+
+    - name: Get list of available NiFi processors within the process group
       uri:
-        url: http://localhost:8080/nifi-api/resources/
+        url: "http://localhost:8080/nifi-api/process-groups/{{pipeline_id}}/processors"
         method: Get
       register: nifi_resources
       when: cred_file_path != "none" or cred_file_path != "None"
 
-## FOR ListS3
-    # we need to access each component one-by-one and configure them by setting the credential file path
-    - name: set the ecredential file path for ListS3
+
+
+    - name: Configure the first processor within the process group
       vars:
-        # get the listS3Id. Example: "/processors/22549d16-e4c8-3f23-b949-af4aca95a3aa"   
-        # we need to extract only the ID, which is at the end     
-        lists3_ID: "{{ nifi_resources.json  | to_json | from_json | json_query(query_ListS3) | first }}"
+        first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
       uri:
-        url: "http://localhost:8080/nifi-api/processors/{{lists3_ID.split('/')[2]}}"
+        url: "http://localhost:8080/nifi-api/processors/{{first_prcsr_id}}"
         method: PUT
         body:
           "revision": { "version": 0}
           "component": 
-            "id": "{{lists3_ID.split('/')[2]}}"
+            "id": "{{first_prcsr_id}}"
             "config": 
-              "properties": { "Credentials File": "{{dest_cred_file_path}}/credentials"}                       
+              "properties": { 
+                "Credentials File": "{{dest_cred_file_path}}/credentials",
+                "Bucket":"{{BucketName}}",
+                "Region": "{{Region}}"
+            }                       
         status_code: 200
         body_format: json
-      # when: cred_file_path != "none" and object_name == "ListS3"
 
-
-    ## FOR PutLambda
-    # - name: set the credential file path for PutLambda
-    #   vars: 
-    #     # get the PutLambda. Example: "/processors/22549d16-e4c8-3f23-b949-af4aca95a3aa"   
-    #     # we need to extract only the ID, which is at the end         
-    #     PutLambda_ID: "{{ nifi_resources.json  | to_json | from_json | json_query(query_PutLambda) | first }}"
-    #   uri:
-    #     url: "http://localhost:8080/nifi-api/processors/{{PutLambda_ID.split('/')[2]}}"
-    #     method: PUT
-    #     body:
-    #       "revision": { "version": 0}
-    #       "component": 
-    #         "id": "{{PutLambda_ID.split('/')[2]}}"
-    #         "config": 
-    #           "properties": { "Credentials File": "{{dest_cred_file_path}}"}                       
-    #     status_code: 200
-    #     body_format: json
-    #   when: cred_file_path != "none" and object_name == "invokeLambda"
-
-
-
-    ## FOR FetchS3Object
-    - name: set the ecredential file path for FetchS3Object
+    - name: Configure the SECOND processor within the process group
       vars:       
-        FetchS3ObjectID: "{{ nifi_resources.json  | to_json | from_json | json_query(query_fetchS3) | first }}"
+        second_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id2) }}"
       uri:
-        url: "http://localhost:8080/nifi-api/processors/{{FetchS3ObjectID.split('/')[2]}}"
+        url: "http://localhost:8080/nifi-api/processors/{{second_prcsr_id}}"
         method: PUT
         body:
           "revision": { "version": 0}
           "component": 
-            "id": "{{FetchS3ObjectID.split('/')[2]}}"
+            "id": "{{second_prcsr_id}}"
             "config": 
-              "properties": { "Credentials File": "{{dest_cred_file_path}}"}                       
+              "properties": {  
+                "Credentials File": "{{dest_cred_file_path}}/credentials",
+                "Bucket":"{{BucketName}}",
+                "Region": "{{Region}}"
+              }                       
         status_code: 200
         body_format: json
-      # when: cred_file_path != "none" and object_name == "ListS3"
 
-## FOR PutS3Object
-    # - name: fetch the revision information of the processor (PutS3Object)
-    #   vars:
-    #     PutS3ObjectID: "{{ nifi_resources.json  | to_json | from_json | json_query(query_putS3) | first }}"
-    #   uri:
-    #     url: "http://localhost:8080/nifi-api/processors/{{PutS3ObjectID.split('/')[2]}}"
-    #     method: GET
-    #   register: revisionInfo
-    #   when: cred_file_path != "none" and object_name == "PutS3Object"
 
-    # - name: set the credential file path for PutS3Object
-    #   vars:      
-    #     PutS3ObjectID: "{{ nifi_resources.json  | to_json | from_json | json_query(query_putS3) | first }}"
-    #   uri:
-    #     url: "http://localhost:8080/nifi-api/processors/{{PutS3ObjectID.split('/')[2]}}"
-    #     method: PUT
-    #     body:
-    #       "revision": "{{ revisionInfo.json.revision}}"
-    #       "component": 
-    #         "id": "{{PutS3ObjectID.split('/')[2]}}"
-    #         "config": 
-    #           "properties": { "Credentials File": "{{dest_cred_file_path}}"}                       
-    #     # status_code: 201
-    #     body_format: json
-    #   when: cred_file_path != "none" and object_name == "PutS3Object"
     
 
 

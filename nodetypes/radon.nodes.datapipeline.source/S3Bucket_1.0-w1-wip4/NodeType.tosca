@@ -58,6 +58,9 @@ node_types:
         operations:
           stop:
           start:
+            implementation:
+              primary: start
+              timeout: 0
           create:
             inputs:
               template_name:
@@ -84,7 +87,6 @@ node_types:
         file: S3Bucket_SRC_PG_LocalConn.xml
       start:
         type: tosca.artifacts.Implementation.Ansible
-        description: ansible script to start s3bucket data pipline node
         file: start.yml
       create:
         type: tosca.artifacts.Implementation.Ansible
@@ -92,7 +94,6 @@ node_types:
         file: create.yml
       configure:
         type: tosca.artifacts.Implementation.Ansible
-        description: Ansible script to configure S3Bucket
         file: configure.yml
       templateFile_RmtConn:
         type: tosca.artifacts.File
