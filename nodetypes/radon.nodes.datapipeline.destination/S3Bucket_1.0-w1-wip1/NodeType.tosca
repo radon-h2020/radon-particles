@@ -1,0 +1,130 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.destination.S3Bucket_1.0-w1-wip1:
+    properties:
+      cred_file_path:
+        type: string
+        required: true
+        status: supported
+      BucketName:
+        type: string
+        required: true
+        status: supported
+      Region:
+        type: string
+        required: false
+        default: eu-central-1
+        status: supported
+    attributes:
+      id:
+        type: string
+    metadata:
+      targetNamespace: radon.nodes.datapipeline.destination
+      abstract: no
+      final: no
+    requirements:
+      - ConnectToPipeline:
+          capability: radon.capabilities.datapipeline.ConnectToPipeline_w1-wip1
+          node: radon.nodes.apache.nifi.NifiPipeline
+          relationship:
+            type: radon.relationships.datapipeline.ConnectNifiLocal_w1-wip1
+          occurrences: [ 1, 1 ]
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.apache.nifi.NifiRuntime
+          relationship:
+            type: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    capabilities:
+      ConnectToPipeline:
+        occurrences: [ 1, 1 ]
+        valid_source_types: [ radon.nodes.datapipeline.MidwayPB_1.0-w1-wip1, radon.nodes.datapipeline.SourcePB_1.0-w1-wip1 ]
+        type: radon.capabilities.datapipeline.ConnectToPipeline_w1-wip1
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          stop:
+            inputs:
+              stop:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: stop
+              timeout: 0
+          start:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: start
+              timeout: 0
+          create:
+            inputs:
+              template_name:
+                type: string
+                required: true
+                default: { get_property: [ SELF, template_name ] }
+              template_file:
+                type: string
+                required: true
+                default: { get_property: [ SELF, template_file ] }
+            implementation:
+              primary: create
+              timeout: 0
+          configure:
+            inputs:
+              BucketName:
+                type: string
+                required: true
+                default: { get_property: [ SELF, BucketName ] }
+              cred_file_path:
+                type: string
+                required: true
+                default: { get_property: [ SELF, cred_file_path ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              Region:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Region ] }
+            implementation:
+              primary: configure
+              timeout: 0
+          delete:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      stop:
+        type: tosca.artifacts.Implementation.Ansible
+        file: stop.yml
+      templateFile_LocalConn:
+        type: tosca.artifacts.File
+        file: S3Bucket_dest_PG_LocalConn.xml
+      start:
+        type: tosca.artifacts.Implementation.Ansible
+        file: start.yml
+      create:
+        type: tosca.artifacts.Implementation.Ansible
+        file: create.yml
+      configure:
+        type: tosca.artifacts.Implementation.Ansible
+        file: configure.yml
+      templateFile_RmtConn:
+        type: tosca.artifacts.File
+        file: S3Bucket_dest_PG_RmtConn.xml
+      delete:
+        type: tosca.artifacts.Implementation.Ansible
+        file: delete.yml
