@@ -8,3 +8,34 @@ relationship_types:
       abstract: "false"
       final: "false"
       targetNamespace: "radon.relationships.aws"
+    properties:
+      events:
+        type: string
+        description: List of events
+        required: false
+        status: supported
+    interfaces:
+      Configure:
+        type: tosca.interfaces.relationship.Configure
+        inputs:
+          aws_region:
+            type: string
+            required: true
+            default: { get_attribute: [ SOURCE, region ] }
+          bucket_name:
+            type: string
+            required: true
+            default: { get_attribute: [ SOURCE, bucket_name ] }
+          function_arn:
+            type: string
+            required: true
+            default: { get_attribute: [ TARGET, arn ] }
+          events:
+            type: string
+            required: true
+            default: { get_property: [ SELF, events ] }
+        operations:
+          post_configure_source:
+            implementation:
+              primary: event-binding.yml
+              timeout: 0

@@ -10,6 +10,8 @@ node_types:
     attributes:
       bucket_name:
         type: string
+      region:
+        type: string
     properties:
       name:
         type: string

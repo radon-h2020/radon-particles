@@ -11,6 +11,8 @@ node_types:
       arn:
         type: string
         description: AWS function's Amazon Resource Name (ARN)
+      region:
+        type: string
     properties:
       runtime:
         type: string
@@ -56,6 +58,11 @@ node_types:
         type: string
         description: path to a function zip file
         required: true
+        status: supported
+      env_vars:
+        type: string
+        description: Function's environment variables
+        required: false
         status: supported
     requirements:
       - host:
@@ -111,11 +118,15 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, zip_file ] }
+          env_vars:
+            type: string
+            required: false
+            default: { get_property: [ SELF, env_vars ] }
         operations:
           create:
             implementation:
               primary: create
-              dependencies: [ X-test-ImageRes, policy ]
+              dependencies: [ thumbnail-generator-dev, policy ]
               timeout: 0
           delete:
             implementation:
@@ -125,9 +136,9 @@ node_types:
       create:
         type: radon.artifacts.Ansible
         file: create.yml
-      X-test-ImageRes:
-        type: radon.artifacts.archive.Zip
-        file: X-test-ImageRes.zip
+      thumbnail-generator-dev:
+        type: radon.artifacts.archive.JAR
+        file: thumbnail-generator-dev.jar
       policy:
         type: tosca.artifacts.File
         file: policy.json

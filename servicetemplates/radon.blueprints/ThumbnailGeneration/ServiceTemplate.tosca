@@ -9,7 +9,7 @@ topology_template:
       metadata:
         x: "405"
         y: "277"
-        displayName: "AwsS3Bucket"
+        displayName: "SourceBucket"
       properties:
         size: "0 MB"
         name: "h2020radon-examples-source-bucket"
@@ -28,17 +28,18 @@ topology_template:
       metadata:
         x: "935"
         y: "242"
-        displayName: "AwsLambdaFunction"
+        displayName: "ThumbnailGenerator"
       properties:
-        handler: "image_resize.lambda_handler"
+        handler: "spblab.thumbgen.lambda.ThumbnailGenerationHandler"
         environment: "adasd"
-        memory: 128
+        memory: 256
         name: "radon-particle-test"
-        alias: "test"
-        runtime: "python3.6"
+        alias: "dev"
+        runtime: "java8"
         statement_id: "lambda_test_permission01"
-        zip_file: "X-test-ImageRes.zip"
-        timeout: 3
+        zip_file: "thumbnail-generator-dev.jar"
+        env_vars: { THUMBNAIL_BUCKET: "h2020radon-examples-target-bucket" }
+        timeout: 300
       requirements:
         - host:
             node: AwsPlatform
@@ -53,7 +54,7 @@ topology_template:
       metadata:
         x: "1631"
         y: "314"
-        displayName: "AwsS3Bucket"
+        displayName: "TargetBucket"
       properties:
         size: "0 MB"
         name: "h2020radon-examples-target-bucket"
@@ -86,4 +87,4 @@ topology_template:
     con_AwsTriggers_0:
       type: radon.relationships.aws.AwsTriggers
       properties:
-        events: null
+        events: "s3:ObjectCreated:*"

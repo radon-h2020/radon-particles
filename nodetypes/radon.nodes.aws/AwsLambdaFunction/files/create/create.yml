@@ -20,6 +20,7 @@
         handler: "{{ lambda_handler }}"
         timeout: "{{ lambda_timeout }}"
         memory_size: "{{ lambda_memory }}"
+        environment_variables: "{{ env_vars }}"
       register: lambda_info
 
     - name: Create function alias name
@@ -41,8 +42,9 @@
 
     - name: Set attributes
       set_stats:
-        data:
+        data: 
           arn: "{{alias_info.alias_arn}}"
+          region: "{{ aws_region }}"
 
     - name: "Put concurrency of Lambda function on AWS : {{ function_name }}"
       command: >-

@@ -10,4 +10,6 @@
 
     - name: Set attributes
       set_stats:
-        data: {bucket_name: "{{ bucket_name }}"}
+        data: 
+          bucket_name: "{{ bucket_name }}"
+          region: "{{ aws_region }}"
