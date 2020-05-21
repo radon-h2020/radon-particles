@@ -8,14 +8,6 @@ node_types:
       final: "false"
       targetNamespace: "radon.nodes.aws"
     properties:
-      access_key_id:
-        type: string
-        required: true
-        status: supported
-      secret_access_key:
-        type: string
-        required: true
-        status: supported
       region:
         type: string
         required: true

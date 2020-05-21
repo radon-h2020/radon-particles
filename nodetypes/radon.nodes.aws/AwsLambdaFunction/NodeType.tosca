@@ -10,48 +10,65 @@ node_types:
     attributes:
       arn:
         type: string
+        description: AWS function's Amazon Resource Name (ARN)
+      region:
+        type: string
     properties:
-      role_name:
-        type: string
-        required: true
-        status: supported
-      handler:
-        type: string
-        required: true
-        default: "index.handler"
-        status: supported
-      schedule:
-        type: string
-        required: false
-        status: supported
-      memory:
-        type: integer
-        description: Size in megabytes
-        required: true
-        default: 128
-        status: supported
-        constraints:
-          - in_range: [ 128,3008 ]
       runtime:
         type: string
         required: true
-        default: "nodejs"
         status: supported
+        description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
+        default: "nodejs"
         constraints:
           - valid_values: [ nodejs,nodejs4.3,nodejs6.10,nodejs8.10,nodejs10.x,java8,python2.7,python3.6,python3.7,dotnetcore1.0,dotnetcore2.0,dotnetcore2.1,nodejs4.3-edge,go1.x,ruby2.5 ]
       timeout:
         type: integer
-        description: Time in seconds
+        description: Function timeout in seconds
         required: true
         default: 3
         status: supported
         constraints:
           - in_range: [ 1,900 ]
-      role_description:
+      memory:
+        type: integer
+        description: Function memory in MB
+        required: true
+        default: 128
+        status: supported
+        constraints:
+          - in_range: [ 128,3008 ]
+      handler:
         type: string
+        description: Handler for lambda function
+        required: true
+        default: "index.handler"
+        status: supported
+      alias:
+        type: string
+        description: Lambda function's alias
+        required: false
+        status: supported
+      statement_id:
+        type: string
+        description: Lambda policy statement identifier
+        required: true
+        status: supported
+      zip_file:
+        type: string
+        description: path to a function zip file
+        required: true
+        status: supported
+      env_vars:
+        type: string
+        description: Function's environment variables
         required: false
         status: supported
     requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
       - endpoint:
           capability: tosca.capabilities.Endpoint
           relationship: tosca.relationships.ConnectsTo
@@ -59,55 +76,72 @@ node_types:
     capabilities:
       invocable:
         occurrences: [ 0, UNBOUNDED ]
+        valid_source_types: [ radon.nodes.aws.AwsS3Bucket ]
         type: radon.capabilities.Invocable
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          function_code_location:
-            type: string
-            required: true
-          function_memory:
-            type: integer
-            required: true
-            default: { get_property: [ SELF, memory ] }
-          schedule:
-            type: string
-            required: true
-            default: { get_property: [ SELF, schedule ] }
-          function_timeout:
-            type: integer
-            required: true
-            default: { get_property: [ SELF, timeout ] }
-          aws_access_key_id:
-            type: string
-            required: true
-            default: { get_property: [ HOST, access_key_id ] }
           aws_region:
             type: string
             required: true
-            default: { get_property: [ HOST, region ] }
-          function_role_name:
+            default: { get_property: [ SELF, host, region ] }
+          lambda_runtime:
             type: string
             required: true
-            default: { get_property: [ SELF, role_name ] }
-          function_handler:
-            type: string
-            required: true
-            default: { get_property: [ SELF, handler ] }
-          aws_secret_access_key:
-            type: string
-            required: true
-            default: { get_property: [ HOST, secret_access_key ] }
+            default: { get_property: [ SELF, runtime ] }
           function_name:
             type: string
             required: true
             default: { get_property: [ SELF, name ] }
-          function_runtime:
+          lambda_timeout:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, timeout ] }
+          lambda_memory:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, memory ] }
+          lambda_handler:
             type: string
             required: true
-            default: { get_property: [ SELF, runtime ] }
-          function_role_description:
+            default: { get_property: [ SELF, handler ] }
+          func_alias:
             type: string
             required: true
-            default: { get_property: [ SELF, role_description ] }
+            default: { get_property: [ SELF, alias ] }
+          permission_id:
+            type: string
+            required: true
+            default: { get_property: [ SELF, statement_id ] }
+          zip_file:
+            type: string
+            required: true
+            default: { get_property: [ SELF, zip_file ] }
+          env_vars:
+            type: string
+            required: false
+            default: { get_property: [ SELF, env_vars ] }
+        operations:
+          create:
+            implementation:
+              primary: create
+              dependencies: [ thumbnail-generator-dev, policy ]
+              timeout: 0
+          delete:
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      thumbnail-generator-dev:
+        type: radon.artifacts.archive.JAR
+        file: thumbnail-generator-dev.jar
+      policy:
+        type: tosca.artifacts.File
+        file: policy.json
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml      
