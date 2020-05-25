@@ -19,7 +19,7 @@ topology_template:
         template_file: ""
       requirements:
         - host:
-            node: radon.nodes.apache.nifi.NifiRuntime
+            node: radon.nodes.nifi.Nifi
             relationship:
               type: tosca.relationships.HostedOn
             capability: tosca.capabilities.Container
@@ -47,7 +47,7 @@ topology_template:
         Region: ""
       requirements:
         - host:
-            node: radon.nodes.apache.nifi.NifiRuntime
+            node: radon.nodes.nifi.Nifi
             relationship:
               type: tosca.relationships.HostedOn
             capability: tosca.capabilities.Container
@@ -75,7 +75,7 @@ topology_template:
               type: con_ConnectNifiLocal_w1-wip1_0
             capability: ConnectToPipeline
         - host:
-            node: radon.nodes.apache.nifi.NifiRuntime
+            node: radon.nodes.nifi.Nifi
             relationship:
               type: tosca.relationships.HostedOn
             capability: tosca.capabilities.Container

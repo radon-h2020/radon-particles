@@ -16,13 +16,13 @@ node_types:
     requirements:
       - host:
           capability: tosca.capabilities.Container
-          node: radon.nodes.apache.nifi.NifiRuntime
+          node: radon.nodes.nifi.Nifi
           relationship:
             type: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
       - ConnectToPipeline:
           capability: radon.capabilities.datapipeline.ConnectToPipeline_w1-wip1
-          node: radon.nodes.apache.nifi.NifiRuntime
+          node: radon.nodes.nifi.Nifi
           relationship:
             type: radon.relationships.datapipeline.ConnectNifiLocal_w1-wip1
           occurrences: [ 0, UNBOUNDED ]

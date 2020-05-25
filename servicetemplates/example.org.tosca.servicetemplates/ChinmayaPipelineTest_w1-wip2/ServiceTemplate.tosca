@@ -108,7 +108,7 @@ topology_template:
               type: tosca.relationships.DependsOn
             capability: tosca.capabilities.Node
     NifiRuntime:
-      type: radon.nodes.apache.nifi.NifiRuntime
+      type: radon.nodes.nifi.Nifi
       metadata:
         x: 815
         y: 352
