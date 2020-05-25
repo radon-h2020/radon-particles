@@ -1,0 +1,66 @@
+# CHECK IF THE HOST ids are different
+
+- name: Create a RPG in the SOURCE server 
+  vars:  
+    query_rootPG_id: "resources[?name=='NiFi Flow' && starts_with(identifier, '/process-groups/')].identifier"
+    rootPG_ID: "{{ nifi_resources.json  | to_json | from_json | json_query(query_rootPG_id) | first }}" 
+  uri:
+        url: http://localhost:8080/nifi-api/process-groups/{{rootPG_ID.split('/')[2]}}/remote-process-groups
+        method: POST
+        body:
+          "revision":
+             "version": 0
+          "component":
+              "targetUri": "http://{{target_pipeline_server_ip}}:8080/nifi/"
+              "transportProtocol": "HTTP"
+        status_code: 201
+        body_format: json
+  register: newRPG
+
+- name: new RPG creation data
+  copy:
+    dest: /tmp/newRPG.txt
+    content: "{{ newRPG }}"
+
+# OUTPUT PORT INFO
+- name: Get the list of output port of source pipeline
+  uri:
+    url: http://localhost:8080/nifi-api/process-groups/{{source_pipeline_id}}/output-ports
+    method: GET
+  register: output_ports_list
+
+# INPUT PORT INFO
+- name: Get the list of input port of new RPG
+  uri:
+    url: http://localhost:8080/nifi-api/remote-process-groups/{{newRPG.json.id}}
+    method: GET
+  register: input_ports_list
+
+- name: RPG information file
+  copy:
+    dest: /tmp/input_ports_list.txt
+    content: "{{ input_ports_list }}"
+
+- name: create the connection between source pipeline and the new RPG
+  vars:
+    output_port_id: "{{ output_ports_list.json  | to_json | from_json | json_query(query_output_port_id)}}"
+    query_rootPG_id: "resources[?name=='NiFi Flow' && starts_with(identifier, '/process-groups/')].identifier"
+    rootPG_ID: "{{ nifi_resources.json  | to_json | from_json | json_query(query_rootPG_id) | first }}"
+  uri:
+        url: http://localhost:8080/nifi-api/process-groups/{{rootPG_ID.split('/')[2]}}/connections
+        method: POST
+        body:
+          "revision": 
+             "version": 0
+          "component":            
+            "source": 
+                "id": "{{ output_port_id }}"
+                "groupId": "{{ source_pipeline_id }}"
+                "type": "OUTPUT_PORT"
+            "destination": 
+                "id": "{{input_ports_list.json.component.contents.inputPorts[0].id}}"
+                "groupId": "{{newRPG.json.id}}"
+                "type": "REMOTE_INPUT_PORT"            
+        status_code: 201
+        body_format: json
+

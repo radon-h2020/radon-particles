@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Write VM hostname to nifi configuration, to avoid issues with remote HTTP connections between nifi nodes.  
+      lineinfile: 
+        path: "/usr/local/bin/nifi-{{ tarball_version }}/conf/nifi.properties"
+        regexp: '^(.*)nifi.remote.input.host=(.*)$' 
+        line: 'nifi.remote.input.host={{ansible_nodename.split(".")[0] | lower }}'
+        backrefs: yes
+
+    - name: Enable RAW site-to-site protocol, by adding the 8043 port number
+      lineinfile: 
+        path: "/usr/local/bin/nifi-{{ tarball_version }}/conf/nifi.properties"
+        regexp: '^(.*)nifi.remote.input.socket.port=(.*)$' 
+        line: 'nifi.remote.input.socket.port=8043'
+        backrefs: yes

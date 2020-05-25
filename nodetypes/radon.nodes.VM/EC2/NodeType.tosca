@@ -1,0 +1,104 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.VM.EC2:
+    derived_from: tosca.nodes.Compute
+    metadata:
+      targetNamespace: "radon.nodes.VM"
+      abstract: "false"
+      final: "false"
+    attributes:
+      id:
+        type: string
+    properties:
+      image:
+        type: string
+        required: true
+        default: "ami-00890f614e48ce866"
+        status: supported
+      ssh_key_name:
+        type: string
+        required: true
+        status: supported
+      vpc_subnet_id:
+        type: string
+        required: true
+        status: supported
+      instance_type:
+        type: string
+        required: true
+        default: "t2.micro"
+        status: supported
+      ssh_key_file:
+        type: string
+        required: true
+        status: supported
+      ssh_user:
+        type: string
+        required: true
+        status: supported
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            description: create
+            inputs:
+              image:
+                type: string
+                required: true
+                default: { get_property: [ SELF, image ] }
+              ssh_key_name:
+                type: string
+                required: true
+                default: { get_property: [ SELF, ssh_key_name ] }
+              vpc_subnet_id:
+                type: string
+                required: true
+                default: { get_property: [ SELF, vpc_subnet_id ] }
+              region:
+                type: string
+                required: true
+                default: { get_property: [ HOST, region ] }
+              instance_type:
+                type: string
+                required: true
+                default: { get_property: [ SELF, instance_type ] }
+              ssh_key_file:
+                type: string
+                required: true
+                default: { get_property: [ SELF, ssh_key_file ] }
+              ssh_user:
+                type: string
+                required: true
+                default: { get_property: [ SELF, ssh_user ] }
+            implementation:
+              primary: create
+              timeout: 0
+          delete:
+            description: delete
+            inputs:
+              id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              region:
+                type: string
+                required: true
+                default: { get_property: [ HOST, region ] }
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml

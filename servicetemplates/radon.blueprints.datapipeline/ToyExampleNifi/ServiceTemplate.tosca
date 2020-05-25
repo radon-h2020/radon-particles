@@ -1,0 +1,164 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.datapipeline"
+topology_template:
+  node_templates:
+    Nifi_2:
+      type: radon.nodes.nifi.Nifi
+      metadata:
+        x: "1095"
+        y: "347"
+        displayName: "Nifi Two"
+      properties:
+        port: 8080
+        component_version: "1.11.1"
+      requirements:
+        - host:
+            node: OpenStack_2
+            relationship: con_HostedOn_1
+            capability: host
+    Pipeline_2:
+      type: radon.nodes.nifi.Pipeline
+      metadata:
+        x: "1388"
+        y: "126"
+        displayName: "Push To Bucket"
+      properties:
+        template_name: "pushToS3_PG"
+        cred_file_path: { get_artifact: [ SELF, credentials ] }
+        object_name: "PutS3Object"
+        name: "pushToS3_PG"
+        template_file: { get_artifact: [ SELF, pushToS3_PG ] }
+      requirements:
+        - host:
+            node: Nifi_2
+            relationship: con_HostedOn_3
+            capability: host
+      artifacts:
+        credentials:
+          type: tosca.artifacts.File
+          file: credentials
+        pushToS3_PG:
+          type: tosca.artifacts.File
+          file: pushToS3_PG.xml
+    Pipeline_3:
+      type: radon.nodes.nifi.Pipeline
+      metadata:
+        x: "797"
+        y: "128"
+        displayName: "Invoke Function"
+      properties:
+        template_name: "invokeLambda_PG"
+        cred_file_path: { get_artifact: [ SELF, credentials ] }
+        object_name: "invokeLambda"
+        name: "invokeLambda_PG"
+        template_file: { get_artifact: [ SELF, invokeLambda_PG ] }
+      requirements:
+        - host:
+            node: Nifi_2
+            relationship: con_HostedOn_4
+            capability: host
+        - connect:
+            node: Pipeline_2
+            relationship: con_ConnectsToNifi_1
+            capability: connect
+      artifacts:
+        credentials:
+          type: tosca.artifacts.File
+          file: credentials
+        invokeLambda_PG:
+          type: tosca.artifacts.File
+          file: invokeLambda_PG.xml
+    OpenStack_2:
+      type: radon.nodes.VM.OpenStack
+      metadata:
+        x: "1094"
+        y: "586"
+        displayName: "VM Two"
+      properties:
+        flavor: "m2.xsmall"
+        key_name: "rem-VM2"
+        image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
+        name: "vmtwo_centos2"
+        network: "provider_64_net"
+      requirements:
+        - dependency:
+            node: OpenStack
+            relationship: con_DependsOn_0
+            capability: feature
+    OpenStack:
+      type: radon.nodes.VM.OpenStack
+      metadata:
+        x: "371"
+        y: "588"
+        displayName: "VM One"
+      properties:
+        flavor: "m2.xsmall"
+        key_name: "rem-VM2"
+        image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
+        name: "vmone_centos1"
+        network: "provider_64_net"
+    Nifi:
+      type: radon.nodes.nifi.Nifi
+      metadata:
+        x: "371"
+        y: "343"
+        displayName: "Nifi One"
+      properties:
+        port: 8080
+        component_version: "1.11.1"
+      requirements:
+        - host:
+            node: OpenStack
+            relationship: con_HostedOn_0
+            capability: host
+    Pipeline:
+      type: radon.nodes.nifi.Pipeline
+      metadata:
+        x: "374"
+        y: "124"
+        displayName: "Get From Bucket"
+      properties:
+        template_name: "readFrmS3_PG"
+        cred_file_path: { get_artifact: [ SELF, credentials ] }
+        object_name: "ListS3"
+        name: "readFrmS3_PG"
+        template_file: { get_artifact: [ SELF, readFrmS3_PG ] }
+      requirements:
+        - host:
+            node: Nifi
+            relationship: con_HostedOn_2
+            capability: host
+        - connect:
+            node: Pipeline_3
+            relationship: con_ConnectsToNifi_0
+            capability: connect
+      artifacts:
+        readFrmS3_PG:
+          type: tosca.artifacts.File
+          file: readFrmS3_PG.xml
+        credentials:
+          type: tosca.artifacts.File
+          file: credentials
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_DependsOn_0:
+      type: tosca.relationships.DependsOn
+    con_HostedOn_3:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectsToNifi_0:
+      type: radon.relationships.nifi.ConnectsToNifi
+      properties:
+        credential: null
+    con_ConnectsToNifi_1:
+      type: radon.relationships.nifi.ConnectsToNifi
+      properties:
+        credential: null
+    con_HostedOn_4:
+      type: tosca.relationships.HostedOn

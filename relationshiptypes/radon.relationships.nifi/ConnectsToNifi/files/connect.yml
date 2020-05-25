@@ -1,0 +1,25 @@
+
+---
+- hosts: all
+  vars:
+    query_output_port_id: "outputPorts[0].id"
+    query_input_port_id: "inputPorts[0].id"
+    root_id_query: "resources[?name=='NiFi Flow' && starts_with(identifier, '/process-groups/')].identifier"
+  tasks:
+    
+    # ROOT INFO
+    - name: Get list of available NiFi resources for fetching the ids of root reource group, input port and output port
+      uri:
+        url: http://localhost:8080/nifi-api/resources
+        method: GET
+      register: nifi_resources
+    
+    # CHECK IF THE HOST ids are different
+    - name: invoke LOCAL connection ansible script if both the server ips are same
+      include_tasks: /home/opera_0.5.2/DP_demo/V1/dpp/localConnection.yml
+      when: source_pipeline_server_ip == target_pipeline_server_ip
+
+    - name: invoke REMOTE connection ansible script if both the server ips are same
+      include_tasks: /home/opera_0.5.2/DP_demo/V1/dpp/remoteConnection.yml
+      when: source_pipeline_server_ip != target_pipeline_server_ip
+ 
