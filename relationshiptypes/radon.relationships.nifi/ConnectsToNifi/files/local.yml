@@ -1,0 +1,37 @@
+    # OUTPUT PORT INFO
+    - name: Get the list of output port of source pipeline
+      uri:
+        url: http://localhost:8080/nifi-api/process-groups/{{source_pipeline_id}}/output-ports
+        method: GET
+      register: output_ports_list
+
+    # INPUT PORT INFO
+    - name: Get the list of input port of target pipeline
+      uri:
+        url: http://localhost:8080/nifi-api/process-groups/{{target_pipeline_id}}/input-ports
+        method: GET
+      register: input_ports_list
+
+
+    - name: create NiFi connection  
+      vars:
+        output_port_id: "{{ output_ports_list.json  | to_json | from_json | json_query(query_output_port_id)}}"
+        input_port_id: "{{ input_ports_list.json  | to_json | from_json | json_query(query_input_port_id)}}"
+        root_identifier: "{{ nifi_resources.json  | to_json | from_json | json_query(root_id_query) | first}}"
+      uri:
+        url: http://localhost:8080/nifi-api/process-groups/{{ root_identifier.split('/')[2] }}/connections
+        method: POST
+        body:
+          "revision": 
+             "version": 0
+          "component":            
+            "source": 
+                "id": "{{ output_port_id }}"
+                "groupId": "{{ source_pipeline_id }}"
+                "type": "OUTPUT_PORT"
+            "destination": 
+                "id": "{{ input_port_id }}"
+                "groupId": "{{ target_pipeline_id }}"
+                "type": "INPUT_PORT"            
+        status_code: 201
+        body_format: json

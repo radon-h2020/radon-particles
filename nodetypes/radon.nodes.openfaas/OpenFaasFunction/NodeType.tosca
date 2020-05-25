@@ -1,37 +1,52 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.openfaas.OpenFaasFunction:
     derived_from: radon.nodes.abstract.Function
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.openfaas"
     attributes:
       function_url:
         type: string
-        default: { concat: [ get_attribute: [SELF, gateway_url], "/function/", get_property: [SELF, function_name] ] }
       gateway_url:
         type: string
-        default: { get_attribute: [HOST, url]}
+        default: { get_attribute: [ HOST, url ] }
     properties:
-      function_name:
-        type: string
       function_language_template:
         type: string
+        required: true
+        status: supported
         constraints:
-          - valid_values: [csharp, dockerfile, docekrfile-armhf, go-armhf, go, java8, node-arm64, node-armhf, node, php7, python-armhf, python, python3-armhf, python3, ruby]
+          - valid_values: [ csharp,dockerfile,docekrfile-armhf,go-armhf,go,java8,node-arm64,node-armhf,node,php7,python-armhf,python,python3-armhf,python3,ruby ]
+      function_name:
+        type: string
+        required: true
+        status: supported
     requirements:
       - host:
-          node: radon.nodes.openfaas.OpenFaasPlatform
           capability: tosca.capabilities.Container
+          node: radon.nodes.openfaas.OpenFaasPlatform
           relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
     capabilities:
       invocable:
+        occurrences: [ 0, UNBOUNDED ]
         type: radon.capabilities.Invocable
-        occurrences: [0, UNBOUNDED]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
+          GATEWAY:
+            type: string
+            required: true
+            default: { get_attribute: [ HOST, url ] }
           FUNCTION_NAME:
+            type: string
+            required: true
             default: { get_property: [ SELF, functiom_name ] }
           FUNCTION_LANGUAGE_TEMPLATE:
+            type: string
+            required: true
             default: { get_property: [ SELF, function_language_template ] }
-          GATEWAY:
-            default: { get_attribute: [HOST, url]}

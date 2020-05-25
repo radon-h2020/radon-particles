@@ -2,27 +2,20 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 policy_types:
   radon.policies.testing.LoadTest:
-    derived_from: radon.policies.testing.TestCase
-    properties:
-      repeats:
-        type: string
-        required: true
-        status: supported
-      lower_bound:
-        type: string
-        required: true
-        status: supported
-      threads:
-        type: string
-        required: true
-        default: 5
-        status: supported
-      upper_bound:
-        type: string
-        required: true
-        status: supported
+    derived_from: radon.policies.testing.Test
     metadata:
-      targetNamespace: radon.policies.testing
-      abstract: no
-      final: no
+      targetNamespace: "radon.policies.testing"
+      abstract: "true"
+      final: "false"
+    properties:
+      hostname:
+        type: string
+        description: Convenience property to specify a hostname as the target of the load test (optional)
+        required: false
+        status: supported
+      port:
+        type: string
+        description: Convenience property to specify a port as the target of the load test (optional)
+        required: false
+        status: supported
     targets: [ tosca.nodes.SoftwareComponent ]

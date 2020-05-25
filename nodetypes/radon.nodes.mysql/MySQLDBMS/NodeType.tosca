@@ -1,26 +1,41 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.mysql.MySQLDBMS:
     derived_from: tosca.nodes.DBMS
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.mysql"
     properties:
-      root_password:
-        required: true
       port:
+        type: string
         required: true
         default: 3306
+        status: supported
+      root_password:
+        type: string
+        required: true
+        status: supported
       component_version:
+        type: string
         required: true
         default: 5.6
+        status: supported
     capabilities:
       host:
-        type: tosca.capabilities.Compute
+        occurrences: [ 1, UNBOUNDED ]
         valid_source_types: [ radon.nodes.mysql.MySQLDatabase ]
+        type: tosca.capabilities.Compute
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          DBMS_ROOT_PASSWORD:
-            default: { get_property: [SELF, root_password] }
           DBMS_PORT:
             type: integer
-            default: { get_property: [SELF, port] }
+            required: true
+            default: { get_property: [ SELF, port ] }
+          DBMS_ROOT_PASSWORD:
+            type: string
+            required: true
+            default: { get_property: [ SELF, root_password ] }

@@ -1,0 +1,55 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Create Lambda AWS role
+      iam_role:
+        name: Lambda-role
+        state: present
+        assume_role_policy_document: "{{ lookup('file','policy.json') }}"
+        managed_policy:
+          -  arn:aws:iam::aws:policy/AWSLambdaFullAccess
+      register: iam_role_response
+      
+    - name: Lambda "{{ function_name }}" deploy
+      lambda:
+        name: "{{ function_name }}"
+        zip_file: "{{ zip_file }}"
+        runtime: "{{ lambda_runtime }}"
+        region: "{{ aws_region }}"
+        role: "{{iam_role_response.arn}}"
+        handler: "{{ lambda_handler }}"
+        timeout: "{{ lambda_timeout }}"
+        memory_size: "{{ lambda_memory }}"
+        environment_variables: "{{ env_vars }}"
+      register: lambda_info
+
+    - name: Create function alias name
+      lambda_alias:
+        function_name: "{{ function_name }}"
+        name: "{{ func_alias }}"
+        region: "{{ aws_region }}"
+        state: present
+      register: alias_info
+
+    - name: "Add invocation permission of Lambda function on AWS : {{ permission_id }}"
+      lambda_policy:
+        function_name: "{{ function_name }}"
+        statement_id: "{{ permission_id }}"
+        action: lambda:InvokeFunction
+        region: "{{ aws_region }}"
+        alias: "{{ func_alias }}"
+        principal: "s3.amazonaws.com"
+
+    - name: Set attributes
+      set_stats:
+        data: 
+          arn: "{{alias_info.alias_arn}}"
+          region: "{{ aws_region }}"
+
+    - name: "Put concurrency of Lambda function on AWS : {{ function_name }}"
+      command: >-
+        aws lambda put-function-concurrency
+          --function-name {{ function_name }}
+          --reserved-concurrent-executions {{ function_concurrency }}
+          --region {{ aws_region }}
+      when: function_concurrency is defined

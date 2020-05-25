@@ -1,33 +1,46 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.azure.AzureHttpTriggeredFunction:
     derived_from: radon.nodes.azure.AzureFunction
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.azure"
     attributes:
       url:
         type: string
-        default: { get_operation_output: [SELF, Standard, create, URL]}
+        default: { get_operation_output: [ SELF, Standard, create, URL ] }
     properties:
-      auth_level:
-        type: string
-        required: false
-        constraints:
-          - valid_values: [anonymous, function, admin]
-      methods:
-        type: list
-        entry_schema: string
-        required: false
+      max_outstanding_requests:
+        type: integer
+        required: true
+        default: 200
+        status: supported
+      max_concurrent_requests:
+        type: integer
+        required: true
+        default: 100
+        status: supported
       route:
         type: string
         required: false
+        status: supported
+      auth_level:
+        type: string
+        required: false
+        status: supported
+        constraints:
+          - valid_values: [ anonymous,function,admin ]
+      methods:
+        type: list
+        required: false
+        status: supported
       route_prefix:
         type: string
-        default: api
-      max_outstanding_requests:
-        type: integer
-        default: 200
-      max_concurrent_requests:
-        type: integer
-        default: 100
+        required: true
+        default: "api"
+        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -35,21 +48,24 @@ node_types:
           AUTH_LEVEL:
             type: string
             required: false
-            default: { get_property: [SELF, auth_level] }
-          METHODS:
-            type: string
-            required: false
-            default: { get_property: [SELF, methods] }
+            default: { get_property: [ SELF, auth_level ] }
           ROUTE:
             type: string
             required: false
-            default: { get_property: [SELF, route] }
+            default: { get_property: [ SELF, route ] }
           ROUTE_PREFIX:
             type: string
-            default: { get_property: [SELF, route_prefix] }
+            required: true
+            default: { get_property: [ SELF, route_prefix ] }
           MAX_OUTSTANDING_REQUESTS:
             type: string
-            default: { get_property: [SELF, max_outstanding_requests] }
+            required: true
+            default: { get_property: [ SELF, max_outstanding_requests ] }
+          METHODS:
+            type: string
+            required: false
+            default: { get_property: [ SELF, methods ] }
           MAX_CONCURRENT_REQUESTS:
             type: string
-            default: { get_property: [SELF, max_concurrent_requests] }
+            required: true
+            default: { get_property: [ SELF, max_concurrent_requests ] }

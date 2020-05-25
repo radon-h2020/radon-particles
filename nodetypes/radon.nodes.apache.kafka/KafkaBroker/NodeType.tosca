@@ -1,89 +1,114 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.apache.kafka.KafkaBroker:
     derived_from: radon.nodes.java.JavaApplication
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.apache.kafka"
     attributes:
+      broker_urls:
+        description: represents a list of one or more urls that corresponds to the brokers of this kafka cluster
+        type: list
       java_home:
         type: string
         default: { get_attribute: [ HOST, java_home ] }
       kafka_home:
         type: string
         default: { get_operation_output: [ SELF, Standard, create, KAFKA_HOME ] }
-      broker_urls:
-        description: represents a list of one or more urls that corresponds to the brokers of this kafka cluster
-        type: list
-        entry_schema:
-          type: string
     properties:
-      component_version:
-        type: version
-        default: 0.10.2.2
-        constraints:
-          - valid_values: [0.10.2.2, 0.11.0.3]
-      scala_version:
-        type: version
-        default: 2.11
-        constraints:
-          - valid_values: [2.11, 2.12]
-      kf_heap_size:
-        type: integer
-        default: 1024
-      zk_heap_size:
-        type: integer
-        default: 500
       log_cleaner_enable:
         type: boolean
+        required: true
         default: false
+        status: supported
+      zk_heap_size:
+        type: integer
+        required: true
+        default: 500
+        status: supported
+      scala_version:
+        type: version
+        required: true
+        default: 2.11
+        status: supported
+        constraints:
+          - valid_values: [ 2.11,2.12 ]
+      component_version:
+        type: version
+        required: true
+        default: "0.10.2.2"
+        status: supported
+        constraints:
+          - valid_values: [ 0.10.2.2,0.11.0.3 ]
+      kf_heap_size:
+        type: integer
+        required: true
+        default: 1024
+        status: supported
     capabilities:
       host:
+        occurrences: [ 0, UNBOUNDED ]
+        valid_source_types: [ radon.nodes.apache.kafka.KafkaTopic ]
         type: radon.capabilities.kafka.KafkaHosting
-        valid_source_types: [radon.nodes.apache.kafka.KafkaTopic]
-        occurrences: [0, UNBOUNDED]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
+          stop:
+            inputs:
+              JAVA_HOME:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, java_home ] }
+              KAFKA_HOME:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, kafka_home ] }
+          start:
+            inputs:
+              JAVA_HOME:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, java_home ] }
+              KAFKA_HOME:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, kafka_home ] }
           create:
             inputs:
               KAFKA_VERSION:
                 type: version
-                default: { get_property: [SELF, component_version] }
+                required: true
+                default: { get_property: [ SELF, component_version ] }
               SCALA_VERSION:
                 type: version
-                default: { get_property: [SELF, scala_version] }
+                required: true
+                default: { get_property: [ SELF, scala_version ] }
           configure:
             inputs:
-              IP_ADDRESS:
-                type: string
-                default: { get_attribute: [HOST, public_address] }
-              LOG_CLEANER_ENABLE:
-                type: boolean
-                default: { get_property: [SELF, log_cleaner_enable] }
-              JAVA_HOME:
-                type: string
-                default: { get_attribute: [SELF, java_home] }
-              KAFKA_HOME:
-                type: string
-                default: { get_attribute: [SELF, kafka_home] }
-              KF_HEAP_SIZE:
-                type: integer
-                default: { get_property: [SELF, kf_heap_size] }
               ZK_HEAP_SIZE:
                 type: integer
-                default: { get_property: [SELF, zk_heap_size] }
-          start:
-            inputs:
-              KAFKA_HOME:
-                type: string
-                default: { get_attribute: [SELF, kafka_home] }
+                required: true
+                default: { get_property: [ SELF, zk_heap_size ] }
               JAVA_HOME:
                 type: string
-                default: { get_attribute: [SELF, java_home] }
-          stop:
-            inputs:
+                required: true
+                default: { get_attribute: [ SELF, java_home ] }
               KAFKA_HOME:
                 type: string
-                default: { get_attribute: [SELF, kafka_home] }
-              JAVA_HOME:
+                required: true
+                default: { get_attribute: [ SELF, kafka_home ] }
+              IP_ADDRESS:
                 type: string
-                default: { get_attribute: [SELF, java_home] }
+                required: true
+                default: { get_attribute: [ HOST, public_address ] }
+              LOG_CLEANER_ENABLE:
+                type: boolean
+                required: true
+                default: { get_property: [ SELF, log_cleaner_enable ] }
+              KF_HEAP_SIZE:
+                type: integer
+                required: true
+                default: { get_property: [ SELF, kf_heap_size ] }

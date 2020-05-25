@@ -1,30 +1,48 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.mysql.MySQLDatabase:
     derived_from: tosca.nodes.Database
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.mysql"
     properties:
-      user:
-        required: true
       password:
+        type: string
         required: true
-    capabilities:
-      database_endpoint:
-        type: tosca.capabilities.Endpoint.Database
-        occurrences: [0, UNBOUNDED]
+        status: supported
+      user:
+        type: string
+        required: true
+        status: supported
     requirements:
       - host:
-          node: radon.nodes.mysql.MySQLDBMS
           capability: tosca.capabilities.Compute
+          node: radon.nodes.mysql.MySQLDBMS
           relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    capabilities:
+      database_endpoint:
+        occurrences: [ 0, UNBOUNDED ]
+        type: tosca.capabilities.Endpoint.Database
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          DB_NAME:
-            default: { get_property: [SELF, name] }
           DB_USER:
-            default: { get_property: [SELF, user] }
-          DB_PASSWORD:
-            default: { get_property: [SELF, password] }
+            type: string
+            required: true
+            default: { get_property: [ SELF, user ] }
+          DB_NAME:
+            type: string
+            required: true
+            default: { get_property: [ SELF, name ] }
           DBMS_ROOT_PASSWORD:
-            default: { get_property: [HOST, root_password] }
+            type: string
+            required: true
+            default: { get_property: [ HOST, root_password ] }
+          DB_PASSWORD:
+            type: string
+            required: true
+            default: { get_property: [ SELF, password ] }

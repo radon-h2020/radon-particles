@@ -1,12 +1,18 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.docker.DockerEngine:
     derived_from: tosca.nodes.Container.Runtime
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.docker"
     attributes:
       port:
         type: integer
-        default: { get_attribute: [SELF, docker, port] }
+        default: { get_attribute: [ SELF, docker, port ] }
     capabilities:
       host:
-        type: radon.capabilities.container.DockerRuntime
+        occurrences: [ 1, UNBOUNDED ]
         valid_source_types: [ radon.nodes.docker.DockerApplication ]
+        type: radon.capabilities.container.DockerRuntime

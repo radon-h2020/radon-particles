@@ -1,17 +1,10 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 relationship_types:
   radon.relationships.azure.AzureCosmosDBTriggers:
-    derived_from: radon.relationships.azure.AzureTriggers
     description: Azure-specific relationship type representing CosmosDB-to-AzureFunction communication
-    interfaces:
-      Configure:
-        type: tosca.interfaces.relationship.Configure
-        inputs:
-          COLLECTION_NAME:
-            default: { get_property: [SOURCE, collection_name] }
-          CONNECTION_STRING_SETTING:
-            default: { get_property: [SOURCE, connection_string_setting] }
-          ACCOUNT_NAME:
-            default: { get_property: [SOURCE, account_name] }
-          RESOURCE_GROUP:
-            default: { get_property: [SOURCE, resource_group] }
+    derived_from: radon.relationships.azure.AzureTriggers
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.relationships.azure"

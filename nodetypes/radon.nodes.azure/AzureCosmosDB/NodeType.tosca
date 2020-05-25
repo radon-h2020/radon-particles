@@ -1,35 +1,52 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.azure.AzureCosmosDB:
     derived_from: radon.nodes.azure.AzureResource
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.azure"
     properties:
-      collection_name:
-        type: string
-      connection_string_setting:
-        type: string
-      account_name:
-        type: string
       resource_group:
         type: string
+        required: true
+        status: supported
+      account_name:
+        type: string
+        required: true
+        status: supported
+      connection_string_setting:
+        type: string
+        required: true
+        status: supported
+      collection_name:
+        type: string
+        required: true
+        status: supported
     requirements:
       - invoker:
-          relationship: radon.relationships.azure.AzureCosmosDBTriggers
           capability: radon.capabilities.Invocable
           node: radon.nodes.azure.AzureResourceTriggeredFunction
-          occurrences: [0,UNBOUNDED]
+          relationship: radon.relationships.azure.AzureCosmosDBTriggers
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
           COLLECTION_NAME:
             type: string
-            default: { get_property: [collection_name]}
-          CONNECTION_STRING_SETTING:
-            type: string
-            default: { get_property: [connection_string_setting]}
+            required: true
+            default: { get_property: [ collection_name ] }
           ACCOUNT_NAME:
             type: string
-            default: { get_property: [account_name]}
+            required: true
+            default: { get_property: [ account_name ] }
           RESOURCE_GROUP:
             type: string
-            default: { get_property: [resource_group]}
+            required: true
+            default: { get_property: [ resource_group ] }
+          CONNECTION_STRING_SETTING:
+            type: string
+            required: true
+            default: { get_property: [ connection_string_setting ] }

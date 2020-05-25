@@ -1,58 +1,82 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.google.GoogleCloudPlatform:
     derived_from: radon.nodes.abstract.CloudPlatform
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.google"
     properties:
-      sdk_version:
-        type: version
-        required: false
-        description: Used to sepcify the SDK version required to manage Google Cloud resources
-      project_id:
-        type: string
-        required: true
-        description: specifies the unique project-id to be used
-      user_account:
-        type: string
-        required: false
-        description: specifies the user account used to log-in if a service account is not used
-      api_key:
-        type: string
-        required: false
-        description: encrypted key that can be used to access certain APIs that don't need to access private user data
       authentication_mode:
         type: string
-        required: true
-        constraints:
-          - valid_values: [user-account, service-account, api-key]
         description: indicates whether user-account, service-account or api-key authentication should be used.
-      region:
+        required: true
+        status: supported
+        constraints:
+          - valid_values: [ user-account,service-account,api-key ]
+      project_id:
         type: string
+        description: specifies the unique project-id to be used
+        required: true
+        status: supported
+      api_key:
+        type: string
+        description: encrypted key that can be used to access certain APIs that don't need to access private user data
+        required: false
+        status: supported
       zone:
         type: string
+        required: true
+        status: supported
+      sdk_version:
+        type: version
+        description: Used to sepcify the SDK version required to manage Google Cloud resources
+        required: false
+        status: supported
+      user_account:
+        type: string
+        description: specifies the user account used to log-in if a service account is not used
+        required: false
+        status: supported
+      region:
+        type: string
+        required: true
+        status: supported
     capabilities:
       host:
+        occurrences: [ 1, UNBOUNDED ]
+        valid_source_types: [ radon.nodes.google.GoogleCloudFunction, radon.nodes.google.GoogleCloudResource ]
         type: tosca.capabilities.Container
-        valid_source_types:
-          - radon.nodes.google.GoogleCloudFunction
-          - radon.nodes.google.GoogleCloudResource
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          SDK_VERSION:
-            default: { get_property: [SELF, sdk_version] }
-            required: false
-          PROJECT_ID:
-            default: { get_property: [SELF, project_id] }
-          AUTHENTICATION_MODE:
-            default: { get_property: [SELF, authentication_mode] }
-          USER_ACCOUNT:
-            default: { get_property: [SELF, user_account] }
-            required: false
           API_KEY:
-            default: { get_property: [SELF, api_key] }
+            type: string
             required: false
-          REGION:
-            default: { get_property: [SELF, region] }
+            default: { get_property: [ SELF, api_key ] }
           ZONE:
-            default: { get_property: [SELF, zone] }
+            type: string
+            required: true
+            default: { get_property: [ SELF, zone ] }
+          SDK_VERSION:
+            type: string
+            required: false
+            default: { get_property: [ SELF, sdk_version ] }
+          AUTHENTICATION_MODE:
+            type: string
+            required: true
+            default: { get_property: [ SELF, authentication_mode ] }
+          PROJECT_ID:
+            type: string
+            required: true
+            default: { get_property: [ SELF, project_id ] }
+          USER_ACCOUNT:
+            type: string
+            required: false
+            default: { get_property: [ SELF, user_account ] }
+          REGION:
+            type: string
+            required: true
+            default: { get_property: [ SELF, region ] }

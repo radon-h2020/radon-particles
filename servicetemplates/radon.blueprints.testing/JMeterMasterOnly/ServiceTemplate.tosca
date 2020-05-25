@@ -1,0 +1,44 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.testing"
+topology_template:
+  node_templates:
+    Workstation:
+      type: radon.nodes.Workstation
+      metadata:
+        x: "1299"
+        y: "316"
+        displayName: "Workstation"
+    DockerEngine:
+      type: radon.nodes.docker.DockerEngine
+      metadata:
+        x: "870"
+        y: "308"
+        displayName: "DockerEngine"
+      properties:
+        component_version: null
+      requirements:
+        - host:
+            node: Workstation
+            relationship: con_HostedOn_1
+            capability: host
+    JMeter:
+      type: radon.nodes.testing.JMeter
+      metadata:
+        x: "405"
+        y: "308"
+        displayName: "JMeterMasterAgent"
+      properties:
+        jmeter_properties: null
+        worker_hostnames: null
+      requirements:
+        - host:
+            node: DockerEngine
+            relationship: con_HostedOn_0
+            capability: host
+  relationship_templates:
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn

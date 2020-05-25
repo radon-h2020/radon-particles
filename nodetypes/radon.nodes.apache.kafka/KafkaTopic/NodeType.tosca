@@ -1,92 +1,106 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.apache.kafka.KafkaTopic:
     derived_from: tosca.nodes.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.apache.kafka"
     attributes:
       broker_urls:
         description: represents a list of one or more urls that corresponds to the brokers of the kafka cluster this topic is hosted on
         type: list
-        entry_schema:
-          type: string
-        default: { get_attribute: [HOST, broker_urls] }
+        default: { get_attribute: [ HOST, broker_urls ] }
     properties:
-      topic_name:
-        type: string
-        required: true
-        constraints:
-          - pattern: "[-_A-Za-z0-9]+"
       partitions:
         type: integer
         required: false
         default: 1
-      replicas:
-        type: integer
-        required: false
-        default: 1
+        status: supported
       min_insync_replicas:
         type: integer
         required: false
         default: 1
+        status: supported
         constraints:
           - greater_or_equal: 0
-      retention:
-        type: integer
-        required: false
-        default: 10080
-        constraints:
-          - greater_or_equal:
-      roll_time:
-        type: integer
-        required: false
-        default: 10080
-        constraints:
-          - greater_or_equal: 1
       segment_size:
         type: integer
         required: false
         default: 1000000
+        status: supported
         constraints:
           - greater_or_equal: 1
-    capabilities:
-      kafka_topic:
-        type: radon.capabilities.kafka.KafkaTopic
-        occurrences: [0, UNBOUNDED]
+      replicas:
+        type: integer
+        required: false
+        default: 1
+        status: supported
+      roll_time:
+        type: integer
+        required: false
+        default: 10080
+        status: supported
+        constraints:
+          - greater_or_equal: 1
+      topic_name:
+        type: string
+        required: true
+        status: supported
+      retention:
+        type: integer
+        required: false
+        default: 10080
+        status: supported
     requirements:
       - host:
           capability: radon.capabilities.kafka.KafkaHosting
           relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
       - openwhisk_invoker:
           capability: radon.capabilities.Invocable
-          relationship: radon.relationships.apache.openwhisk.OpenWhiskKafkaTriggers
           node: radon.nodes.apache.openwhisk.OpenWhiskFunction
-          occurrences: [0,UNBOUNDED]
+          relationship: radon.relationships.apache.openwhisk.OpenWhiskKafkaTriggers
+          occurrences: [ 0, UNBOUNDED ]
       - openfaas_invoker:
           capability: radon.capabilities.Invocable
-          relationship: radon.relationships.openfaas.OpenFaasKafkaTriggers
           node: radon.nodes.openfaas.OpenFaasFunction
-          occurrences: [0,UNBOUNDED]
+          relationship: radon.relationships.openfaas.OpenFaasKafkaTriggers
+          occurrences: [ 0, UNBOUNDED ]
+    capabilities:
+      kafka_topic:
+        occurrences: [ 0, UNBOUNDED ]
+        type: radon.capabilities.kafka.KafkaTopic
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          TOPIC_NAME:
-            type: string
-            default: { get_property: [SELF, topic_name] }
-          PARTITIONS:
-            type: integer
-            default: { get_property: [SELF, partitions] }
-          REPLICAS:
-            type: integer
-            default: { get_property: [SELF, replicas] }
           MIN_INSYNC_REPLICAS:
             type: integer
-            default: { get_property: [SELF, min_insync_replicas] }
+            required: true
+            default: { get_property: [ SELF, min_insync_replicas ] }
           RETENTION:
             type: integer
-            default: { get_property: [SELF, retention] }
-          SEGMENT_SIZE:
+            required: true
+            default: { get_property: [ SELF, retention ] }
+          REPLICAS:
             type: integer
-            default: { get_property: [SELF, segment_size] }
+            required: true
+            default: { get_property: [ SELF, replicas ] }
+          PARTITIONS:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, partitions ] }
+          TOPIC_NAME:
+            type: string
+            required: true
+            default: { get_property: [ SELF, topic_name ] }
           ROLL_TIME:
             type: integer
-            default: { get_property: [SELF, roll_time] }
+            required: true
+            default: { get_property: [ SELF, roll_time ] }
+          SEGMENT_SIZE:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, segment_size ] }

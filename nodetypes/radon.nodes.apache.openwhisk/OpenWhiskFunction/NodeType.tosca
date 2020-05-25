@@ -1,43 +1,57 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.apache.openwhisk.OpenWhiskFunction:
     derived_from: radon.nodes.abstract.Function
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.apache.openwhisk"
     attributes:
       rest_api_endpoint:
         type: string
-        default: { concat: [ get_attribute: [HOST, api_url], "/api/v1/namespaces/", get_property: [HOST, default_namespace], "/actions/", get_property: [SELF, function_package_name], "/", get_property: [SELF, function_name] ] }
     properties:
       function_name:
         type: string
+        required: true
+        status: supported
       function_package_name:
         type: string
+        required: true
+        status: supported
       function_runtime:
         type: string
+        required: true
+        status: supported
         constraints:
-          - valid_values: [go_1_11, java_8, ballerina_0_990, nodejs_12, nodejs_10, nodejs_8, nodejs_6, php_7_3, python_2, python_3, ruby_2_5, swift_4_2, dotnet_2_2]
+          - valid_values: [ go_1_11,java_8,ballerina_0_990,nodejs_12,nodejs_10,nodejs_8,nodejs_6,php_7_3,python_2,python_3,ruby_2_5,swift_4_2,dotnet_2_2 ]
       entry_point:
         type: string
         required: false
+        status: supported
     requirements:
       - host:
-          node: radon.nodes.apache.openwhisk.OpenWhiskPlatform
           capability: tosca.capabilities.Container
+          node: radon.nodes.apache.openwhisk.OpenWhiskPlatform
           relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
     capabilities:
       invocable:
+        occurrences: [ 0, UNBOUNDED ]
         type: radon.capabilities.Invocable
-        occurrences: [0, UNBOUNDED]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
           FUNCTION_NAME:
             type: string
-            default: { get_property: [SELF, function_name] }
+            required: true
+            default: { get_property: [ SELF, function_name ] }
           FUNCTION_RUNTIME:
             type: string
-            default: { get_property: [SELF, function_runtime] }
+            required: true
+            default: { get_property: [ SELF, function_runtime ] }
           ENTRY_POINT:
             type: string
             required: false
-            default: { get_property: [SELF, entry_point] }
+            default: { get_property: [ SELF, entry_point ] }

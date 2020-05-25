@@ -1,44 +1,17 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 relationship_types:
   radon.relationships.azure.AzureTriggers:
-    derived_from: radon.relationships.abstract.Triggers
     description: Azure-specific relationship type representing AzureResource-to-AzureFunction communication
+    derived_from: radon.relationships.abstract.Triggers
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.relationships.azure"
     properties:
       events:
+        type: string
+        required: true
+        status: supported
         constraints:
           - length: 1
-    interfaces:
-      Configure:
-        type: tosca.interfaces.relationship.Configure
-        inputs:
-          EVENT:
-            type: radon.datatypes.Event
-            default: { get_property: [SELF, events, 1] }
-          RESOURCE:
-            default: { get_property: [SOURCE, name] }
-          FUNCTION_NAME:
-            type: string
-            default: { get_property: [TARGET, function_name] }
-          TIMEOUT:
-            type: integer
-            default: { get_property: [TARGET, timeout] }
-          APP_NAME:
-            type: string
-            default: { get_property: [TARGET, app_name] }
-          APP_RUNTIME:
-            type: string
-            default: { get_property: [TARGET, app_runtime] }
-          APP_OS_TYPE:
-            type: string
-            required: false
-            default: { get_property: [TARGET, app_os_type] }
-          APP_STORAGE_ACCOUNT:
-            description: if empty, assumes app already existing
-            type: string
-            required: false
-            default: { get_property: [TARGET, app_storage_account] }
-          APP_RESOURCE_GROUP:
-            description: if empty, assumes app already existing
-            type: string
-            required: false
-            default: { get_property: [TARGET, app_resource_group] }

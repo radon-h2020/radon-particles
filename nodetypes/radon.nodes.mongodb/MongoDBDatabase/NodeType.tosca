@@ -1,30 +1,44 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.mongodb.MongoDBDatabase:
     derived_from: tosca.nodes.Database
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.mongodb"
     properties:
       authentication_database:
         type: string
         required: false
-    capabilities:
-      database_endpoint:
-        type: tosca.capabilities.Endpoint.Database
-        occurrences: [0, UNBOUNDED]
+        status: supported
     requirements:
       - host:
           capability: tosca.capabilities.Compute
           node: radon.nodes.mongodb.MongoDBMS
           relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    capabilities:
+      database_endpoint:
+        occurrences: [ 0, UNBOUNDED ]
+        type: tosca.capabilities.Endpoint.Database
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          DB_NAME:
-            default: { get_property: [SELF, name] }
-          DB_USER:
-            default: { get_property: [SELF, user] }
-          DB_PASSWORD:
-            default: { get_property: [SELF, password] }
           DB_USER_AUTH_DB:
-            default: { get_property: [SELF, authentication_database] }
+            type: string
             required: false
+            default: { get_property: [ SELF, authentication_database ] }
+          DB_USER:
+            type: string
+            required: true
+            default: { get_property: [ SELF, user ] }
+          DB_NAME:
+            type: string
+            required: true
+            default: { get_property: [ SELF, name ] }
+          DB_PASSWORD:
+            type: string
+            required: true
+            default: { get_property: [ SELF, password ] }

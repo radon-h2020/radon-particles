@@ -1,0 +1,32 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.testing.JMeter:
+    derived_from: radon.nodes.testing.LoadTestAgent
+    metadata:
+      targetNamespace: "radon.nodes.testing"
+      abstract: "false"
+      final: "false"
+    properties:
+      jmeter_properties:
+        type: string
+        description: Location and filename of a file with JMeter properties (optional)
+        required: false
+        status: supported
+      worker_hostnames:
+        type: string
+        description: Comma-separated list of worker hostnames
+        required: false
+        status: supported
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            implementation:
+              primary: create
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml

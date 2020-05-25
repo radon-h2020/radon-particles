@@ -1,40 +1,54 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.azure.AzureFunction:
     derived_from: radon.nodes.abstract.Function
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.azure"
     properties:
-      function_name:
-        type: string
-      timeout:
-        type: integer
-        default: 300
-        constraints:
-          - in_range: [1, 600]
       app_name:
         type: string
-        constraints:
-          - pattern: "[-a-z0-9]+"
+        required: true
+        status: supported
       app_runtime:
-        description: if empty, assumes app already existing
         type: string
+        description: if empty, assumes app already existing
         required: false
+        status: supported
         constraints:
-          - valid_values: [dotnet, node, java, python, powershell]
+          - valid_values: [ dotnet,node,java,python,powershell ]
+      function_name:
+        type: string
+        required: true
+        status: supported
       app_os_type:
         type: string
         required: false
+        status: supported
         constraints:
-          - valid_values: [Windows, Linux]
+          - valid_values: [ Windows,Linux ]
       app_storage_account:
-        description: if empty, assumes app already existing
         type: string
+        description: if empty, assumes app already existing
         required: false
+        status: supported
+      timeout:
+        type: integer
+        required: true
+        default: 300
+        status: supported
+        constraints:
+          - in_range: [ 1,600 ]
       app_resource_group:
-        description: if empty, assumes app already existing
         type: string
+        description: if empty, assumes app already existing
         required: false
+        status: supported
     requirements:
       - host:
-          node: radon.nodes.azure.AzurePlatform
           capability: tosca.capabilities.Container
+          node: radon.nodes.azure.AzurePlatform
           relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]

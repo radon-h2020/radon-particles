@@ -1,0 +1,87 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.VM.OpenStack:
+    derived_from: tosca.nodes.Compute
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.VM"
+    attributes:
+      public_address:
+        description: OpenStack public IP address of the VM
+        type: string
+      id:
+        description: OpenStack id of the VM
+        type: string
+    properties:
+      flavor:
+        type: string
+        description: OpenStack flavor id (flavor names are not accepted)
+        required: true
+        status: supported
+      key_name:
+        type: string
+        description: OpenStack SSH key name that should be placed on the VM
+        required: true
+        status: supported
+      image:
+        type: string
+        description: OpenStack image id (image names are not accepted)
+        required: true
+        status: supported
+      name:
+        type: string
+        description: Name that should be given to the VM in OpenStack
+        required: true
+        status: supported
+      network:
+        type: string
+        description: OpenStack network id (network names are not accepted)
+        required: true
+        status: supported
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              flavor:
+                type: string
+                required: true
+                default: { get_property: [ SELF, flavor ] }
+              key_name:
+                type: string
+                required: true
+                default: { get_property: [ SELF, key_name ] }
+              image:
+                type: string
+                required: true
+                default: { get_property: [ SELF, image ] }
+              vm_name:
+                type: string
+                required: true
+                default: { get_property: [ SELF, name ] }
+              network:
+                type: string
+                required: true
+                default: { get_property: [ SELF, network ] }
+            implementation:
+              primary: create
+              timeout: 0
+          delete:
+            inputs:
+              id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml

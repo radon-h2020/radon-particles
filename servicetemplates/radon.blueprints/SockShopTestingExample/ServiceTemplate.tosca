@@ -1,0 +1,61 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints"
+topology_template:
+  node_templates:
+    Workstation:
+      type: radon.nodes.Workstation
+      metadata:
+        x: "640"
+        y: "413"
+        displayName: "Workstation"
+    SockShop:
+      type: radon.nodes.SockShop
+      metadata:
+        x: "638"
+        y: "101"
+        displayName: "SockShop"
+      properties:
+        component_version: 1
+      requirements:
+        - host:
+            node: Workstation
+            relationship: con_HostedOn_0
+            capability: host
+  relationship_templates:
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+  policies:
+    SimplePingTest:
+      type: radon.policies.testing.PingTest
+      properties:
+        hostname: "localhost"
+        ti_blueprint: "radon.blueprints.DeploymentTestAgent"
+        test_id: "pingtest_123"
+      targets: [ SockShop ]
+    SimpleEndpointTest:
+      type: radon.policies.testing.HttpEndpointTest
+      properties:
+        path: "/cart/"
+        hostname: "localhost"
+        method: "GET"
+        expected_status: 200
+        port: 80
+        expected_body: null
+        ti_blueprint: null
+        use_https: true
+        test_id: null
+        test_header: null
+        test_body: null
+      targets: [ SockShop ]
+    SimpleJMeterLoadTest:
+      type: radon.policies.testing.JMeterLoadTest
+      properties:
+        hostname: "localhost"
+        jmx_file: "sockshop.jmx"
+        port: 8080
+        ti_blueprint: "radon.blueprints.testing.JMeterMasterOnly"
+        user.properties: null
+        test_id: "loadtest213"
+      targets: [ SockShop ]

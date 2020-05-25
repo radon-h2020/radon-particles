@@ -1,23 +1,41 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 relationship_types:
   radon.relationships.aws.AwsTriggers:
-    derived_from: radon.relationships.abstract.Triggers
     description: AWS-specific relationship type representing AWS-to-AWS communication
+    derived_from: radon.relationships.abstract.Triggers
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.relationships.aws"
+    properties:
+      events:
+        type: string
+        description: List of events
+        required: false
+        status: supported
     interfaces:
       Configure:
         type: tosca.interfaces.relationship.Configure
         inputs:
-          source_aws_access_key_id:
-            default: { get_property: [ SOURCE, host, access_key_id ] }
-          source_aws_secret_access_key:
-            default: { get_property: [ SOURCE, host, secret_access_key ] }
-          source_aws_region:
-            default: { get_property: [ SOURCE, host, region ] }
-          target_aws_access_key_id:
-            default: { get_property: [ TARGET, host, access_key_id ] }
-          target_aws_secret_access_key:
-            default: { get_property: [ TARGET, host, secret_access_key ] }
-          target_aws_region:
-            default: { get_property: [ TARGET, host, region ] }
-          event_types:
-            default: { get_property: [ SELF, event_types ] }
+          aws_region:
+            type: string
+            required: true
+            default: { get_attribute: [ SOURCE, region ] }
+          bucket_name:
+            type: string
+            required: true
+            default: { get_attribute: [ SOURCE, bucket_name ] }
+          function_arn:
+            type: string
+            required: true
+            default: { get_attribute: [ TARGET, arn ] }
+          events:
+            type: string
+            required: true
+            default: { get_property: [ SELF, events ] }
+        operations:
+          post_configure_source:
+            implementation:
+              primary: event-binding.yml
+              timeout: 0

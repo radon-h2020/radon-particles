@@ -1,22 +1,32 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 policy_types:
   radon.policies.performance.AverageResponseTime:
     derived_from: tosca.policies.Performance
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.policies.performance"
     properties:
       lower_bound:
-        description: Time in seconds
         type: float
+        description: Time in seconds
         required: false
+        status: supported
         constraints:
           - greater_or_equal: 0.0
-      upper_bound:
-        description: Time in seconds
-        type: float
-        required: false
-        constraints:
-          - greater_or_equal: 0.0
-      target_entry:
-        type: string
       include_phase2:
         type: boolean
         required: false
+        status: supported
+      target_entry:
+        type: string
+        required: true
+        status: supported
+      upper_bound:
+        type: float
+        description: Time in seconds
+        required: false
+        status: supported
+        constraints:
+          - greater_or_equal: 0.0

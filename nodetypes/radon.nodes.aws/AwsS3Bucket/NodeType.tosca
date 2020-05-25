@@ -1,30 +1,57 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.aws.AwsS3Bucket:
     derived_from: tosca.nodes.Storage.ObjectStorage
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.aws"
     attributes:
-      arn:
+      bucket_name:
+        type: string
+      region:
         type: string
     properties:
       name:
         type: string
+        description: The name of the AWS S3 bucket
+        required: true
+        status: supported
     requirements:
       - host:
           capability: tosca.capabilities.Container
           relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
       - invoker:
           capability: radon.capabilities.Invocable
           relationship: radon.relationships.aws.AwsTriggers
-          occurrences: [0,UNBOUNDED]
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          aws_access_key_id:
-            default: { get_property: [ HOST, access_key_id ] }
-          aws_secret_access_key:
-            default: { get_property: [ HOST, secret_access_key ] }
           aws_region:
-            default: { get_property: [ HOST, region ] }
+            type: string
+            required: true
+            default: { get_property: [ SELF, host, region ] }
           bucket_name:
+            type: string
+            required: true
             default: { get_property: [ SELF, name ] }
+        operations:
+          create:
+            implementation:
+              primary: create
+              timeout: 0
+          delete:
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml

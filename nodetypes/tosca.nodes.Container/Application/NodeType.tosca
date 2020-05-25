@@ -1,13 +1,21 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   tosca.nodes.Container.Application:
     derived_from: tosca.nodes.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "tosca.nodes.Container"
     requirements:
       - host:
           capability: tosca.capabilities.Compute
           node: tosca.nodes.Container.Runtime
           relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
       - storage:
           capability: tosca.capabilities.Storage
+          occurrences: [ 1, 1 ]
       - network:
-          capability: tosca.capabilities.EndPoint
+          capability: tosca.capabilities.Endpoint
+          occurrences: [ 1, 1 ]

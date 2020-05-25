@@ -1,54 +1,76 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.mongodb.MongoDBMS:
     derived_from: tosca.nodes.DBMS
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.mongodb"
     attributes:
       url:
         type: string
-        default: { concat: ["http://", get_attribute: [HOST, public_address], get_property: [SELF, port] ] }
     properties:
-      component_version:
-        type: version
-        default: 3.6
-        constraints:
-          - valid_values: [3.2,3.4,3.6]
-      port:
-        default: 27017
-        required: true
-      db_path:
-        type: string
-        default: /var/lib/mongo
-        required: true
-      authorization_enabled:
-        type: boolean
-        default: false
-        required: true
       administrator:
         type: string
         required: false
+        status: supported
+      port:
+        type: string
+        required: true
+        default: 27017
+        status: supported
+      authorization_enabled:
+        type: boolean
+        required: true
+        default: false
+        status: supported
+      component_version:
+        type: version
+        required: true
+        default: 3.6
+        status: supported
+        constraints:
+          - valid_values: [ 3.2,3.4,3.6 ]
+      db_path:
+        type: string
+        required: true
+        default: "/var/lib/mongo"
+        status: supported
     capabilities:
       host:
+        occurrences: [ 1, UNBOUNDED ]
+        valid_source_types: [ radon.nodes.mongodb.MongoDBDatabase ]
         type: tosca.capabilities.Compute
-        valid_source_types: [radon.nodes.mongodb.MongoDBDatabase]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          IP_ADDRESS:
-            default: { get_attribute: [HOST, private_address] }
           MONGODB_VERSION:
             type: version
-            default: { get_property: [SELF, component_version] }
-          MONGODB_PORT:
-            type: integer
-            default: { get_property: [SELF, port] }
-          MONGODB_DB_PATH:
-            default: { get_property: [SELF, db_path] }
+            required: true
+            default: { get_property: [ SELF, component_version ] }
+          MONGODB_ADMIN:
+            type: string
+            required: false
+            default: { get_property: [ SELF, administrator ] }
           MONGODB_AUTHORIZATION:
             type: boolean
-            default: { get_property: [SELF, authorization_enabled] }
-          MONGODB_ADMIN:
-            default: {get_property: [SELF, administrator]}
-            required: false
+            required: true
+            default: { get_property: [ SELF, authorization_enabled ] }
+          IP_ADDRESS:
+            type: string
+            required: true
+            default: { get_attribute: [ HOST, private_address ] }
+          MONGODB_DB_PATH:
+            type: string
+            required: true
+            default: { get_property: [ SELF, db_path ] }
           MONGODB_ROOT_PASSWORD:
-            default: { get_property: [SELF, root_password] }
+            type: string
+            required: true
+            default: { get_property: [ SELF, root_password ] }
+          MONGODB_PORT:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, port ] }

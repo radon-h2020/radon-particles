@@ -1,0 +1,139 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.nifi.Pipeline:
+    derived_from: radon.nodes.abstract.DataPipeline
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.nifi"
+    attributes:
+      id:
+        description: Unique ID of the pipeline
+        type: string
+      pipeline_type:
+        description: type of the pipeline. e.g. processor, process-groups, inputPorts, RPG etc
+        type: string
+    properties:
+      template_name:
+        type: string
+        description: name of the pipeline
+        required: true
+        status: supported
+      cred_file_path:
+        type: string
+        description: credential file for access and secret key
+        required: true
+        status: supported
+      object_name:
+        type: string
+        description: object name in the process group
+        required: true
+        status: supported
+      template_file:
+        type: string
+        description: XML implementation of the pipeline
+        required: true
+        status: supported
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.nifi.Nifi
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - connect:
+          capability: tosca.capabilities.Endpoint
+          node: radon.nodes.nifi.Pipeline
+          relationship: tosca.relationships.ConnectsTo
+          occurrences: [ 0, 1 ]
+    capabilities:
+      connect:
+        description: Capability to receive data from other pipeline nodes
+        occurrences: [ 0, UNBOUNDED ]
+        valid_source_types: [ radon.nodes.nifi.Pipeline ]
+        type: tosca.capabilities.Endpoint
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          stop:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              pipeline_type:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_type ] }
+            implementation:
+              primary: stop
+              timeout: 0
+          start:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              pipeline_type:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_type ] }
+            implementation:
+              primary: start
+              timeout: 0
+          create:
+            inputs:
+              template_name:
+                type: string
+                required: true
+                default: { get_property: [ SELF, template_name ] }
+              template_file:
+                type: string
+                required: true
+                default: { get_property: [ SELF, template_file ] }
+            implementation:
+              primary: create
+              timeout: 0
+          configure:
+            inputs:
+              cred_file_path:
+                type: string
+                required: true
+                default: { get_property: [ SELF, cred_file_path ] }
+              object_name:
+                type: string
+                required: true
+                default: { get_property: [ SELF, object_name ] }
+            implementation:
+              primary: configure
+              timeout: 0
+          delete:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              pipeline_type:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_type ] }
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      stop:
+        type: radon.artifacts.Ansible
+        file: stop.yml
+      start:
+        type: radon.artifacts.Ansible
+        file: start.yml
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml

@@ -1,0 +1,55 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.legacy.AwsS3Bucket:
+    derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      targetNamespace: "radon.nodes.legacy"
+      abstract: "false"
+      final: "false"
+    attributes:
+      bucket_name:
+        type: string
+    properties:
+      aws_region:
+        type: string
+        description: AWS region
+        required: true
+        status: supported
+      bucket_name:
+        type: string
+        description: The name of the bucket
+        required: true
+        status: supported
+    capabilities:
+      bucket:
+        occurrences: [ 1, 1 ]
+        type: tosca.capabilities.Compute
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          aws_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, aws_region ] }
+          bucket_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, bucket_name ] }
+        operations:
+          create:
+            implementation:
+              primary: create
+              timeout: 0
+          delete:
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml

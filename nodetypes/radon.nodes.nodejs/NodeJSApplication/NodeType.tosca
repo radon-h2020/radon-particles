@@ -1,15 +1,23 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.nodejs.NodeJSApplication:
     derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.nodejs"
     properties:
       node_version:
         type: version
-        default: 10.16.0
+        required: true
+        default: "10.16.0"
+        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
           NODE_VERSION:
             type: version
-            default: { get_property: [SELF, node_version] }
+            required: true
+            default: { get_property: [ SELF, node_version ] }

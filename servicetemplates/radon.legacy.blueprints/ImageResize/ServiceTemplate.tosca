@@ -1,0 +1,95 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.legacy.blueprints"
+topology_template:
+  node_templates:
+    AwsS3Notification:
+      type: radon.nodes.legacy.AwsS3Notification
+      metadata:
+        x: "496"
+        y: "115"
+        displayName: "Event"
+      properties:
+        aws_region: "eu-central-1"
+      requirements:
+        - receives_notification:
+            node: AwsLambdaFunction
+            relationship: con_DependsOn_1
+            capability: receives_notification
+        - bucket:
+            node: AwsS3BucketIn
+            relationship: con_DependsOn_4
+            capability: bucket
+    AwsS3BucketOut:
+      type: radon.nodes.legacy.AwsS3Bucket
+      metadata:
+        x: "1202"
+        y: "297"
+        displayName: "Bucket Out"
+      properties:
+        aws_region: "eu-central-1"
+        bucket_name: "radon-particles-resized"
+    AwsLambdaFunction:
+      type: radon.nodes.legacy.AwsLambdaFunction
+      metadata:
+        x: "820"
+        y: "295"
+        displayName: "ImageResize"
+      properties:
+        aws_region: "eu-central-1"
+        lambda_runtime: "python3.6"
+        function_name: "radon-particle-test"
+        lambda_timeout: 3
+        lambda_memory: 128
+        function_alias: "test"
+        permission_id: "lambda_test_permission01"
+        zip_file: "X-test-ImageRes.zip"
+        lambda_handler: "image_resize.lambda_handler"
+      requirements:
+        - requires_role:
+            node: AwsCreateRole
+            relationship: con_DependsOn_0
+            capability: requires_role
+        - dependency:
+            node: AwsS3BucketOut
+            relationship: con_DependsOn_2
+            capability: feature
+        - bucket:
+            node: AwsS3BucketIn
+            relationship: con_DependsOn_3
+            capability: bucket
+      artifacts:
+        X-test-ImageRes:
+          type: radon.artifacts.Ansible
+          file: X-test-ImageRes.zip
+    AwsS3BucketIn:
+      type: radon.nodes.legacy.AwsS3Bucket
+      metadata:
+        x: "390"
+        y: "409"
+        displayName: "Bucket In"
+      properties:
+        aws_region: "eu-central-1"
+        bucket_name: "radon-particles"
+    AwsCreateRole:
+      type: radon.nodes.legacy.AwsCreateRole
+      metadata:
+        x: "1123"
+        y: "126"
+        displayName: "AWS Create Role"
+      properties:
+        role_name: "RadonLambda"
+        aws_region: "eu-central-1"
+        role_description: "Lambda role"
+  relationship_templates:
+    con_DependsOn_0:
+      type: tosca.relationships.DependsOn
+    con_DependsOn_1:
+      type: tosca.relationships.DependsOn
+    con_DependsOn_4:
+      type: tosca.relationships.DependsOn
+    con_DependsOn_2:
+      type: tosca.relationships.DependsOn
+    con_DependsOn_3:
+      type: tosca.relationships.DependsOn

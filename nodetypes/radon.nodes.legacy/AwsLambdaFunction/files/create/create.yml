@@ -1,0 +1,44 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Lambda "{{ function_name }}" deploy
+      lambda:
+        name: "{{ function_name }}"
+        zip_file: "{{ zip_file }}"
+        runtime: "{{ lambda_runtime }}"
+        region: "{{ aws_region }}"
+        role: "{{ aws_role }}"
+        handler: "{{ lambda_handler }}"
+        timeout: "{{ lambda_timeout }}"
+        memory_size: "{{ lambda_memory }}"
+      register: lambda_info
+
+    - name: Create function alias name
+      lambda_alias:
+        function_name: "{{ function_name }}"
+        name: "{{ func_alias }}"
+        region: "{{ aws_region }}"
+        state: present
+      register: alias_info
+
+    - name: "Add invocation permission of Lambda function on AWS : {{ permission_id }}"
+      lambda_policy:
+        function_name: "{{ function_name }}"
+        statement_id: "{{ permission_id }}"
+        action: lambda:InvokeFunction
+        region: "{{ aws_region }}"
+        alias: "{{ func_alias }}"
+        principal: "s3.amazonaws.com"
+
+    - name: Set attributes
+      set_stats:
+        data:
+          function_arn: "{{alias_info.alias_arn}}"
+
+    - name: "Put concurrency of Lambda function on AWS : {{ function_name }}"
+      command: >-
+        aws lambda put-function-concurrency
+          --function-name {{ function_name }}
+          --reserved-concurrent-executions {{ function_concurrency }}
+          --region {{ aws_region }}
+      when: function_concurrency is defined

@@ -1,42 +1,51 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.apache.openwhisk.OpenWhiskPlatform:
     derived_from: radon.nodes.abstract.CloudPlatform
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.apache.openwhisk"
     attributes:
       api_url:
         type: string
-        default:  { concat: ["http://", get_property: [SELF, api_host], get_property: [SELF, api_port] ] }
       auth_key:
         type: string
-        default: { concat: [get_property: [SELF, auth_username], get_property: [SELF, auth_password] ] }
     properties:
-      default_namespace:
+      auth_username:
         type: string
+        description: the username part of the authorization key used to gain access to the OpenWhisk API
         required: true
+        status: supported
       kubernetes_version:
         type: version
         required: false
         default: 1.8
-      auth_username:
-        type: string
-        required: true
-        description: the username part of the authorization key used to gain access to the OpenWhisk API
+        status: supported
       auth_password:
         type: string
-        required: true
         description: the password part of the authorization key used to gain access to the OpenWhisk API
+        required: true
+        status: supported
+      api_host:
+        type: string
+        required: true
+        status: supported
+      default_namespace:
+        type: string
+        required: true
+        status: supported
       api_port:
         type: integer
         required: true
         default: 31001
-      api_host:
-        type: string
-        required: true
+        status: supported
     capabilities:
       host:
+        occurrences: [ 1, UNBOUNDED ]
+        valid_source_types: [ radon.nodes.apache.openwhisk.OpenWhiskFunction ]
         type: tosca.capabilities.Container
-        valid_source_types:
-          - radon.nodes.apache.openwhisk.OpenWhiskFunction
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -45,13 +54,15 @@ node_types:
             inputs:
               KUBERNETES_VERSION:
                 type: version
-                default: { get_property: [SELF, kubernetes_version] }
                 required: false
+                default: { get_property: [ SELF, kubernetes_version ] }
           configure:
             inputs:
-              API_URL:
-                type: string
-                default: { get_attribute: [SELF, api_url] }
               AUTH_KEY:
                 type: string
-                default: { get_attribute: [SELF, auth_key] }
+                required: true
+                default: { get_attribute: [ SELF, auth_key ] }
+              API_URL:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, api_url ] }

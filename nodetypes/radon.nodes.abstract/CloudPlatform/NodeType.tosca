@@ -1,14 +1,19 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.abstract.CloudPlatform:
     derived_from: tosca.nodes.Root
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.abstract"
     properties:
       name:
         type: string
         required: false
+        status: supported
     capabilities:
       host:
+        occurrences: [ 1, UNBOUNDED ]
+        valid_source_types: [ radon.nodes.abstract.Function, tosca.nodes.Storage.ObjectStorage ]
         type: tosca.capabilities.Container
-        valid_source_types:
-          - radon.nodes.abstract.Function
-          - tosca.nodes.Storage.ObjectStorage

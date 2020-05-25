@@ -1,0 +1,133 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.legacy.AwsLambdaFunction:
+    derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      targetNamespace: "radon.nodes.legacy"
+      abstract: "false"
+      final: "false"
+    attributes:
+      function_arn:
+        description: AWS function arn
+        type: string
+    properties:
+      aws_region:
+        type: string
+        required: true
+        status: supported
+      lambda_runtime:
+        type: string
+        description: Runtime for lambda (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
+        required: true
+        status: supported
+      function_name:
+        type: string
+        required: true
+        status: supported
+      lambda_timeout:
+        type: string
+        description: Function timeout in seconds
+        required: true
+        status: supported
+      lambda_memory:
+        type: string
+        description: Function memory in MB
+        required: true
+        status: supported
+      function_alias:
+        type: string
+        required: true
+        status: supported
+      permission_id:
+        type: string
+        required: true
+        status: supported
+      zip_file:
+        type: string
+        description: path to a function zip file
+        required: true
+        status: supported
+      lambda_handler:
+        type: string
+        description: Handler for lambda function
+        required: true
+        status: supported
+    requirements:
+      - bucket:
+          capability: tosca.capabilities.Compute
+          relationship: tosca.relationships.DependsOn
+          occurrences: [ 1, 1 ]
+      - requires_role:
+          capability: tosca.capabilities.Compute
+          relationship: tosca.relationships.DependsOn
+          occurrences: [ 1, 1 ]
+    capabilities:
+      receives_notification:
+        occurrences: [ 1, UNBOUNDED ]
+        valid_source_types: [ radon.nodes.legacy.AwsS3Notification ]
+        type: tosca.capabilities.Compute
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          aws_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, aws_region ] }
+          lambda_runtime:
+            type: string
+            required: true
+            default: { get_property: [ SELF, lambda_runtime ] }
+          function_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, function_name ] }
+          lambda_timeout:
+            type: string
+            required: true
+            default: { get_property: [ SELF, lambda_timeout ] }
+          lambda_memory:
+            type: string
+            required: true
+            default: { get_property: [ SELF, lambda_memory ] }
+          func_alias:
+            type: string
+            required: true
+            default: { get_property: [ SELF, function_alias ] }
+          permission_id:
+            type: string
+            required: true
+            default: { get_property: [ SELF, permission_id ] }
+          zip_file:
+            type: string
+            required: true
+            default: { get_property: [ SELF, zip_file ] }
+          aws_role:
+            type: string
+            required: true
+            default: { get_attribute: [ SELF, requires_role, role_arn ] }
+          lambda_handler:
+            type: string
+            required: true
+            default: { get_property: [ SELF, lambda_handler ] }
+        operations:
+          create:
+            implementation:
+              primary: create
+              dependencies: [ X-test-ImageRes ]
+              timeout: 0
+          delete:
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      X-test-ImageRes:
+        type: radon.artifacts.archive.Zip
+        file: X-test-ImageRes.zip
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml
