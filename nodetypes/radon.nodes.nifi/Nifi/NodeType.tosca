@@ -22,7 +22,7 @@ node_types:
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.abstract.datapipeline ]
+        valid_source_types: [ radon.nodes.abstract.DataPipeline ]
         type: tosca.capabilities.Container
     interfaces:
       Standard:

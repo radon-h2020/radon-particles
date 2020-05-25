@@ -47,7 +47,7 @@ node_types:
           occurrences: [ 1, 1 ]
       - ConnectToPipeline:
           capability: radon.capabilities.datapipeline.ConnectToPipeline_w1-wip1
-          node: radon.nodes.abstract.datapipeline
+          node: radon.nodes.abstract.DataPipeline
           relationship:
             type: radon.relationships.datapipeline.ConnectNifiLocal_w1-wip1
           occurrences: [ 1, 1 ]
