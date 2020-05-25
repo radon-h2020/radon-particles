@@ -1,8 +1,0 @@
-tosca_definitions_version: tosca_simple_yaml_1_3
-
-artifact_types:
-  installPipeline_w1-wip1:
-    metadata:
-      targetNamespace: tosca.artifacts
-      abstract: no
-      final: no

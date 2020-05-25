@@ -2,7 +2,7 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
   radon.nodes.datapipeline.destination.PubsS3Bucket:
-    derived_from: radon.nodes.datapipeline.destination.PublishRemote_1.0-w1-wip2
+    derived_from: radon.nodes.datapipeline.destination.PublishRemote
     properties:
       template_name:
         type: string

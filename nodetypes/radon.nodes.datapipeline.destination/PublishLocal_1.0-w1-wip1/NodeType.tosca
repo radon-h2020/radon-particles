@@ -1,9 +1,0 @@
-tosca_definitions_version: tosca_simple_yaml_1_3
-
-node_types:
-  radon.nodes.datapipeline.destination.PublishLocal_1.0-w1-wip1:
-    derived_from: radon.nodes.datapipeline.destination.PublishDataEndPoint_1.0-w1-wip1
-    metadata:
-      targetNamespace: radon.nodes.datapipeline.destination
-      abstract: no
-      final: no

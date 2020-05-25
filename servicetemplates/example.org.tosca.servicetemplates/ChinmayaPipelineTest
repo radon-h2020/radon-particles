@@ -1,0 +1,95 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: example.org.tosca.servicetemplates
+topology_template:
+  node_templates:
+    AWSLambda:
+      type: radon.nodes.datapipeline.process.AWSLambda_1.0-w1
+      metadata:
+        x: 806
+        y: 80
+        displayName: AWSLambda
+      properties:
+        template_name: ""
+        cred_file_path: ""
+        function_name: ""
+        name: ""
+        region: "EU (Frankfurt)"
+        template_file: ""
+      requirements:
+        - host:
+            node: radon.nodes.nifi.Nifi
+            relationship:
+              type: tosca.relationships.HostedOn
+            capability: tosca.capabilities.Container
+        - ConnectToPipeline:
+            node: PubsS3Bucket
+            relationship:
+              type: con_ConnectNifiLocal_1
+            capability: ConnectToPipeline
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
+    PubsS3Bucket:
+      type: radon.nodes.datapipeline.destination.PubsS3Bucket
+      metadata:
+        x: 1167
+        y: 189
+        displayName: PubsS3Bucket
+      properties:
+        template_name: ""
+        cred_file_path: ""
+        BucketName: ""
+        name: ""
+        Region: ""
+      requirements:
+        - host:
+            node: radon.nodes.nifi.Nifi
+            relationship:
+              type: tosca.relationships.HostedOn
+            capability: tosca.capabilities.Container
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
+    ConsS3Bucket:
+      type: radon.nodes.datapipeline.source.ConsS3Bucket
+      metadata:
+        x: 393
+        y: 177
+        displayName: ConsS3Bucket
+      properties:
+        template_name: ""
+        cred_file_path: ""
+        BucketName: ""
+        name: ""
+        Region: ""
+      requirements:
+        - ConnectToPipeline:
+            node: AWSLambda
+            relationship:
+              type: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
+        - host:
+            node: radon.nodes.nifi.Nifi
+            relationship:
+              type: tosca.relationships.HostedOn
+            capability: tosca.capabilities.Container
+        - dependency:
+            node: tosca.nodes.Root
+            relationship:
+              type: tosca.relationships.DependsOn
+            capability: tosca.capabilities.Node
+  relationship_templates:
+    con_ConnectNifiLocal_0:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+      properties:
+        credential: ""
+    con_ConnectNifiLocal_1:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+      properties:
+        credential: ""

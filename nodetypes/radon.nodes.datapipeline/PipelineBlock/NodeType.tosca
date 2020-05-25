@@ -1,0 +1,15 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.PipelineBlock.PipelineBlock:
+    derived_from: radon.nodes.abstract.DataPipeline
+    properties:
+      name:
+        type: string
+        description: Name of the pipeline node
+        required: false
+        status: supported
+    metadata:
+      targetNamespace: radon.nodes.datapipeline
+      abstract: no
+      final: no

@@ -1,0 +1,33 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.destination.PublishDataEndPoint:
+    derived_from: radon.nodes.datapipeline.DestinationPB
+    metadata:
+      targetNamespace: radon.nodes.datapipeline.destination
+      abstract: no
+      final: no
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.nifi.Nifi
+          relationship:
+            type: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - ConnectToPipeline:
+          capability: radon.capabilities.datapipeline.ConnectToPipeline
+          node: (none)
+          relationship:
+            type: radon.relationships.datapipeline.ConnectNifiLocal
+          occurrences: [ 1, UNBOUNDED ]
+      - connectToPipeline:
+          capability: radon.capabilities.datapipeline.ConnectToPipeline
+          node: radon.nodes.nifi.Pipeline
+          relationship:
+            type: radon.relationships.datapipeline.ConnectNifiLocal
+          occurrences: [ 1, UNBOUNDED ]
+    capabilities:
+      ConnectToPipeline:
+        occurrences: [ 1, unbounded ]
+        valid_source_types: [ radon.nodes.datapipeline.MidwayPB, radon.nodes.datapipeline.SourcePB ]
+        type: radon.capabilities.datapipeline.ConnectToPipeline

@@ -2,7 +2,7 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
   radon.nodes.datapipeline.source.ConsS3Bucket:
-    derived_from: radon.nodes.datapipeline.source.ConsumeRemote_1.0-w1-wip2
+    derived_from: radon.nodes.datapipeline.source.ConsumeRemote
     properties:
       template_name:
         type: string
@@ -26,10 +26,10 @@ node_types:
       final: no
     requirements:
       - ConnectToPipeline:
-          capability: radon.capabilities.datapipeline.ConnectToPipeline_w1-wip1
+          capability: radon.capabilities.datapipeline.ConnectToPipeline
           node: radon.nodes.abstract.DataPipeline
           relationship:
-            type: radon.relationships.datapipeline.ConnectNifiLocal_w1-wip1
+            type: radon.relationships.datapipeline.ConnectNifiLocal
           occurrences: [ 1, 1 ]
     interfaces:
       Standard:

@@ -1,0 +1,9 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.MidwayPB:
+    derived_from: radon.nodes.datapipeline.PipelineBlock
+    metadata:
+      targetNamespace: radon.nodes.datapipeline
+      abstract: no
+      final: no
