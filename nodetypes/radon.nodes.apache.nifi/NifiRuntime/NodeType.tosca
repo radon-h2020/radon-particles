@@ -1,34 +1,55 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.apache.nifi.NifiRuntime:
     derived_from: tosca.nodes.SoftwareComponent
     properties:
-      component_version:
-        description: The version of Apache Nifi
-        required: true
       port:
+        type: inherited
         description: The port exposed by Apache Nifi
         required: true
         default: 8080
+        status: supported
+      component_version:
+        type: inherited
+        description: The version of Apache Nifi
+        required: true
+        status: supported
+    metadata:
+      abstract: no
+      final: no
     capabilities:
       host:
+        occurrences: [ 1, unbounded ]
+        valid_source_types: [ radon.nodes.abstract.DataPipeline, radon.nodes.apache.nifi.NifiPipeline ]
         type: tosca.capabilities.Container
-        valid_source_types: [ radon.nodes.apache.nifi.NifiPipeline ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
+          stop:
+            implementation:
+              primary: files/stop.yml
+              timeout: 0
+          start:
+            implementation:
+              primary: files/start.yml
+              timeout: 0
           create:
             inputs:
-              tarball_version: { default: { get_property: [ SELF, component_version ] } }
-            implementation: files/create.yml
-          start:
-            implementation: files/start.yml
-          stop:
-            implementation: files/stop.yml
+              tarball_version:
+                default: { get_property: [SELF, component_version] }
+            implementation:
+              primary: files/create.yml
+              timeout: 0
           configure:
-            implementation: files/configure.yml
+            implementation:
+              primary: files/configure.yml
+              timeout: 0
           delete:
             inputs:
-              tarball_version: { default: { get_property: [ SELF, component_version ] } }
-            implementation: files/delete.yml
+              tarball_version:
+                default: { get_property: [SELF, component_version] }
+            implementation:
+              primary: files/delete.yml
+              timeout: 0
