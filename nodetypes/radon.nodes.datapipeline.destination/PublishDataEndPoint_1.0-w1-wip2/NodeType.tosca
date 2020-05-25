@@ -22,7 +22,7 @@ node_types:
           occurrences: [ 1, UNBOUNDED ]
       - connectToPipeline:
           capability: radon.capabilities.datapipeline.ConnectToPipeline_w1-wip1
-          node: radon.nodes.apache.nifi.NifiPipeline
+          node: radon.nodes.nifi.Pipeline
           relationship:
             type: radon.relationships.datapipeline.ConnectNifiLocal_w1-wip1
           occurrences: [ 1, UNBOUNDED ]
