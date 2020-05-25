@@ -1,0 +1,8 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.source.ConsS3Bucket:
+    metadata:
+      targetNamespace: radon.nodes.datapipeline.source
+      abstract: no
+      final: no
