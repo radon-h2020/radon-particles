@@ -5,7 +5,7 @@ node_types:
     derived_from: radon.nodes.datapipeline.source.ConsumeDataEndPoint_1.0-w1-wip1
     attributes:
       id:
-        description: ID of the pipeline
+        description: id of the pipeline
         type: string
     metadata:
       targetNamespace: radon.nodes.datapipeline.source
