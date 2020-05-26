@@ -5,7 +5,7 @@ metadata:
 topology_template:
   node_templates:
     AWSLambda:
-      type: radon.nodes.datapipeline.process.AWSLambda_1.0-w1
+      type: radon.nodes.datapipeline.process.AWSLambda
       metadata:
         x: 806
         y: 80
