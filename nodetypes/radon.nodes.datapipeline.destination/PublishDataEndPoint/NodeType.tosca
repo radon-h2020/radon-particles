@@ -14,12 +14,6 @@ node_types:
           relationship:
             type: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
-      - ConnectToPipeline:
-          capability: radon.capabilities.datapipeline.ConnectToPipeline
-          node: (none)
-          relationship:
-            type: radon.relationships.datapipeline.ConnectNifiLocal
-          occurrences: [ 1, UNBOUNDED ]
       - connectToPipeline:
           capability: radon.capabilities.datapipeline.ConnectToPipeline
           node: radon.nodes.nifi.Pipeline
