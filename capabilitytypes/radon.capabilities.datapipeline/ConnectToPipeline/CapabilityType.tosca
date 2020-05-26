@@ -1,7 +1,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 capability_types:
-  ConnectToPipeline:
+  radon.capabilities.datapipeline.ConnectToPipeline:
     derived_from: tosca.capabilities.Endpoint
     metadata:
       targetNamespace: radon.capabilities.datapipeline
