@@ -40,12 +40,12 @@ topology_template:
         aws_region: "eu-central-1"
         lambda_runtime: "python3.6"
         function_name: "radon-particle-test"
-        lambda_timeout: 3
         lambda_memory: 128
-        function_alias: "test"
+        lambda_timeout: 3
         permission_id: "lambda_test_permission01"
-        zip_file: "X-test-ImageRes.zip"
+        function_alias: "test"
         lambda_handler: "image_resize.lambda_handler"
+        zip_file: "X-test-ImageRes.zip"
       requirements:
         - requires_role:
             node: AwsCreateRole

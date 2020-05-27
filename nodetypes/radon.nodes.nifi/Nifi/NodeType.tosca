@@ -50,7 +50,7 @@ node_types:
               tarball_version:
                 type: string
                 required: true
-                default: { get_property: [ SELF, component_version ] }          
+                default: { get_property: [ SELF, component_version ] }
             implementation:
               primary: configure
               timeout: 0
@@ -59,7 +59,7 @@ node_types:
               tarball_version:
                 type: string
                 required: true
-                default: { get_property: [ SELF, component_version ] }          
+                default: { get_property: [ SELF, component_version ] }
             implementation:
               primary: delete
               timeout: 0

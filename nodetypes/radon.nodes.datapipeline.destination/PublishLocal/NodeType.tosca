@@ -3,6 +3,13 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.datapipeline.destination.PublishLocal:
     derived_from: radon.nodes.datapipeline.destination.PublishDataEndPoint
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.destination"
+      abstract: "false"
+      final: "false"
+    attributes:
+      id:
+        type: string
     properties:
       create_if_missing:
         type: boolean
@@ -21,25 +28,16 @@ node_types:
         type: string
         required: true
         status: supported
-    attributes:
-      id:
-        type: string
-    metadata:
-      targetNamespace: radon.nodes.datapipeline.destination
-      abstract: no
-      final: no
     requirements:
       - host:
           capability: tosca.capabilities.Container
           node: radon.nodes.nifi.Nifi
-          relationship:
-            type: tosca.relationships.HostedOn
+          relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
       - ConnectToPipeline:
           capability: radon.capabilities.datapipeline.ConnectToPipeline
           node: radon.nodes.nifi.Pipeline
-          relationship:
-            type: radon.relationships.datapipeline.ConnectNifiLocal
+          relationship: radon.relationships.datapipeline.ConnectNifiLocal
           occurrences: [ 1, UNBOUNDED ]
     interfaces:
       Standard:
@@ -50,7 +48,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: stop
               timeout: 0
@@ -59,7 +57,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: start
               timeout: 0
@@ -68,11 +66,11 @@ node_types:
               template_name:
                 type: string
                 required: true
-                default: { get_property: [SELF, template_name] }
+                default: { get_property: [ SELF, template_name ] }
               template_file:
                 type: string
                 required: true
-                default: { get_property: [SELF, template_file] }
+                default: { get_property: [ SELF, template_file ] }
             implementation:
               primary: create
               timeout: 0
@@ -81,15 +79,15 @@ node_types:
               create_if_missing:
                 type: string
                 required: false
-                default: { get_property: [SELF, create_if_missing] }
+                default: { get_property: [ SELF, create_if_missing ] }
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
               directory:
                 type: string
                 required: true
-                default: { get_property: [SELF, directory] }
+                default: { get_property: [ SELF, directory ] }
             implementation:
               primary: configure
               timeout: 0
@@ -98,7 +96,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: delete
               timeout: 0

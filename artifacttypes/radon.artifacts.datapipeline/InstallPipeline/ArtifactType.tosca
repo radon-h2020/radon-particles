@@ -3,6 +3,6 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 artifact_types:
   radon.artifacts.datapipeline.InstallPipeline:
     metadata:
-      targetNamespace: radon.artifacts.datapipeline
-      abstract: no
-      final: no
+      targetNamespace: "radon.artifacts.datapipeline"
+      abstract: "false"
+      final: "false"

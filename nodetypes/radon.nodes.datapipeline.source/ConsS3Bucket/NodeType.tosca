@@ -3,6 +3,10 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.datapipeline.source.ConsS3Bucket:
     derived_from: radon.nodes.datapipeline.source.ConsumeRemote
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.source"
+      abstract: "false"
+      final: "false"
     properties:
       template_name:
         type: string
@@ -20,16 +24,11 @@ node_types:
         type: string
         required: true
         status: supported
-    metadata:
-      targetNamespace: radon.nodes.datapipeline.source
-      abstract: no
-      final: no
     requirements:
       - ConnectToPipeline:
           capability: radon.capabilities.datapipeline.ConnectToPipeline
           node: radon.nodes.abstract.DataPipeline
-          relationship:
-            type: radon.relationships.datapipeline.ConnectNifiLocal
+          relationship: radon.relationships.datapipeline.ConnectNifiLocal
           occurrences: [ 1, 1 ]
     interfaces:
       Standard:
@@ -40,7 +39,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: stop
               timeout: 0
@@ -49,7 +48,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: start
               timeout: 0
@@ -58,7 +57,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: create
               timeout: 0
@@ -67,19 +66,19 @@ node_types:
               cred_file_path:
                 type: string
                 required: true
-                default: { get_property: [SELF, cred_file_path] }
+                default: { get_property: [ SELF, cred_file_path ] }
               BucketName:
                 type: string
                 required: true
-                default: { get_property: [SELF, BucketName] }
+                default: { get_property: [ SELF, BucketName ] }
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
               Region:
                 type: string
                 required: true
-                default: { get_property: [SELF, Region] }
+                default: { get_property: [ SELF, Region ] }
             implementation:
               primary: config
               timeout: 0
@@ -88,7 +87,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: delete
               timeout: 0

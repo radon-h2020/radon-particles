@@ -34,12 +34,12 @@ topology_template:
         environment: "adasd"
         memory: 256
         name: "radon-particle-test"
-        alias: "dev"
         runtime: "java8"
+        alias: "dev"
         statement_id: "lambda_test_permission01"
         zip_file: "thumbnail-generator-dev.jar"
-        env_vars: { THUMBNAIL_BUCKET: "h2020radon-examples-target-bucket" }
         timeout: 300
+        env_vars: { THUMBNAIL_BUCKET: h2020radon-examples-target-bucket }
       requirements:
         - host:
             node: AwsPlatform

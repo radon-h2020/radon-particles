@@ -3,6 +3,13 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.datapipeline.source.S3Bucket:
     derived_from: radon.nodes.datapipeline.source.ConsumeRemote
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.source"
+      abstract: "false"
+      final: "false"
+    attributes:
+      id:
+        type: string
     properties:
       cred_file_path:
         type: string
@@ -23,33 +30,24 @@ node_types:
         type: string
         description: Specify region, if it is different from eu-central-1 region.
         required: false
-        default: eu-central-1
+        default: "eu-central-1"
         status: supported
       ObjectName:
         type: string
         description: Name of the object to be fetched. Leave blank if ContinuousFetch is True.
         required: false
-        default: ${filename}
+        default: "${filename}"
         status: supported
-    attributes:
-      id:
-        type: string
-    metadata:
-      targetNamespace: radon.nodes.datapipeline.source
-      abstract: no
-      final: no
     requirements:
       - host:
           capability: tosca.capabilities.Container
           node: radon.nodes.nifi.Nifi
-          relationship:
-            type: tosca.relationships.HostedOn
+          relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
       - ConnectToPipeline:
           capability: radon.capabilities.datapipeline.ConnectToPipeline
           node: radon.nodes.datapipeline.MidwayPB
-          relationship:
-            type: radon.relationships.datapipeline.ConnectNifiLocal
+          relationship: radon.relationships.datapipeline.ConnectNifiLocal
           occurrences: [ 0, UNBOUNDED ]
     capabilities:
       ConnectToPipeline:
@@ -65,7 +63,7 @@ node_types:
               id:
                 type: string
                 required: false
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: stop
               timeout: 0
@@ -74,7 +72,7 @@ node_types:
               pipeline_id:
                 type: string
                 required: false
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: start
               timeout: 0
@@ -83,12 +81,12 @@ node_types:
               template_name:
                 type: string
                 required: true
-                default: { get_property: [SELF, template_name] }
+                default: { get_property: [ SELF, template_name ] }
               template_file:
                 type: string
                 description: path to the template file
                 required: true
-                default: { get_artifact: [SELF, templateFile_localConn, file] }
+                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
             implementation:
               primary: create
               timeout: 0
@@ -97,19 +95,19 @@ node_types:
               BucketName:
                 type: string
                 required: true
-                default: { get_property: [SELF, BucketName] }
+                default: { get_property: [ SELF, BucketName ] }
               cred_file_path:
                 type: string
                 required: false
-                default: { get_property: [SELF, cred_file_path] }
+                default: { get_property: [ SELF, cred_file_path ] }
               pipeline_id:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
               Region:
                 type: string
                 required: false
-                default: { get_property: [SELF, Region] }
+                default: { get_property: [ SELF, Region ] }
             implementation:
               primary: configure
               timeout: 0

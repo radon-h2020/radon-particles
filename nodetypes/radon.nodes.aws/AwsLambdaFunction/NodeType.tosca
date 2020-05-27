@@ -9,27 +9,17 @@ node_types:
       targetNamespace: "radon.nodes.aws"
     attributes:
       arn:
-        type: string
         description: AWS function's Amazon Resource Name (ARN)
+        type: string
       region:
         type: string
     properties:
-      runtime:
+      handler:
         type: string
+        description: Handler for lambda function
         required: true
+        default: "index.handler"
         status: supported
-        description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-        default: "nodejs"
-        constraints:
-          - valid_values: [ nodejs,nodejs4.3,nodejs6.10,nodejs8.10,nodejs10.x,java8,python2.7,python3.6,python3.7,dotnetcore1.0,dotnetcore2.0,dotnetcore2.1,nodejs4.3-edge,go1.x,ruby2.5 ]
-      timeout:
-        type: integer
-        description: Function timeout in seconds
-        required: true
-        default: 3
-        status: supported
-        constraints:
-          - in_range: [ 1,900 ]
       memory:
         type: integer
         description: Function memory in MB
@@ -38,12 +28,14 @@ node_types:
         status: supported
         constraints:
           - in_range: [ 128,3008 ]
-      handler:
+      runtime:
         type: string
-        description: Handler for lambda function
+        description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
         required: true
-        default: "index.handler"
+        default: "nodejs"
         status: supported
+        constraints:
+          - valid_values: [ nodejs,nodejs4.3,nodejs6.10,nodejs8.10,nodejs10.x,java8,python2.7,python3.6,python3.7,dotnetcore1.0,dotnetcore2.0,dotnetcore2.1,nodejs4.3-edge,go1.x,ruby2.5 ]
       alias:
         type: string
         description: Lambda function's alias
@@ -59,6 +51,14 @@ node_types:
         description: path to a function zip file
         required: true
         status: supported
+      timeout:
+        type: integer
+        description: Function timeout in seconds
+        required: true
+        default: 3
+        status: supported
+        constraints:
+          - in_range: [ 1,900 ]
       env_vars:
         type: string
         description: Function's environment variables
@@ -102,10 +102,6 @@ node_types:
             type: integer
             required: true
             default: { get_property: [ SELF, memory ] }
-          lambda_handler:
-            type: string
-            required: true
-            default: { get_property: [ SELF, handler ] }
           func_alias:
             type: string
             required: true
@@ -114,6 +110,10 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, statement_id ] }
+          lambda_handler:
+            type: string
+            required: true
+            default: { get_property: [ SELF, handler ] }
           zip_file:
             type: string
             required: true
@@ -136,12 +136,12 @@ node_types:
       create:
         type: radon.artifacts.Ansible
         file: create.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml
       thumbnail-generator-dev:
         type: radon.artifacts.archive.JAR
         file: thumbnail-generator-dev.jar
       policy:
         type: tosca.artifacts.File
         file: policy.json
-      delete:
-        type: radon.artifacts.Ansible
-        file: delete.yml      

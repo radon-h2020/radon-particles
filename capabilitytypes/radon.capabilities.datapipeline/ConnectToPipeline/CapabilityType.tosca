@@ -4,6 +4,6 @@ capability_types:
   radon.capabilities.datapipeline.ConnectToPipeline:
     derived_from: tosca.capabilities.Endpoint
     metadata:
-      targetNamespace: radon.capabilities.datapipeline
-      abstract: no
-      final: no
+      targetNamespace: "radon.capabilities.datapipeline"
+      abstract: "false"
+      final: "false"

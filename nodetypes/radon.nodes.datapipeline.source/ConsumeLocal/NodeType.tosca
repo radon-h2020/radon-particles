@@ -3,6 +3,13 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
   radon.nodes.datapipeline.source.ConsumeLocal:
     derived_from: radon.nodes.datapipeline.source.ConsumeDataEndPoint
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.source"
+      abstract: "false"
+      final: "false"
+    attributes:
+      id:
+        type: string
     properties:
       template_name:
         type: string
@@ -17,25 +24,16 @@ node_types:
         type: string
         required: true
         status: supported
-    attributes:
-      id:
-        type: string
-    metadata:
-      targetNamespace: radon.nodes.datapipeline.source
-      abstract: no
-      final: no
     requirements:
       - host:
           capability: tosca.capabilities.Container
           node: radon.nodes.nifi.Nifi
-          relationship:
-            type: tosca.relationships.HostedOn
+          relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
       - ConnectToPipeline:
           capability: radon.capabilities.datapipeline.ConnectToPipeline
           node: radon.nodes.nifi.Nifi
-          relationship:
-            type: radon.relationships.datapipeline.ConnectNifiLocal
+          relationship: radon.relationships.datapipeline.ConnectNifiLocal
           occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
@@ -47,7 +45,7 @@ node_types:
                 type: string
                 description: ID of the pipeline.
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: stop
               timeout: 0
@@ -66,12 +64,12 @@ node_types:
                 type: string
                 description: Name of the template.
                 required: true
-                default: { get_property: [SELF, template_name] }
+                default: { get_property: [ SELF, template_name ] }
               template_file:
                 type: string
                 description: Path to the template file.
                 required: true
-                default: { get_artifact: [SELF, templateFile_localConn, file] }
+                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
             implementation:
               primary: Create
               timeout: 0
@@ -85,7 +83,7 @@ node_types:
                 type: string
                 description: Directory on local machine from where the data will be read.
                 required: true
-                default: { get_property: [SELF, directory] }
+                default: { get_property: [ SELF, directory ] }
             implementation:
               primary: configure
               timeout: 0
@@ -95,7 +93,7 @@ node_types:
                 type: string
                 description: ID of the pipeline
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: delete
               timeout: 0

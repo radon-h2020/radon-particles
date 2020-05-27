@@ -4,9 +4,9 @@ relationship_types:
   radon.relationships.datapipeline.ConnectNifiLocal:
     derived_from: tosca.relationships.ConnectsTo
     metadata:
-      targetNamespace: radon.relationships.datapipeline
-      abstract: no
-      final: no
+      targetNamespace: "radon.relationships.datapipeline"
+      abstract: "false"
+      final: "false"
     interfaces:
       Configure:
         operations:
