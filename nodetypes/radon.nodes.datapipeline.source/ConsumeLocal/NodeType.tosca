@@ -1,0 +1,126 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.source.ConsumeLocal:
+    derived_from: radon.nodes.datapipeline.source.ConsumeDataEndPoint
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.source"
+      abstract: "false"
+      final: "false"
+    attributes:
+      id:
+        type: string
+    properties:
+      template_name:
+        type: string
+        required: true
+        status: supported
+      directory:
+        type: string
+        description: Path to the file/folder
+        required: true
+        status: supported
+      template_file:
+        type: string
+        required: true
+        status: supported
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.nifi.Nifi
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - ConnectToPipeline:
+          capability: radon.capabilities.datapipeline.ConnectToPipeline
+          node: radon.nodes.nifi.Nifi
+          relationship: radon.relationships.datapipeline.ConnectNifiLocal
+          occurrences: [ 0, UNBOUNDED ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          stop:
+            inputs:
+              pipeline_id:
+                type: string
+                description: ID of the pipeline.
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: stop
+              timeout: 0
+          start:
+            inputs:
+              pipeline_id:
+                type: string
+                required: false
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: start
+              timeout: 0
+          create:
+            inputs:
+              template_name:
+                type: string
+                description: Name of the template.
+                required: true
+                default: { get_property: [ SELF, template_name ] }
+              template_file:
+                type: string
+                description: Path to the template file.
+                required: true
+                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
+            implementation:
+              primary: Create
+              timeout: 0
+          configure:
+            inputs:
+              pipeline_id:
+                type: string
+                required: false
+                default: { get_attribute: [ SELF, id ] }
+              directory:
+                type: string
+                description: Directory on local machine from where the data will be read.
+                required: true
+                default: { get_property: [ SELF, directory ] }
+            implementation:
+              primary: configure
+              timeout: 0
+          delete:
+            inputs:
+              pipeline_id:
+                type: string
+                description: ID of the pipeline
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      templateFile_LocalConn:
+        type: tosca.artifacts.File
+        description: Nifi template to consume local data and send to local pipelines.
+        file: ConsumeLocal_localConn.xml
+      stop:
+        type: tosca.artifacts.Implementation.Ansible
+        description: Script to stop the pipeline.
+        file: stop.yml
+      Create:
+        type: tosca.artifacts.Implementation.Ansible
+        description: Script to create the pipeline
+        file: create.yml
+      start:
+        type: tosca.artifacts.Implementation.Ansible
+        file: start.yml
+      configure:
+        type: tosca.artifacts.Implementation.Ansible
+        file: configure.yml
+      templateFile_RmtConn:
+        type: tosca.artifacts.File
+        description: Nifi template to consume local data and send to remote pipelines.
+        file: ConsumeLocal_RmtConn.xml
+      delete:
+        type: tosca.artifacts.Implementation.Ansible
+        description: Ansible script to delete the pipeline.
+        file: delete.yml

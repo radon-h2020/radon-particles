@@ -8,6 +8,10 @@ policy_types:
       final: "false"
       targetNamespace: "radon.policies.performance"
     properties:
+      include_phase2:
+        type: boolean
+        required: false
+        status: supported
       lower_bound:
         type: float
         description: Time in seconds
@@ -15,10 +19,6 @@ policy_types:
         status: supported
         constraints:
           - greater_or_equal: 0.0
-      include_phase2:
-        type: boolean
-        required: false
-        status: supported
       target_entry:
         type: string
         required: true

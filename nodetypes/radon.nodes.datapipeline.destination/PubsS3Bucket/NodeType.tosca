@@ -1,0 +1,106 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.destination.PubsS3Bucket:
+    derived_from: radon.nodes.datapipeline.destination.PublishRemote
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.destination"
+      abstract: "false"
+      final: "false"
+    attributes:
+      id:
+        type: string
+    properties:
+      template_name:
+        type: string
+        required: true
+        status: supported
+      BucketName:
+        type: string
+        required: true
+        status: supported
+      cred_file_path:
+        type: string
+        required: true
+        status: supported
+      Region:
+        type: string
+        required: true
+        status: supported
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          stop:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: stop
+              timeout: 0
+          start:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: start
+              timeout: 0
+          create:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: create
+              timeout: 0
+          configure:
+            inputs:
+              cred_file_path:
+                type: string
+                required: true
+                default: { get_property: [ SELF, cred_file_path ] }
+              BucketName:
+                type: string
+                required: true
+                default: { get_property: [ SELF, BucketName ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              Region:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Region ] }
+            implementation:
+              primary: config
+              timeout: 0
+          delete:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      stop:
+        type: tosca.artifacts.Implementation.Ansible
+        file: stop.yml
+      start:
+        type: tosca.artifacts.Implementation.Ansible
+        file: start.yml
+      create:
+        type: tosca.artifacts.Implementation.Ansible
+        file: create.yml
+      delete:
+        type: tosca.artifacts.Implementation.Ansible
+        file: delete.yml
+      config:
+        type: tosca.artifacts.Implementation.Ansible
+        file: configure.yml

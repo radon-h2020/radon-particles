@@ -1,0 +1,109 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.examples"
+topology_template:
+  node_templates:
+    AWSLambda:
+      type: radon.nodes.datapipeline.process.AWSLambda
+      metadata:
+        x: "823"
+        y: "148"
+        displayName: "AWSLambda"
+      properties:
+        template_name: null
+        cred_file_path: null
+        function_name: null
+        name: null
+        region: "EU (Frankfurt)"
+        template_file: null
+      requirements:
+        - host:
+            node: Nifi
+            relationship: con_HostedOn_2
+            capability: host
+        - ConnectToPipeline:
+            node: PubsS3Bucket
+            relationship: con_ConnectNifiLocal_1
+            capability: ConnectToPipeline
+    PubsS3Bucket:
+      type: radon.nodes.datapipeline.destination.PubsS3Bucket
+      metadata:
+        x: "1210"
+        y: "155"
+        displayName: "PubsS3Bucket"
+      properties:
+        template_name: null
+        cred_file_path: null
+        BucketName: null
+        name: null
+        Region: null
+      requirements:
+        - host:
+            node: Nifi
+            relationship: con_HostedOn_1
+            capability: host
+    ConsS3Bucket:
+      type: radon.nodes.datapipeline.source.ConsS3Bucket
+      metadata:
+        x: "350"
+        y: "155"
+        displayName: "ConsS3Bucket"
+      properties:
+        template_name: null
+        cred_file_path: null
+        BucketName: null
+        name: null
+        Region: null
+      requirements:
+        - ConnectToPipeline:
+            node: AWSLambda
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi
+            relationship: con_HostedOn_3
+            capability: host
+    OpenStack:
+      type: radon.nodes.VM.OpenStack
+      metadata:
+        x: "828"
+        y: "703"
+        displayName: "OpenStack"
+      properties:
+        key_name: null
+        flavor: null
+        image: null
+        name: null
+        network: null
+    Nifi:
+      type: radon.nodes.nifi.Nifi
+      metadata:
+        x: "828"
+        y: "450"
+        displayName: "Nifi"
+      properties:
+        port: 8080
+        component_version: null
+      requirements:
+        - host:
+            node: OpenStack
+            relationship: con_HostedOn_0
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_3:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectNifiLocal_0:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+      properties:
+        credential: null
+    con_ConnectNifiLocal_1:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+      properties:
+        credential: null

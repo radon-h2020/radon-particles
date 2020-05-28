@@ -36,17 +36,17 @@ capability_types:
         required: false
         default: "PRIVATE"
         status: supported
-      secure:
-        type: boolean
-        required: false
-        default: false
-        status: supported
       ports:
         type: map
         required: false
         status: supported
         constraints:
           - min_length: 1
+      secure:
+        type: boolean
+        required: false
+        default: false
+        status: supported
       url_path:
         type: string
         required: false

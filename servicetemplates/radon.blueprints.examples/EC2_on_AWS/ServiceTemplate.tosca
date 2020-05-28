@@ -28,8 +28,8 @@ topology_template:
         ssh_key_name: { get_input: ssh_key_name }
         vpc_subnet_id: { get_input: vpc_subnet_id }
         instance_type: "t2.micro"
-        ssh_key_file: { get_input: ssh_key_file }
         ssh_user: { get_input: ssh_user }
+        ssh_key_file: { get_input: ssh_key_file }
       requirements:
         - host:
             node: AwsPlatform
