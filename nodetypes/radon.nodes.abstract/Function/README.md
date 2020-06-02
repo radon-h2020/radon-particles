@@ -1,6 +1,6 @@
 ## Function Node Type (Abstract)
 
-Abstract function type representing a FaaS-hosted function independently of the underlying provider.
+Abstract node type representing a serverless function independently of the underlying provider.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
@@ -8,17 +8,21 @@ Abstract function type representing a FaaS-hosted function independently of the 
 
 ### Properties
 
-| Name | Required | Type | Constraint | Description |
-|:---- |:-------- |:---- |:---------- |:----------- |
-| `name` | `true` | `string` |   | Name of the function |
-| `environment` | `false` | `map of string` |  | Environment variables to set during the deployment |
+| Name | Required | Type | Constraint | Default Value | Description |
+|:---- |:-------- |:---- |:---------- |:------------- |:----------- |
+| `name` | `true` | `string` |   |   | Name of the function |
+| `environment` | `false` | `map: string` |   |   | Map of environment variables |
+| `entries` | `false` | `radon.datatypes.function.Entries` |   |   | Set of entries |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `tosca.capabilities.Container` |   | `tosca.relationships.HostedOn` |   |
+| `host` | `tosca.capabilities.Container` | `radon.nodes.abstract.CloudPlatform` | `tosca.relationships.HostedOn` | [1, 1] |
+| `endpoint` | `tosca.capabilities.Endpoint` |   | `radon.relationships.abstract.ConnectsTo` | [0, UNBOUNDED] |
 
-### Notes
+### Capabilities
 
-* A `deployment_package` artifact can be supplied of type `radon.artifacts.archive.Zip` in the node template.
+| Name | Type | Valid Source Types | Occurrences |
+|:---- |:---- |:------------------ |:----------- |
+| `invocable` | `radon.capabilities.Invocable` |   | [0, UNBOUNDED] |
