@@ -1,0 +1,79 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "example.org.tosca.servicetemplates"
+topology_template:
+  node_templates:
+    PublishLocal:
+      type: radon.nodes.datapipeline.destination.PublishLocal
+      metadata:
+        x: "1547"
+        y: "193"
+        displayName: "PublishLocal"
+      properties:
+        create_if_missing: true
+        template_name: "PublishLocal_localConn"
+        name: "publishlocal"
+        directory: "/tmp/out"
+      requirements:
+        - host:
+            node: Nifi
+            relationship: con_HostedOn_0
+            capability: host
+    OpenStack:
+      type: radon.nodes.VM.OpenStack
+      metadata:
+        x: "1232"
+        y: "1122"
+        displayName: "OpenStack"
+      properties:
+        key_name: "jakovits_ldpc"
+        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
+        image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
+        ssh_username: "ubuntu"
+        name: "nifihostpelle2"
+        network: "provider_64_net"
+    Nifi:
+      type: radon.nodes.nifi.Nifi
+      metadata:
+        x: "851"
+        y: "608"
+        displayName: "Nifi"
+      properties:
+        port: 8080
+        component_version: "1.11.4"
+      requirements:
+        - host:
+            node: OpenStack
+            relationship: con_HostedOn_3
+            capability: host
+    ConsumeLocal:
+      type: radon.nodes.datapipeline.source.ConsumeLocal
+      metadata:
+        x: "387"
+        y: "132"
+        displayName: "ConsumeLocal"
+      properties:
+        template_name: "ConsumeLocal_localConn"
+        name: "consumelocal"
+        directory: "/tmp/in"
+      requirements:
+        - connectToPipeline:
+            node: PublishLocal
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi
+            relationship: con_HostedOn_1
+            capability: host
+  relationship_templates:
+    con_HostedOn_3:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectNifiLocal_0:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+      properties:
+        credential: null

@@ -10,7 +10,25 @@ relationship_types:
     interfaces:
       Configure:
         operations:
-          postConfigureSource:
-          postConfigureTarget:
           preConfigureTarget:
-          preConfigureSource:
+            inputs:
+              source_pipeline_server_ip:
+                type: string
+                required: true
+                default: { get_attribute: [ SOURCE, host, host, public_address ] }
+              target_pipeline_server_ip:
+                type: string
+                required: true
+                default: { get_attribute: [ TARGET, host, host, public_address ] }
+              source_pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SOURCE, id ] }
+              target_pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ TARGET, id ] }
+            implementation:
+              primary: connect.yml
+              dependencies: [ local.yml, remote.yml ]
+              timeout: 0

@@ -31,33 +31,6 @@ node_types:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
-          stop:
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, id ] }
-            implementation:
-              primary: stop
-              timeout: 0
-          start:
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, id ] }
-            implementation:
-              primary: start
-              timeout: 0
-          create:
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, id ] }
-            implementation:
-              primary: create
-              timeout: 0
           configure:
             inputs:
               cred_file_path:
@@ -79,28 +52,7 @@ node_types:
             implementation:
               primary: config
               timeout: 0
-          delete:
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, id ] }
-            implementation:
-              primary: delete
-              timeout: 0
     artifacts:
-      stop:
-        type: tosca.artifacts.Implementation.Ansible
-        file: stop.yml
-      start:
-        type: tosca.artifacts.Implementation.Ansible
-        file: start.yml
-      create:
-        type: tosca.artifacts.Implementation.Ansible
-        file: create.yml
-      delete:
-        type: tosca.artifacts.Implementation.Ansible
-        file: delete.yml
       config:
         type: tosca.artifacts.Implementation.Ansible
         file: configure.yml

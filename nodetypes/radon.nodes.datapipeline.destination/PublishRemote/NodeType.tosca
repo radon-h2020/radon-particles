@@ -7,13 +7,3 @@ node_types:
       targetNamespace: "radon.nodes.datapipeline.destination"
       abstract: "false"
       final: "false"
-    requirements:
-      - host:
-          capability: tosca.capabilities.Container
-          node: radon.nodes.nifi.Nifi
-          relationship: tosca.relationships.HostedOn
-          occurrences: [ 1, 1 ]
-    capabilities:
-      ConnectToPipeline:
-        occurrences: [ 1, 1 ]
-        type: radon.capabilities.datapipeline.ConnectToPipeline
