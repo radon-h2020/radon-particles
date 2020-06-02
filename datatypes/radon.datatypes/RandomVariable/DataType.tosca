@@ -1,13 +1,16 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 data_types:
-  radon.datatypes.TimeDistribution:
+  radon.datatypes.RandomVariable:
     derived_from: tosca.datatypes.Root
     properties:
       mean:
-        type: integer
+        type: float
+        required: true
+        default: 1.0
         constraints:
-          - greater_or_equal: 0
+          - greater_or_equal: 0.0
       scv:
         type: float
+        required: false
         constraints:
           - greater_or_equal: 0.0
