@@ -1,0 +1,25 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.abstract.ObjectStorage:
+    derived_from: tosca.nodes.Storage.ObjectStorage
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.abstract"
+    properties:
+      entries:
+        type: radon.datatypes.objectstorage.Entries
+        required: false
+        status: supported
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.abstract.CloudPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - invoker:
+          capability: radon.capabilities.Invocable
+          node: radon.nodes.abstract.Function
+          relationship: radon.relationships.abstract.Triggers
+          occurrences: [ 0, UNBOUNDED ]
