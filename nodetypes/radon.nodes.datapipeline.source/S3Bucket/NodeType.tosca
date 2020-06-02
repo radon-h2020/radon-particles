@@ -69,7 +69,7 @@ node_types:
         description: This Nifi template file is only for the local connection.
         file: S3Bucket_SRC_PG_LocalConn.xml
       configure:
-        type: tosca.artifacts.Implementation.Ansible
+        type: tosca.artifacts.File
         file: configure.yml
       templateFile_RmtConn:
         type: tosca.artifacts.File

@@ -30,7 +30,7 @@ topology_template:
         key_name: "jakovits_ldpc"
         flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
         image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
-        ssh_username: "ubuntu"
+        ssh_username: "centos"
         name: "nifihostpelle2"
         network: "provider_64_net"
     Nifi:

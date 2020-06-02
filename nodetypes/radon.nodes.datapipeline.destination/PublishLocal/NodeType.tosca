@@ -50,7 +50,7 @@ node_types:
         type: tosca.artifacts.File
         file: PublishLocal_localConn.xml
       configure:
-        type: tosca.artifacts.Implementation.Ansible
+        type: tosca.artifacts.File
         file: configure.yml
       PublishLocal_rmtConn:
         type: tosca.artifacts.File

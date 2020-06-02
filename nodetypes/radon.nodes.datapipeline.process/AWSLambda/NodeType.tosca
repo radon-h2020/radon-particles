@@ -63,5 +63,5 @@ node_types:
         type: tosca.artifacts.File
         file: AWSlambda_localConn.xml
       configure:
-        type: tosca.artifacts.Implementation.Ansible
+        type: tosca.artifacts.File
         file: configure.yml

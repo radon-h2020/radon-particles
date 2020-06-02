@@ -54,7 +54,7 @@ node_types:
         type: tosca.artifacts.File
         file: S3Bucket_dest_PG_LocalConn.xml
       configure:
-        type: tosca.artifacts.Implementation.Ansible
+        type: tosca.artifacts.File
         file: configure.yml
       templateFile_RmtConn:
         type: tosca.artifacts.File

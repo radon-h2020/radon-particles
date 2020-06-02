@@ -1,7 +1,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  radon.nodes.PipelineBlock:
+  radon.nodes.datapipeline.PipelineBlock:
     derived_from: radon.nodes.abstract.DataPipeline
     metadata:
       targetNamespace: "radon.nodes.datapipeline"
@@ -46,10 +46,14 @@ node_types:
               timeout: 0
           create:
             inputs:
-              pipeline_id:
+              template_file: 
                 type: string
                 required: true
-                default: { get_attribute: [SELF, id] }
+                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
+              template_name: 
+                type: string
+                required: true
+                default: { get_property: [SELF, template_name] }
             implementation:
               primary: create
               timeout: 0

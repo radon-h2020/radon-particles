@@ -44,7 +44,7 @@ node_types:
         description: Nifi template to consume local data and send to local pipelines.
         file: ConsumeLocal_localConn.xml
       configure:
-        type: tosca.artifacts.Implementation.Ansible
+        type: tosca.artifacts.File
         file: configure.yml
       templateFile_RmtConn:
         type: tosca.artifacts.File
