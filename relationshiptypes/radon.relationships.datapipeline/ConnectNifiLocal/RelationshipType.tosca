@@ -9,8 +9,9 @@ relationship_types:
       final: "false"
     interfaces:
       Configure:
+        type: tosca.interfaces.relationship.Configure
         operations:
-          preConfigureTarget:
+          post_configure_source:
             inputs:
               source_pipeline_server_ip:
                 type: string

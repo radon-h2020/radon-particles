@@ -45,13 +45,28 @@ node_types:
             implementation:
               primary: configure
               timeout: 0
+          create:
+            inputs:
+              template_file:
+                type: string
+                required: true
+#                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
+                default: PublishLocal_localConn.xml
+              template_name:
+                type: string
+                required: true
+                default: { get_property: [SELF, template_name] }
+            implementation:
+              primary: create
+              dependencies: [templateFile_localConn]
+              timeout: 0
     artifacts:
-      PublishLocal_localConn:
+      templateFile_localConn:
         type: tosca.artifacts.File
         file: PublishLocal_localConn.xml
       configure:
         type: tosca.artifacts.File
         file: configure.yml
-      PublishLocal_rmtConn:
+      create:
         type: tosca.artifacts.File
-        file: PublishLocal_rmtConn.xml
+        file: create.yml

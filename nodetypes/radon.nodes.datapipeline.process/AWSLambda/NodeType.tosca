@@ -58,10 +58,28 @@ node_types:
             implementation:
               primary: configure
               timeout: 0
+          create:
+            inputs:
+              template_file:
+                type: string
+                required: true
+                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
+              template_name:
+                type: string
+                required: true
+                default: { get_property: [SELF, template_name] }
+            implementation:
+              primary: create
+              dependencies: [templateFile_localConn]
+              timeout: 0
     artifacts:
-      AWSlambda_localConn:
+      templateFile_localConn:
         type: tosca.artifacts.File
         file: AWSlambda_localConn.xml
       configure:
         type: tosca.artifacts.File
         file: configure.yml
+      create:
+        type: tosca.artifacts.File
+        file: create.yml
+

@@ -38,6 +38,21 @@ node_types:
             implementation:
               primary: configure
               timeout: 0
+          create:
+            inputs:
+              template_file:
+                type: string
+                required: true
+#                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
+                default: ConsumeLocal_localConn.xml
+              template_name:
+                type: string
+                required: true
+                default: { get_property: [SELF, template_name] }
+            implementation:
+              primary: create
+              dependencies: [templateFile_localConn]
+              timeout: 0
     artifacts:
       templateFile_LocalConn:
         type: tosca.artifacts.File
@@ -50,3 +65,6 @@ node_types:
         type: tosca.artifacts.File
         description: Nifi template to consume local data and send to remote pipelines.
         file: ConsumeLocal_RmtConn.xml
+      create:
+        type: tosca.artifacts.File
+        file: create.yml

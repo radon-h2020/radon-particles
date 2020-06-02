@@ -52,7 +52,24 @@ node_types:
             implementation:
               primary: config
               timeout: 0
+          create:
+            inputs:
+              template_file:
+                type: string
+                required: true
+                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
+              template_name:
+                type: string
+                required: true
+                default: { get_property: [SELF, template_name] }
+            implementation:
+              primary: create
+              dependencies: [templateFile_localConn]
+              timeout: 0
     artifacts:
       config:
         type: tosca.artifacts.File
         file: configure.yml
+      create:
+        type: tosca.artifacts.File
+        file: create.yml

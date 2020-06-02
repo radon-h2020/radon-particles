@@ -44,19 +44,6 @@ node_types:
             implementation:
               primary: start
               timeout: 0
-          create:
-            inputs:
-              template_file: 
-                type: string
-                required: true
-                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
-              template_name: 
-                type: string
-                required: true
-                default: { get_property: [SELF, template_name] }
-            implementation:
-              primary: create
-              timeout: 0
           delete:
             inputs:
               pipeline_id:
@@ -73,9 +60,6 @@ node_types:
       start:
         type: tosca.artifacts.File
         file: start.yml
-      create:
-        type: tosca.artifacts.File
-        file: create.yml
       delete:
         type: tosca.artifacts.File 
         file: delete.yml
