@@ -1,4 +1,5 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.abstract.workload.OpenWorkload:
     derived_from: radon.nodes.abstract.Workload

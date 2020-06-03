@@ -14,9 +14,9 @@ node_types:
         status: supported
     capabilities:
       host:
-        type: tosca.capabilities.Container
-        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket, radon.nodes.VM.EC2 ]
         occurrences: [ 1, UNBOUNDED ]
+        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket, radon.nodes.VM.EC2 ]
+        type: tosca.capabilities.Container
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
