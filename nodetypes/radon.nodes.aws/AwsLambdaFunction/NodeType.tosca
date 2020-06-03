@@ -27,7 +27,28 @@ node_types:
         default: 128
         status: supported
         constraints:
-          - in_range: [ 128,3008 ]
+          - in_range: [ 128, 3008 ]
+      memory_range:
+        type: range
+        description: Range of function memory in MB to search
+        required: false
+        status: supported
+        constraints:
+          - in_range: [ 128, 3008 ]
+      concurrency:
+        type: integer
+        description: Function concurrency
+        required: false
+        status: supported
+        constraints:
+          - in_range: [ 1, UNBOUNDED ]
+      concurrency_range:
+        type: range
+        description: Range of function concurrency to search
+        required: false
+        status: supported
+        constraints:
+          - in_range: [ 1, UNBOUNDED ]
       runtime:
         type: string
         description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
@@ -35,7 +56,7 @@ node_types:
         default: "nodejs"
         status: supported
         constraints:
-          - valid_values: [ nodejs,nodejs4.3,nodejs6.10,nodejs8.10,nodejs10.x,java8,python2.7,python3.6,python3.7,dotnetcore1.0,dotnetcore2.0,dotnetcore2.1,nodejs4.3-edge,go1.x,ruby2.5 ]
+          - valid_values: [ nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5 ]
       alias:
         type: string
         description: Lambda function's alias
@@ -58,7 +79,7 @@ node_types:
         default: 3
         status: supported
         constraints:
-          - in_range: [ 1,900 ]
+          - in_range: [ 1, 900 ]
       env_vars:
         type: string
         description: Function's environment variables
@@ -67,17 +88,9 @@ node_types:
     requirements:
       - host:
           capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
-      - endpoint:
-          capability: tosca.capabilities.Endpoint
-          relationship: tosca.relationships.ConnectsTo
-          occurrences: [ 0, UNBOUNDED ]
-    capabilities:
-      invocable:
-        occurrences: [ 0, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.aws.AwsS3Bucket ]
-        type: radon.capabilities.Invocable
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -102,6 +115,10 @@ node_types:
             type: integer
             required: true
             default: { get_property: [ SELF, memory ] }
+          lambda_concurrency:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, concurrency ] }
           func_alias:
             type: string
             required: true

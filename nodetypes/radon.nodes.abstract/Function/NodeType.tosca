@@ -8,13 +8,19 @@ node_types:
       final: "false"
       targetNamespace: "radon.nodes.abstract"
     properties:
+      name:
+        type: string
+        required: true
+        status: supported
       environment:
         type: map
         required: false
         status: supported
-      name:
-        type: string
-        required: true
+        entry_schema:
+          type: string
+      entries:
+        type: radon.datatypes.function.Entries
+        required: false
         status: supported
     requirements:
       - host:
@@ -22,3 +28,11 @@ node_types:
           node: radon.nodes.abstract.CloudPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
+      - endpoint:
+          capability: tosca.capabilities.Endpoint
+          relationship: radon.relationships.abstract.ConnectsTo
+          occurrences: [ 0, UNBOUNDED ]
+    capabilities:
+      invocable:
+        type: radon.capabilities.Invocable
+        occurrences: [ 0, UNBOUNDED ]

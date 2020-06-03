@@ -2,7 +2,7 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
   radon.nodes.aws.AwsS3Bucket:
-    derived_from: tosca.nodes.Storage.ObjectStorage
+    derived_from: radon.nodes.abstract.ObjectStorage
     metadata:
       abstract: "false"
       final: "false"
@@ -12,19 +12,15 @@ node_types:
         type: string
       region:
         type: string
-    properties:
-      name:
-        type: string
-        description: The name of the AWS S3 bucket
-        required: true
-        status: supported
     requirements:
       - host:
           capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
       - invoker:
           capability: radon.capabilities.Invocable
+          node: radon.nodes.aws.AwsLambdaFunction
           relationship: radon.relationships.aws.AwsTriggers
           occurrences: [ 0, UNBOUNDED ]
     interfaces:

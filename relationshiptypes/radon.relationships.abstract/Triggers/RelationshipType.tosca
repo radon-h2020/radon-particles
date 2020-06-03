@@ -2,7 +2,7 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 relationship_types:
   radon.relationships.abstract.Triggers:
-    derived_from: tosca.relationships.DependsOn
+    derived_from: tosca.relationships.Root
     metadata:
       abstract: "false"
       final: "false"
@@ -12,4 +12,12 @@ relationship_types:
         type: list
         required: true
         status: supported
+        entry_schema:
+          type: radon.datatypes.Event
+      interactions:
+        type: list
+        required: false
+        status: supported
+        entry_schema:
+          type: radon.datatypes.Interaction
     valid_target_types: [ radon.capabilities.Invocable ]

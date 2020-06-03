@@ -1,6 +1,6 @@
 ## Cloud Platform Node Type (Abstract)
 
-Abstract cloud platform type representing an abstract, provider-managed platform.
+Abstract node type representing a provider-managed cloud platform.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
@@ -8,12 +8,11 @@ Abstract cloud platform type representing an abstract, provider-managed platform
 
 ### Properties
 
-| Name | Required | Type | Constraint | Description |
-|:---- |:-------- |:---- |:---------- |:----------- |
-| `name` | `false` | `string` |   | Name of the cloud platform |
+| Name | Required | Type | Constraint | Default Value | Description |
+|:---- |:-------- |:---- |:---------- |:------------- |:----------- |
+| `name` | `false` | `string` |   |   | Name of the cloud platform |
 
-### Requirements
-
-| Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
-|:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `tosca.capabilities.Container` |   |   |   |
+### Capabilities
+| Name | Type | Valid Source Types | Occurrences |
+|:---- |:---- |:------------------ |:----------- |
+| `host` | `tosca.capabilities.Container` | `[radon.nodes.abstract.Function, radon.nodes.abstract.ObjectStorage]` | [1, UNBOUNDED] |

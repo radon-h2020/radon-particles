@@ -1,0 +1,15 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+data_types:
+  radon.datatypes.Entry:
+    derived_from: tosca.datatypes.Root
+    properties:
+      activities:
+        type: map
+        required: true
+        entry_schema:
+          type: radon.datatypes.Activity
+      precedences:
+        type: list
+        required: false
+        entry_schema:
+          type: radon.datatypes.Precedence
