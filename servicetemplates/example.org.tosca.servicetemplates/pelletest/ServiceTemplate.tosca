@@ -11,8 +11,8 @@ topology_template:
         y: "226"
         displayName: "OpenStack"
       properties:
-        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
         key_name: "jakovits_ldpc"
+        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
         image: "21cd7486-a2a6-458c-9b05-9207c0b63819"
         ssh_username: "ubuntu"
         name: "nifihostpelle"

@@ -7,37 +7,37 @@ topology_template:
     PublishLocal:
       type: radon.nodes.datapipeline.destination.PublishLocal
       metadata:
-        x: "1547"
-        y: "193"
+        x: "1411"
+        y: "88"
         displayName: "PublishLocal"
       properties:
-        template_name: "PublishLocal_localConn"
         create_if_missing: true
-        name: "publishlocal"
-        directory: "/tmp/out"
+        template_name: "PublishLocal_localConn"
+        name: "PublishLocal_localConn"
+        directory: "/mnt/out"
       requirements:
         - host:
             node: Nifi
-            relationship: con_HostedOn_0
+            relationship: con_HostedOn_1
             capability: host
     OpenStack:
       type: radon.nodes.VM.OpenStack
       metadata:
-        x: "1232"
-        y: "1122"
+        x: "1386"
+        y: "752"
         displayName: "OpenStack"
       properties:
         flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
         key_name: "jakovits_ldpc"
         image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
         ssh_username: "centos"
-        name: "nifihostpelle2"
+        name: "nifihost"
         network: "provider_64_net"
     Nifi:
       type: radon.nodes.nifi.Nifi
       metadata:
-        x: "851"
-        y: "608"
+        x: "881"
+        y: "560"
         displayName: "Nifi"
       properties:
         port: 8080
@@ -45,18 +45,18 @@ topology_template:
       requirements:
         - host:
             node: OpenStack
-            relationship: con_HostedOn_3
+            relationship: con_HostedOn_0
             capability: host
     ConsumeLocal:
       type: radon.nodes.datapipeline.source.ConsumeLocal
       metadata:
-        x: "387"
-        y: "132"
+        x: "377"
+        y: "118"
         displayName: "ConsumeLocal"
       properties:
         template_name: "ConsumeLocal_localConn"
-        name: "consumelocal"
-        directory: "/tmp/in"
+        name: "ConsumeLocal_localConn"
+        directory: "/mnt/in"
       requirements:
         - connectToPipeline:
             node: PublishLocal
@@ -64,10 +64,10 @@ topology_template:
             capability: ConnectToPipeline
         - host:
             node: Nifi
-            relationship: con_HostedOn_1
+            relationship: con_HostedOn_2
             capability: host
   relationship_templates:
-    con_HostedOn_3:
+    con_HostedOn_2:
       type: tosca.relationships.HostedOn
     con_HostedOn_0:
       type: tosca.relationships.HostedOn

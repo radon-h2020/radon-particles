@@ -51,3 +51,14 @@
                 "type": "INPUT_PORT"            
         status_code: 201
         body_format: json
+
+
+    - name: start the PROCESS GROUP. This will start everything with in.
+      uri:
+        url: "http://localhost:8080/nifi-api/flow/process-groups/{{target_pipeline_id}}"
+        method: PUT
+        body:
+          "id": "{{target_pipeline_id}}"
+          "state": "RUNNING" 
+        status_code: 200
+        body_format: json     

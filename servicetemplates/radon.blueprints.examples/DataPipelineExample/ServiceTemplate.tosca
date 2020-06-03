@@ -34,8 +34,8 @@ topology_template:
         displayName: "PubsS3Bucket"
       properties:
         template_name: null
-        cred_file_path: null
         BucketName: null
+        cred_file_path: null
         name: null
         Region: null
       requirements:
@@ -51,8 +51,8 @@ topology_template:
         displayName: "ConsS3Bucket"
       properties:
         template_name: null
-        cred_file_path: null
         BucketName: null
+        cred_file_path: null
         name: null
         Region: null
       requirements:
@@ -71,8 +71,8 @@ topology_template:
         y: "703"
         displayName: "OpenStack"
       properties:
-        key_name: null
         flavor: null
+        key_name: null
         image: null
         name: null
         network: null

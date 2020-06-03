@@ -8,16 +8,30 @@ policy_types:
       final: "false"
       targetNamespace: "radon.policies.performance"
     properties:
+<<<<<<< HEAD:policytypes/radon.policies.performance/MeanResponseTime/PolicyType.tosca
       target_entries:
         type: list
         required: false
         entry_schema:
           type: string
+=======
+>>>>>>> adding starting target pipeline to data pipeline relationship:policytypes/radon.policies.performance/AverageResponseTime/PolicyType.tosca
       lower_bound:
         type: float
         required: false
         constraints:
           - greater_or_equal: 0.0
+<<<<<<< HEAD:policytypes/radon.policies.performance/MeanResponseTime/PolicyType.tosca
+=======
+      include_phase2:
+        type: boolean
+        required: false
+        status: supported
+      target_entry:
+        type: string
+        required: true
+        status: supported
+>>>>>>> adding starting target pipeline to data pipeline relationship:policytypes/radon.policies.performance/AverageResponseTime/PolicyType.tosca
       upper_bound:
         type: float
         required: false

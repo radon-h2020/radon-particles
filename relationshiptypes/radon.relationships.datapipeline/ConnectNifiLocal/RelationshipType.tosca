@@ -31,5 +31,4 @@ relationship_types:
                 default: { get_attribute: [ TARGET, id ] }
             implementation:
               primary: connect.yml
-#              dependencies: [ local.yml, remote.yml ]
               timeout: 0

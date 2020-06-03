@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <template encoding-version="1.3">
-    <description>Publish data to the local directory. 
-get the data from local pipeline (NOT remote pipeline)</description>
-    <groupId>828d601e-0171-1000-586c-8ce1c1d0d129</groupId>
+    <description>Template to publish save to a local directory as files. </description>
+    <groupId>75e8afa0-0172-1000-4806-fa75d35c18d8</groupId>
     <name>PublishLocal_localConn</name>
     <snippet>
         <processGroups>
-            <id>49b00e44-f13d-3526-0000-000000000000</id>
-            <parentGroupId>11e64e91-b867-3e4e-0000-000000000000</parentGroupId>
+            <id>c23b3755-718c-3377-0000-000000000000</id>
+            <parentGroupId>dac3b43b-d8ad-3768-0000-000000000000</parentGroupId>
             <position>
                 <x>0.0</x>
                 <y>0.0</y>
@@ -15,13 +14,13 @@ get the data from local pipeline (NOT remote pipeline)</description>
             <comments></comments>
             <contents>
                 <connections>
-                    <id>1320577a-84dd-32be-0000-000000000000</id>
-                    <parentGroupId>49b00e44-f13d-3526-0000-000000000000</parentGroupId>
+                    <id>51c870fa-b814-344a-0000-000000000000</id>
+                    <parentGroupId>c23b3755-718c-3377-0000-000000000000</parentGroupId>
                     <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
                     <backPressureObjectThreshold>10000</backPressureObjectThreshold>
                     <destination>
-                        <groupId>49b00e44-f13d-3526-0000-000000000000</groupId>
-                        <id>ba3414cf-c6b2-3c56-0000-000000000000</id>
+                        <groupId>c23b3755-718c-3377-0000-000000000000</groupId>
+                        <id>dffb757f-2412-3e53-0000-000000000000</id>
                         <type>PROCESSOR</type>
                     </destination>
                     <flowFileExpiration>0 sec</flowFileExpiration>
@@ -32,15 +31,15 @@ get the data from local pipeline (NOT remote pipeline)</description>
                     <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
                     <name></name>
                     <source>
-                        <groupId>49b00e44-f13d-3526-0000-000000000000</groupId>
-                        <id>3f391761-49a9-3ed6-0000-000000000000</id>
+                        <groupId>c23b3755-718c-3377-0000-000000000000</groupId>
+                        <id>b9e58522-5ad4-3232-0000-000000000000</id>
                         <type>INPUT_PORT</type>
                     </source>
                     <zIndex>0</zIndex>
                 </connections>
                 <inputPorts>
-                    <id>3f391761-49a9-3ed6-0000-000000000000</id>
-                    <parentGroupId>49b00e44-f13d-3526-0000-000000000000</parentGroupId>
+                    <id>b9e58522-5ad4-3232-0000-000000000000</id>
+                    <parentGroupId>c23b3755-718c-3377-0000-000000000000</parentGroupId>
                     <position>
                         <x>-512.0</x>
                         <y>-152.0</y>
@@ -52,8 +51,8 @@ get the data from local pipeline (NOT remote pipeline)</description>
                     <validationErrors>'Port 'connLocal_IP'' is invalid because Port has no incoming connections</validationErrors>
                 </inputPorts>
                 <processors>
-                    <id>ba3414cf-c6b2-3c56-0000-000000000000</id>
-                    <parentGroupId>49b00e44-f13d-3526-0000-000000000000</parentGroupId>
+                    <id>dffb757f-2412-3e53-0000-000000000000</id>
+                    <parentGroupId>c23b3755-718c-3377-0000-000000000000</parentGroupId>
                     <position>
                         <x>-472.0</x>
                         <y>-16.0</y>
@@ -123,6 +122,7 @@ get the data from local pipeline (NOT remote pipeline)</description>
                         <properties>
                             <entry>
 <key>Directory</key>
+<value>/mnt/out</value>
                             </entry>
                             <entry>
 <key>Conflict Resolution Strategy</key>
@@ -156,11 +156,11 @@ get the data from local pipeline (NOT remote pipeline)</description>
                     <executionNodeRestricted>false</executionNodeRestricted>
                     <name>PutFile</name>
                     <relationships>
-                        <autoTerminate>false</autoTerminate>
+                        <autoTerminate>true</autoTerminate>
                         <name>failure</name>
                     </relationships>
                     <relationships>
-                        <autoTerminate>false</autoTerminate>
+                        <autoTerminate>true</autoTerminate>
                         <name>success</name>
                     </relationships>
                     <state>STOPPED</state>
@@ -172,5 +172,5 @@ get the data from local pipeline (NOT remote pipeline)</description>
             <variables/>
         </processGroups>
     </snippet>
-    <timestamp>05/20/2020 05:40:01 UTC</timestamp>
+    <timestamp>06/03/2020 06:14:18 UTC</timestamp>
 </template>

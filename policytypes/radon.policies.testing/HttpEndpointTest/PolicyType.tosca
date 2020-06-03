@@ -22,15 +22,15 @@ policy_types:
         required: true
         default: "GET"
         status: supported
-      expected_status:
-        type: integer
-        required: true
-        default: 200
-        status: supported
       port:
         type: integer
         required: true
         default: 80
+        status: supported
+      expected_status:
+        type: integer
+        required: true
+        default: 200
         status: supported
       expected_body:
         type: json
@@ -41,11 +41,11 @@ policy_types:
         required: true
         default: false
         status: supported
-      test_header:
-        type: map
-        required: false
-        status: supported
       test_body:
         type: json
+        required: false
+        status: supported
+      test_header:
+        type: map
         required: false
         status: supported

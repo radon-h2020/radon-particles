@@ -40,20 +40,20 @@ topology_template:
         path: "/cart/"
         hostname: "localhost"
         method: "GET"
-        port: 80
         expected_status: 200
+        port: 80
         expected_body: null
         ti_blueprint: null
         use_https: true
-        test_body: null
-        test_header: null
         test_id: null
+        test_header: null
+        test_body: null
       targets: [ SockShop ]
     SimpleJMeterLoadTest:
       type: radon.policies.testing.JMeterLoadTest
       properties:
-        jmx_file: "sockshop.jmx"
         hostname: "localhost"
+        jmx_file: "sockshop.jmx"
         port: 8080
         ti_blueprint: "radon.blueprints.testing.JMeterMasterOnly"
         user.properties: null
