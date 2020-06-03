@@ -40,7 +40,7 @@ node_types:
               template_file:
                 type: string
                 required: true
-                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
+                default: "S3Bucket_dest_PG_LocalConn.xml"
             implementation:
               primary: create
               dependencies: [ templateFile_localConn ]
@@ -64,12 +64,18 @@ node_types:
                 required: true
                 default: { get_property: [ SELF, Region ] }
             implementation:
-              primary: config
+              primary: configure
               timeout: 0
     artifacts:
       create:
         type: tosca.artifacts.File
         file: create.yml
-      config:
+      configure:
         type: tosca.artifacts.File
         file: configure.yml
+      templateFile_LocalConn:
+        type: tosca.artifacts.File
+        file: S3Bucket_dest_PG_LocalConn.xml
+      templateFile_RmtConn:
+        type: tosca.artifacts.File
+        file: S3Bucket_dest_PG_RmtConn.xml

@@ -46,7 +46,7 @@ node_types:
               template_file:
                 type: string
                 required: true
-                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
+                default: "AWSlambda_localConn.xml"
             implementation:
               primary: create
               dependencies: [ templateFile_localConn ]

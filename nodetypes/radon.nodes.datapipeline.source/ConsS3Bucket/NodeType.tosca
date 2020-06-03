@@ -47,9 +47,35 @@ node_types:
                 required: true
                 default: { get_property: [ SELF, Region ] }
             implementation:
-              primary: config
+              primary: configure
+              timeout: 0
+          create:
+            inputs:
+              template_name:
+                type: string
+                required: true
+                default: { get_property: [ SELF, template_name ] }
+              template_file:
+                type: string
+                required: true
+                default: "S3Bucket_SRC_PG_LocalConn.xml"
+            implementation:
+              primary: create
+              dependencies: [ templateFile_localConn ]
               timeout: 0
     artifacts:
-      config:
+      configure:
         type: tosca.artifacts.File
         file: configure.yml
+      templateFile_localConn:
+        type: tosca.artifacts.File
+        description: This Nifi template file is only for the local connection.
+        file: S3Bucket_SRC_PG_LocalConn.xml
+      templateFile_RmtConn:
+        type: tosca.artifacts.File
+        description: This nifi template file is for remote connect.
+        file: S3Bucket_SRC_PG_RmtConn.xml
+      create:
+        type: tosca.artifacts.File
+        file: create.yml
+

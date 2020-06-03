@@ -51,7 +51,7 @@ node_types:
               template_file:
                 type: string
                 required: true
-                default: { get_artifact: [ SELF, templateFile_localConn, file ] }
+                default: "S3Bucket_SRC_PG_LocalConn.xml"
             implementation:
               primary: create
               dependencies: [ templateFile_localConn ]

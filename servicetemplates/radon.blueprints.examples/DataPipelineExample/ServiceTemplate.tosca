@@ -7,37 +7,36 @@ topology_template:
     AWSLambda:
       type: radon.nodes.datapipeline.process.AWSLambda
       metadata:
-        x: "823"
-        y: "148"
+        x: "767"
+        y: "112"
         displayName: "AWSLambda"
       properties:
-        template_name: null
-        cred_file_path: null
-        function_name: null
-        name: null
-        region: "EU (Frankfurt)"
-        template_file: null
+        template_name: "AWSlambda_localConn"
+        cred_file_path: "/home/jakovits/aws/credentials"
+        function_name: "radonthumbnail"
+        name: "callAWS"
+        region: "eu-central-1"
       requirements:
+        - ConnectToPipeline:
+            node: PubsS3Bucket
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
         - host:
             node: Nifi
             relationship: con_HostedOn_2
             capability: host
-        - ConnectToPipeline:
-            node: PubsS3Bucket
-            relationship: con_ConnectNifiLocal_1
-            capability: ConnectToPipeline
     PubsS3Bucket:
       type: radon.nodes.datapipeline.destination.PubsS3Bucket
       metadata:
-        x: "1210"
-        y: "155"
+        x: "1322"
+        y: "149"
         displayName: "PubsS3Bucket"
       properties:
-        template_name: null
-        BucketName: null
-        cred_file_path: null
-        name: null
-        Region: null
+        template_name: "S3Bucket_dest_PG_LocalConn"
+        BucketName: "radon-jakovits-output"
+        cred_file_path: "/home/jakovits/aws/credentials"
+        name: "sendToS3"
+        Region: "eu-central-1"
       requirements:
         - host:
             node: Nifi
@@ -46,19 +45,19 @@ topology_template:
     ConsS3Bucket:
       type: radon.nodes.datapipeline.source.ConsS3Bucket
       metadata:
-        x: "350"
-        y: "155"
+        x: "178"
+        y: "148"
         displayName: "ConsS3Bucket"
       properties:
-        template_name: null
-        BucketName: null
-        cred_file_path: null
-        name: null
-        Region: null
+        template_name: "S3Bucket_SRC_PG_LocalConn"
+        BucketName: "radon-jakovits"
+        cred_file_path: "/home/jakovits/aws/credentials"
+        name: "getFromS3"
+        Region: "eu-central-1"
       requirements:
-        - ConnectToPipeline:
+        - connectToPipeline:
             node: AWSLambda
-            relationship: con_ConnectNifiLocal_0
+            relationship: con_ConnectNifiLocal_1
             capability: ConnectToPipeline
         - host:
             node: Nifi
@@ -67,24 +66,25 @@ topology_template:
     OpenStack:
       type: radon.nodes.VM.OpenStack
       metadata:
-        x: "828"
-        y: "703"
+        x: "1146"
+        y: "710"
         displayName: "OpenStack"
       properties:
-        flavor: null
-        key_name: null
-        image: null
-        name: null
-        network: null
+        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
+        key_name: "jakovits_ldpc"
+        image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
+        ssh_username: "centos"
+        name: "nifihost2"
+        network: "provider_64_net"
     Nifi:
       type: radon.nodes.nifi.Nifi
       metadata:
-        x: "828"
-        y: "450"
+        x: "766"
+        y: "516"
         displayName: "Nifi"
       properties:
         port: 8080
-        component_version: null
+        component_version: "1.11.4"
       requirements:
         - host:
             node: OpenStack
