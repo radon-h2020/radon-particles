@@ -1,6 +1,6 @@
 ## Triggers Relationship (Abstract)
 
-This is an abstract Relationship Type that represents a binding between an event source, e.g., an object store, and an event target, e.g., a FaaS function.
+Abstract relationship type representing triggering of an invocable node.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
@@ -14,4 +14,5 @@ This is an abstract Relationship Type that represents a binding between an event
 
 | Name | Required | Type | Constraint | Default Value| Description |
 |:---- |:-------- |:---- |:---------- |:-----------  |:----------- |
-| `events` | `false` | `list` |   |   | A list of events of type `radon.datatypes.Event` that are conveyed to the target |
+| `events` | `true` | `list: radon.datatypes.Event` |   |   | List of events |
+| `interactions` | `false` | `list: radon.datatypes.Interaction` |   |   | List of interactions |
