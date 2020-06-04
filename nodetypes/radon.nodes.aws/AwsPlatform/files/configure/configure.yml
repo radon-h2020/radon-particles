@@ -3,8 +3,7 @@
   gather_facts: false
   tasks:
     - name: install awscli
-      become: yes
-      package:
+      pip:
         name: awscli
         state: present
     - name: install boto
