@@ -7,3 +7,7 @@ node_types:
       targetNamespace: "radon.nodes.testing"
       abstract: "false"
       final: "false"
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
