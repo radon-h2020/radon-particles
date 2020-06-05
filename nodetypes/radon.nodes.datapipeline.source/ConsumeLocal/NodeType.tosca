@@ -8,13 +8,10 @@ node_types:
       abstract: "false"
       final: "false"
     attributes:
-      id:
-        type: string
-    properties:
       template_name:
         type: string
-        required: true
-        status: supported
+        default: "ConsumeLocal_localConn"
+    properties:
       directory:
         type: string
         description: Path to the file/folder
@@ -29,7 +26,7 @@ node_types:
               template_name:
                 type: string
                 required: true
-                default: { get_property: [ SELF, template_name ] }
+                default: { get_attribute: [ SELF, template_name ] }
               template_file:
                 type: string
                 required: true

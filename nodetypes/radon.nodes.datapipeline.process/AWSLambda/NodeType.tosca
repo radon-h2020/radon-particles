@@ -7,16 +7,7 @@ node_types:
       targetNamespace: "radon.nodes.datapipeline.process"
       abstract: "false"
       final: "false"
-    attributes:
-      id:
-        description: Unique ID of the pipeline
-        type: string
     properties:
-      template_name:
-        type: string
-        description: name of the pipeline
-        required: false
-        status: supported
       cred_file_path:
         type: string
         description: credential file for access and secret key
@@ -33,6 +24,10 @@ node_types:
         required: true
         default: "EU (Frankfurt)"
         status: supported
+    attributes:
+      template_name:
+        type: string
+        default: "AWSlambda_localConn"
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -42,7 +37,7 @@ node_types:
               template_name:
                 type: string
                 required: true
-                default: { get_property: [ SELF, template_name ] }
+                default: { get_attribute: [ SELF, template_name ] }
               template_file:
                 type: string
                 required: true
@@ -60,7 +55,7 @@ node_types:
               function_name:
                 type: string
                 required: true
-                default: { get_attribute: [ SELF, function_name ] }
+                default: { get_property: [ SELF, function_name ] }
               pipeline_id:
                 type: string
                 required: true
@@ -68,7 +63,7 @@ node_types:
               region:
                 type: string
                 required: true
-                default: { get_attribute: [ SELF, region ] }
+                default: { get_property: [ SELF, region ] }
             implementation:
               primary: configure
               timeout: 0

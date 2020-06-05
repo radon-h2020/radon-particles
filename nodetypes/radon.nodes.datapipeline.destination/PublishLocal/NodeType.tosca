@@ -8,17 +8,14 @@ node_types:
       abstract: "false"
       final: "false"
     attributes:
-      id:
+      template_name:
         type: string
+        default: "PublishLocal_localConn"
     properties:
       create_if_missing:
         type: boolean
         required: false
         default: true
-        status: supported
-      template_name:
-        type: string
-        required: true
         status: supported
       directory:
         type: string
@@ -33,7 +30,7 @@ node_types:
               template_name:
                 type: string
                 required: true
-                default: { get_property: [ SELF, template_name ] }
+                default: { get_attribute: [ SELF, template_name ] }
               template_file:
                 type: string
                 required: true

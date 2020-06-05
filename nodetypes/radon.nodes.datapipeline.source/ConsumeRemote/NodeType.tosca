@@ -7,7 +7,3 @@ node_types:
       targetNamespace: "radon.nodes.datapipeline.source"
       abstract: "false"
       final: "false"
-    attributes:
-      id:
-        description: id of the pipeline
-        type: string

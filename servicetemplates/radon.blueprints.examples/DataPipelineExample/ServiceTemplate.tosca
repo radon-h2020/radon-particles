@@ -11,7 +11,6 @@ topology_template:
         y: "112"
         displayName: "AWSLambda"
       properties:
-        template_name: "AWSlambda_localConn"
         cred_file_path: "/home/jakovits/aws/credentials"
         function_name: "radonthumbnail"
         name: "callAWS"
@@ -32,7 +31,6 @@ topology_template:
         y: "149"
         displayName: "PubsS3Bucket"
       properties:
-        template_name: "S3Bucket_dest_PG_LocalConn"
         BucketName: "radon-jakovits-output"
         cred_file_path: "/home/jakovits/aws/credentials"
         name: "sendToS3"
@@ -49,7 +47,6 @@ topology_template:
         y: "148"
         displayName: "ConsS3Bucket"
       properties:
-        template_name: "S3Bucket_SRC_PG_LocalConn"
         BucketName: "radon-jakovits"
         cred_file_path: "/home/jakovits/aws/credentials"
         name: "getFromS3"
