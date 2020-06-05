@@ -11,6 +11,7 @@ policy_types:
       path:
         type: string
         required: true
+        default: "/"
         status: supported
       hostname:
         type: string
@@ -38,7 +39,7 @@ policy_types:
       use_https:
         type: boolean
         required: true
-        default: true
+        default: false
         status: supported
       test_header:
         type: map
