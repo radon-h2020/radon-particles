@@ -34,7 +34,7 @@
         name: server
         groups: vms
         ansible_host: "{{ server_info.server.public_v4 }}"
-        ansible_user: centos
+        ansible_user: "{{ssh_username}}"
         ansible_ssh_common_args: > 
           -o BatchMode=yes
           -o UserKnownHostsFile=/dev/null

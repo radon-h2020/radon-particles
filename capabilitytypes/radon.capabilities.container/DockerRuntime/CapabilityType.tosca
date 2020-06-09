@@ -8,20 +8,20 @@ capability_types:
       final: "false"
       targetNamespace: "radon.capabilities.container"
     properties:
+      publish_ports:
+        type: list
+        required: false
+        status: supported
       port:
         type: integer
         required: true
         default: 2375
         status: supported
-      publish_ports:
+      expose_ports:
         type: list
         required: false
         status: supported
       volumes:
-        type: list
-        required: false
-        status: supported
-      expose_ports:
         type: list
         required: false
         status: supported

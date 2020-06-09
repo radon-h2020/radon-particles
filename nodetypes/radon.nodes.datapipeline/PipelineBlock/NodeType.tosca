@@ -1,15 +1,65 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  radon.nodes.PipelineBlock.PipelineBlock:
+  radon.nodes.datapipeline.PipelineBlock:
     derived_from: radon.nodes.abstract.DataPipeline
     metadata:
       targetNamespace: "radon.nodes.datapipeline"
-      abstract: "false"
+      abstract: "true"
       final: "false"
+    attributes:
+      id:
+        type: string
     properties:
       name:
         type: string
         description: Name of the pipeline node
         required: false
         status: supported
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.nifi.Nifi
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          stop:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: stop
+              timeout: 0
+          start:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: start
+              timeout: 0
+          delete:
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      stop:
+        type: tosca.artifacts.File
+        file: stop.yml
+      start:
+        type: tosca.artifacts.File
+        file: start.yml
+      delete:
+        type: tosca.artifacts.File
+        file: delete.yml

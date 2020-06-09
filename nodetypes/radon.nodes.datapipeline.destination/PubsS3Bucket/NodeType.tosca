@@ -8,13 +8,10 @@ node_types:
       abstract: "false"
       final: "false"
     attributes:
-      id:
-        type: string
-    properties:
       template_name:
         type: string
-        required: true
-        status: supported
+        default: "S3Bucket_dest_PG_LocalConn"
+    properties:
       BucketName:
         type: string
         required: true
@@ -31,32 +28,19 @@ node_types:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
-          stop:
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, id ] }
-            implementation:
-              primary: stop
-              timeout: 0
-          start:
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, id ] }
-            implementation:
-              primary: start
-              timeout: 0
           create:
             inputs:
-              pipeline_id:
+              template_name:
                 type: string
                 required: true
-                default: { get_attribute: [ SELF, id ] }
+                default: { get_attribute: [ SELF, template_name ] }
+              template_file:
+                type: string
+                required: true
+                default: "S3Bucket_dest_PG_LocalConn.xml"
             implementation:
               primary: create
+              dependencies: [ templateFile_localConn ]
               timeout: 0
           configure:
             inputs:
@@ -77,30 +61,18 @@ node_types:
                 required: true
                 default: { get_property: [ SELF, Region ] }
             implementation:
-              primary: config
-              timeout: 0
-          delete:
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, id ] }
-            implementation:
-              primary: delete
+              primary: configure
               timeout: 0
     artifacts:
-      stop:
-        type: tosca.artifacts.Implementation.Ansible
-        file: stop.yml
-      start:
-        type: tosca.artifacts.Implementation.Ansible
-        file: start.yml
       create:
-        type: tosca.artifacts.Implementation.Ansible
+        type: tosca.artifacts.File
         file: create.yml
-      delete:
-        type: tosca.artifacts.Implementation.Ansible
-        file: delete.yml
-      config:
-        type: tosca.artifacts.Implementation.Ansible
+      configure:
+        type: tosca.artifacts.File
         file: configure.yml
+      templateFile_LocalConn:
+        type: tosca.artifacts.File
+        file: S3Bucket_dest_PG_LocalConn.xml
+      templateFile_RmtConn:
+        type: tosca.artifacts.File
+        file: S3Bucket_dest_PG_RmtConn.xml
