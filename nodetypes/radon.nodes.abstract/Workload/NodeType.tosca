@@ -8,6 +8,10 @@ node_types:
       final: "false"
       targetNamespace: "radon.nodes.abstract"
     properties:
+      name:
+        type: string
+        required: false
+        status: supported
       entries:
         type: radon.datatypes.workload.Entries
         required: false

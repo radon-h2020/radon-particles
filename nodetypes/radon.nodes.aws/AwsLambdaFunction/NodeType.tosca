@@ -85,16 +85,6 @@ node_types:
         description: Function's environment variables
         required: false
         status: supported
-    requirements:
-      - host:
-          capability: tosca.capabilities.Container
-          node: radon.nodes.aws.AwsPlatform
-          relationship: tosca.relationships.HostedOn
-          occurrences: [ 1, 1 ]
-      - endpoint:
-          capability: tosca.capabilities.Endpoint
-          relationship: tosca.relationships.ConnectsTo
-          occurrences: [ 0, UNBOUNDED ]
     capabilities:
       invocable:
         occurrences: [ 0, UNBOUNDED ]
