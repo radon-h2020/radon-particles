@@ -5,5 +5,10 @@ node_types:
     derived_from: radon.nodes.datapipeline.PipelineBlock
     metadata:
       targetNamespace: "radon.nodes.datapipeline"
-      abstract: "false"
+      abstract: "true"
       final: "false"
+    capabilities:
+      ConnectToPipeline:
+        occurrences: [ 1, 1 ]
+        valid_source_types: [ radon.nodes.datapipeline.MidwayPB, radon.nodes.datapipeline.SourcePB ]
+        type: radon.capabilities.datapipeline.ConnectToPipeline

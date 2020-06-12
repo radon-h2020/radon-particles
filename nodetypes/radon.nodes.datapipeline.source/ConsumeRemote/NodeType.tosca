@@ -7,13 +7,3 @@ node_types:
       targetNamespace: "radon.nodes.datapipeline.source"
       abstract: "false"
       final: "false"
-    attributes:
-      id:
-        description: id of the pipeline
-        type: string
-    requirements:
-      - host:
-          capability: tosca.capabilities.Container
-          node: radon.nodes.nifi.Nifi
-          relationship: tosca.relationships.HostedOn
-          occurrences: [ 1, 1 ]

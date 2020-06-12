@@ -11,6 +11,7 @@ policy_types:
       path:
         type: string
         required: true
+        default: "/"
         status: supported
       hostname:
         type: string
@@ -21,15 +22,15 @@ policy_types:
         required: true
         default: "GET"
         status: supported
-      expected_status:
-        type: integer
-        required: true
-        default: 200
-        status: supported
       port:
         type: integer
         required: true
         default: 80
+        status: supported
+      expected_status:
+        type: integer
+        required: true
+        default: 200
         status: supported
       expected_body:
         type: json
@@ -38,13 +39,13 @@ policy_types:
       use_https:
         type: boolean
         required: true
-        default: true
-        status: supported
-      test_header:
-        type: map
-        required: false
+        default: false
         status: supported
       test_body:
         type: json
+        required: false
+        status: supported
+      test_header:
+        type: map
         required: false
         status: supported
