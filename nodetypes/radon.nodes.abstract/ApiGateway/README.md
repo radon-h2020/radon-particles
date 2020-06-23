@@ -1,4 +1,4 @@
-## Object Storage Node Type (Abstract)
+## API Gateway Node Type (Abstract)
 
 Abstract node type representing an API Gateway independently of the underlying provider.
 
