@@ -15,7 +15,7 @@ This file is the input to Pandoc in order to create the specification
   ```shell
   cat ./docs/pandoc/pandoc-input.txt | xargs -I{} sh -c "cat {}; echo ''; echo'';" | pandoc -f markdown -t docx --data-dir=./docs/pandoc -s -o spec.docx
   ```
-* There will be a new file called `appendix.docx` containing RADON's type specification
+* There will be a new file called `spec.docx` containing the type specification
 
 > *Note:* By modifying the `-t` parameter of the command above you can change the output format, e.g., change `docx` to `html`.
 
