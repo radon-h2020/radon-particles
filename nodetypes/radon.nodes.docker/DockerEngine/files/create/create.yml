@@ -1,0 +1,46 @@
+---
+- hosts: localhost
+  gather_facts: yes  
+
+  tasks:
+  - name: Install apt-transport-https
+    apt:
+      name: apt-transport-https  
+
+  - name: Install ca-certificates
+    apt: 
+      name: ca-certificates  
+
+  - name: Install curl
+    apt:
+      name: curl  
+
+  - name: Install gnupg2
+    apt:
+      name: gnupg2  
+
+  - name: Install software-properties-common
+    apt:
+      name: software-properties-common  
+
+  - name: Add Docker GPG key
+    apt_key:
+      url: https://download.docker.com/linux/{{ ansible_distribution|lower }}/gpg
+      id: 0EBFCD88
+      state: present  
+
+  - name: Add Docker repository
+    apt_repository:
+      filename: docker
+      repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }} stable
+      update_cache: yes  
+
+  - name: Install docker-ce
+    apt:
+      name: docker-ce  
+
+  - name: Start and enable docker service
+    service: 
+      name: docker
+      enabled: yes
+      state: started

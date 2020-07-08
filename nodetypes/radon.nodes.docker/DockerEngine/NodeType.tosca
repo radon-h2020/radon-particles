@@ -16,3 +16,15 @@ node_types:
         occurrences: [ 1, UNBOUNDED ]
         valid_source_types: [ radon.nodes.docker.DockerApplication ]
         type: radon.capabilities.container.DockerRuntime
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            implementation:
+              primary: create
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
