@@ -8,15 +8,7 @@ node_types:
       abstract: "false"
       final: "false"
     attributes:
-      role_name:
-        type: string
-      aws_region:
-        type: string
-      function_name:
-        type: string
-      api_gateway_title:
-        type: string
-      api_gateway_resource_uri:
+      arn:
         type: string
     properties:
       role_name:

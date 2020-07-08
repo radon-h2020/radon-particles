@@ -70,7 +70,7 @@
       set_stats:
         data:
           id: "{{ pipeline_info.json.flow.processGroups[0].id }}"        
-          pipeline_type: "processGroups"
+#          pipeline_type: "processGroups"
       when: pipeline_info.json.flow.processGroups|length > 0
     # - name: Ansible create file if it doesn't exist example
     #   copy:

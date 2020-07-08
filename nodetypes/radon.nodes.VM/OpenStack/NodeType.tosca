@@ -30,6 +30,11 @@ node_types:
         description: OpenStack image id (image names are not accepted)
         required: true
         status: supported
+      ssh_username:
+        type: string
+        description: ssh username of the base image
+        required: true
+        status: supported
       name:
         type: string
         description: Name that should be given to the VM in OpenStack
@@ -58,6 +63,10 @@ node_types:
                 type: string
                 required: true
                 default: { get_property: [ SELF, image ] }
+              ssh_username:
+                type: string
+                required: true
+                default: { get_property: [ SELF, ssh_username ] }
               vm_name:
                 type: string
                 required: true

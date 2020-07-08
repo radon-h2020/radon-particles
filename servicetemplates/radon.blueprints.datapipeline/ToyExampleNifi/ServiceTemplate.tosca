@@ -77,8 +77,8 @@ topology_template:
         y: "586"
         displayName: "VM Two"
       properties:
-        key_name: "rem-VM2"
         flavor: "m2.xsmall"
+        key_name: "rem-VM2"
         image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
         name: "vmtwo_centos2"
         network: "provider_64_net"
@@ -94,8 +94,8 @@ topology_template:
         y: "588"
         displayName: "VM One"
       properties:
-        key_name: "rem-VM2"
         flavor: "m2.xsmall"
+        key_name: "rem-VM2"
         image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
         name: "vmone_centos1"
         network: "provider_64_net"

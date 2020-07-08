@@ -18,9 +18,7 @@
 ---
 - hosts: all
   vars: 
-    get_id1: "processors[0].id" 
-    # This will return the putlambda processor id (not the other processors)
-    # get_id2: "processors[1].id" 
+    get_id1: "processors[?component.name=='PutLambda'].id" 
     dest_cred_file_path: "/tmp/.opera/aws/cred"
   
   tasks:
@@ -47,7 +45,7 @@
 
     - name: Configure the first processor within the process group
       vars:
-        first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
+        first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) | first }}"
       uri:
         url: "http://localhost:8080/nifi-api/processors/{{first_prcsr_id}}"
         method: PUT
@@ -63,25 +61,6 @@
             }                       
         status_code: 200
         body_format: json
-
-    # - name: Configure the SECOND processor within the process group
-    #   vars:       
-    #     second_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id2) }}"
-    #   uri:
-    #     url: "http://localhost:8080/nifi-api/processors/{{second_prcsr_id}}"
-    #     method: PUT
-    #     body:
-    #       "revision": { "version": 0}
-    #       "component": 
-    #         "id": "{{second_prcsr_id}}"
-    #         "config": 
-    #           "properties": {  
-    #             "Credentials File": "{{dest_cred_file_path}}/credentials",
-    #             "Bucket":"{{BucketName}}",
-    #             "Region": "{{Region}}"
-    #           }                       
-    #     status_code: 200
-    #     body_format: json
 
 
     
