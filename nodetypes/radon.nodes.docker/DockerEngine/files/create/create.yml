@@ -1,27 +1,18 @@
 ---
-- hosts: localhost
+- name: create
+  hosts: localhost
   gather_facts: yes  
+  become: yes
 
   tasks:
-  - name: Install apt-transport-https
+  - name: Install required packages
     apt:
-      name: apt-transport-https  
-
-  - name: Install ca-certificates
-    apt: 
-      name: ca-certificates  
-
-  - name: Install curl
-    apt:
-      name: curl  
-
-  - name: Install gnupg2
-    apt:
-      name: gnupg2  
-
-  - name: Install software-properties-common
-    apt:
-      name: software-properties-common  
+      pkg: 
+        - apt-transport-https  
+        - ca-certificates  
+        - curl  
+        - gnupg2  
+        - software-properties-common  
 
   - name: Add Docker GPG key
     apt_key:
