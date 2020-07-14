@@ -1,6 +1,8 @@
 ---
-- hosts: localhost
+- name: create
+  hosts: localhost
   gather_facts: yes  
+  become: yes
 
   tasks:
   - name: Install required packages

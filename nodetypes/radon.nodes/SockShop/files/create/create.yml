@@ -2,8 +2,8 @@
 - name: create
   hosts: localhost
   gather_facts: yes
-  tasks:
-    
+
+  tasks:    
     - name: Install module prerequisites (Linux)
       apt:
         name:
@@ -14,8 +14,8 @@
           - python3-docker
         update_cache: yes
         state: present
-      when: ansible_os_family == "Debian"
       become: yes
+      when: ansible_os_family == "Debian"
       
     - name: Install docker-compose pip
       pip:
@@ -37,6 +37,8 @@
       docker_compose:
         project_src: "{{ sockshop_target_dir.path }}/deploy/docker-compose"
         project_name: SockShop
+        pull: yes
+        nocache: yes
         services:
           - carts
           - carts-db
@@ -52,4 +54,5 @@
           - shipping
           - user
           - user-db
+      become: yes
 
