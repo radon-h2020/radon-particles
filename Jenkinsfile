@@ -82,7 +82,7 @@ pipeline {
       }
     }
   }  
-  post {  
+  post { 
     always {
       sh "docker-compose -f ${GMT_COMPOSE_FILE} rm -fsv"
     }
