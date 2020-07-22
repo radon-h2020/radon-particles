@@ -30,31 +30,31 @@ pipeline {
 
     stage('Obtain radon.blueprints Service Templates') {
       matrix {
-	      agent any
-	      axes {
-	        axis {
-	          name 'SERVICE_TEMPLATE'
+        agent any
+        axes {
+          axis {
+            name 'SERVICE_TEMPLATE'
             values 'SockShopTestingExample', 'ThumbnailGeneration'
-	        }
+          }
           axis {
             name 'NAMESPACE'
             values 'radon.blueprints'
           }
-	      }
-      	stages {
-	        stage('Query Service Template') {
-	          environment {
-	            CSAR = "${NAMESPACE}.${SERVICE_TEMPLATE}.csar"
-	          }
-	          steps {
-	            sh "curl -H 'Accept: application/xml' -o ${CSAR} ${PARTICLES_EXPORT_URL}/${NAMESPACE}/${SERVICE_TEMPLATE}/?yaml&csar"
-	            archiveArtifacts artifacts: "${CSAR}", onlyIfSuccessful: true
-	          }
-	        }
-	      }
+        }
+        stages {
+          stage('Query Service Template') {
+            environment {
+              CSAR = "${NAMESPACE}.${SERVICE_TEMPLATE}.csar"
+            }
+            steps {
+              sh "curl -H 'Accept: application/xml' -o ${CSAR} ${PARTICLES_EXPORT_URL}/${NAMESPACE}/${SERVICE_TEMPLATE}/?yaml&csar"
+              archiveArtifacts artifacts: "${CSAR}", onlyIfSuccessful: true
+            }
+          }
+        }
       }
     }
-	
+  
     stage('Obtain radon.blueprints.testing Service Templates') {
       matrix {
         agent any
