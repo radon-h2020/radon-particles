@@ -27,7 +27,6 @@ pipeline {
         sh "sleep 30"
       }
     }
-
     stage('Obtain radon.blueprints Service Templates') {
       matrix {
         agent any
@@ -54,7 +53,6 @@ pipeline {
         }
       }
     }
-  
     stage('Obtain radon.blueprints.testing Service Templates') {
       matrix {
         agent any
@@ -77,12 +75,12 @@ pipeline {
               sh "curl -H 'Accept: application/xml' -o ${CSAR} ${PARTICLES_EXPORT_URL}/${NAMESPACE}/${SERVICE_TEMPLATE}/?yaml&csar"
               archiveArtifacts artifacts: "${CSAR}", onlyIfSuccessful: true
             }
-          }  
+          }
         }
       }
     }
-  }  
-  post { 
+  }
+  post {
     always {
       sh "docker-compose -f ${GMT_COMPOSE_FILE} rm -fsv"
     }
