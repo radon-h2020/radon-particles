@@ -1,0 +1,11 @@
+version: '3'
+services:
+  winery:
+    image: opentosca/radon-gmt
+    environment:
+      WINERY_FEATURE_RADON: "true"
+      WINERY_REPOSITORY_PROVIDER: "yaml"
+    volumes:
+      - .:/var/repository
+    ports:
+      - '18080:8080'
