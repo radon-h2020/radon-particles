@@ -46,7 +46,7 @@ pipeline {
               CSAR = "${NAMESPACE}.${SERVICE_TEMPLATE}.csar"
             }
             steps {
-              sh "curl -H 'Accept: application/xml' -o ${CSAR} ${PARTICLES_EXPORT_URL}/${NAMESPACE}/${SERVICE_TEMPLATE}/?yaml&csar"
+              sh "curl -H 'Accept: application/xml' -o \"${CSAR} ${PARTICLES_EXPORT_URL}/${NAMESPACE}/${SERVICE_TEMPLATE}/?yaml&csar\""
               archiveArtifacts artifacts: "${CSAR}", onlyIfSuccessful: true
             }
           }
@@ -72,7 +72,7 @@ pipeline {
               CSAR = "${NAMESPACE}.${SERVICE_TEMPLATE}.csar"
             }
             steps {
-              sh "curl -H 'Accept: application/xml' -o ${CSAR} ${PARTICLES_EXPORT_URL}/${NAMESPACE}/${SERVICE_TEMPLATE}/?yaml&csar"
+              sh "curl -H 'Accept: application/xml' -o \"${CSAR} ${PARTICLES_EXPORT_URL}/${NAMESPACE}/${SERVICE_TEMPLATE}/?yaml&csar\""
               archiveArtifacts artifacts: "${CSAR}", onlyIfSuccessful: true
             }
           }
