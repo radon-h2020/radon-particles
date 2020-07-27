@@ -14,7 +14,7 @@ pipeline {
   environment {
     GMT_COMPOSE_FILE = 'gmt-docker-compose.yml'
     GMT_HTTP_PORT = "18090"
-    PARTICLES_EXPORT_URL = "http://127.0.0.1:${GMT_HTTP_PORT}/winery/servicetemplates/"
+    PARTICLES_EXPORT_URL = "http://127.0.0.1:${GMT_HTTP_PORT}/winery/servicetemplates"
   }
 
   stages {
