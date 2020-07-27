@@ -18,9 +18,14 @@ pipeline {
   }
 
   stages {
+    stage('Ensure clean and up to date environment') {
+      steps {
+        sh "docker-compose -f ${GMT_COMPOSE_FILE} rm -fsv"
+        sh "docker-compose -f ${GMT_COMPOSE_FILE} pull"
+      }
+    }
     stage('Set up and start GMT') {
       steps {
-        sh "docker-compose -f ${GMT_COMPOSE_FILE} pull"
         sh "chmod -R a+rwx ."
         sh "docker-compose -f ${GMT_COMPOSE_FILE} up -d"
         sh "sleep 30"
