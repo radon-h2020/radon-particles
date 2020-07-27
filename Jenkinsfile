@@ -19,7 +19,6 @@ pipeline {
 
   stages {
     stage('Set up and start GMT') {
-      agent any
       steps {
         sh "docker-compose -f ${GMT_COMPOSE_FILE} pull"
         sh "chmod -R a+rwx ."
@@ -29,7 +28,6 @@ pipeline {
     }
     stage('Obtain radon.blueprints Service Templates') {
       matrix {
-        agent any
         axes {
           axis {
             name 'SERVICE_TEMPLATE'
@@ -55,7 +53,6 @@ pipeline {
     }
     stage('Obtain radon.blueprints.testing Service Templates') {
       matrix {
-        agent any
         axes {
           axis {
             name 'SERVICE_TEMPLATE'
