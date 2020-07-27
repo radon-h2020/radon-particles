@@ -21,6 +21,7 @@ pipeline {
     stage('Ensure clean and up to date environment') {
       steps {
         cleanWs()
+        checkout scm
         sh "docker-compose -f ${GMT_COMPOSE_FILE} rm -fsv"
         sh "docker-compose -f ${GMT_COMPOSE_FILE} pull"
       }
