@@ -8,4 +8,4 @@ services:
     volumes:
       - .:/var/repository
     ports:
-      - '18080:8080'
+      - '18090:8080'
