@@ -1,6 +1,6 @@
 - name: create
   hosts: localhost
-  gather_facts: False
+  gather_facts: yes
   remote_user: "{{ ssh_user }}"
 
   vars:
