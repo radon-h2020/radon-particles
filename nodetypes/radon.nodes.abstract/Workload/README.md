@@ -10,7 +10,8 @@ Abstract node type representing a workload in general.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `entries` | `false` | `radon.datatypes.workload.Entries` |   |   | Set of entries |
+| `name` | `false` | `string` |  |  | Name of this node |
+| `entries` | `false` | `radon.datatypes.workload.Entries` |  |  | Set of entries |
 
 ### Requirements
 

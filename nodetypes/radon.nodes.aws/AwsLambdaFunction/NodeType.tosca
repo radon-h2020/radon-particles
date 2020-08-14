@@ -85,11 +85,6 @@ node_types:
         description: Function's environment variables
         required: false
         status: supported
-    capabilities:
-      invocable:
-        occurrences: [ 0, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.aws.AwsS3Bucket ]
-        type: radon.capabilities.Invocable
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

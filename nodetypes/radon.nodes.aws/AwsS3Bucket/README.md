@@ -12,12 +12,6 @@ A node type that represents an AWS S3 Bucket.
 |:---- |:---- |:------------- |:----------- |
 | `arn` | `string` |   | Amazon's resource name for this bucket |
 
-### Properties	
-
-| Name | Required | Type | Constraint | Default Value | Description |	
-|:---- |:-------- |:---- |:---------- |:------------- |:----------- |	
-| `name` | `true` | `string` |   |   | The name of this bucket. |
-
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
