@@ -85,6 +85,12 @@ node_types:
         description: Function's environment variables
         required: false
         status: supported
+    requirements:	
+      - host:	
+          capability: tosca.capabilities.Container	
+          node: radon.nodes.aws.AwsPlatform	
+          relationship: tosca.relationships.HostedOn	
+          occurrences: [ 1, 1 ]        
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
