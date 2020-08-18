@@ -8,6 +8,11 @@ node_types:
       final: "false"
       targetNamespace: "radon.nodes.aws"
     properties:
+      name:
+        type: string
+        required: true
+        default: "AWS"
+        status: supported
       region:
         type: string
         required: true
@@ -15,7 +20,7 @@ node_types:
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket, radon.nodes.VM.EC2 ]
+        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket, radon.nodes.VM.EC2, radon.nodes.aws.AwsApiGateway ]
         type: tosca.capabilities.Container
     interfaces:
       Standard:
