@@ -7,6 +7,10 @@ node_types:
       abstract: "false"
       final: "false"
       targetNamespace: "radon.nodes.aws"
+    attributes:
+      role_arn:
+        description: AWS role arn identifier
+        type: string
     properties:
       name:
         type: string
@@ -29,8 +33,12 @@ node_types:
           configure:
             implementation:
               primary: configure
+              dependencies: [ policy ]
               timeout: 0
     artifacts:
       configure:
         type: radon.artifacts.Ansible
         file: configure.yml
+      policy:
+        type: tosca.artifacts.File
+        file: policy.json
