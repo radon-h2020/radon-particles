@@ -98,7 +98,7 @@ node_types:
     capabilities:
       invocable:
         occurrences: [ 0, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.aws.AwsS3Bucket ]
+        valid_source_types: [ radon.nodes.aws.AwsS3Bucket, radon.nodes.aws.AwsApiGateway ]
         type: radon.capabilities.Invocable
     interfaces:
       Standard:
@@ -108,6 +108,10 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, host, region ] }
+          role_arn:
+            type: string
+            required: true
+            default: { get_attribute: [ SELF, host, role_arn ] }
           lambda_runtime:
             type: string
             required: true
@@ -152,7 +156,7 @@ node_types:
           create:
             implementation:
               primary: create
-              dependencies: [ thumbnail-generator-dev, policy ]
+              dependencies: [ thumbnail-generator-dev ]
               timeout: 0
           delete:
             implementation:
@@ -168,6 +172,3 @@ node_types:
       thumbnail-generator-dev:
         type: radon.artifacts.archive.JAR
         file: thumbnail-generator-dev.jar
-      policy:
-        type: tosca.artifacts.File
-        file: policy.json
