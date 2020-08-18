@@ -1,7 +1,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  radon.nodes.aws.APIGateway:
+  radon.nodes.aws.AwsApiGateway:
     derived_from: radon.nodes.abstract.ApiGateway
     metadata:
       targetNamespace: "radon.nodes.aws"
@@ -16,16 +16,6 @@ node_types:
         description: The name of the aws role
         required: true
         status: supported
-      aws_region:
-        type: string
-        description: AWS region
-        required: true
-        status: supported
-      function_name:
-        type: string
-        description: The name of the lambda function
-        required: true
-        status: supported
       api_gateway_title:
         type: string
         description: Name of the API gateway region
@@ -37,14 +27,16 @@ node_types:
         required: true
         status: supported
     requirements:
-      - requires_role:
-          capability: tosca.capabilities.Node
-          relationship: tosca.relationships.DependsOn
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
-      - receives_notification:
-          capability: tosca.capabilities.Compute
-          relationship: tosca.relationships.DependsOn
-          occurrences: [ 1, 1 ]
+      - invoker:
+          capability: radon.capabilities.Invocable
+          node: radon.nodes.aws.AwsLambdaFunction
+          relationship: radon.relationships.aws.AwsTriggers
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -56,15 +48,15 @@ node_types:
           lambda_function_arn:
             type: string
             required: true
-            default: { get_attribute: [ SELF, receives_notification, function_arn ] }
+            default: { get_attribute: [ SELF, invoker, arn ] }
           aws_region:
             type: string
             required: true
-            default: { get_property: [ SELF, aws_region ] }
+            default: { get_property: [ SELF, host, region ] }
           function_name:
             type: string
             required: true
-            default: { get_property: [ SELF, function_name ] }
+            default: { get_property: [ SELF, invoker, name ] }
           api_gateway_title:
             type: string
             required: true
@@ -76,10 +68,17 @@ node_types:
           aws_role:
             type: string
             required: true
-            default: { get_attribute: [ SELF, requires_role, role_arn ] }
+            default: { get_attribute: [ SELF, invoker, role_arn ] }
         operations:
           create:
             implementation:
-              primary: files/create.yml
-              dependencies: [ files/swagger ]
+              primary: create
+              dependencies: [ swagger ]
               timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      swagger:
+        type: tosca.artifacts.File
+        file: swagger_template.yaml

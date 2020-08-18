@@ -3,8 +3,8 @@
   tasks:
   - name: Configure gateway API swagger file
     template:
-      src: "/tmp/RadonApiGateway.yaml"
-      dest: "/tmp/RadonApiGatewayNew.yaml"
+      src: "../swagger/swagger_template.yaml"
+      dest: "../swagger/RadonApiGatewayNew.yaml"
       mode: u=rw,g=r,o=r
     vars:
       api_gateway_resource_uri_override: "arn:aws:apigateway:{{ aws_region }}:lambda:path/2015-03-31/functions/{{ lambda_function_arn }}/invocations"
@@ -12,7 +12,7 @@
   - name: Deploy API gateway
     aws_api_gateway:
       state: present
-      swagger_file: "/tmp/RadonApiGatewayNew.yaml"
+      swagger_file: "../swagger/RadonApiGatewayNew.yaml"
       stage: production
       region: "{{ aws_region }}"
 ...
