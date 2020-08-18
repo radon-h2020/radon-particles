@@ -7,13 +7,14 @@ topology_template:
     AwsS3Bucket:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
-        x: "405"
-        y: "277"
+        x: "437"
+        y: "272"
         displayName: "SourceBucket"
       properties:
+        entries: null
         size: "0 MB"
         name: "h2020radon-examples-source-bucket"
-        maxsize: 2
+        maxsize: null
       requirements:
         - host:
             node: AwsPlatform
@@ -26,21 +27,24 @@ topology_template:
     AwsLambdaFunction:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "935"
-        y: "242"
+        x: "875"
+        y: "93"
         displayName: "ThumbnailGenerator"
       properties:
         handler: "spblab.thumbgen.lambda.ThumbnailGenerationHandler"
-        environment: "adasd"
         memory: 256
-        name: "radon-particle-test"
-        alias: "dev"
-        concurrency: null
+        memory_range: null
         runtime: "java8"
         statement_id: "lambda_test_permission01"
-        zip_file: "thumbnail-generator-dev.jar"
         timeout: 300
-        env_vars: { THUMBNAIL_BUCKET: h2020radon-examples-target-bucket }
+        concurrency: null
+        env_vars: { THUMBNAIL_BUCKET: 'h2020radon-examples-target-bucket' }
+        environment: null
+        entries: null
+        name: "radon-particle-test"
+        alias: "dev"
+        concurrency_range: null
+        zip_file: "thumbnail-generator-dev.jar"
       requirements:
         - host:
             node: AwsPlatform
@@ -53,13 +57,14 @@ topology_template:
     AwsS3Bucket_2:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
-        x: "1631"
-        y: "314"
+        x: "1294"
+        y: "271"
         displayName: "TargetBucket"
       properties:
+        entries: null
         size: "0 MB"
         name: "h2020radon-examples-target-bucket"
-        maxsize: 2
+        maxsize: null
       requirements:
         - host:
             node: AwsPlatform
@@ -68,8 +73,8 @@ topology_template:
     AwsPlatform:
       type: radon.nodes.aws.AwsPlatform
       metadata:
-        x: "931"
-        y: "707"
+        x: "873"
+        y: "465"
         displayName: "AwsPlatform"
       properties:
         name: "AWS"
@@ -89,3 +94,4 @@ topology_template:
       type: radon.relationships.aws.AwsTriggers
       properties:
         events: "s3:ObjectCreated:*"
+        interactions: null
