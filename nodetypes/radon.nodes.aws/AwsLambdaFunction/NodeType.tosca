@@ -11,6 +11,9 @@ node_types:
       arn:
         description: AWS function's Amazon Resource Name (ARN)
         type: string
+      role_arn:
+        description: AWS function's role ARN
+        type: string
       region:
         type: string
     properties:

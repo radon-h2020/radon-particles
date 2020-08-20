@@ -11,19 +11,19 @@ node_types:
       arn:
         type: string
     properties:
-      role_name:
+      api_title:
         type: string
-        description: The name of the aws role
+        description: Name of the API
         required: true
         status: supported
-      api_gateway_title:
+      api_description:
         type: string
-        description: Name of the API gateway region
+        description: Description of the API
         required: true
         status: supported
-      api_gateway_resource_uri:
+      api_version:
         type: string
-        description: URI of the resource to connect to API Gateway
+        description: Version of the API
         required: true
         status: supported
     requirements:
@@ -35,16 +35,24 @@ node_types:
       - invoker:
           capability: radon.capabilities.Invocable
           node: radon.nodes.aws.AwsLambdaFunction
-          relationship: radon.relationships.aws.AwsTriggers
+          relationship: radon.relationships.aws.ApiGatewayTriggers
           occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          role_name:
+          api_title:
             type: string
             required: true
-            default: { get_property: [ SELF, role_name ] }
+            default: { get_property: [ SELF, api_title ] }
+          api_description:
+            type: string
+            required: true
+            default: { get_property: [ SELF, api_description ] }
+          api_version:
+            type: string
+            required: true
+            default: { get_property: [ SELF, api_version ] }
           lambda_function_arn:
             type: string
             required: true
@@ -56,15 +64,7 @@ node_types:
           function_name:
             type: string
             required: true
-            default: { get_property: [ SELF, invoker, name ] }
-          api_gateway_title:
-            type: string
-            required: true
-            default: { get_property: [ SELF, api_gateway_title ] }
-          api_gateway_resource_uri:
-            type: string
-            required: true
-            default: { get_property: [ SELF, api_gateway_resource_uri ] }
+            default: { get_property: [ SELF, invoker, name ] }          
           aws_role:
             type: string
             required: true
@@ -73,12 +73,15 @@ node_types:
           create:
             implementation:
               primary: create
-              dependencies: [ swagger ]
+              timeout: 0
+          configure:
+            implementation:
+              primary: configure
               timeout: 0
     artifacts:
       create:
         type: radon.artifacts.Ansible
         file: create.yml
-      swagger:
-        type: tosca.artifacts.File
-        file: swagger_template.yaml
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml

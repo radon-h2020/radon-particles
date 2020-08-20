@@ -1,18 +1,24 @@
 ---
 - hosts: all
   tasks:
-  - name: Configure gateway API swagger file
-    template:
-      src: "../swagger/swagger_template.yaml"
-      dest: "../swagger/RadonApiGatewayNew.yaml"
-      mode: u=rw,g=r,o=r
-    vars:
-      api_gateway_resource_uri_override: "arn:aws:apigateway:{{ aws_region }}:lambda:path/2015-03-31/functions/{{ lambda_function_arn }}/invocations"
+    - name: Check that the swagger.json exists
+      stat:
+        path: /tmp/swagger.json
+      register: swagger_spec
 
-  - name: Deploy API gateway
-    aws_api_gateway:
-      state: present
-      swagger_file: "../swagger/RadonApiGatewayNew.yaml"
-      stage: production
-      region: "{{ aws_region }}"
-...
+    - name: remove the old swagger specification
+      file:
+        path: "{{ swagger_spec.stat.path }}"
+        state: absent
+      when: swagger_spec.stat.exists
+
+    - name: Initialize empty swagger.json if it does not exist
+      file:
+        path: "{{ swagger_spec.stat.path }}"
+        state: touch
+      when: not swagger_spec.stat.exists
+
+    - name: Set the basis for API
+      copy:
+        content: '{ "swagger": "2.0", "info": {"title": "{{ api_title }}", "description": "{{ api_description }}", "version": "{{ api_version }}" }, "paths": {}}'
+        dest: "{{ swagger_spec.stat.path }}"
