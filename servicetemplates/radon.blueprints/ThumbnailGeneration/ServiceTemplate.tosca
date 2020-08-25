@@ -37,10 +37,10 @@ topology_template:
         runtime: "java8"
         statement_id: "lambda_test_permission01"
         timeout: 300
+        env_vars: { THUMBNAIL_BUCKET: h2020radon-examples-target-bucket }
         concurrency: null
-        env_vars: { THUMBNAIL_BUCKET: 'h2020radon-examples-target-bucket' }
-        environment: null
         entries: null
+        environment: null
         name: "radon-particle-test"
         alias: "dev"
         concurrency_range: null
@@ -54,6 +54,10 @@ topology_template:
             node: AwsS3Bucket_2
             relationship: con_ConnectsTo_0
             capability: storage_endpoint
+      artifacts:
+        thumbnail-generator:
+          type: radon.artifacts.archive.JAR
+          file: thumbnail-generator-dev.jar
     AwsS3Bucket_2:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
@@ -73,8 +77,8 @@ topology_template:
     AwsPlatform:
       type: radon.nodes.aws.AwsPlatform
       metadata:
-        x: "873"
-        y: "465"
+        x: "875"
+        y: "467"
         displayName: "AwsPlatform"
       properties:
         name: "AWS"
