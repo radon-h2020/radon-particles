@@ -37,6 +37,10 @@ node_types:
           node: radon.nodes.aws.AwsLambdaFunction
           relationship: radon.relationships.aws.ApiGatewayTriggers
           occurrences: [ 0, UNBOUNDED ]
+      - dependency:
+          capability: tosca.capabilities.Node
+          relationship: tosca.relationships.DependsOn
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

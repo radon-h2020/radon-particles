@@ -1,10 +1,23 @@
 ---
 - hosts: localhost
-  tasks:      
+  vars:
+    - pwd: "{{ lookup('env', 'PWD') }}"
+  tasks:
+    - name: Find the deployment package (temporary substitute for TOSCA get_artifact)
+      find:
+        paths: 
+          - '{{ pwd }}'
+        file_type: file
+        recurse: yes
+        use_regex: yes
+        patterns:
+           - "{{ zip_file }}"
+      register: deployment_package
+
     - name: Lambda "{{ function_name }}" deploy
       lambda:
         name: "{{ function_name }}"
-        zip_file: "{{ zip_file }}"
+        zip_file: "{{ deployment_package.files[0].path }}"
         runtime: "{{ lambda_runtime }}"
         region: "{{ aws_region }}"
         role: "{{ role_arn }}"

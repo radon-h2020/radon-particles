@@ -8,11 +8,11 @@ node_types:
       final: "false"
       targetNamespace: "radon.nodes.aws"
     attributes:
-      arn:
-        description: AWS function's Amazon Resource Name (ARN)
-        type: string
       role_arn:
         description: AWS function's role ARN
+        type: string
+      arn:
+        description: AWS function's Amazon Resource Name (ARN)
         type: string
       region:
         type: string
@@ -38,20 +38,6 @@ node_types:
         status: supported
         constraints:
           - in_range: [ 128, 3008 ]
-      concurrency:
-        type: integer
-        description: Function concurrency
-        required: false
-        status: supported
-        constraints:
-          - in_range: [ 1, UNBOUNDED ]
-      concurrency_range:
-        type: range
-        description: Range of function concurrency to search
-        required: false
-        status: supported
-        constraints:
-          - in_range: [ 1, UNBOUNDED ]
       runtime:
         type: string
         description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
@@ -65,6 +51,13 @@ node_types:
         description: Lambda function's alias
         required: false
         status: supported
+      concurrency_range:
+        type: range
+        description: Range of function concurrency to search
+        required: false
+        status: supported
+        constraints:
+          - in_range: [ 1, UNBOUNDED ]
       statement_id:
         type: string
         description: Lambda policy statement identifier
@@ -83,6 +76,13 @@ node_types:
         status: supported
         constraints:
           - in_range: [ 1, 900 ]
+      concurrency:
+        type: integer
+        description: Function concurrency
+        required: false
+        status: supported
+        constraints:
+          - in_range: [ 1, UNBOUNDED ]
       env_vars:
         type: string
         description: Function's environment variables
@@ -131,10 +131,6 @@ node_types:
             type: integer
             required: true
             default: { get_property: [ SELF, memory ] }
-          lambda_concurrency:
-            type: integer
-            required: true
-            default: { get_property: [ SELF, concurrency ] }
           func_alias:
             type: string
             required: true
@@ -151,6 +147,10 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, zip_file ] }
+          lambda_concurrency:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, concurrency ] }
           env_vars:
             type: string
             required: false
@@ -159,7 +159,6 @@ node_types:
           create:
             implementation:
               primary: create
-              dependencies: [ thumbnail-generator-dev ]
               timeout: 0
           delete:
             implementation:
@@ -172,6 +171,3 @@ node_types:
       delete:
         type: radon.artifacts.Ansible
         file: delete.yml
-      thumbnail-generator-dev:
-        type: radon.artifacts.archive.JAR
-        file: thumbnail-generator-dev.jar
