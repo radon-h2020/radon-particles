@@ -24,7 +24,13 @@ ssh_key_file: ~/opera.pem    # path to your personal AWS certificate
 
 Deployment TOSCA Service Template:
 ```
-opera deploy --inputs inputs.yaml _definitions/radonblueprintsexamples__EC2_on_AWS.tosca
+# note: adapt path to certificate
+OPERA_SSH_USER=ubuntu OPERA_SSH_IDENTITY_FILE=~/opera.pem opera deploy --inputs inputs.yaml _definitions/radonblueprintsexamples__EC2_on_AWS.tosca
+```
+
+You can login with SSH to the create instance:
+```
+ssh -i opera.pem ubuntu@ec2-<public-ip>.eu-west-1.compute.amazonaws.com
 ```
 
 Undeploy instance:
