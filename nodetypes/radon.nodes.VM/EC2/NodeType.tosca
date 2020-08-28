@@ -65,7 +65,7 @@ node_types:
               region:
                 type: string
                 required: true
-                default: { get_property: [ HOST, region ] }
+                default: { get_property: [ SELF, host, region ] }
               instance_type:
                 type: string
                 required: true
@@ -91,7 +91,7 @@ node_types:
               region:
                 type: string
                 required: true
-                default: { get_property: [ HOST, region ] }
+                default: { get_property: [ SELF, host, region ] }
             implementation:
               primary: delete
               timeout: 0
