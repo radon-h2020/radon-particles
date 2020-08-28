@@ -18,4 +18,4 @@ Abstract node type representing a workload in general.
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
 | `invoker` | `radon.capabilities.Invocable` |   | `radon.relationships.abstract.Triggers` | [0, UNBOUNDED] |
-| `endpoint` | `tosca.capabilities.Endpoint` |   | `radon.relationships.abstract.ConnectsTo` | [0, UNBOUNDED] |
+| `endpoint` | `tosca.capabilities.Endpoint` |   | `radon.relationships.ConnectsTo` | [0, UNBOUNDED] |
