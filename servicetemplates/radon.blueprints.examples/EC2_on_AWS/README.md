@@ -1,4 +1,10 @@
 
+# EC2 Deployment Example
+
+TOSCA Service Template to deploy a EC2 instance on AWS and installing a Docker Engine on the provisioned VM.
+
+---
+
 Content of the `inputs.yaml` for deployment if you wanna change the defaults:
 
 ```
