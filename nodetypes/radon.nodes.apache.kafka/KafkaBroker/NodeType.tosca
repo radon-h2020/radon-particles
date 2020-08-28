@@ -13,7 +13,7 @@ node_types:
         type: list
       java_home:
         type: string
-        default: { get_attribute: [ HOST, java_home ] }
+        default: { get_attribute: [ SELF, host, java_home ] }
       kafka_home:
         type: string
         default: { get_operation_output: [ SELF, Standard, create, KAFKA_HOME ] }
@@ -103,7 +103,7 @@ node_types:
               IP_ADDRESS:
                 type: string
                 required: true
-                default: { get_attribute: [ HOST, public_address ] }
+                default: { get_attribute: [ SELF, host, public_address ] }
               LOG_CLEANER_ENABLE:
                 type: boolean
                 required: true

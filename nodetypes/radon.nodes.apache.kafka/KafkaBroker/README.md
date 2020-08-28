@@ -20,7 +20,7 @@ This node type represents a Kafka broker that can be scaled out into a Kafka clu
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
-| `java_home` | `string`| `get_attribute: [ HOST, java_home ]` | The path to the Java home at the hosting `JavaRuntime`node. |
+| `java_home` | `string`| `get_attribute: [ SELF, host, java_home ]` | The path to the Java home at the hosting `JavaRuntime`node. |
 | `kafka_home`| `string`| `get_operation_output: [ SELF, Standard, create, KAFKA_HOME ]` | The path to the Kafka home directory. |
 | `broker_urls` | `list` of `string` |   | represents a list of one or more urls that corresponds to the brokers of this Kafka cluster. |
 

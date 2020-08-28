@@ -19,7 +19,7 @@ node_types:
         entry_schema:
           type: string
       entries:
-        type: radon.datatypes.function.Entries
+        type: string
         required: false
         status: supported
     requirements:

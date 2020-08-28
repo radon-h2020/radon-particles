@@ -35,6 +35,7 @@ topology_template:
         memory: 256
         name: "radon-particle-test"
         alias: "dev"
+        concurrency: null
         runtime: "java8"
         statement_id: "lambda_test_permission01"
         zip_file: "thumbnail-generator-dev.jar"
