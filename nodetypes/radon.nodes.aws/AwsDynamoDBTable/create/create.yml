@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  vars:
+    - pwd: "{{ lookup('env', 'PWD') }}"
+  tasks:
+    - dynamodb_table:
+        name: {{ table_name }}
+        region: {{ aws_region }}
+        hash_key_name: {{ hash_key_name }}
+        hash_key_type: {{ hash_key_type }}
+        range_key_name: {{ range_key_name }}
+        range_key_type: {{ range_key_type }}
+        read_capacity: {{ read_capacity }}
+        write_capacity: {{ write_capacity }}

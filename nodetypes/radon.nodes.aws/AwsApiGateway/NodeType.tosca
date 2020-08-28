@@ -37,10 +37,6 @@ node_types:
           node: radon.nodes.aws.AwsLambdaFunction
           relationship: radon.relationships.aws.ApiGatewayTriggers
           occurrences: [ 0, UNBOUNDED ]
-      - dependency:
-          capability: tosca.capabilities.Node
-          relationship: tosca.relationships.DependsOn
-          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -56,23 +52,11 @@ node_types:
           api_version:
             type: string
             required: true
-            default: { get_property: [ SELF, api_version ] }
-          lambda_function_arn:
-            type: string
-            required: true
-            default: { get_attribute: [ SELF, invoker, arn ] }
+            default: { get_property: [ SELF, api_version ] }          
           aws_region:
             type: string
             required: true
             default: { get_property: [ SELF, host, region ] }
-          function_name:
-            type: string
-            required: true
-            default: { get_property: [ SELF, invoker, name ] }          
-          aws_role:
-            type: string
-            required: true
-            default: { get_attribute: [ SELF, invoker, role_arn ] }
         operations:
           create:
             implementation:

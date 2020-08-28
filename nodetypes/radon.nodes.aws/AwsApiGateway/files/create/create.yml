@@ -1,24 +1,25 @@
 ---
 - hosts: all
+  vars:
+    - spec_path: "/tmp/swagger.json"
   tasks:
     - name: Check that the swagger.json exists
       stat:
-        path: /tmp/swagger.json
+        path: "{{ spec_path }}"
       register: swagger_spec
 
     - name: remove the old swagger specification
       file:
-        path: "{{ swagger_spec.stat.path }}"
+        path: "{{ spec_path }}"
         state: absent
       when: swagger_spec.stat.exists
 
     - name: Initialize empty swagger.json if it does not exist
       file:
-        path: "{{ swagger_spec.stat.path }}"
+        path: "{{ spec_path }}"
         state: touch
-      when: not swagger_spec.stat.exists
-
+      
     - name: Set the basis for API
       copy:
         content: '{ "swagger": "2.0", "info": {"title": "{{ api_title }}", "description": "{{ api_description }}", "version": "{{ api_version }}" }, "paths": {}}'
-        dest: "{{ swagger_spec.stat.path }}"
+        dest: "{{ spec_path }}"

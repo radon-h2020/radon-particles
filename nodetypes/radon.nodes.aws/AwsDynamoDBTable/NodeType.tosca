@@ -1,0 +1,108 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.aws.AwsDynamoDBTable:
+    derived_from: tosca.nodes.Database
+    metadata:
+      abstract: "false"
+      final: "false"
+      targetNamespace: "radon.nodes.aws"
+    properties:
+      table_name:
+        type: string
+        description: The name of the AWS DynamoDB table
+        required: true
+        status: supported
+      hash_key_name:
+        type: string
+        description: The name of the hash key
+        required: true
+        status: supported
+      hash_key_type:
+        type: string
+        description: The type of the hash key {STRING, NUMBER, BINARY}
+        required: true
+        status: supported
+      range_key_name:
+        type: string
+        description: The name of the range key.
+        required: true
+        status: supported
+      range_key_type:
+        type: string
+        description: The type of the range key {STRING, NUMBER, BINARY}
+        required: true
+        status: supported
+      read_capacity:
+        type: string
+        description: Read throughput capacity (units) to provision
+        required: true
+        status: supported
+      write_capacity:
+        type: string
+        description: Write throughput capacity (units) to provision
+        required: true
+        status: supported
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - invoker:
+          capability: radon.capabilities.Invocable
+          node: radon.nodes.aws.AwsLambdaFunction
+          relationship: radon.relationships.aws.AwsTriggers
+          occurrences: [ 0, UNBOUNDED ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          aws_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, host, region ] }
+          table_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, table_name ] }
+          hash_key_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, hash_key_name ] }
+          hash_key_type:
+            type: string
+            required: true
+            default: { get_property: [ SELF, hash_key_type ] }
+          range_key_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, range_key_name ] }
+          range_key_type:
+            type: string
+            required: true
+            default: { get_property: [ SELF, range_key_type ] }
+          read_capacity:
+            type: string
+            required: true
+            default: { get_property: [ SELF, read_capacity ] }
+          write_capacity:
+            type: string
+            required: true
+            default: { get_property: [ SELF, write_capacity ] }          
+        operations:
+          create:
+            implementation:
+              primary: create
+              timeout: 0
+          delete:
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml

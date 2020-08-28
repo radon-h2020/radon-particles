@@ -1,0 +1,106 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints"
+topology_template:
+  node_templates:
+    AwsDynamoDBTable_0:
+      type: radon.nodes.aws.AwsDynamoDBTable
+      metadata:
+        x: "1496"
+        y: "160"
+        displayName: "AwsDynamoDBTable"
+      properties:
+        hash_key_name: null
+        range_key_name: null
+        read_capacity: null
+        password: null
+        range_key_type: null
+        port: null
+        name: null
+        write_capacity: null
+        hash_key_type: null
+        table_name: null
+        user: null
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_0
+            capability: host
+    AwsLambdaFunction_0:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "940"
+        y: "115"
+        displayName: "AwsLambdaFunction"
+      properties:
+        handler: "index.handler"
+        memory: 128
+        memory_range: null
+        runtime: "nodejs"
+        statement_id: null
+        timeout: 3
+        concurrency: null
+        env_vars: null
+        environment: null
+        entries: null
+        name: null
+        alias: null
+        concurrency_range: null
+        zip_file: null
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_0
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_1
+            capability: host
+    AwsPlatform_0:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "970"
+        y: "520"
+        displayName: "AwsPlatform"
+      properties:
+        name: "AWS"
+        region: null
+    AwsApiGateway_0:
+      type: radon.nodes.aws.AwsApiGateway
+      metadata:
+        x: "467"
+        y: "182"
+        displayName: "AwsApiGateway"
+      properties:
+        api_title: null
+        api_description: null
+        api_version: null
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_2
+            capability: host
+        - invoker:
+            node: AwsLambdaFunction_0
+            relationship: con_ApiGatewayTriggers_0
+            capability: invocable
+  relationship_templates:
+    con_ApiGatewayTriggers_0:
+      type: radon.relationships.aws.ApiGatewayTriggers
+      properties:
+        endpoint: null
+        http_methods: null
+        events: null
+        interactions: null
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectsTo_0:
+      type: radon.relationships.abstract.ConnectsTo
+      properties:
+        credential: null
+        interactions: null
