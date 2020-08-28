@@ -11,7 +11,7 @@ node_types:
       broker_urls:
         description: represents a list of one or more urls that corresponds to the brokers of the kafka cluster this topic is hosted on
         type: list
-        default: { get_attribute: [ HOST, broker_urls ] }
+        default: { get_attribute: [ SELF, host, broker_urls ] }
     properties:
       partitions:
         type: integer

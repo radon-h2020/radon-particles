@@ -61,7 +61,7 @@ node_types:
           IP_ADDRESS:
             type: string
             required: true
-            default: { get_attribute: [ HOST, private_address ] }
+            default: { get_attribute: [ SELF, host, private_address ] }
           MONGODB_DB_PATH:
             type: string
             required: true
