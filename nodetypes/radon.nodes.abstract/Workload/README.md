@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Workload Node Type (Abstract)
 
 Abstract node type representing a workload in general.

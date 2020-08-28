@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## CTT Agent Node Type
 
 This (abstract) node type represents an agent that can execute tests.

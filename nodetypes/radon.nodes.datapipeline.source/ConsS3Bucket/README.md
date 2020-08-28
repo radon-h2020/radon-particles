@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
+
 ## ConsS3Bucket Pipeline Node Type
 
 This will allow the user to read data from a AWS S3 bucket.

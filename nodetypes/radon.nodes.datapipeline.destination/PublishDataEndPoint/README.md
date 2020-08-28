@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Publish Data Endpoint Node Type
 
 A node type that represents an endpoint that can receive data.

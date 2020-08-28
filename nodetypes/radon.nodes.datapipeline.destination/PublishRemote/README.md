@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Publish Remote Node Type
 
 A node type that represents a remote endpoint that can receive data.

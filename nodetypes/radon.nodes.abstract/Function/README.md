@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Function Node Type (Abstract)
 
 Abstract node type representing a serverless function independently of the underlying provider.

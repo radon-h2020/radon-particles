@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## Azure Cosmos DB Node Type
 
 A node type that represents a Cosmos DB hosted by the Azure platform

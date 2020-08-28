@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
+
 ## Docker Engine Node Type
 
 Type that represents a Docker runtime to run multiple Docker container applications on a single host.

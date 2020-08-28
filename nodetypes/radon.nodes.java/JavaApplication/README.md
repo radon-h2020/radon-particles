@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## Java Application Node Type
 
 An abstract type that defines a Java application

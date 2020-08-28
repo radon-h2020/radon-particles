@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
+
 ## NiFi Pipeline Node Type
 
 A type representing a data pipeline hosted on Apache NiFi.

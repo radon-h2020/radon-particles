@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## NodeJS Application Node Type
 
 The type of a node that represents a Node.js application, and that installs Node.js runtime if necessary.

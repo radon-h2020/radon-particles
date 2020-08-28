@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
+
 ## AWS EC2 Compute Node Type
 
 A type representing an EC2 virtual machine on AWS.
@@ -9,7 +12,7 @@ A type representing an EC2 virtual machine on AWS.
 
 ### Properties
 
-| Name | Required | Type | Constraint | Default Value | Description | 
+| Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `image`  | `true`  | `string` |   | ami-00890f614e48ce866 | EC2 image ID |
 | `instance_type` | `true` | `string` |  | t2.micro | EC2 instance type ID |
