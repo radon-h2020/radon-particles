@@ -4,7 +4,7 @@
     {
       "Effect": "Allow",
       "Principal": {
-        "Service": ["lambda.amazonaws.com", "apigateway.amazonaws.com"]
+        "Service": ["lambda.amazonaws.com", "apigateway.amazonaws.com", "dynamodb.amazonaws.com"]
       },
       "Action": "sts:AssumeRole"
     }

@@ -4,24 +4,58 @@ metadata:
   targetNamespace: "radon.blueprints"
 topology_template:
   node_templates:
+    AwsLambdaFunction_1:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "909"
+        y: "250"
+        displayName: "GetToDoItem"
+      properties:
+        handler: "get.handler"
+        memory: 128
+        memory_range: null
+        runtime: "nodejs12.x"
+        statement_id: "get-stmt"
+        timeout: 300
+        env_vars: { TODOS_TABLE: items }
+        concurrency: null
+        entries: null
+        environment: null
+        name: "get-todo"
+        alias: "dev"
+        concurrency_range: null
+        zip_file: "get.zip"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_1
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_3
+            capability: host
+      artifacts:
+        get-item:
+          type: radon.artifacts.archive.Zip
+          file: get.zip
     AwsDynamoDBTable_0:
       type: radon.nodes.aws.AwsDynamoDBTable
       metadata:
-        x: "1496"
-        y: "160"
-        displayName: "AwsDynamoDBTable"
+        x: "1385"
+        y: "290"
+        displayName: "ItemsTable"
       properties:
-        hash_key_name: null
         range_key_name: null
-        read_capacity: null
+        hash_key_name: "id"
         password: null
+        read_capacity: 1
         range_key_type: null
         port: null
         name: null
-        write_capacity: null
-        hash_key_type: null
-        table_name: null
+        write_capacity: 1
+        hash_key_type: "STRING"
         user: null
+        table_name: "items"
       requirements:
         - host:
             node: AwsPlatform_0
@@ -32,22 +66,22 @@ topology_template:
       metadata:
         x: "940"
         y: "115"
-        displayName: "AwsLambdaFunction"
+        displayName: "ListToDoItems"
       properties:
-        handler: "index.handler"
+        handler: "list.handler"
         memory: 128
         memory_range: null
-        runtime: "nodejs"
-        statement_id: null
-        timeout: 3
+        runtime: "nodejs12.x"
+        statement_id: "list-statement"
+        timeout: 300
+        env_vars: { TODOS_TABLE: items }
         concurrency: null
-        env_vars: null
-        environment: null
         entries: null
-        name: null
-        alias: null
+        environment: null
+        name: "list-todos"
+        alias: "dev"
         concurrency_range: null
-        zip_file: null
+        zip_file: "list.zip"
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -57,25 +91,29 @@ topology_template:
             node: AwsPlatform_0
             relationship: con_HostedOn_1
             capability: host
+      artifacts:
+        list_function:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
     AwsPlatform_0:
       type: radon.nodes.aws.AwsPlatform
       metadata:
-        x: "970"
-        y: "520"
+        x: "602"
+        y: "623"
         displayName: "AwsPlatform"
       properties:
         name: "AWS"
-        region: null
+        region: "eu-central-1"
     AwsApiGateway_0:
       type: radon.nodes.aws.AwsApiGateway
       metadata:
-        x: "467"
-        y: "182"
+        x: "335"
+        y: "112"
         displayName: "AwsApiGateway"
       properties:
-        api_title: null
-        api_description: null
-        api_version: null
+        api_title: "ServerlessToDoListAPI"
+        api_version: "1.0.0"
+        api_description: "a simple serverless API example"
       requirements:
         - host:
             node: AwsPlatform_0
@@ -85,15 +123,21 @@ topology_template:
             node: AwsLambdaFunction_0
             relationship: con_ApiGatewayTriggers_0
             capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_1
+            relationship: con_ApiGatewayTriggers_1
+            capability: invocable
   relationship_templates:
     con_ApiGatewayTriggers_0:
       type: radon.relationships.aws.ApiGatewayTriggers
       properties:
-        endpoint: null
-        http_methods: null
+        endpoint: "/todos"
+        http_methods: "get"
         events: null
         interactions: null
     con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_3:
       type: tosca.relationships.HostedOn
     con_HostedOn_0:
       type: tosca.relationships.HostedOn
@@ -103,4 +147,16 @@ topology_template:
       type: radon.relationships.abstract.ConnectsTo
       properties:
         credential: null
+        interactions: null
+    con_ConnectsTo_1:
+      type: radon.relationships.abstract.ConnectsTo
+      properties:
+        credential: null
+        interactions: null
+    con_ApiGatewayTriggers_1:
+      type: radon.relationships.aws.ApiGatewayTriggers
+      properties:
+        endpoint: "/todos/{id}"
+        http_methods: "get"
+        events: null
         interactions: null

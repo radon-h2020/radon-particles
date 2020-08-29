@@ -72,7 +72,7 @@ node_types:
         type: integer
         description: Function timeout in seconds
         required: true
-        default: 3
+        default: 300
         status: supported
         constraints:
           - in_range: [ 1, 900 ]

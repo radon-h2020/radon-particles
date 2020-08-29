@@ -16,32 +16,34 @@ node_types:
       hash_key_name:
         type: string
         description: The name of the hash key
-        required: true
+        required: false
         status: supported
       hash_key_type:
         type: string
         description: The type of the hash key {STRING, NUMBER, BINARY}
-        required: true
+        required: false
         status: supported
       range_key_name:
         type: string
         description: The name of the range key.
-        required: true
+        required: false
         status: supported
       range_key_type:
         type: string
         description: The type of the range key {STRING, NUMBER, BINARY}
-        required: true
+        required: false
         status: supported
       read_capacity:
-        type: string
+        type: integer
         description: Read throughput capacity (units) to provision
-        required: true
+        required: false
+        default: 1
         status: supported
       write_capacity:
-        type: string
+        type: integer
         description: Write throughput capacity (units) to provision
-        required: true
+        required: false
+        default: 1
         status: supported
     requirements:
       - host:
