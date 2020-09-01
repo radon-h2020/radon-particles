@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## Azure Function Node Type (Abstract)
 
 Abstract node type that represents an function hosted on the Azure cloud platform.

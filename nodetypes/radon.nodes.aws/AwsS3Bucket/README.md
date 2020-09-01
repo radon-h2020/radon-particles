@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
+
 ## S3 Bucket Node Type
 
 A node type that represents an AWS S3 Bucket.
@@ -11,12 +14,6 @@ A node type that represents an AWS S3 Bucket.
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
 | `arn` | `string` |   | Amazon's resource name for this bucket |
-
-### Properties	
-
-| Name | Required | Type | Constraint | Default Value | Description |	
-|:---- |:-------- |:---- |:---------- |:------------- |:----------- |	
-| `name` | `true` | `string` |   |   | The name of this bucket. |
 
 ### Requirements
 

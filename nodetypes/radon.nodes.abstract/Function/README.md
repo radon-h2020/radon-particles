@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Function Node Type (Abstract)
 
 Abstract node type representing a serverless function independently of the underlying provider.
@@ -19,7 +21,7 @@ Abstract node type representing a serverless function independently of the under
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
 | `host` | `tosca.capabilities.Container` | `radon.nodes.abstract.CloudPlatform` | `tosca.relationships.HostedOn` | [1, 1] |
-| `endpoint` | `tosca.capabilities.Endpoint` |   | `radon.relationships.abstract.ConnectsTo` | [0, UNBOUNDED] |
+| `endpoint` | `tosca.capabilities.Endpoint` |   | `radon.relationships.ConnectsTo` | [0, UNBOUNDED] |
 
 ### Capabilities
 

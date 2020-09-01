@@ -1,4 +1,6 @@
-## FaaS Function Pipeline Node Type
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
+## Remote Function Pipeline Node Type
 
 To carry out the data analysis on remote machine.
 

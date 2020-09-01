@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Pipeline Block Node Type
 
 This acts as the root node for all types of data pipeline models.

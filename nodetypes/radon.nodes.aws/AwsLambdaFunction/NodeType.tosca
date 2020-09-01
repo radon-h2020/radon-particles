@@ -91,15 +91,6 @@ node_types:
           node: radon.nodes.aws.AwsPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
-      - endpoint:
-          capability: tosca.capabilities.Endpoint
-          relationship: tosca.relationships.ConnectsTo
-          occurrences: [ 0, UNBOUNDED ]
-    capabilities:
-      invocable:
-        occurrences: [ 0, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.aws.AwsS3Bucket ]
-        type: radon.capabilities.Invocable
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

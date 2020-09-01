@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## MySQL DBMS Node Type
 
 A MySQL database management system.
@@ -8,7 +10,7 @@ A MySQL database management system.
 
 ### Properties
 
-| Name | Required | Type | Constraint | Default Value | Description | 
+| Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `root_password`  | `true`  | `string` |   |   | The root password of the DBMS  |
 | `port` | `false` | `integer` |   | 3306 | The listening port of the DBMS |

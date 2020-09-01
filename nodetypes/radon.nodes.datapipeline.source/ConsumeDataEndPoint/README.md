@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## ConsumeDataEndPoint Pipeline Node Type
 
 This will allow the user to read data from an endpoint.

@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## Kafka Broker Node Type
 
 This node type represents a Kafka broker that can be scaled out into a Kafka cluster.

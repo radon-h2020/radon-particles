@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Object Storage Node Type (Abstract)
 
 Abstract node type representing an object storage independently of the underlying provider.

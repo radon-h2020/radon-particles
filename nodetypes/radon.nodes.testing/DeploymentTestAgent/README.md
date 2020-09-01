@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Deployment Test Agent Node Type
 
 This node type represents an agent that can execute deployment tests.

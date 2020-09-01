@@ -1,11 +1,13 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## Resource-triggered Azure Function Node Type
 
 A node type that represents a function that is triggered by an Azure-specific resource. This includes:
-[Blob storage](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-storage-blob), 
+[Blob storage](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-storage-blob),
 [Cosmos DB](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-documentdb),
 [Event Grid](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-event-grid),
 [Event Hubs](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-event-hubs),
-[Microsoft Graph events](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-microsoft-graph), 
+[Microsoft Graph events](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-microsoft-graph),
 [Queue storage](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-storage-queue), and
 [Service Bus](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-service-bus).
 

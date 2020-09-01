@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
+
 ## Publish S3 Bucket Node Type
 
 A node type that represents a AWS S3 bucket that can receive data.

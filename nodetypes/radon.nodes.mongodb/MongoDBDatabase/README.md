@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## MongoDB Database Node Type
 
 A node type that describes a MongoDB database.
@@ -26,6 +28,6 @@ A node type that describes a MongoDB database.
 
 ### Notes
 
-* If authorization is enabled by the host, the properties: `user`, `password`, and `authentication_database` must be assigned values.    
+* If authorization is enabled by the host, the properties: `user`, `password`, and `authentication_database` must be assigned values.
 * Inputs added to the `Standard` interface:
     * `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_USER_AUTH_DB`

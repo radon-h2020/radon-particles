@@ -8,6 +8,10 @@ node_types:
       final: "false"
       targetNamespace: "radon.nodes.abstract"
     properties:
+      name:
+        type: string
+        required: false
+        status: supported
       entries:
         type: radon.datatypes.workload.Entries
         required: false
@@ -19,5 +23,5 @@ node_types:
           occurrences: [ 0, UNBOUNDED ]
       - endpoint:
           capability: tosca.capabilities.Endpoint
-          relationship: radon.relationships.abstract.ConnectsTo
+          relationship: radon.relationships.ConnectsTo
           occurrences: [ 0, UNBOUNDED ]

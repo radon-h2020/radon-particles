@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## FaaS Function Pipeline Node Type
 
 A node type that represents a FaaS function that can process data.

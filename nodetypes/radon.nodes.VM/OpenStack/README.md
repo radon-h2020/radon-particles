@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
+
 ## OpenStack Compute Node Type
 
 A type representing a virtual machine on OpenStack.
@@ -8,7 +11,7 @@ A type representing a virtual machine on OpenStack.
 
 ### Properties
 
-| Name | Required | Type | Constraint | Default Value | Description | 
+| Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `name`  | `true`  | `string` |   |   | Name that should be given to the VM in OpenStack |
 | `image_id` | `true` | `string` |   |   | OpenStack image ID (image names are not accepted) |

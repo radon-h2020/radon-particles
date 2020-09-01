@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## Azure Platform Node Type
 
 This is Node Type represents the Azure cloud platform.

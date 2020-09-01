@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## RouteToRemote Pipeline Node Type
 
 This will allow the user to route the data to the pipeline in remote machine.
