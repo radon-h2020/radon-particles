@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEPRECATED-inactive)
+
 ## Lambda Function Node Type
 
 A node type that represents an AWS Lambda Function that can be triggered by an AWS resource, a fixed schedule or via an API gateway.

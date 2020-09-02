@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## Kafka Topic Node Type
 
 A node type that describes a Kafka topic
@@ -42,4 +44,4 @@ A node type that describes a Kafka topic
 * The `openwhisk_invoker` requirement is optional, and it allows to establish a "Triggers" relationship between the Kafka topic and an OpenWhisk function.
 * The `openfaas_invoker` requirement is optional, and it allows to establish a "Triggers" relationship between the Kafka topic and an OpenFaaS function.
 * Inputs added to the operations of the `Standard` interface:
-  * `create`: `TOPIC_NAME`, `PARTITIONS`, `REPLICAS`, `MIN_INSYNC_REPLICAS`, `RETENTION`, `SEGMENT_SIZE`, `ROLL_TIME` 
+  * `create`: `TOPIC_NAME`, `PARTITIONS`, `REPLICAS`, `MIN_INSYNC_REPLICAS`, `RETENTION`, `SEGMENT_SIZE`, `ROLL_TIME`

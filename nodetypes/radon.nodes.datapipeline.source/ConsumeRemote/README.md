@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## ConsumeRemote Pipeline Node Type
 
 Get the data from a remote location.

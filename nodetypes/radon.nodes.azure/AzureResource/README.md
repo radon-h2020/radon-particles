@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## Azure Resource Node Type (Abstract)
 
 An abstract node type to describe a generic Azure Resource. All specific Azure Resources should derive from this type.

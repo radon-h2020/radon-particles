@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Workload Node Type (Abstract)
 
 Abstract node type representing a workload in general.
@@ -10,11 +12,12 @@ Abstract node type representing a workload in general.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `entries` | `false` | `radon.datatypes.workload.Entries` |   |   | Set of entries |
+| `name` | `false` | `string` |  |  | Name of this node |
+| `entries` | `false` | `radon.datatypes.workload.Entries` |  |  | Set of entries |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
 | `invoker` | `radon.capabilities.Invocable` |   | `radon.relationships.abstract.Triggers` | [0, UNBOUNDED] |
-| `endpoint` | `tosca.capabilities.Endpoint` |   | `radon.relationships.abstract.ConnectsTo` | [0, UNBOUNDED] |
+| `endpoint` | `tosca.capabilities.Endpoint` |   | `radon.relationships.ConnectsTo` | [0, UNBOUNDED] |

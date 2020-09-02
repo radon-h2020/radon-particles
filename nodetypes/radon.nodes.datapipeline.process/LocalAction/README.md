@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Local Action Pipeline Node Type
 
 This belongs to MidwayPB pipeline block.

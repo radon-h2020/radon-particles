@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Publish Local Node Type
 
 A node type that represents a local endpoint that can receive data.

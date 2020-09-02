@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## ConsumeLocal Pipeline Node Type
 
 Get the data from the local directory.

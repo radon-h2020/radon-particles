@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Workstation Node Type
 
 Simple type representing the developers local system.

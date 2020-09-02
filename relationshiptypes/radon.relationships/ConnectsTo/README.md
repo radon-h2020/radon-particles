@@ -4,7 +4,7 @@ Abstract relationship type representing connection to an endpoint node.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `ConnectsTo` | `radon.relationships.abstract.ConnectsTo` | 1.0.0 | `tosca.relationships.ConnectsTo` |
+| `ConnectsTo` | `radon.relationships.ConnectsTo` | 1.0.0 | `tosca.relationships.ConnectsTo` |
 
 ### Properties
 

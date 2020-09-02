@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## Google Cloud Resource Node Type
 
 An abstract node type to describe a generic Google Cloud Resource. All specific Google Cloud Resources should derive from this type.

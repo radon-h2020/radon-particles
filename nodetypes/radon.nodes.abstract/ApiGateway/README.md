@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## API Gateway Node Type (Abstract)
 
 Abstract node type representing an API Gateway independently of the underlying provider.

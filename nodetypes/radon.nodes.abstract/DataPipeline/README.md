@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Data Pipeline Node Type (Abstract)
 
 Abstract data pipeline type.
