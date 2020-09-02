@@ -6,7 +6,7 @@ relationship_types:
     metadata:
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.relationships.abstract"
+      targetNamespace: "radon.relationships"
     properties:
       interactions:
         type: list
