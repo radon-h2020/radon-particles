@@ -38,7 +38,7 @@ topology_template:
         statement_id: "lambda_test_permission01"
         timeout: 300
         env_vars: { THUMBNAIL_BUCKET: h2020radon-examples-target-bucket }
-        concurrency: null
+        concurrency: 0
         entries: null
         environment: null
         name: "radon-particle-test"
@@ -91,9 +91,10 @@ topology_template:
     con_HostedOn_1:
       type: tosca.relationships.HostedOn
     con_ConnectsTo_0:
-      type: tosca.relationships.ConnectsTo
+      type: radon.relationships.ConnectsTo
       properties:
-        credential: null
+        credential: test
+        interactions: null
     con_AwsTriggers_0:
       type: radon.relationships.aws.AwsTriggers
       properties:

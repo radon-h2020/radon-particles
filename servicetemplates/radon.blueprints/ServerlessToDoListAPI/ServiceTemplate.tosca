@@ -257,7 +257,7 @@ topology_template:
     con_HostedOn_5:
       type: tosca.relationships.HostedOn
     con_ConnectsTo_2:
-      type: radon.relationships.abstract.ConnectsTo
+      type: radon.relationships.ConnectsTo
       properties:
         credential: null
         interactions: null
@@ -269,12 +269,12 @@ topology_template:
         events: null
         interactions: null
     con_ConnectsTo_3:
-      type: radon.relationships.abstract.ConnectsTo
+      type: radon.relationships.ConnectsTo
       properties:
         credential: null
         interactions: null
     con_ConnectsTo_4:
-      type: radon.relationships.abstract.ConnectsTo
+      type: radon.relationships.ConnectsTo
       properties:
         credential: null
         interactions: null
@@ -300,12 +300,12 @@ topology_template:
         events: null
         interactions: null
     con_ConnectsTo_0:
-      type: radon.relationships.abstract.ConnectsTo
+      type: radon.relationships.ConnectsTo
       properties:
         credential: null
         interactions: null
     con_ConnectsTo_1:
-      type: radon.relationships.abstract.ConnectsTo
+      type: radon.relationships.ConnectsTo
       properties:
         credential: null
         interactions: null

@@ -80,9 +80,10 @@ node_types:
         type: integer
         description: Function concurrency
         required: false
+        default: 0
         status: supported
         constraints:
-          - in_range: [ 1, UNBOUNDED ]
+          - in_range: [ 0, UNBOUNDED ]
       env_vars:
         type: string
         description: Function's environment variables
@@ -94,6 +95,11 @@ node_types:
           node: radon.nodes.aws.AwsPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
+    capabilities:
+      invocable:
+        occurrences: [ 0, UNBOUNDED ]
+        valid_source_types: [ radon.nodes.aws.AwsS3Bucket, radon.nodes.aws.AwsApiGateway ]
+        type: radon.capabilities.Invocable
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
