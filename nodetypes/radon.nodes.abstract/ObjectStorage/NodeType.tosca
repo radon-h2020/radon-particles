@@ -9,7 +9,7 @@ node_types:
       targetNamespace: "radon.nodes.abstract"
     properties:
       entries:
-        type: string
+        type: radon.datatypes.function.Entries
         required: false
         status: supported
     requirements:
