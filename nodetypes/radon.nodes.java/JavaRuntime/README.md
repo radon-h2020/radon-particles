@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## Java Runtime Node Type
 
 A type that describes a node capable of installing JRE/JDK and hosting Java applications.

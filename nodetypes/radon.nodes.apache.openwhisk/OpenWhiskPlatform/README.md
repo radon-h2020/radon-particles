@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## OpenWhisk Platform Node Type
 
 A node type that represents an externally managed OpenWhisk Platform.

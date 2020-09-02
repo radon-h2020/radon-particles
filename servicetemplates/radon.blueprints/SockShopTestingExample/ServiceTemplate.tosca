@@ -31,29 +31,29 @@ topology_template:
       type: radon.policies.testing.PingTest
       properties:
         hostname: "localhost"
-        ti_blueprint: "radon.blueprints.DeploymentTestAgent"
+        ti_blueprint: "radon.blueprints.testing.DeploymentTestAgent"
         test_id: "pingtest_123"
       targets: [ SockShop ]
     SimpleEndpointTest:
       type: radon.policies.testing.HttpEndpointTest
       properties:
-        path: "/cart/"
+        path: "/"
         hostname: "localhost"
         method: "GET"
-        port: 80
         expected_status: 200
+        port: 80
         expected_body: null
-        ti_blueprint: null
-        use_https: true
-        test_body: null
+        ti_blueprint: "radon.blueprints.testing.DeploymentTestAgent"
+        use_https: false
+        test_id: "httptest_214"
         test_header: null
-        test_id: null
+        test_body: null
       targets: [ SockShop ]
     SimpleJMeterLoadTest:
       type: radon.policies.testing.JMeterLoadTest
       properties:
-        jmx_file: "sockshop.jmx"
         hostname: "localhost"
+        jmx_file: "sockshop.jmx"
         port: 8080
         ti_blueprint: "radon.blueprints.testing.JMeterMasterOnly"
         user.properties: null

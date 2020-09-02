@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## Google Cloud Platform Node Type
 
 A node type representing the Google Cloud Platform which capable of hosting resources and functions.

@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## OpenWhisk Function Node Type
 
 A node type that represents a function hosted on an OpenWhisk Platform
@@ -19,7 +21,7 @@ A node type that represents a function hosted on an OpenWhisk Platform
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
-| `rest_api_endpoint` | `string` | `concat: [ get_attribute: [HOST, api_url], "/api/v1/namespaces/", get_property: [HOST, default_namespace], "/actions/", get_property: [SELF, function_package_name], "/", get_property: [SELF, function_name] ]` | The URL at which the function can be addressed via a REST call. |
+| `rest_api_endpoint` | `string` | `concat: [ get_attribute: [SELF, host, api_url], "/api/v1/namespaces/", get_property: [SELF, host, default_namespace], "/actions/", get_property: [SELF, function_package_name], "/", get_property: [SELF, function_name] ]` | The URL at which the function can be addressed via a REST call. |
 
 ### Capabilities
 

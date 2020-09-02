@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEPRECATED-inactive)
+
 ## S3 Bucket Node Type
 
 A node type that represents an AWS S3 Bucket.

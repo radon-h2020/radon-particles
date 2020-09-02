@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## MySQL Database Node Type
 
 Node type to represent the logical database that can be managed and hosted on MySQL.
@@ -9,7 +11,7 @@ Node type to represent the logical database that can be managed and hosted on My
 ### Properties
 
 | Name | Required | Type | Constraint | Default Value | Description |
-|:---- |:-------- |:---- |:---------- |:------------- |:----------- |  
+|:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `user` | `true` | `string` |   |   | the required user account name for DB administration |
 | `password` | `true` | `string` |   |   | the required password for the DB user account |
 

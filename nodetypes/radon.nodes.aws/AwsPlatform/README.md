@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## AWS Platform  Node Type
 
 A node type that represents the AWS platform.

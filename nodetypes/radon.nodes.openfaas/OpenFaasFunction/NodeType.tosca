@@ -12,7 +12,7 @@ node_types:
         type: string
       gateway_url:
         type: string
-        default: { get_attribute: [ HOST, url ] }
+        default: { get_attribute: [ SELF, host, url ] }
     properties:
       function_language_template:
         type: string
@@ -41,7 +41,7 @@ node_types:
           GATEWAY:
             type: string
             required: true
-            default: { get_attribute: [ HOST, url ] }
+            default: { get_attribute: [ SELF, host, url ] }
           FUNCTION_NAME:
             type: string
             required: true

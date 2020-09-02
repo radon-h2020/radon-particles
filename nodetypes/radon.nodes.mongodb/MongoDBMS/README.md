@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+
 ## MongoDB DBMS Node Type
 
 A node type that describes a MongoDB DBMS.
@@ -20,7 +22,7 @@ A node type that describes a MongoDB DBMS.
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:---------- |:------------- |
-| `url` | `string` | `concat: ["http://", get_attribute: [HOST, public_address], get_property: [SELF, port] ]` | The URL used to formulate the connection string |
+| `url` | `string` | `concat: ["http://", get_attribute: [SELF, host, public_address], get_property: [SELF, port] ]` | The URL used to formulate the connection string |
 
 ### Capabilities
 

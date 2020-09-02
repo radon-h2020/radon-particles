@@ -8,11 +8,11 @@ capability_types:
       final: "false"
       targetNamespace: "tosca.capabilities"
     properties:
-      distribution:
+      type:
         type: string
         required: false
         status: supported
-      type:
+      distribution:
         type: string
         required: false
         status: supported

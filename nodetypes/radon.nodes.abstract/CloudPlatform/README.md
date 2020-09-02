@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+
 ## Cloud Platform Node Type (Abstract)
 
 Abstract node type representing a provider-managed cloud platform.

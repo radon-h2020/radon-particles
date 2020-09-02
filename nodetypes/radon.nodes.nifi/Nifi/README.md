@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
+
 ## NiFi Node Type
 
 A type representing an Apache NiFi middleware component.
@@ -8,7 +11,7 @@ A type representing an Apache NiFi middleware component.
 
 ### Properties
 
-| Name | Required | Type | Constraint | Default Value | Description | 
+| Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `component_version` | `true` | `version` |   |   | The version of Apache NiFi |
 | `port` | `true` | `integer` |   | 8080 | The listening port of Apache NiFi |

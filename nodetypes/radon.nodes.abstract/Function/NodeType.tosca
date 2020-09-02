@@ -30,7 +30,7 @@ node_types:
           occurrences: [ 1, 1 ]
       - endpoint:
           capability: tosca.capabilities.Endpoint
-          relationship: radon.relationships.abstract.ConnectsTo
+          relationship: radon.relationships.ConnectsTo
           occurrences: [ 0, UNBOUNDED ]
     capabilities:
       invocable:

@@ -8,12 +8,12 @@ capability_types:
       final: "false"
       targetNamespace: "tosca.capabilities"
     properties:
-      max_instances:
+      min_instances:
         type: integer
         required: true
         default: 1
         status: supported
-      min_instances:
+      max_instances:
         type: integer
         required: true
         default: 1

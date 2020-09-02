@@ -7,16 +7,7 @@ node_types:
       targetNamespace: "radon.nodes.datapipeline.process"
       abstract: "false"
       final: "false"
-    attributes:
-      id:
-        description: Unique ID of the pipeline
-        type: string
     properties:
-      template_name:
-        type: string
-        description: name of the pipeline
-        required: false
-        status: supported
       cred_file_path:
         type: string
         description: credential file for access and secret key
@@ -33,60 +24,27 @@ node_types:
         required: true
         default: "EU (Frankfurt)"
         status: supported
-      template_file:
+    attributes:
+      template_name:
         type: string
-        description: XML implementation of the pipeline
-        required: false
-        status: supported
-    requirements:
-      - host:
-          capability: tosca.capabilities.Container
-          node: radon.nodes.nifi.Nifi
-          relationship: tosca.relationships.HostedOn
-          occurrences: [ 1, 1 ]
-      - ConnectToPipeline:
-          capability: radon.capabilities.datapipeline.ConnectToPipeline
-          node: radon.nodes.abstract.DataPipeline
-          relationship: radon.relationships.datapipeline.ConnectNifiLocal
-          occurrences: [ 1, 1 ]
-    capabilities:
-      ConnectToPipeline:
-        occurrences: [ 1, 1 ]
-        type: radon.capabilities.datapipeline.ConnectToPipeline
+        default: "AWSlambda_localConn"
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
-          stop:
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, id ] }
-            implementation:
-              primary: stop
-              timeout: 0
-          start:
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, id ] }
-            implementation:
-              primary: start
-              timeout: 0
           create:
             inputs:
               template_name:
                 type: string
                 required: true
-                default: { get_property: [ SELF, template_name ] }
+                default: { get_attribute: [ SELF, template_name ] }
               template_file:
                 type: string
                 required: true
-                default: { get_property: [ SELF, template_file ] }
+                default: "AWSlambda_localConn.xml"
             implementation:
               primary: create
+              dependencies: [ templateFile_localConn ]
               timeout: 0
           configure:
             inputs:
@@ -97,7 +55,7 @@ node_types:
               function_name:
                 type: string
                 required: true
-                default: { get_attribute: [ SELF, function_name ] }
+                default: { get_property: [ SELF, function_name ] }
               pipeline_id:
                 type: string
                 required: true
@@ -105,35 +63,17 @@ node_types:
               region:
                 type: string
                 required: true
-                default: { get_attribute: [ SELF, region ] }
+                default: { get_property: [ SELF, region ] }
             implementation:
               primary: configure
               timeout: 0
-          delete:
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, id ] }
-            implementation:
-              primary: delete
-              timeout: 0
     artifacts:
-      AWSlambda_localConn:
+      templateFile_localConn:
         type: tosca.artifacts.File
         file: AWSlambda_localConn.xml
-      stop:
-        type: tosca.artifacts.Implementation.Ansible
-        file: stop.yml
-      start:
-        type: tosca.artifacts.Implementation.Ansible
-        file: start.yml
       create:
-        type: tosca.artifacts.Implementation.Ansible
+        type: tosca.artifacts.File
         file: create.yml
       configure:
-        type: tosca.artifacts.Implementation.Ansible
+        type: tosca.artifacts.File
         file: configure.yml
-      delete:
-        type: tosca.artifacts.Implementation.Ansible
-        file: delete.yml

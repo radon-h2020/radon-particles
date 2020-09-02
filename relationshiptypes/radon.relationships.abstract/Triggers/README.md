@@ -4,7 +4,7 @@ Abstract relationship type representing triggering of an invocable node.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `Triggers` | `radon.relationships.abstract.Triggers` | 1.0.0 | `tosca.relationships.Root` |
+| `Triggers` | `radon.relationships.abstract.Triggers` | 1.0.0 | `tosca.relationships.ConnectsTo` |
 
 ### Valid Target types
 

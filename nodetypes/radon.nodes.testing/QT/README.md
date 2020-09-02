@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
+
 ## QT CTT Agent Node Type
 
 This node type represents an agent that can execute load tests with the DICE QT tool.

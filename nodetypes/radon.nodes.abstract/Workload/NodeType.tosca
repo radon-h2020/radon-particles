@@ -1,4 +1,5 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.abstract.Workload:
     derived_from: tosca.nodes.Root
@@ -7,6 +8,10 @@ node_types:
       final: "false"
       targetNamespace: "radon.nodes.abstract"
     properties:
+      name:
+        type: string
+        required: false
+        status: supported
       entries:
         type: radon.datatypes.workload.Entries
         required: false
@@ -15,8 +20,8 @@ node_types:
       - invoker:
           capability: radon.capabilities.Invocable
           relationship: radon.relationships.abstract.Triggers
-          occurrences: [0, UNBOUNDED]
+          occurrences: [ 0, UNBOUNDED ]
       - endpoint:
           capability: tosca.capabilities.Endpoint
-          relationship: radon.relationships.abstract.ConnectsTo
-          occurrences: [0, UNBOUNDED]
+          relationship: radon.relationships.ConnectsTo
+          occurrences: [ 0, UNBOUNDED ]

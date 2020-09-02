@@ -1,0 +1,38 @@
+---
+- name: create
+  hosts: all
+  gather_facts: yes  
+  become: yes
+
+  tasks:
+    - name: Install required packages
+      apt:
+        pkg:
+          - apt-transport-https  
+          - ca-certificates  
+          - curl  
+          - gnupg
+          - software-properties-common  
+      when: ansible_os_family == "Debian"
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/{{ ansible_distribution|lower }}/gpg
+        id: 0EBFCD88
+        state: present  
+
+    - name: Add Docker repository
+      apt_repository:
+        filename: docker
+        repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }} stable
+        update_cache: yes  
+
+    - name: Install docker-ce
+      apt:
+        name: docker-ce  
+
+    - name: Start and enable docker service
+      service: 
+        name: docker
+        enabled: yes
+        state: started
