@@ -1,11 +1,6 @@
 ---
 - hosts: localhost
   tasks:
-    - name: "Delete role of Lambda function on AWS : {{ function_name }}"
-      iam_role:
-        name: "{{ aws_role }}"
-        state: absent
-
     - name: "Remove function alias name"
       lambda_alias:
         function_name: "{{ function_name }}"
@@ -18,6 +13,6 @@
       lambda:
         name: "{{ function_name }}"
         region: "{{ aws_region }}"
-        role: "{{ aws_role }}"
+        role: "{{ role_arn }}"
         handler: image_resize.lambda_handler
         state: absent

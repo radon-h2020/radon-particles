@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+    - name: Deploy API gateway
+      aws_api_gateway:
+        state: present
+        swagger_file: "/tmp/swagger.json"
+        stage: production
+        region: "{{ aws_region }}"

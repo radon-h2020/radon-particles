@@ -8,5 +8,4 @@
         bucket_name: "{{ bucket_name }}"
         lambda_function_arn: "{{ function_arn }}"
         events:  [ "{{ events }}" ]
-        suffix: ".jpg"
         region: "{{ aws_region }}"

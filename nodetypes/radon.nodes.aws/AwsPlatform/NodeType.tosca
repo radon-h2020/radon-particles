@@ -7,7 +7,16 @@ node_types:
       abstract: "false"
       final: "false"
       targetNamespace: "radon.nodes.aws"
+    attributes:
+      role_arn:
+        description: AWS role arn identifier
+        type: string
     properties:
+      name:
+        type: string
+        required: true
+        default: "AWS"
+        status: supported
       region:
         type: string
         required: true
@@ -15,7 +24,7 @@ node_types:
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket, radon.nodes.VM.EC2 ]
+        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket, radon.nodes.VM.EC2, radon.nodes.aws.AwsApiGateway, radon.nodes.aws.AwsDynamoDBTable ]
         type: tosca.capabilities.Container
     interfaces:
       Standard:
@@ -24,8 +33,12 @@ node_types:
           configure:
             implementation:
               primary: configure
+              dependencies: [ policy ]
               timeout: 0
     artifacts:
       configure:
         type: radon.artifacts.Ansible
         file: configure.yml
+      policy:
+        type: tosca.artifacts.File
+        file: policy.json
