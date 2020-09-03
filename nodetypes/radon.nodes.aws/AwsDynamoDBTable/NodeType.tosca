@@ -76,14 +76,6 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, hash_key_type ] }
-          # range_key_name:
-          #   type: string
-          #  required: true
-          #  default: { get_property: [ SELF, range_key_name ] }
-          # range_key_type:
-          #   type: string
-          #   required: true
-          #   default: { get_property: [ SELF, range_key_type ] }
           read_capacity:
             type: string
             required: true
