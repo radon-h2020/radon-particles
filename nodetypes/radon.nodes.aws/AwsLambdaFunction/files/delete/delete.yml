@@ -13,6 +13,6 @@
       lambda:
         name: "{{ function_name }}"
         region: "{{ aws_region }}"
-        role: "{{ aws_role }}"
+        role: "{{ role_arn }}"
         handler: image_resize.lambda_handler
         state: absent
