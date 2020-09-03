@@ -37,7 +37,8 @@ topology_template:
         runtime: "java8"
         statement_id: "lambda_test_permission01"
         timeout: 300
-        env_vars: { THUMBNAIL_BUCKET: h2020radon-examples-target-bucket }
+        env_vars: 
+          THUMBNAIL_BUCKET: h2020radon-examples-target-bucket
         concurrency: 0
         entries: null
         environment: null
