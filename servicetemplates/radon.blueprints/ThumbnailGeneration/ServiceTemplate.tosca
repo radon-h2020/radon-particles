@@ -11,10 +11,8 @@ topology_template:
         y: "272"
         displayName: "SourceBucket"
       properties:
-        entries: null
         size: "0 MB"
         name: "h2020radon-examples-source-bucket"
-        maxsize: null
       requirements:
         - host:
             node: AwsPlatform
@@ -33,18 +31,14 @@ topology_template:
       properties:
         handler: "spblab.thumbgen.lambda.ThumbnailGenerationHandler"
         memory: 256
-        memory_range: null
         runtime: "java8"
         statement_id: "lambda_test_permission01"
         timeout: 300
-        env_vars: 
-          THUMBNAIL_BUCKET: h2020radon-examples-target-bucket
+        env_vars:
+          THUMBNAIL_BUCKET: "h2020radon-examples-target-bucket"
         concurrency: 0
-        entries: null
-        environment: null
         name: "radon-particle-test"
         alias: "dev"
-        concurrency_range: null
         zip_file: "thumbnail-generator-dev.jar"
       requirements:
         - host:
@@ -66,10 +60,8 @@ topology_template:
         y: "271"
         displayName: "TargetBucket"
       properties:
-        entries: null
         size: "0 MB"
         name: "h2020radon-examples-target-bucket"
-        maxsize: null
       requirements:
         - host:
             node: AwsPlatform
@@ -93,11 +85,7 @@ topology_template:
       type: tosca.relationships.HostedOn
     con_ConnectsTo_0:
       type: radon.relationships.ConnectsTo
-      properties:
-        credential: test
-        interactions: null
     con_AwsTriggers_0:
       type: radon.relationships.aws.AwsTriggers
       properties:
         events: "s3:ObjectCreated:*"
-        interactions: null
