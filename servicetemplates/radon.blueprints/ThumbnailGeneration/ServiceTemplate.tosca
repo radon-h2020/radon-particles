@@ -31,15 +31,15 @@ topology_template:
       properties:
         handler: "spblab.thumbgen.lambda.ThumbnailGenerationHandler"
         memory: 256
+        name: "radon-particle-test"
         runtime: "java8"
+        alias: "dev"
         statement_id: "lambda_test_permission01"
+        zip_file: "thumbnail-generator-dev.jar"
         timeout: 300
         env_vars:
           THUMBNAIL_BUCKET: "h2020radon-examples-target-bucket"
         concurrency: 0
-        name: "radon-particle-test"
-        alias: "dev"
-        zip_file: "thumbnail-generator-dev.jar"
       requirements:
         - host:
             node: AwsPlatform
