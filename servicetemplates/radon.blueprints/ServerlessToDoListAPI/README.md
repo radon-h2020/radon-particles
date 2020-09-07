@@ -1,7 +1,7 @@
 ## ServerlessToDoListAPI Blueprint
 
 This blueprint represents a serverless API for managing a list of TODO items implemented using Amazon Web Services (AWS Lambda, AWS API Gateway, AWS DynamoDB).
-The functions are implemented in node.js based on <https://github.com/kraigh/serverless-todo-api>
+The functions are implemented in node.js based on <https://github.com/kraigh/serverless-todo-api>.
 
 ## API Specification
 
