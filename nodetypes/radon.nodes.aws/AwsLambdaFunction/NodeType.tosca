@@ -43,6 +43,7 @@ node_types:
         type: string
         description: Lambda function's alias
         required: false
+        default: "dev"
       concurrency_range:
         type: range
         description: Range of function concurrency to search
