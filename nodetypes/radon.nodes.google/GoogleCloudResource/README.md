@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+![](https://img.shields.io/badge/Status:-RELEASED-green)
 
 ## Google Cloud Resource Node Type
 

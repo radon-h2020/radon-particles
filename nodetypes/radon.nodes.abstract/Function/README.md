@@ -13,7 +13,6 @@ Abstract node type representing a serverless function independently of the under
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `name` | `true` | `string` |   |   | Name of the function |
-| `environment` | `false` | `map: string` |   |   | Map of environment variables |
 | `entries` | `false` | `radon.datatypes.function.Entries` |   |   | Set of entries |
 
 ### Requirements

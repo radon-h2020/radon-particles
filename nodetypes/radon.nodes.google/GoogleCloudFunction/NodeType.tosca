@@ -34,7 +34,7 @@ node_types:
         default: "entry_point"
       environment_variables:
         type: map
-        description: Function's environment variables
+        description: The function's environment variables
         required: false
         entry_schema:
           type: string

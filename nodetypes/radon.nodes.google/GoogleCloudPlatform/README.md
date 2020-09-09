@@ -1,4 +1,5 @@
-![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
 ## Google Cloud Platform Node Type
 
@@ -12,6 +13,7 @@ A node type representing the Google Cloud Platform which capable of hosting reso
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
+| `name` | `true` | `string` |  | "GCP" |  |
 | `project_id` | `true` | `string` |   |   | The unique project-id to be used |
 | `region` | `true` | `string` |   |   | The region to be used for deployment |
 

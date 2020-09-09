@@ -14,7 +14,7 @@ node_types:
         required: false
     capabilities:
       storage_endpoint:
-        occurrences: [ 1, UNBOUNDED ]
+        occurrences: [ 0, UNBOUNDED ]
         type: tosca.capabilities.Endpoint
     interfaces:
       Standard:
