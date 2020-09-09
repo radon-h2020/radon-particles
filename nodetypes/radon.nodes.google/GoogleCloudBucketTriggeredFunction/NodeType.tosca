@@ -1,0 +1,88 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.google.GoogleCloudBucketTriggeredFunction:
+    derived_from: radon.nodes.google.GoogleCloudFunction
+    metadata:
+      targetNamespace: "radon.nodes.google"
+      abstract: "false"
+      final: "false"
+    properties:
+      bucket_name:
+        type: string
+        description: Name of the GCP input bucket
+    capabilities:
+      invocable:
+        occurrences: [ 1, 1 ]
+        valid_source_types: [ radon.nodes.google.GoogleCloudBucket ]
+        type: radon.capabilities.Invocable
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          environment_variables:
+            type: string
+            required: true
+            default: { get_property: [ SELF, environment_variables ] }
+          function_memory:
+            type: string
+            required: true
+            default: { get_property: [ SELF, function_memory ] }
+          function_location:
+            type: string
+            required: true
+            default: { get_property: [ SELF, host, region ] }
+          function_timeout:
+            type: string
+            required: true
+            default: { get_property: [ SELF, function_timeout ] }
+          function_bucket_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, function_bucket_name ] }
+          project_id:
+            type: string
+            required: true
+            default: { get_property: [ SELF, host, project_id ] }
+          function_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, function_name ] }
+          bucket_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, bucket_name ] }
+          function_runtime:
+            type: string
+            required: true
+            default: { get_property: [ SELF, function_runtime ] }
+          service_account_file:
+            type: string
+            required: true
+            default: { get_input: service_account_file }
+          zip_file:
+            type: string
+            required: true
+            default: { get_property: [ SELF, zip_file ] }
+          function_entry_point:
+            type: string
+            required: true
+            default: { get_property: [ SELF, function_entry_point ] }
+        operations:
+          create:
+            description: The standard create operation
+            implementation:
+              primary: create
+              timeout: 0
+          delete:
+            description: The standard delete operation
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml

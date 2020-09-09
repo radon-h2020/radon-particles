@@ -19,3 +19,16 @@ node_types:
         occurrences: [ 1, UNBOUNDED ]
         valid_source_types: [ radon.nodes.google.GoogleCloudFunction, radon.nodes.google.GoogleCloudResource ]
         type: tosca.capabilities.Container
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            description: The standard create operation
+            implementation:
+              primary: create
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
