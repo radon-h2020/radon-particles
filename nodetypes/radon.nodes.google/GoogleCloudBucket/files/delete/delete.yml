@@ -1,0 +1,34 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Authenticate to GCP with service account JSON key file
+      shell: "gcloud auth activate-service-account --key-file {{ service_account_file }}"
+
+    - name: Delete all files in GCP bucket
+      shell: "gsutil rm -r gs://{{ bucket_name }}"
+
+    # The gcp_storage_object module should be used instead of the two shell commands above but unluckily this module does
+    # not work when trying to delete all the files or a single file from bucket bucket and for most of the time fails with:
+    # TypeError: 'NoneType' object does not support item assignment. The bad thing is also that gcp_storage_bucket can only
+    # delete a bucket if it it completely empty without providing an option to force the deletion process.
+    #
+    #    - name: Delete all files in GCP bucket
+    #      gcp_storage_object:
+    #        state: absent
+    #        action: delete
+    #        bucket: "{{ bucket_name }}"
+    #        src: "*"
+    #        project: "{{ project_id }}"
+    #        auth_kind: serviceaccount
+    #        service_account_file: "{{ service_account_file }}"
+
+    - name: Delete a GCP storage bucket (bucket must be empty)
+      gcp_storage_bucket:
+        state: absent
+        name: "{{ bucket_name }}"
+        location: "{{ bucket_location }}"
+        project: "{{ project_id }}"
+        auth_kind: serviceaccount
+        service_account_file: "{{ service_account_file }}"
+...
