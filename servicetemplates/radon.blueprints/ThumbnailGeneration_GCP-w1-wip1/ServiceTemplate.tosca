@@ -7,10 +7,12 @@ topology_template:
     project_id:
       type: string
       description: Project ID found in the GCP console
+      required: true
       default: "project-123456"
     service_account_file:
       type: string
       description: Path to the service account JSON file
+      required: true
       default: "/tmp/service_account.json"
   node_templates:
     GoogleCloudBucket_0:
@@ -72,8 +74,8 @@ topology_template:
         y: "626"
         displayName: "GoogleCloudPlatform"
       properties:
-        region: "europe-west1"
         project_id: { get_input: project_id }
+        region: "europe-west1"
     GoogleCloudBucket_1:
       type: radon.nodes.google.GoogleCloudBucket
       metadata:
