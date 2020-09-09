@@ -7,8 +7,8 @@ topology_template:
     AwsS3Bucket:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
-        x: "437"
-        y: "272"
+        x: "363"
+        y: "184"
         displayName: "SourceBucket"
       properties:
         size: "0 MB"
@@ -16,7 +16,7 @@ topology_template:
       requirements:
         - host:
             node: AwsPlatform
-            relationship: con_HostedOn_1
+            relationship: con_HostedOn_0
             capability: host
         - invoker:
             node: AwsLambdaFunction
@@ -25,8 +25,8 @@ topology_template:
     AwsLambdaFunction:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "875"
-        y: "93"
+        x: "705"
+        y: "183"
         displayName: "ThumbnailGenerator"
       properties:
         handler: "spblab.thumbgen.lambda.ThumbnailGenerationHandler"
@@ -41,23 +41,36 @@ topology_template:
           THUMBNAIL_BUCKET: "h2020radon-examples-target-bucket"
         concurrency: 0
       requirements:
-        - host:
-            node: AwsPlatform
-            relationship: con_HostedOn_0
-            capability: host
         - endpoint:
             node: AwsS3Bucket_2
             relationship: con_ConnectsTo_0
             capability: storage_endpoint
+        - endpoint:
+            node: AwsS3Bucket_3
+            relationship: con_ConnectsTo_1
+            capability: storage_endpoint
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_1
+            capability: host
       artifacts:
         thumbnail-generator:
           type: radon.artifacts.archive.JAR
           file: thumbnail-generator-dev.jar
+    AwsPlatform_0:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "1447"
+        y: "503"
+        displayName: "AwsPlatform"
+      properties:
+        name: "AWS"
+        region: "eu-west-2"
     AwsS3Bucket_2:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
-        x: "1294"
-        y: "271"
+        x: "1446"
+        y: "97"
         displayName: "TargetBucket"
       properties:
         size: "0 MB"
@@ -70,20 +83,38 @@ topology_template:
     AwsPlatform:
       type: radon.nodes.aws.AwsPlatform
       metadata:
-        x: "875"
-        y: "467"
+        x: "706"
+        y: "503"
         displayName: "AwsPlatform"
       properties:
         name: "AWS"
-        region: "eu-central-1"
+        region: "eu-west-1"
+    AwsS3Bucket_3:
+      type: radon.nodes.aws.AwsS3Bucket
+      metadata:
+        x: "1447"
+        y: "250"
+        displayName: "TargetBucket 2"
+      properties:
+        size: "0 MB"
+        name: "h2020radon-examples-target-bucket-2"
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_3
+            capability: host
   relationship_templates:
     con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_3:
       type: tosca.relationships.HostedOn
     con_HostedOn_0:
       type: tosca.relationships.HostedOn
     con_HostedOn_1:
       type: tosca.relationships.HostedOn
     con_ConnectsTo_0:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_1:
       type: radon.relationships.ConnectsTo
     con_AwsTriggers_0:
       type: radon.relationships.aws.AwsTriggers
