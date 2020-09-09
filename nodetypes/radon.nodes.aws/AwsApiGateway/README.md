@@ -8,6 +8,12 @@ A node type that represents an AWS Lambda Function.
 |:---- |:--- |:------- |:------------ |
 | `AwsApiGateway` | `radon.nodes.aws.AwsApiGateway` | 1.0.0 | `radon.nodes.abstract.ApiGateway` |
 
+### Attributes
+
+| Name | Type | Default Value | Description |
+|:---- |:---- |:------------- |:----------- |
+| `arn` | `string` |   | Amazon's resource name for this entity |
+
 ### Properties
 
 | Name | Required | Type | Constraint | Default Value | Description |
@@ -15,12 +21,6 @@ A node type that represents an AWS Lambda Function.
 | `api_title` | `true` | `string` |  |  | Name of the API |
 | `api_description` | `true` | `string` |  |  |  Description of the API |
 | `api_version` | `true` | `string` |  |  | Version of the API |
-
-### Attributes
-
-| Name | Type | Default Value | Description |
-|:---- |:---- |:------------- |:----------- |
-| `arn` | `string` |   | Amazon's resource name for this entity |
 
 ### Requirements
 

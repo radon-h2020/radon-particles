@@ -25,7 +25,7 @@ node_types:
         status: supported
       range_key_name:
         type: string
-        description: The name of the range key.
+        description: The name of the range key
         required: false
         status: supported
       range_key_type:
