@@ -3,6 +3,15 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 metadata:
   targetNamespace: "radon.blueprints"
 topology_template:
+  inputs:
+    project_id:
+      type: string
+      description: Project ID found in the GCP console
+      default: "project-123456"
+    service_account_file:
+      type: string
+      description: Path to the service account JSON file
+      default: "/tmp/service_account.json"
   node_templates:
     GoogleCloudBucket_0:
       type: radon.nodes.google.GoogleCloudBucket
@@ -62,6 +71,9 @@ topology_template:
         x: "803"
         y: "626"
         displayName: "GoogleCloudPlatform"
+      properties:
+        region: "europe-west1"
+        project_id: { get_input: project_id }
     GoogleCloudBucket_1:
       type: radon.nodes.google.GoogleCloudBucket
       metadata:
