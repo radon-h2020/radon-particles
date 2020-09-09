@@ -31,6 +31,7 @@ node_types:
       function_entry_point:
         type: string
         description: The name of the function that will be executed
+        default: "entry_point"
       environment_variables:
         type: map
         description: Function's environment variables

@@ -8,6 +8,9 @@ node_types:
       abstract: "false"
       final: "false"
     properties:
+      name:
+        type: string
+        default: "GCP"
       project_id:
         type: string
         description: The unique project-id to be used
