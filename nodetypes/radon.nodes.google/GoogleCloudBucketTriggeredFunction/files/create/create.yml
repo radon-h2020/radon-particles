@@ -19,7 +19,7 @@
       shell: "gcloud auth activate-service-account --key-file {{ service_account_file }}"
 
     - name: Upload zip archive with function to the GCP bucket
-      shell: "gsutil cp "{{ deployment_package.files[0].path }}" gs://{{ bucket_function_name }}/function.zip"
+      shell: "gsutil cp {{ deployment_package.files[0].path }} gs://{{ bucket_function_name }}/function.zip"
 
     - name: Create a new Google Cloud function
       gcp_cloudfunctions_cloud_function:
@@ -37,3 +37,4 @@
         auth_kind: serviceaccount
         service_account_file: "{{ service_account_file }}"
         environment_variables: "{{ environment_variables }}"
+        state: present
