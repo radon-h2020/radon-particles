@@ -4,24 +4,15 @@ node_types:
   radon.nodes.abstract.Function:
     derived_from: tosca.nodes.Root
     metadata:
+      targetNamespace: "radon.nodes.abstract"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.abstract"
     properties:
-      name:
-        type: string
-        required: true
-        status: supported
-      environment:
-        type: map
-        required: false
-        status: supported
-        entry_schema:
-          type: string
       entries:
         type: radon.datatypes.function.Entries
         required: false
-        status: supported
+      name:
+        type: string
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -34,5 +25,5 @@ node_types:
           occurrences: [ 0, UNBOUNDED ]
     capabilities:
       invocable:
-        type: radon.capabilities.Invocable
         occurrences: [ 0, UNBOUNDED ]
+        type: radon.capabilities.Invocable
