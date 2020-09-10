@@ -1,4 +1,5 @@
-![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
 ## Google Cloud Bucket Node Type
 
