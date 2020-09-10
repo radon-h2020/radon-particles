@@ -7,10 +7,6 @@ This blueprint represents a thumbnail generation example application implemented
 1. Install Google Cloud SDK from as described here: <https://cloud.google.com/sdk/docs/downloads-apt-get>
 2. Create a Google Cloud Service Account (Google Cloud Console > IAM). 
    Further, generate a new key along with a JSON file that can be downloaded.
-   The following permissions should be set for the service account:
-     * Cloud Functions Admin
-     * Storage Admin
-     * Storage Object Admin
 3. Initialize xOpera:
    ```
    mkdir gcp && cd gcp

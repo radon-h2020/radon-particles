@@ -27,7 +27,7 @@ node_types:
           project_id:
             type: string
             required: true
-            default: { get_property: [ SELF, host, region ] }
+            default: { get_property: [ SELF, host, project_id ] }
           bucket_name:
             type: string
             required: false

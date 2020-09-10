@@ -37,4 +37,3 @@
         auth_kind: serviceaccount
         service_account_file: "{{ service_account_file }}"
         environment_variables: "{{ environment_variables }}"
-        state: present
