@@ -4,10 +4,13 @@ node_types:
   radon.nodes.aws.AwsLambdaFunction:
     derived_from: radon.nodes.abstract.Function
     metadata:
+      targetNamespace: "radon.nodes.aws"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.aws"
     attributes:
+      role_arn:
+        description: AWS function's role ARN
+        type: string
       arn:
         description: AWS function's Amazon Resource Name (ARN)
         type: string
@@ -17,74 +20,61 @@ node_types:
       handler:
         type: string
         description: Handler for lambda function
-        required: true
         default: "index.handler"
-        status: supported
       memory:
         type: integer
         description: Function memory in MB
-        required: true
         default: 128
-        status: supported
         constraints:
-          - in_range: [ 128, 3008 ]
+          - in_range: [ 128,3008 ]
       memory_range:
         type: range
         description: Range of function memory in MB to search
         required: false
-        status: supported
         constraints:
-          - in_range: [ 128, 3008 ]
-      concurrency:
-        type: integer
-        description: Function concurrency
-        required: false
-        status: supported
-        constraints:
-          - in_range: [ 1, UNBOUNDED ]
-      concurrency_range:
-        type: range
-        description: Range of function concurrency to search
-        required: false
-        status: supported
-        constraints:
-          - in_range: [ 1, UNBOUNDED ]
+          - in_range: [ 128,3008 ]
       runtime:
         type: string
         description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-        required: true
         default: "nodejs"
-        status: supported
         constraints:
-          - valid_values: [ nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5 ]
+          - valid_values: [ nodejs,nodejs4.3,nodejs6.10,nodejs8.10,nodejs10.x,java8,python2.7,python3.6,python3.7,dotnetcore1.0,dotnetcore2.0,dotnetcore2.1,nodejs4.3-edge,go1.x,ruby2.5 ]
       alias:
         type: string
         description: Lambda function's alias
         required: false
-        status: supported
+        default: "dev"
+      concurrency_range:
+        type: range
+        description: Range of function concurrency to search
+        required: false
+        constraints:
+          - in_range: [ 1,UNBOUNDED ]
       statement_id:
         type: string
         description: Lambda policy statement identifier
-        required: true
-        status: supported
       zip_file:
         type: string
         description: path to a function zip file
-        required: true
-        status: supported
       timeout:
         type: integer
         description: Function timeout in seconds
-        required: true
-        default: 3
-        status: supported
+        default: 300
         constraints:
-          - in_range: [ 1, 900 ]
+          - in_range: [ 1,900 ]
+      concurrency:
+        type: integer
+        description: Function concurrency
+        required: false
+        default: 0
+        constraints:
+          - in_range: [ 0,UNBOUNDED ]
       env_vars:
-        type: string
+        type: map
         description: Function's environment variables
         required: false
-        status: supported
+        entry_schema:
+          type: string
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -99,6 +89,10 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, host, region ] }
+          role_arn:
+            type: string
+            required: true
+            default: { get_attribute: [ SELF, host, role_arn ] }
           lambda_runtime:
             type: string
             required: true
@@ -115,10 +109,6 @@ node_types:
             type: integer
             required: true
             default: { get_property: [ SELF, memory ] }
-          lambda_concurrency:
-            type: integer
-            required: true
-            default: { get_property: [ SELF, concurrency ] }
           func_alias:
             type: string
             required: true
@@ -135,6 +125,10 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, zip_file ] }
+          lambda_concurrency:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, concurrency ] }
           env_vars:
             type: string
             required: false
@@ -143,7 +137,6 @@ node_types:
           create:
             implementation:
               primary: create
-              dependencies: [ thumbnail-generator-dev, policy ]
               timeout: 0
           delete:
             implementation:
@@ -156,9 +149,3 @@ node_types:
       delete:
         type: radon.artifacts.Ansible
         file: delete.yml
-      thumbnail-generator-dev:
-        type: radon.artifacts.archive.JAR
-        file: thumbnail-generator-dev.jar
-      policy:
-        type: tosca.artifacts.File
-        file: policy.json

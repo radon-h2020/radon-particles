@@ -1,4 +1,5 @@
-![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
+![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
 ## AWS API Gateway Node Type
 
@@ -8,36 +9,31 @@ A node type that represents an AWS Lambda Function.
 |:---- |:--- |:------- |:------------ |
 | `AwsApiGateway` | `radon.nodes.aws.AwsApiGateway` | 1.0.0 | `radon.nodes.abstract.ApiGateway` |
 
-### Properties
-
-| Name | Required | Type | Constraint | Default Value | Description |
-|:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `role_name` | `true` | `string` |  |   | The Amazon Resource Name (ARN) of the execution role |
-| `aws_region` | `true` | `string` |  |   | The selected Amazon region |
-| `function_name` | `true` | `string` |  | `index.handler` | The name of the lambda function |
-| `api_gateway_title` | `true` | `string` |  |   | Name of the API gateway region |
-| `api_gateway_resource_uri` | `true` | `string` |  |   | The amount of concurrency that your function has access to |
-
 ### Attributes
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
 | `arn` | `string` |   | Amazon's resource name for this entity |
 
+### Properties
+
+| Name | Required | Type | Constraint | Default Value | Description |
+|:---- |:-------- |:---- |:---------- |:------------- |:----------- |
+| `api_title` | `true` | `string` |  |  | Name of the API |
+| `api_description` | `true` | `string` |  |  |  Description of the API |
+| `api_version` | `true` | `string` |  |  | Version of the API |
+
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `requires_role` | `tosca.capabilities.Node` |  | `tosca.relationships.DependsOn` | [1, 1] |
-| `receives_notification` | `tosca.capabilities.Compute` |  | `tosca.relationships.DependsOn` | [1, 1] |
+| `host` | `tosca.capabilities.Container` | `radon.nodes.aws.AwsPlatform` | `tosca.relationships.HostedOn`| [1, 1] |
+| `invoker` | `radon.capabilities.Invocable` | `radon.nodes.aws.LambdaFunction` | `radon.relationships.aws.Triggers`| [0, UNBOUNDED] |
 
 ### Notes
 
 * Parameters added to the `Standard` interface inputs:
-    * `role_name`
-    * `lambda_function_arn`
+    * `api_title`
+    * `api_description`
+    * `api_version`
     * `aws_region`
-    * `function_name`
-    * `api_gateway_title`
-    * `api_gateway_resource_uri`
-    * `aws_role`

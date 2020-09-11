@@ -7,13 +7,12 @@ topology_template:
     AwsS3Bucket:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
-        x: "405"
-        y: "277"
+        x: "437"
+        y: "272"
         displayName: "SourceBucket"
       properties:
         size: "0 MB"
         name: "h2020radon-examples-source-bucket"
-        maxsize: 2
       requirements:
         - host:
             node: AwsPlatform
@@ -26,21 +25,21 @@ topology_template:
     AwsLambdaFunction:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "935"
-        y: "242"
+        x: "875"
+        y: "93"
         displayName: "ThumbnailGenerator"
       properties:
         handler: "spblab.thumbgen.lambda.ThumbnailGenerationHandler"
-        environment: "adasd"
         memory: 256
         name: "radon-particle-test"
-        alias: "dev"
-        concurrency: null
         runtime: "java8"
+        alias: "dev"
         statement_id: "lambda_test_permission01"
         zip_file: "thumbnail-generator-dev.jar"
         timeout: 300
-        env_vars: { THUMBNAIL_BUCKET: h2020radon-examples-target-bucket }
+        env_vars:
+          THUMBNAIL_BUCKET: "h2020radon-examples-target-bucket"
+        concurrency: 0
       requirements:
         - host:
             node: AwsPlatform
@@ -50,16 +49,19 @@ topology_template:
             node: AwsS3Bucket_2
             relationship: con_ConnectsTo_0
             capability: storage_endpoint
+      artifacts:
+        thumbnail-generator:
+          type: radon.artifacts.archive.JAR
+          file: thumbnail-generator-dev.jar
     AwsS3Bucket_2:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
-        x: "1631"
-        y: "314"
+        x: "1294"
+        y: "271"
         displayName: "TargetBucket"
       properties:
         size: "0 MB"
         name: "h2020radon-examples-target-bucket"
-        maxsize: 2
       requirements:
         - host:
             node: AwsPlatform
@@ -68,8 +70,8 @@ topology_template:
     AwsPlatform:
       type: radon.nodes.aws.AwsPlatform
       metadata:
-        x: "931"
-        y: "707"
+        x: "875"
+        y: "467"
         displayName: "AwsPlatform"
       properties:
         name: "AWS"
@@ -82,9 +84,7 @@ topology_template:
     con_HostedOn_1:
       type: tosca.relationships.HostedOn
     con_ConnectsTo_0:
-      type: tosca.relationships.ConnectsTo
-      properties:
-        credential: null
+      type: radon.relationships.ConnectsTo
     con_AwsTriggers_0:
       type: radon.relationships.aws.AwsTriggers
       properties:

@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  vars:
+    - pwd: "{{ lookup('env', 'PWD') }}"
+  tasks:
+    - name: Delete DynamoDB table
+      dynamodb_table:
+        name: "{{ table_name }}"
+        region: "{{ aws_region }}"
+        state: absent

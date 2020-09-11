@@ -1,7 +1,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  radon.nodes.aws.APIGateway:
+  radon.nodes.aws.AwsApiGateway:
     derived_from: radon.nodes.abstract.ApiGateway
     metadata:
       targetNamespace: "radon.nodes.aws"
@@ -11,75 +11,65 @@ node_types:
       arn:
         type: string
     properties:
-      role_name:
+      api_title:
         type: string
-        description: The name of the aws role
+        description: Name of the API
         required: true
         status: supported
-      aws_region:
+      api_description:
         type: string
-        description: AWS region
+        description: Description of the API
         required: true
         status: supported
-      function_name:
+      api_version:
         type: string
-        description: The name of the lambda function
-        required: true
-        status: supported
-      api_gateway_title:
-        type: string
-        description: Name of the API gateway region
-        required: true
-        status: supported
-      api_gateway_resource_uri:
-        type: string
-        description: URI of the resource to connect to API Gateway
+        description: Version of the API
         required: true
         status: supported
     requirements:
-      - requires_role:
-          capability: tosca.capabilities.Node
-          relationship: tosca.relationships.DependsOn
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
-      - receives_notification:
-          capability: tosca.capabilities.Compute
-          relationship: tosca.relationships.DependsOn
-          occurrences: [ 1, 1 ]
+      - invoker:
+          capability: radon.capabilities.Invocable
+          node: radon.nodes.aws.AwsLambdaFunction
+          relationship: radon.relationships.aws.ApiGatewayTriggers
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          role_name:
+          api_title:
             type: string
             required: true
-            default: { get_property: [ SELF, role_name ] }
-          lambda_function_arn:
+            default: { get_property: [ SELF, api_title ] }
+          api_description:
             type: string
             required: true
-            default: { get_attribute: [ SELF, receives_notification, function_arn ] }
+            default: { get_property: [ SELF, api_description ] }
+          api_version:
+            type: string
+            required: true
+            default: { get_property: [ SELF, api_version ] }          
           aws_region:
             type: string
             required: true
-            default: { get_property: [ SELF, aws_region ] }
-          function_name:
-            type: string
-            required: true
-            default: { get_property: [ SELF, function_name ] }
-          api_gateway_title:
-            type: string
-            required: true
-            default: { get_property: [ SELF, api_gateway_title ] }
-          api_gateway_resource_uri:
-            type: string
-            required: true
-            default: { get_property: [ SELF, api_gateway_resource_uri ] }
-          aws_role:
-            type: string
-            required: true
-            default: { get_attribute: [ SELF, requires_role, role_arn ] }
+            default: { get_property: [ SELF, host, region ] }
         operations:
           create:
             implementation:
-              primary: files/create.yml
-              dependencies: [ files/swagger ]
+              primary: create
               timeout: 0
+          configure:
+            implementation:
+              primary: configure
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml

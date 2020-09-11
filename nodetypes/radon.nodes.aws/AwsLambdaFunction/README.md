@@ -13,20 +13,24 @@ A node type that represents an AWS Lambda Function.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `role_name` | `true` | `string` |   |   | The Amazon Resource Name (ARN) of the function's execution role |
-| `role_description` | `true` | `string` |   |   | Description of the function's execution role |
+| `alias` | `true` | `string` |  |  | Lambda function's alias |
 | `runtime` | `true` | `string` | `valid_values: [nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5]` |   | The identifier of the function's runtime |
 | `handler` | `true` | `string` |   | `index.handler` | The name of the method within your code that Lambda calls to execute your function |
 | `memory` | `true` | `integer` | `in_range: [128, 3008]` |   | The amount of memory in megabytes that your function has access to |
-| `concurrency` | `false` | `integer` | `in_range: [1, UNBOUNDED]` |   | The amount of concurrency that your function has access to |
+| `memory_range` | `true` | `range` | `in_range: [128, 3008]` |   | Range of function memory in MB to search |
+| `concurrency` | `false` | `integer` | `in_range: [0, UNBOUNDED]` |   | The amount of concurrency that your function has access to |
+| `concurrency_range` | `false` | `range` | `in_range: [1, UNBOUNDED]` |   | Range of function concurrency to search |
 | `timeout` | `true` | `integer` | `in_range: [1, 900]` | 3 | The amount of time that Lambda allows a function to run before stopping it |
-| `schedule` | `false` | `string` |   |   | The schedule in which the platform will invoke this function, can be a rate or a cron |
+| `statement_id` | `true` | `string` |  |  | Lambda policy statement identifier |
+| `zip_file` | `true` | `string` |  |  | path to a function zip file |
 
 ### Attributes
 
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
-| `arn` | `string` |   | Amazon's resource name for this Lambda function |
+| `arn` | `string` |  | Amazon's resource name for this Lambda function |
+| `role_arn` | `string` |  | AWS function's role ARN |
+| `region` | `string` |  |  |
 
 ### Requirements
 
@@ -37,15 +41,15 @@ A node type that represents an AWS Lambda Function.
 ### Notes
 
 * Parameters added to the `Standard` interface inputs:
-    * `function_name`
-    * `function_role_name`
-    * `function_runtime`
-    * `function_handler`
-    * `function_memory`
-    * `function_concurrency`
-    * `function_timeout`
-    * `function_code_location`
-    * `aws_access_key_id`
-    * `aws_secret_access_key`
     * `aws_region`
-    * `schedule`
+    * `role_arn`
+    * `lambda_runtime`
+    * `function_name`
+    * `lambda_timeout`
+    * `lambda_memory`
+    * `func_alias`
+    * `permission_id`
+    * `lambda_handler`
+    * `zip_file`
+    * `lambda_concurrency`
+    * `env_vars`

@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  vars:
+    - pwd: "{{ lookup('env', 'PWD') }}"
+  tasks:
+    - name: Create DynamoDB table with a string key (module requires a type w/o quotes...)
+      dynamodb_table:
+        name: "{{ table_name }}"
+        region: "{{ aws_region }}"
+        hash_key_name: "{{ hash_key_name | default(omit) }}"
+        hash_key_type: STRING
+        read_capacity: "{{ read_capacity | default(1) | int }}"
+        write_capacity: "{{ write_capacity | default(1) | int }}"
+      when: hash_key_type == "STRING"
+    
+    - name: Create DynamoDB table with an integer key (module requires a type w/o quotes...)
+      dynamodb_table:
+        name: "{{ table_name }}"
+        region: "{{ aws_region }}"
+        hash_key_name: "{{ hash_key_name | default(omit) }}"
+        hash_key_type: NUMBER
+        read_capacity: "{{ read_capacity | default(1) | int }}"
+        write_capacity: "{{ write_capacity | default(1) | int }}"
+      when: hash_key_type == "NUMBER"
+
+    - name: Create DynamoDB table with a binary key (module requires a type w/o quotes...)
+      dynamodb_table:
+        name: "{{ table_name }}"
+        region: "{{ aws_region }}"
+        hash_key_name: "{{ hash_key_name | default(omit) }}"
+        hash_key_type: BINARY
+        read_capacity: "{{ read_capacity | default(1) | int }}"
+        write_capacity: "{{ write_capacity | default(1) | int }}"
+      when: hash_key_type == "BINARY"
+

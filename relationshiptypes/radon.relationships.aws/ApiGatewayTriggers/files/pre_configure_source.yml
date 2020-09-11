@@ -1,0 +1,13 @@
+---
+- name: configure AWS
+  hosts: localhost
+  gather_facts: false
+  tasks:  
+    - name: Run simple generation script
+      command: /usr/bin/python3 generator.py /tmp/swagger.json {{ endpoint }} {{ http_methods }} {{ aws_region }} {{ function_arn }} {{ role_arn }}
+      
+    #- name: remove the temporary swagger specification
+    #  file:
+    #    path: "{{ swagger_spec.path }}"
+    #    state: absent
+    #    when: swagger_spec.path is defined
