@@ -20,7 +20,7 @@ node_types:
           occurrences: [ 1, 1 ]
       - invoker:
           capability: radon.capabilities.Invocable
-          node: radon.nodes.aws.AwsLambdaFunction
+          node: radon.nodes.abstract.Function
           relationship: radon.relationships.aws.AwsTriggers
           occurrences: [ 0, UNBOUNDED ]
     interfaces:

@@ -19,40 +19,35 @@ topology_template:
             relationship: con_HostedOn_1
             capability: host
         - invoker:
-            node: AwsLambdaFunction
+            node: AwsLambdaFunctionFromS3_0
             relationship: con_AwsTriggers_0
             capability: invocable
-    AwsLambdaFunction:
-      type: radon.nodes.aws.AwsLambdaFunction
+    AwsLambdaFunctionFromS3_0:
+      type: radon.nodes.aws.AwsLambdaFunctionFromS3
       metadata:
-        x: "875"
-        y: "93"
-        displayName: "ThumbnailGenerator"
+        x: "874"
+        y: "120"
+        displayName: "AwsLambdaFunctionFromS3"
       properties:
-        handler: "spblab.thumbgen.lambda.ThumbnailGenerationHandler"
-        memory: 256
-        name: "radon-particle-test"
-        runtime: "java8"
-        alias: "dev"
-        statement_id: "lambda_test_permission01"
-        zip_file: "thumbnail-generator-dev.jar"
+        handler: "<adjust the handler, e.g., index.handler>"
+        memory: 128
+        runtime: "<adjust runtime, e.g., nodejs"
+        statement_id: "thumbgen"
+        s3_bucket_name: "<add you S3 bucket name here>"
         timeout: 300
-        env_vars:
-          THUMBNAIL_BUCKET: "h2020radon-examples-target-bucket"
         concurrency: 0
+        s3_bucket_key: "<add the S3 filename here>"
+        name: "thumbgen"
+        alias: "thumbgen"
       requirements:
-        - host:
-            node: AwsPlatform
-            relationship: con_HostedOn_0
-            capability: host
         - endpoint:
             node: AwsS3Bucket_2
             relationship: con_ConnectsTo_0
             capability: storage_endpoint
-      artifacts:
-        thumbnail-generator:
-          type: radon.artifacts.archive.JAR
-          file: thumbnail-generator-dev.jar
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_0
+            capability: host
     AwsS3Bucket_2:
       type: radon.nodes.aws.AwsS3Bucket
       metadata:
