@@ -9,9 +9,11 @@ node_types:
       targetNamespace: "radon.nodes.abstract"
     properties:
       entries:
-        type: radon.datatypes.function.Entries
+        type: map
         required: false
         status: supported
+        entry_schema:
+          type: radon.datatypes.Entry
     requirements:
       - host:
           capability: tosca.capabilities.Container

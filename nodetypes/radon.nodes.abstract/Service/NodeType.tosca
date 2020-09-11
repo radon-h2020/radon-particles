@@ -1,7 +1,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  radon.nodes.abstract.CloudPlatform:
+  radon.nodes.abstract.Service:
     derived_from: tosca.nodes.Root
     metadata:
       abstract: "false"
@@ -12,8 +12,13 @@ node_types:
         type: string
         required: false
         status: supported
+      entries:
+        type: map
+        required: false
+        status: supported
+        entry_schema:
+          type: radon.datatypes.Entry
     capabilities:
-      host:
-        type: tosca.capabilities.Container
-        valid_source_types: [ radon.nodes.abstract.Function, radon.nodes.abstract.ObjectStorage ]
+      endpoint_service:
+        type: tosca.capabilities.Endpoint
         occurrences: [ 1, UNBOUNDED ]
