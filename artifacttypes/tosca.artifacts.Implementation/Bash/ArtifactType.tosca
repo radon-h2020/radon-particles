@@ -5,7 +5,7 @@ artifact_types:
     description: Script artifact for the Unix Bash shell
     derived_from: tosca.artifacts.Implementation
     metadata:
+      targetNamespace: "tosca.artifacts.Implementation"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.artifacts.Implementation"
     mime_type: application/x-sh

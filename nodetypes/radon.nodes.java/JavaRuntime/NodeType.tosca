@@ -4,9 +4,9 @@ node_types:
   radon.nodes.java.JavaRuntime:
     derived_from: tosca.nodes.SoftwareComponent
     metadata:
+      targetNamespace: "radon.nodes.java"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.java"
     attributes:
       headless:
         type: boolean

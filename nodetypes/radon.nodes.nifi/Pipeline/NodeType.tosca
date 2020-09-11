@@ -4,9 +4,9 @@ node_types:
   radon.nodes.nifi.Pipeline:
     derived_from: radon.nodes.abstract.DataPipeline
     metadata:
+      targetNamespace: "radon.nodes.nifi"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.nifi"
     attributes:
       id:
         description: Unique ID of the pipeline
@@ -18,23 +18,15 @@ node_types:
       template_name:
         type: string
         description: name of the pipeline
-        required: true
-        status: supported
       cred_file_path:
         type: string
         description: credential file for access and secret key
-        required: true
-        status: supported
       object_name:
         type: string
         description: object name in the process group
-        required: true
-        status: supported
       template_file:
         type: string
         description: XML implementation of the pipeline
-        required: true
-        status: supported
     requirements:
       - host:
           capability: tosca.capabilities.Container

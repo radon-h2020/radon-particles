@@ -12,4 +12,3 @@ node_types:
         type: string
         description: Comma-separated list of worker hostnames
         required: false
-        status: supported

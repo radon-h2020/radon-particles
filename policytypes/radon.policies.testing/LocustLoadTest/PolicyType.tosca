@@ -12,9 +12,6 @@ policy_types:
         type: string
         description: Location and filename of a file with properties (optional)
         required: false
-        status: supported
       locust_file:
         type: string
         description: Location and filename of the Locust script
-        required: true
-        status: supported

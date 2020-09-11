@@ -4,14 +4,12 @@ node_types:
   radon.nodes.abstract.DataPipeline:
     derived_from: tosca.nodes.Root
     metadata:
+      targetNamespace: "radon.nodes.abstract"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.abstract"
     properties:
       name:
         type: string
-        required: true
-        status: supported
     requirements:
       - host:
           capability: tosca.capabilities.Container

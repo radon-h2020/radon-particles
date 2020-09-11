@@ -5,18 +5,14 @@ relationship_types:
     description: OpenWhisk-specific relationship type representing Kafka-to-OpenWhisk Function communication
     derived_from: radon.relationships.abstract.Triggers
     metadata:
+      targetNamespace: "radon.relationships.apache.openwhisk"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.relationships.apache.openwhisk"
     properties:
       trigger_name:
         type: string
         description: the name of the trigger created by this relationship. Used for proper cleanup when the relationship is removed.
-        required: true
-        status: supported
       events:
         type: string
-        required: true
-        status: supported
         constraints:
           - length: 1

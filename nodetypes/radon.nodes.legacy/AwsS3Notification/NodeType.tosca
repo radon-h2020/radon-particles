@@ -10,8 +10,6 @@ node_types:
     properties:
       aws_region:
         type: string
-        required: true
-        status: supported
     requirements:
       - receives_notification:
           capability: tosca.capabilities.Compute

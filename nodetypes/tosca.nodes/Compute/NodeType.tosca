@@ -4,9 +4,9 @@ node_types:
   tosca.nodes.Compute:
     derived_from: tosca.nodes.Root
     metadata:
+      targetNamespace: "tosca.nodes"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.nodes"
     attributes:
       private_address:
         type: string

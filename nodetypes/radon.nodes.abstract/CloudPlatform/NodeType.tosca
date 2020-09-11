@@ -4,14 +4,13 @@ node_types:
   radon.nodes.abstract.CloudPlatform:
     derived_from: tosca.nodes.Root
     metadata:
+      targetNamespace: "radon.nodes.abstract"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.abstract"
     properties:
       name:
         type: string
         required: false
-        status: supported
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]

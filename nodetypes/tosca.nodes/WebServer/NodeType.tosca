@@ -4,9 +4,9 @@ node_types:
   tosca.nodes.WebServer:
     derived_from: tosca.nodes.SoftwareComponent
     metadata:
+      targetNamespace: "tosca.nodes"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.nodes"
     capabilities:
       data_endpoint:
         occurrences: [ 1, UNBOUNDED ]

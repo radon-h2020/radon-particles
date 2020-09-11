@@ -79,7 +79,7 @@ node_types:
           s3_bucket_key:
             type: string
             required: true
-            default: { get_property: [SELF, s3_bucket_key] }
+            default: { get_property: [ SELF, s3_bucket_key ] }
           aws_region:
             type: string
             required: true
@@ -119,7 +119,7 @@ node_types:
           s3_bucket_name:
             type: string
             required: true
-            default: { get_property: [SELF, s3_bucket_name] }
+            default: { get_property: [ SELF, s3_bucket_name ] }
           lambda_concurrency:
             type: integer
             required: true

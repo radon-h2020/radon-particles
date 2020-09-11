@@ -4,48 +4,33 @@ policy_types:
   radon.policies.testing.HttpEndpointTest:
     derived_from: radon.policies.testing.Test
     metadata:
+      targetNamespace: "radon.policies.testing"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.policies.testing"
     properties:
       path:
         type: string
-        required: true
         default: "/"
-        status: supported
       hostname:
         type: string
-        required: true
-        status: supported
       method:
         type: string
-        required: true
         default: "GET"
-        status: supported
       port:
         type: integer
-        required: true
         default: 80
-        status: supported
       expected_status:
         type: integer
-        required: true
         default: 200
-        status: supported
       expected_body:
         type: json
         required: false
-        status: supported
       use_https:
         type: boolean
-        required: true
         default: false
-        status: supported
       test_body:
         type: json
         required: false
-        status: supported
       test_header:
         type: map
         required: false
-        status: supported

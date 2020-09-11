@@ -4,6 +4,6 @@ artifact_types:
   radon.artifacts.docker.DockerImage:
     derived_from: tosca.artifacts.Deployment.Image
     metadata:
+      targetNamespace: "radon.artifacts.docker"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.artifacts.docker"

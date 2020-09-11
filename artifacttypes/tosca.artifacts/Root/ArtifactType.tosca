@@ -4,6 +4,6 @@ artifact_types:
   tosca.artifacts.Root:
     description: The TOSCA Artifact Type all other TOSCA Artifact Types derive from
     metadata:
+      targetNamespace: "tosca.artifacts"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.artifacts"

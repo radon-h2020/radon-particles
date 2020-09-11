@@ -4,6 +4,6 @@ capability_types:
   tosca.capabilities.Endpoint.Database:
     derived_from: tosca.capabilities.Endpoint
     metadata:
+      targetNamespace: "tosca.capabilities.Endpoint"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.capabilities.Endpoint"

@@ -13,14 +13,14 @@ topology_template:
       properties:
         handler: "get.handler"
         memory: 128
+        name: "get-todo"
         runtime: "nodejs12.x"
+        alias: "dev"
         statement_id: "get-stmt"
+        zip_file: "get.zip"
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
-        name: "get-todo"
-        alias: "dev"
-        zip_file: "get.zip"
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -43,14 +43,14 @@ topology_template:
       properties:
         handler: "create.handler"
         memory: 128
+        name: "create-item"
         runtime: "nodejs12.x"
+        alias: "dev"
         statement_id: "create-stmt"
+        zip_file: "create.zip"
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
-        name: "create-item"
-        alias: "dev"
-        zip_file: "create.zip"
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -90,14 +90,14 @@ topology_template:
       properties:
         handler: "list.handler"
         memory: 128
+        name: "list-todos"
         runtime: "nodejs12.x"
+        alias: "dev"
         statement_id: "list-statement"
+        zip_file: "list.zip"
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
-        name: "list-todos"
-        alias: "dev"
-        zip_file: "list.zip"
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -120,14 +120,14 @@ topology_template:
       properties:
         handler: "update.handler"
         memory: 128
+        name: "update-item"
         runtime: "nodejs12.x"
+        alias: "dev"
         statement_id: "update-stmt"
+        zip_file: "update.zip"
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
-        name: "update-item"
-        alias: "dev"
-        zip_file: "update.zip"
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -159,14 +159,14 @@ topology_template:
       properties:
         handler: "delete.handler"
         memory: 128
+        name: "delete-item"
         runtime: "nodejs12.x"
+        alias: "dev"
         statement_id: "delete-stmt"
+        zip_file: "delete.zip"
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
-        name: "delete-item"
-        alias: "dev"
-        zip_file: "delete.zip"
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0

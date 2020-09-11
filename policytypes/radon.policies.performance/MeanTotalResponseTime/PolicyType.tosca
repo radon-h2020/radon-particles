@@ -4,9 +4,9 @@ policy_types:
   radon.policies.performance.MeanTotalResponseTime:
     derived_from: tosca.policies.Performance
     metadata:
+      targetNamespace: "radon.policies.performance"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.policies.performance"
     properties:
       target_entries:
         type: list

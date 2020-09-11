@@ -1,20 +1,17 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 node_types:
   radon.nodes.abstract.workload.ClosedWorkload:
     derived_from: radon.nodes.abstract.Workload
     metadata:
+      targetNamespace: "radon.nodes.abstract.workload"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.abstract.workload"
     properties:
-      population:
-        type: integer
-        required: true
-        default: 1
-        status: supported
-        constraints:
-          - greater_or_equal: 1
       think_time:
         type: radon.datatypes.RandomVariable
-        required: true
-        status: supported
+      population:
+        type: integer
+        default: 1
+        constraints:
+          - greater_or_equal: 1

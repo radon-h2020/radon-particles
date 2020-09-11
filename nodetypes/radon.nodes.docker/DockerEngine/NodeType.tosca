@@ -4,9 +4,9 @@ node_types:
   radon.nodes.docker.DockerEngine:
     derived_from: tosca.nodes.Container.Runtime
     metadata:
+      targetNamespace: "radon.nodes.docker"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.docker"
     attributes:
       port:
         type: integer

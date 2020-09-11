@@ -4,6 +4,6 @@ capability_types:
   radon.capabilities.kafka.KafkaHosting:
     derived_from: tosca.capabilities.Container
     metadata:
+      targetNamespace: "radon.capabilities.kafka"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.capabilities.kafka"

@@ -4,14 +4,12 @@ node_types:
   radon.nodes.azure.AzureResource:
     derived_from: tosca.nodes.SoftwareComponent
     metadata:
+      targetNamespace: "radon.nodes.azure"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.azure"
     properties:
       name:
         type: string
-        required: true
-        status: supported
     requirements:
       - host:
           capability: tosca.capabilities.Container

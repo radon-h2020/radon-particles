@@ -4,23 +4,17 @@ capability_types:
   radon.capabilities.container.JavaRuntime:
     derived_from: tosca.capabilities.Container
     metadata:
+      targetNamespace: "radon.capabilities.container"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.capabilities.container"
     properties:
       headless:
         type: boolean
-        required: true
         default: true
-        status: supported
       java_version:
         type: integer
-        required: true
         default: 8
-        status: supported
       only_jre:
         type: boolean
-        required: true
         default: true
-        status: supported
     valid_source_types: [ radon.nodes.java.JavaApplication ]

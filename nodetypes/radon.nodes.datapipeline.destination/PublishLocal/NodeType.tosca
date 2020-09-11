@@ -16,11 +16,8 @@ node_types:
         type: boolean
         required: false
         default: true
-        status: supported
       directory:
         type: string
-        required: true
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

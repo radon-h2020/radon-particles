@@ -15,8 +15,6 @@ node_types:
       directory:
         type: string
         description: Path to the file/folder
-        required: true
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

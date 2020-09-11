@@ -13,12 +13,18 @@ node_types:
         description: Limit on the amount of memory the function can use.
         default: 256
         constraints:
-          - valid_values: [ 128,256,512,1024,2048 ]
+          - valid_values: [ 128, 256, 512, 1024, 2048 ]
+      environment_variables:
+        type: map
+        description: The function's environment variables
+        required: false
+        entry_schema:
+          type: string
       function_timeout:
         type: integer
         default: 60
         constraints:
-          - in_range: [ 1,540 ]
+          - in_range: [ 1, 540 ]
       function_bucket_name:
         type: string
         description: Name of the GCP bucket containing the zipped GCP function
@@ -27,20 +33,14 @@ node_types:
       function_runtime:
         type: string
         constraints:
-          - valid_values: [ nodejs8,nodejs10,python37,go111,nodejs6 ]
+          - valid_values: [ nodejs8, nodejs10, python37, go111, nodejs6 ]
+      zip_file:
+        type: string
+        description: Path to a zip file containing the function code
       function_entry_point:
         type: string
         description: The name of the function that will be executed
         default: "entry_point"
-      environment_variables:
-        type: map
-        description: The function's environment variables
-        required: false
-        entry_schema:
-          type: string
-      zip_file:
-        type: string
-        description: Path to a zip file containing the function code
     requirements:
       - host:
           capability: tosca.capabilities.Container

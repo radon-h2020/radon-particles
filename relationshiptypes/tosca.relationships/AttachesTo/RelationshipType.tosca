@@ -4,18 +4,15 @@ relationship_types:
   tosca.relationships.DependsOn:
     derived_from: tosca.relationships.Root
     metadata:
+      targetNamespace: "tosca.relationships"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.relationships"
     properties:
       location:
         type: string
-        required: true
-        status: supported
         constraints:
           - min_length: 1
       device:
         type: string
         required: false
-        status: supported
     valid_target_types: [ tosca.capabilities.Attachment ]

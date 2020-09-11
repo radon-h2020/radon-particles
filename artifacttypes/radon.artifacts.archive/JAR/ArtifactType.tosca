@@ -4,8 +4,8 @@ artifact_types:
   radon.artifacts.archive.JAR:
     derived_from: tosca.artifacts.File
     metadata:
+      targetNamespace: "radon.artifacts.archive"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.artifacts.archive"
     mime_type: application/java-archive
     file_ext: [ jar ]

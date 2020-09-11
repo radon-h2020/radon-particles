@@ -4,9 +4,9 @@ node_types:
   radon.nodes.java.JavaApplication:
     derived_from: tosca.nodes.SoftwareComponent
     metadata:
+      targetNamespace: "radon.nodes.java"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.java"
     requirements:
       - host:
           capability: tosca.capabilities.Container

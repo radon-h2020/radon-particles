@@ -26,19 +26,19 @@ node_types:
         description: Function memory in MB
         default: 128
         constraints:
-          - in_range: [ 128,3008 ]
+          - in_range: [ 128, 3008 ]
       memory_range:
         type: range
         description: Range of function memory in MB to search
         required: false
         constraints:
-          - in_range: [ 128,3008 ]
+          - in_range: [ 128, 3008 ]
       runtime:
         type: string
         description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
         default: "nodejs"
         constraints:
-          - valid_values: [ nodejs,nodejs4.3,nodejs6.10,nodejs8.10,nodejs10.x,java8,python2.7,python3.6,python3.7,dotnetcore1.0,dotnetcore2.0,dotnetcore2.1,nodejs4.3-edge,go1.x,ruby2.5 ]
+          - valid_values: [ nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5 ]
       alias:
         type: string
         description: Lambda function's alias
@@ -49,7 +49,7 @@ node_types:
         description: Range of function concurrency to search
         required: false
         constraints:
-          - in_range: [ 1,UNBOUNDED ]
+          - in_range: [ 1, UNBOUNDED ]
       statement_id:
         type: string
         description: Lambda policy statement identifier
@@ -61,14 +61,14 @@ node_types:
         description: Function timeout in seconds
         default: 300
         constraints:
-          - in_range: [ 1,900 ]
+          - in_range: [ 1, 900 ]
       concurrency:
         type: integer
         description: Function concurrency
         required: false
         default: 0
         constraints:
-          - in_range: [ 0,UNBOUNDED ]
+          - in_range: [ 0, UNBOUNDED ]
       env_vars:
         type: map
         description: Function's environment variables
