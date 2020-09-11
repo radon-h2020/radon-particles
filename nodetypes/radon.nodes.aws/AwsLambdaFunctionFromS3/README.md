@@ -22,7 +22,8 @@ A node type that represents an AWS Lambda Function that is instrumented based on
 | `concurrency_range` | `false` | `range` | `in_range: [1, UNBOUNDED]` |   | Range of function concurrency to search |
 | `timeout` | `true` | `integer` | `in_range: [1, 900]` | 3 | The amount of time that Lambda allows a function to run before stopping it |
 | `statement_id` | `true` | `string` |  |  | Lambda policy statement identifier |
-| `zip_file` | `true` | `string` |  |  | path to a function zip file |
+| `s3_bucket_name` | `true` | `string` |  |  | The S3 bucket name containing the function package to be deployed |
+| `s3_bucket_key` | `true` | `string` |  |  | The S3 key aka. filename referencing the file to be deployed |
 
 ### Attributes
 
@@ -50,6 +51,7 @@ A node type that represents an AWS Lambda Function that is instrumented based on
     * `func_alias`
     * `permission_id`
     * `lambda_handler`
-    * `zip_file`
     * `lambda_concurrency`
     * `env_vars`
+    * `s3_bucket_name`
+    * `s3_bucket_key`
