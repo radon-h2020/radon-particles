@@ -1,21 +1,25 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 data_types:
   radon.datatypes.Event:
     derived_from: tosca.datatypes.Root
+    metadata:
+      targetNamespace: "radon.datatypes"
+      abstract: "false"
+      final: "false"
     properties:
-      type:
-        type: string
-        required: true
       spec_version:
         type: string
         required: false
         default: 0.3
+      schema_url:
+        type: string
+        required: false
       data_content_encoding:
         type: string
         required: false
-      data_content_type:
+      type:
         type: string
-        required: false
-      schema_url:
+      data_content_type:
         type: string
         required: false

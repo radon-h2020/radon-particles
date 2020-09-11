@@ -1,18 +1,24 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
+
 data_types:
   tosca.datatypes.network.PortSpec:
     derived_from: tosca.datatypes.Root
+    metadata:
+      targetNamespace: "tosca.datatypes.network"
+      abstract: "false"
+      final: "false"
     properties:
       protocol:
         type: string
-        required: true
-        default: tcp
+        default: "tcp"
         constraints:
           - valid_values: [ udp, tcp, igmp ]
-      target:
-        type: PortDef
-        required: false
       target_range:
+        type: range
+        required: false
+        constraints:
+          - in_range: [ 1, 65535 ]
+      source_range:
         type: range
         required: false
         constraints:
@@ -20,8 +26,6 @@ data_types:
       source:
         type: PortDef
         required: false
-      source_range:
-        type: range
+      target:
+        type: PortDef
         required: false
-        constraints:
-          - in_range: [ 1, 65535 ]
