@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  tasks:
+    - name: "Remove function alias name"
+      lambda_alias:
+        function_name: "{{ function_name }}"
+        name: "{{ func_alias }}"
+        region: "{{ aws_region }}"
+        state: absent
+      ignore_errors: yes
+
+    - name: "Lambda {{ function_name }} undeploy"
+      lambda:
+        name: "{{ function_name }}"
+        region: "{{ aws_region }}"
+        role: "{{ role_arn }}"
+        handler: image_resize.lambda_handler
+        state: absent
