@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/Status:-TESTING-yellow)
 ![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
 ## Lambda Function Node Type
