@@ -14,5 +14,5 @@
         name: "{{ function_name }}"
         region: "{{ aws_region }}"
         role: "{{ role_arn }}"
-        handler: image_resize.lambda_handler
+        handler: "{{ lambda_handler }}"
         state: absent
