@@ -1,13 +1,13 @@
-![](https://img.shields.io/badge/Status:-RELEASED-green)
+![](https://img.shields.io/badge/Status:-TESTING-yellow)
 ![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
 ## Lambda Function Node Type
 
-A node type that represents an AWS Lambda Function.
+A node type that represents an AWS Lambda Function that is instrumented based on a function deployment package hosted on S3.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `AwsLambdaFunction` | `radon.nodes.aws.AwsLambdaFunction` | 1.0.0 | `radon.nodes.abstract.Function` |
+| `AwsLambdaFunctionFromS3` | `radon.nodes.aws.AwsLambdaFunctionFromS3` | 1.0.0 | `radon.nodes.abstract.Function` |
 
 ### Properties
 
@@ -22,7 +22,8 @@ A node type that represents an AWS Lambda Function.
 | `concurrency_range` | `false` | `range` | `in_range: [1, UNBOUNDED]` |   | Range of function concurrency to search |
 | `timeout` | `true` | `integer` | `in_range: [1, 900]` | 3 | The amount of time that Lambda allows a function to run before stopping it |
 | `statement_id` | `true` | `string` |  |  | Lambda policy statement identifier |
-| `zip_file` | `true` | `string` |  |  | path to a function zip file |
+| `s3_bucket_name` | `true` | `string` |  |  | The S3 bucket name containing the function package to be deployed |
+| `s3_bucket_key` | `true` | `string` |  |  | The S3 key aka. filename referencing the file to be deployed |
 
 ### Attributes
 
@@ -50,6 +51,7 @@ A node type that represents an AWS Lambda Function.
     * `func_alias`
     * `permission_id`
     * `lambda_handler`
-    * `zip_file`
     * `lambda_concurrency`
     * `env_vars`
+    * `s3_bucket_name`
+    * `s3_bucket_key`
