@@ -12,7 +12,8 @@ Abstract node type representing an object storage independently of the underlyin
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `entries` | `false` | `radon.datatypes.objectstorage.Entries` |   |   | Set of entries |
+| `entries` | `false` | `map: radon.datatypes.Entry` |   |   | Map of entries<sup>[1](#fn1)</sup> |
+<sup name="fn1">1</sup> Entry names must be prefixed with an operation, e.g. `get` and `get_image`. The supported operations include `get`, `put` and `delete`.
 
 ### Requirements
 
