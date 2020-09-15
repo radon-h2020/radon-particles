@@ -4,9 +4,9 @@ node_types:
   radon.nodes.docker.DockerApplication:
     derived_from: tosca.nodes.Container.Application
     metadata:
+      targetNamespace: "radon.nodes.docker"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.docker"
     requirements:
       - host:
           capability: radon.capabilities.container.DockerRuntime

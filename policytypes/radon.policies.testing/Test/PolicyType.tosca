@@ -10,10 +10,7 @@ policy_types:
       ti_blueprint:
         type: string
         description: Reference to a RADON test infrastructure blueprint
-        required: true
-        status: supported
       test_id:
         type: string
         description: Identifier for this test case
         required: false
-        status: supported

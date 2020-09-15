@@ -4,6 +4,6 @@ policy_types:
   tosca.policies.Root:
     description: The TOSCA Policy Type all other TOSCA Policy Types derive from
     metadata:
+      targetNamespace: "tosca.policies"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.policies"

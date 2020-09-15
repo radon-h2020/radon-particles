@@ -4,35 +4,30 @@ capability_types:
   tosca.capabilities.Compute:
     derived_from: tosca.capabilities.Container
     metadata:
+      targetNamespace: "tosca.capabilities"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.capabilities"
     properties:
       num_cpus:
         type: integer
         required: false
-        status: supported
         constraints:
           - greater_or_equal: 1
       name:
         type: string
         required: false
-        status: supported
       disk_size:
         type: size
         required: false
-        status: supported
         constraints:
           - greater_or_equal: 0 MB
       cpu_frequency:
         type: frequency
         required: false
-        status: supported
         constraints:
           - greater_or_equal: 0.1 GHz
       mem_size:
         type: size
         required: false
-        status: supported
         constraints:
           - greater_or_equal: 0 MB

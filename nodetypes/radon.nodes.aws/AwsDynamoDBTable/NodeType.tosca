@@ -4,47 +4,39 @@ node_types:
   radon.nodes.aws.AwsDynamoDBTable:
     derived_from: tosca.nodes.Database
     metadata:
+      targetNamespace: "radon.nodes.aws"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.aws"
     properties:
-      table_name:
-        type: string
-        description: The name of the AWS DynamoDB table
-        required: true
-        status: supported
       hash_key_name:
         type: string
         description: The name of the hash key
         required: false
-        status: supported
-      hash_key_type:
-        type: string
-        description: The type of the hash key {STRING, NUMBER, BINARY}
-        required: false
-        status: supported
       range_key_name:
         type: string
         description: The name of the range key
         required: false
-        status: supported
-      range_key_type:
-        type: string
-        description: The type of the range key {STRING, NUMBER, BINARY}
-        required: false
-        status: supported
       read_capacity:
         type: integer
         description: Read throughput capacity (units) to provision
         required: false
         default: 1
-        status: supported
+      range_key_type:
+        type: string
+        description: The type of the range key {STRING, NUMBER, BINARY}
+        required: false
       write_capacity:
         type: integer
         description: Write throughput capacity (units) to provision
         required: false
         default: 1
-        status: supported
+      hash_key_type:
+        type: string
+        description: The type of the hash key {STRING, NUMBER, BINARY}
+        required: false
+      table_name:
+        type: string
+        description: The name of the AWS DynamoDB table
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -60,30 +52,30 @@ node_types:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          aws_region:
-            type: string
-            required: true
-            default: { get_property: [ SELF, host, region ] }
-          table_name:
-            type: string
-            required: true
-            default: { get_property: [ SELF, table_name ] }
           hash_key_name:
             type: string
             required: true
             default: { get_property: [ SELF, hash_key_name ] }
-          hash_key_type:
-            type: string
-            required: true
-            default: { get_property: [ SELF, hash_key_type ] }
           read_capacity:
             type: string
             required: true
             default: { get_property: [ SELF, read_capacity ] }
+          aws_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, host, region ] }
           write_capacity:
             type: string
             required: true
-            default: { get_property: [ SELF, write_capacity ] }          
+            default: { get_property: [ SELF, write_capacity ] }
+          hash_key_type:
+            type: string
+            required: true
+            default: { get_property: [ SELF, hash_key_type ] }
+          table_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, table_name ] }
         operations:
           create:
             implementation:

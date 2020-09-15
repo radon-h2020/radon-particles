@@ -4,6 +4,6 @@ capability_types:
   radon.capabilities.kafka.KafkaTopic:
     derived_from: tosca.capabilities.Endpoint
     metadata:
+      targetNamespace: "radon.capabilities.kafka"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.capabilities.kafka"

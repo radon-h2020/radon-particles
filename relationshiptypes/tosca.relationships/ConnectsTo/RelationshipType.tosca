@@ -4,12 +4,11 @@ relationship_types:
   tosca.relationships.ConnectsTo:
     derived_from: tosca.relationships.Root
     metadata:
+      targetNamespace: "tosca.relationships"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.relationships"
     properties:
       credential:
         type: Credential
         required: false
-        status: supported
     valid_target_types: [ tosca.capabilities.Endpoint ]

@@ -7,27 +7,22 @@ node_types:
       targetNamespace: "radon.nodes.datapipeline.process"
       abstract: "false"
       final: "false"
+    attributes:
+      template_name:
+        type: string
+        default: "AWSlambda_localConn"
     properties:
       cred_file_path:
         type: string
         description: credential file for access and secret key
         required: false
-        status: supported
       function_name:
         type: string
         description: name of the lambda function
-        required: true
-        status: supported
       region:
         type: string
         description: Region of the function
-        required: true
         default: "EU (Frankfurt)"
-        status: supported
-    attributes:
-      template_name:
-        type: string
-        default: "AWSlambda_localConn"
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

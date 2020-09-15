@@ -15,7 +15,6 @@ node_types:
         type: string
         description: Name of the pipeline node
         required: false
-        status: supported
     requirements:
       - host:
           capability: tosca.capabilities.Container

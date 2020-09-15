@@ -4,9 +4,9 @@ node_types:
   tosca.nodes.Container.Application:
     derived_from: tosca.nodes.Root
     metadata:
+      targetNamespace: "tosca.nodes.Container"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.nodes.Container"
     requirements:
       - host:
           capability: tosca.capabilities.Compute

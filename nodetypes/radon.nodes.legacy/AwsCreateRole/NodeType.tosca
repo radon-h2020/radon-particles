@@ -14,16 +14,10 @@ node_types:
     properties:
       role_name:
         type: string
-        required: true
-        status: supported
       aws_region:
         type: string
-        required: true
-        status: supported
       role_description:
         type: string
-        required: true
-        status: supported
     capabilities:
       requires_role:
         occurrences: [ 1, UNBOUNDED ]

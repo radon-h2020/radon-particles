@@ -4,23 +4,19 @@ capability_types:
   tosca.capabilities.OperatingSystem:
     derived_from: tosca.capabilities.Root
     metadata:
+      targetNamespace: "tosca.capabilities"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.capabilities"
     properties:
       type:
         type: string
         required: false
-        status: supported
       distribution:
         type: string
         required: false
-        status: supported
       version:
         type: version
         required: false
-        status: supported
       architecture:
         type: string
         required: false
-        status: supported

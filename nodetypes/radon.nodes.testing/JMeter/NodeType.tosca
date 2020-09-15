@@ -12,12 +12,10 @@ node_types:
         type: string
         description: Location and filename of a file with JMeter properties (optional)
         required: false
-        status: supported
       worker_hostnames:
         type: string
         description: Comma-separated list of worker hostnames
         required: false
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

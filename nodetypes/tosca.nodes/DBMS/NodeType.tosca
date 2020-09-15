@@ -4,20 +4,18 @@ node_types:
   tosca.nodes.DBMS:
     derived_from: tosca.nodes.SoftwareComponent
     metadata:
+      targetNamespace: "tosca.nodes"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.nodes"
     properties:
       port:
         type: integer
         description: the port the DBMS service will listen to for data and requests
         required: false
-        status: supported
       root_password:
         type: string
         description: the optional root password for the DBMS service
         required: false
-        status: supported
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]

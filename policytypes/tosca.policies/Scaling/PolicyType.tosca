@@ -5,6 +5,6 @@ policy_types:
     description: The TOSCA Policy Type definition that is used to govern scaling of TOSCA nodes or groups of nodes.
     derived_from: tosca.policies.Root
     metadata:
+      targetNamespace: "tosca.policies"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.policies"

@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Status:-DEPRECATED-inactive)
+
 ## ImageResize Function
 
 Install `opera`, `boto3`, and `botocore`:

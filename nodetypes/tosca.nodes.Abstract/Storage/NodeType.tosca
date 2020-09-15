@@ -4,18 +4,14 @@ node_types:
   tosca.nodes.Abstract.Storage:
     derived_from: tosca.nodes.Root
     metadata:
+      targetNamespace: "tosca.nodes.Abstract"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.nodes.Abstract"
     properties:
       size:
         type: size
-        required: true
         default: "0 MB"
-        status: supported
         constraints:
           - greater_or_equal: 0 MB
       name:
         type: string
-        required: true
-        status: supported

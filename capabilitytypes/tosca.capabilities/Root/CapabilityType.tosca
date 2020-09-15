@@ -4,6 +4,6 @@ capability_types:
   tosca.capabilities.Root:
     description: The TOSCA root Capability Type all other TOSCA Capability Types derive from
     metadata:
+      targetNamespace: "tosca.capabilities"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.capabilities"
