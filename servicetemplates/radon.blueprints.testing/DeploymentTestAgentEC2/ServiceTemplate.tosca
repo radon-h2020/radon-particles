@@ -1,0 +1,73 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.testing"
+topology_template:
+  inputs:
+    ssh_key_name:
+      type: string
+      required: true
+    vpc_subnet_id:
+      type: string
+      description: AWS VPC Subnet ID
+      required: true
+    ssh_key_file:
+      type: string
+      required: true
+  node_templates:
+    DockerEngine_0:
+      type: radon.nodes.docker.DockerEngine
+      metadata:
+        x: "854"
+        y: "361"
+        displayName: "DockerEngine"
+      requirements:
+        - host:
+            node: EC2_0
+            relationship: con_HostedOn_1
+            capability: host
+    DeploymentTestAgent_0:
+      type: radon.nodes.testing.DeploymentTestAgent
+      metadata:
+        x: "589"
+        y: "359"
+        displayName: "DeploymentTestAgent"
+      requirements:
+        - host:
+            node: DockerEngine_0
+            relationship: con_HostedOn_2
+            capability: host
+    AwsPlatform_0:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "1339"
+        y: "362"
+        displayName: "AwsPlatform"
+      properties:
+        name: "AWS"
+        region: "eu-west-1"
+    EC2_0:
+      type: radon.nodes.VM.EC2
+      metadata:
+        x: "1094"
+        y: "360"
+        displayName: "EC2"
+      properties:
+        image: "ami-089cc16f7f08c4457"
+        ssh_key_name: { get_input: ssh_key_name }
+        vpc_subnet_id: { get_input: vpc_subnet_id }
+        instance_type: "t2.micro"
+        ssh_key_file: { get_input: ssh_key_file }
+        ssh_user: "ubuntu"
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_0
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
