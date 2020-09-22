@@ -57,6 +57,9 @@ node_types:
               primary: stop
               timeout: 0
           start:
+            implementation:
+              primary: start
+              timeout: 0
           create:
             inputs:
               template_name:
