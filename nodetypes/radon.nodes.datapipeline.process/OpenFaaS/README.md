@@ -1,7 +1,7 @@
 ![](https://img.shields.io/badge/Status:-RELEASED-green)
 ![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
-## AWS Lambda Pipeline Node Type
+## OpenFaaS Pipeline Node Type
 
 A node type to invoke OpenFaaS function.
 
