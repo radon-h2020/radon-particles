@@ -20,7 +20,7 @@ All Methods produce JSON responses and accept JSON requests.
 ```json
 {
   "id": "8c299858-4bf0-4b2d-89ea-36bd5dc09fde",
-  "todo": "Have a cofee :-)",
+  "todo": "Have a coffee :-)",
   "completed": false,
   "created": 1566323969,
   "updated": 1566323995
@@ -37,7 +37,7 @@ All Methods produce JSON responses and accept JSON requests.
 
 ```json
 {
-  "todo": "Have one more cofee :-)"
+  "todo": "Have one more coffee :-)"
 }
 ```
 
