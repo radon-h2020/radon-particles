@@ -108,6 +108,14 @@ node_types:
               primary: configure
               timeout: 0
           delete:
+            inputs:
+              pipeline_id:
+                type: string
+                required: false
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: delete
+              timeout: 0
     artifacts:
       stop:
         type: tosca.artifacts.File
