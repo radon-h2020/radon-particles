@@ -48,6 +48,14 @@ node_types:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
           stop:
+            inputs:
+              pipeline_id:
+                type: string
+                required: false
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: stop
+              timeout: 0
           start:
           create:
             inputs:
