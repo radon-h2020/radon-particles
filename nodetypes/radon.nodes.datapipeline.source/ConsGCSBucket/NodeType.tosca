@@ -46,6 +46,10 @@ node_types:
                 type: string
                 required: false
                 default: { get_property: [ SELF, bucket ] }
+              credential_JSON_file :
+                type: string
+                required: false
+                default: { get_property: [ SELF, credential_JSON_file ] }
               project_ID:
                 type: string
                 required: false
