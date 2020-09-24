@@ -1,6 +1,8 @@
 - name: create
   hosts: localhost
   gather_facts: yes
+  become: yes
+
   tasks:
     - name: Install Python pip module prerequisites (Linux)
       apt:
@@ -12,7 +14,6 @@
         update_cache: yes
         state: present
       when: ansible_os_family == "Debian"
-      become: yes
 
     - name: Run HttpEndpointAgent Docker image
       docker_container:
