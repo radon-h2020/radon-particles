@@ -41,6 +41,11 @@ node_types:
               primary: create
               timeout: 0
           configure:
+            inputs:
+              project_ID :
+                type: string
+                required: false
+                default: { get_property: [ SELF, project_ID ] }
             implementation:
               primary: configure
               timeout: 0
