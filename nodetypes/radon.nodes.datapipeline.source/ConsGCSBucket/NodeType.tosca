@@ -42,6 +42,10 @@ node_types:
               timeout: 0
           configure:
             inputs:
+              bucket:
+                type: string
+                required: false
+                default: { get_property: [ SELF, bucket ] }
               project_ID:
                 type: string
                 required: false
