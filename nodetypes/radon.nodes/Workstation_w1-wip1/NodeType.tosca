@@ -22,6 +22,17 @@ node_types:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          pypi_dependencies: {default: { get_property: [SELF, pypi_dependencies] }, type: string }     
+          pypi_dependencies:
+            type: string
+            required: true
+            default: { get_property: [ SELF, pypi_dependencies ] }
         operations:
-          create: /nodetypes/radon.nodes/Workstation/create/create.yaml
+          create:
+            description: The standard create operation
+            implementation:
+              primary: create
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yaml
