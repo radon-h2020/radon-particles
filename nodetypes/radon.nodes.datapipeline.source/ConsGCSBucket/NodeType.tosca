@@ -12,12 +12,26 @@ node_types:
         type: string
         description: Name of the bucket
         required: false
+<<<<<<< HEAD
       project_ID:
         type: string
         description: ID of the project.
       credential_JSON_file:
         type: string
         description: Path of the credentials in the form of JSON file
+=======
+        status: supported
+      project_ID:
+        type: string
+        description: ID of the project.
+        required: true
+        status: supported
+      credential_JSON_file:
+        type: string
+        description: Path of the credentials in the form of JSON file
+        required: true
+        status: supported
+>>>>>>> 0f03cfb... updating interface
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -28,14 +42,18 @@ node_types:
                 type: string
                 required: false
                 default: { get_property: [ SELF, template_name ] }
+<<<<<<< HEAD
               template_file:
                 type: string
                 required: false
                 default: "GCSObject_consume.xml"
+=======
+>>>>>>> 0f03cfb... updating interface
             implementation:
               primary: create
               timeout: 0
           configure:
+<<<<<<< HEAD
             inputs:
               bucket:
                 type: string
@@ -52,6 +70,8 @@ node_types:
             implementation:
               primary: configure
               timeout: 0
+=======
+>>>>>>> 0f03cfb... updating interface
     artifacts:
       create:
         type: tosca.artifacts.File
