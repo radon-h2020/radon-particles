@@ -2,7 +2,7 @@
 
 ## Workstation Node Type
 
-Simple type representing the developers local system.
+Representing the system on which the RADON Orchestrator is executed.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
