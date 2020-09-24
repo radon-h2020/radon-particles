@@ -33,6 +33,10 @@ node_types:
                 type: string
                 required: false
                 default: { get_property: [ SELF, template_name ] }
+              template_file:
+                type: string
+                required: false
+                default: "GCSObject_consume.xml"
             implementation:
               primary: create
               timeout: 0
