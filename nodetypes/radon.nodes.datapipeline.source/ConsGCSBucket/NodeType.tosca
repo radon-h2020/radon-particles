@@ -41,6 +41,9 @@ node_types:
               primary: create
               timeout: 0
           configure:
+            implementation:
+              primary: configure
+              timeout: 0
     artifacts:
       create:
         type: tosca.artifacts.File
