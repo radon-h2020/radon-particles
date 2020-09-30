@@ -2,32 +2,6 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
   example.org.tosca.nodetypes.ConsGCSBucket:
-    description: >
-      Copyright (c) 2019 Contributors to the RADON project
-
-      
-
-      Licensed under the Apache License, Version 2.0 (the "License");
-
-      you may not use this file except in compliance with the License.
-
-      You may obtain a copy of the License at
-
-      
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-      
-
-      Unless required by applicable law or agreed to in writing, software
-
-      distributed under the License is distributed on an "AS IS" BASIS,
-
-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-
-      See the License for the specific language governing permissions and
-
-      limitations under the License.
     derived_from: radon.nodes.datapipeline.source.ConsumeRemote
     metadata:
       targetNamespace: "radon.nodes.datapipeline.source"
@@ -38,17 +12,12 @@ node_types:
         type: string
         description: Name of the bucket
         required: false
-        status: supported
       project_ID:
         type: string
         description: ID of the project.
-        required: true
-        status: supported
       credential_JSON_file:
         type: string
         description: Path of the credentials in the form of JSON file
-        required: true
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

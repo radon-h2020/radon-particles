@@ -73,7 +73,7 @@ topology_template:
       type: tosca.relationships.HostedOn
   outputs:
     public_address:
-      description: "Address of the deployed EC2 instance running the DeploymentTestAgent"
-      value: { get_attribute: [ EC2_0, public_address ] }
       type: string
-
+      description: Address of the deployed EC2 instance running the DeploymentTestAgent
+      required: true
+      value: { get_attribute: [ EC2_0, public_address ] }

@@ -14,16 +14,10 @@ node_types:
     properties:
       BucketName:
         type: string
-        required: true
-        status: supported
       cred_file_path:
         type: string
-        required: true
-        status: supported
       ProjectID:
         type: string
-        required: true
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

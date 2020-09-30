@@ -18,31 +18,24 @@ node_types:
       content_type:
         type: string
         description: The type of the content (text/html, text/plain, image/jpeg, ... )
-        required: true
-        status: supported
       schedulingStrategy:
         type: string
         description: Either EVENT_DRIVEN (default) or CRON_DRIVEN. EVENT_DRIVEN is similar with TIMER_DRIVEN with 0 sec value in NiFi.
         required: false
         default: "EVENT_DRIVEN"
-        status: supported
       function_URL:
         type: string
         description: Remote URL of the OpenFaaS function
-        required: true
-        status: supported
       schedulingPeriodCRON:
         type: string
         description: For CRON_DRIVEN give in CRON syntax.
         required: false
         default: "* * * * * ?"
-        status: supported
       HTTP_method:
         type: string
         description: Function invokation method.
         required: false
         default: "POST"
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
