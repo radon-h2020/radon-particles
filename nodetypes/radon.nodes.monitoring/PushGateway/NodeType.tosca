@@ -1,0 +1,92 @@
+################################################################################
+#                                                                              #
+#   This is the TOSCA node definition for the Prometheus Pushgateway instance. #
+#   The node type derives from radon.nodes.docker.DockerApplication and it is  #
+#   extended to receive the EC2 ip dynamically and deploy prometheus push-     #
+#   gateway on these premises. This node has the newly defined capability      #
+#   monitor. This capability is optional and is is used along with the newly   #
+#   introduced IsMonitoredBy relashionship type generated from a GCP function  #
+#   Artifacts: create.yml, configure.yml                                       #
+#                                                                              #
+################################################################################
+#
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.monitoring.PushGateway:
+    derived_from: radon.nodes.docker.DockerApplication
+    metadata:
+      targetNamespace: "radon.nodes.monitoring.PushGateway"
+      abstract: "false"
+      final: "false"
+    properties:
+      user_email:
+        type: string
+        default: { get_property: [SELF, user_email] }
+      concul_ip:
+        type: string
+        default: { get_property: [SELF, concul_ip] }
+      concul_service_port:
+        type: string
+        default: { get_property: [SELF, concul_service_port] }
+      grafana_ip:
+        type: string
+        default: { get_property: [SELF, grafana_ip] }
+    attributes:
+      pushgateway_ip:
+        type: string
+        default: { get_attribute: [SELF, dependency, public_ip] }
+    capabilities:
+      monitor:
+        occurrences: [0, UNBOUNDED]
+        type: radon.capabilities.Monitor
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            implementation:
+              primary: create
+              timeout: 0
+          configure:
+            inputs:
+              pushgateway_ip:
+                type: string
+                required: true
+                default: { get_attribute: [SELF, dependency, public_ip] }
+              user_email:
+                type: string
+                default: { get_property: [SELF, user_email] }
+              concul_ip:
+                type: string
+                default: { get_property: [SELF, concul_ip] }
+              concul_service_port:
+                type: string
+                default: { get_property: [SELF, concul_service_port] }
+            implementation:
+              primary: configure
+              timeout: 0
+    requirements:
+      - host:
+          capability: radon.capabilities.container.DockerRuntime
+          node: tosca.nodes.Container.Runtime
+          relationship: tosca.relationships.HostedOn
+          occurrences: [1, 1]
+      - storage:
+          capability: tosca.capabilities.Storage
+          occurrences: [0, 1]
+      - network:
+          capability: tosca.capabilities.Endpoint
+          occurrences: [0, 1]
+      - dependency:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.VM.EC2
+          relationship: tosca.relationships.DependsOn
+          occurrences: [ 1, 1 ]
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml
