@@ -1,15 +1,3 @@
-################################################################################
-#                                                                              #
-#   This is the TOSCA node definition for the Prometheus Pushgateway instance. #
-#   The node type derives from radon.nodes.docker.DockerApplication and it is  #
-#   extended to receive the EC2 ip dynamically and deploy prometheus push-     #
-#   gateway on these premises. This node has the newly defined capability      #
-#   monitor. This capability is optional and is is used along with the newly   #
-#   introduced IsMonitoredBy relashionship type generated from a GCP function  #
-#   Artifacts: create.yml, configure.yml                                       #
-#                                                                              #
-################################################################################
-#
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
