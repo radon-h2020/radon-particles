@@ -27,7 +27,7 @@ node_types:
     capabilities:
       monitor:
         occurrences: [0, UNBOUNDED]
-        type: radon.capabilities.monitoring.Monitor
+        type: radon.capabilities.monitor.Monitor
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
