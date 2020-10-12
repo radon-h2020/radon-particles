@@ -34,5 +34,5 @@ relationship_types:
         operations:
           post_configure_source:
             implementation:
-              primary: grafana-injection
+              primary: grafana-injection.yml
               timeout: 30
