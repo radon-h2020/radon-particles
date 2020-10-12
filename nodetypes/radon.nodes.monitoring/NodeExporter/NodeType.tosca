@@ -32,7 +32,7 @@ node_types:
                 required: true
                 default: { get_attribute: [SELF, dependency, public_ip] }
               concul_ip:
-                t ype: string
+                type: string
                 default: { get_input: concul_ip }
               node_exporter_service_port:
                 type: string
