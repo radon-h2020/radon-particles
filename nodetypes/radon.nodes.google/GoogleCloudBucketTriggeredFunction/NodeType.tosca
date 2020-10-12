@@ -18,9 +18,9 @@ node_types:
         type: radon.capabilities.Invocable
     requirements:
       - monitor:
-          capability: radon.capabilities.Monitor
+          capability: radon.capabilities.monitoring.Monitor
           node: radon.nodes.monitoring.PushGateway
-          relationship: radon.relationships.IsMonitoredBy
+          relationship: radon.relationships.monitoring.IsMonitoredBy
           occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
