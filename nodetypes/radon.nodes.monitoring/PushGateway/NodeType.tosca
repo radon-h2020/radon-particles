@@ -67,7 +67,7 @@ node_types:
           capability: tosca.capabilities.Endpoint
           occurrences: [0, 1]
       - dependency:
-          capability: tosca.capabilities.Container
+          capability: tosca.capabilities.Node
           node: radon.nodes.VM.EC2
           relationship: tosca.relationships.DependsOn
           occurrences: [ 1, 1 ]
