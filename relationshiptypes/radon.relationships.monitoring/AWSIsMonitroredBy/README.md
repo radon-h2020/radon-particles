@@ -1,10 +1,10 @@
-## Monitoring IsMonitoredBy relashionship
+## Monitoring AWSIsMonitoredBy relashionship
 
 Monitoring-specific relationship type representing Cloud Service-to-PushaGateway communication
 
-| Name            | URI                                            | Version | Derived From                     |
-| :-------------- | :--------------------------------------------- | :------ | :------------------------------- |
-| `IsMonitoredBy` | `radon.relationships.monitoring.IsMonitoredBy` | 1.0.0   | `tosca.relationships.ConnectsTo` |
+| Name               | URI                                               | Version | Derived From                     |
+| :----------------- | :------------------------------------------------ | :------ | :------------------------------- |
+| `AWSIsMonitoredBy` | `radon.relationships.monitoring.AWSIsMonitoredBy` | 1.0.0   | `tosca.relationships.ConnectsTo` |
 
 ### Inputs
 

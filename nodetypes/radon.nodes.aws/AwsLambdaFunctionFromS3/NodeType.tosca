@@ -72,6 +72,11 @@ node_types:
           node: radon.nodes.aws.AwsPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
+      - monitor:
+          capability: radon.capabilities.monitoring.Monitor
+          node: radon.nodes.monitoring.PushGateway
+          relationship: radon.relationships.monitoring.AWSIsMonitoredBy
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

@@ -151,7 +151,7 @@ topology_template:
             capability: storage_endpoint
         - monitor:
             node: PushGateway_0
-            relationship: con_IsMonitoredBy_0
+            relationship: con_GCPIsMonitoredBy_0
             capability: monitor
     GoogleCloudPlatform_0:
       type: radon.nodes.google.GoogleCloudPlatform
@@ -212,8 +212,8 @@ topology_template:
       type: tosca.relationships.DependsOn
     con_DependsOn_1:
       type: tosca.relationships.DependsOn
-    con_IsMonitoredBy_0:
-      type: radon.relationships.IsMonitoredBy
+    con_GCPIsMonitoredBy_0:
+      type: radon.relationships.GCPIsMonitoredBy
     con_ConnectsTo_0:
       type: radon.relationships.ConnectsTo
     con_ConnectsTo_1:

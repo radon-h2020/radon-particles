@@ -20,7 +20,7 @@ node_types:
       - monitor:
           capability: radon.capabilities.monitoring.Monitor
           node: radon.nodes.monitoring.PushGateway
-          relationship: radon.relationships.monitoring.IsMonitoredBy
+          relationship: radon.relationships.monitoring.GCPIsMonitoredBy
           occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
