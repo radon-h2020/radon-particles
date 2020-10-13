@@ -1,0 +1,87 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  example.org.tosca.nodetypes.PubsMQTT:
+    derived_from: radon.nodes.datapipeline.destination.PublishRemote
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.destination"
+      abstract: "false"
+      final: "false"
+    attributes:
+      template_name:
+        type: string
+        default: "MQTT_dest_PG_LocalConn"
+    properties:
+      Broker_URI:
+        type: string
+        required: true
+        status: supported
+      Quality_of_Service:
+        type: integer
+        required: true
+        status: supported
+      Client_ID:
+        type: string
+        required: true
+        status: supported
+      TopicName:
+        type: string
+        required: true
+        status: supported
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              template_name:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, template_name ] }
+              template_file:
+                type: string
+                description: MQTT Dest XML
+                required: true
+                default: "MQTT_dest_PG_LocalConn.xml"
+            implementation:
+              primary: create
+              dependencies: [ templateFile_LocalConn ]
+              timeout: 0
+          configure:
+            inputs:
+              Broker_URI:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Broker_URI ] }
+              Quality_of_Service:
+                type: integer
+                required: true
+                default: { get_property: [ SELF, Quality_of_Service ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              Client_ID:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Client_ID ] }
+              TopicName:
+                type: string
+                required: true
+                default: { get_property: [ SELF, TopicName ] }
+            implementation:
+              primary: configure
+              timeout: 0
+    artifacts:
+      templateFile_LocalConn:
+        type: tosca.artifacts.File
+        description: Template of Publish Mqtt
+        file: MQTT_dest_PG_LocalConn.xml
+      create:
+        type: tosca.artifacts.File
+        description: Ansible Create
+        file: create.yml
+      configure:
+        type: tosca.artifacts.File
+        description: Configure Ansible Script
+        file: configure.yml
