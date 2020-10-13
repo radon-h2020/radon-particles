@@ -17,7 +17,7 @@ topology_template:
         runtime: "nodejs12.x"
         alias: "dev"
         statement_id: "get-stmt"
-        zip_file: "get.zip"
+        zip_file: { get-artifact: [ SELF, get-item ] }
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
@@ -47,7 +47,7 @@ topology_template:
         runtime: "nodejs12.x"
         alias: "dev"
         statement_id: "create-stmt"
-        zip_file: "create.zip"
+        zip_file: { get_artifact: [ SELF, create-item ] }
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
@@ -94,7 +94,7 @@ topology_template:
         runtime: "nodejs12.x"
         alias: "dev"
         statement_id: "list-statement"
-        zip_file: "list.zip"
+        zip_file: { get_artifact: [ SELF, list_function ] }
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
@@ -124,7 +124,7 @@ topology_template:
         runtime: "nodejs12.x"
         alias: "dev"
         statement_id: "update-stmt"
-        zip_file: "update.zip"
+        zip_file: { get_artifact: [ SELF, update-item ] }
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
@@ -163,7 +163,7 @@ topology_template:
         runtime: "nodejs12.x"
         alias: "dev"
         statement_id: "delete-stmt"
-        zip_file: "delete.zip"
+        zip_file: { get_artifact: [ SELF, delete-item ] }
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
