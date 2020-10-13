@@ -14,8 +14,5 @@
           "jobid": "{{ monitored_function }}"
           "type": "custom"
 
-    # - name: Authenticate to GCP with service account JSON key file
-    #   shell: "gcloud auth activate-service-account --key-file {{ service_account_file }}"
-
-    # - name: Inject the PUSH_GATEWAY_HOST ebv variable to the function to create the GCP-PushGateway relation
-    #   shell: "gcloud functions deploy {{ monitored_function }} --set-env-vars PUSH_GATEWAY_HOST={{ pushgateway_ip }}:9091"
+    - name: Inject the PUSH_GATEWAY_HOST env variable to the function to create the AWS-PushGateway relation
+      shell: "aws lambda update-function-configuration --function-name {{ monitored_function }} --environment Variables={PUSH_GATEWAY_HOST={{ pushgateway_ip }}:9091}"
