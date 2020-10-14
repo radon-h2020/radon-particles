@@ -9,6 +9,5 @@ node_types:
       final: "false"
     capabilities:
       ConnectToPipeline:
-        occurrences: [ 1, 1 ]
-        valid_source_types: [ radon.nodes.datapipeline.MidwayPB, radon.nodes.datapipeline.SourcePB ]
+        occurrences: [ 1, UNBOUNDED ]
         type: radon.capabilities.datapipeline.ConnectToPipeline

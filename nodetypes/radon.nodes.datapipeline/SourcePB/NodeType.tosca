@@ -12,4 +12,4 @@ node_types:
           capability: radon.capabilities.datapipeline.ConnectToPipeline
           node: radon.nodes.abstract.DataPipeline
           relationship: radon.relationships.datapipeline.ConnectNifiLocal
-          occurrences: [ 1, 1 ]
+          occurrences: [ 1, UNBOUNDED ]
