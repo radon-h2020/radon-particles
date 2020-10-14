@@ -1,0 +1,101 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.examples"
+topology_template:
+  node_templates:
+    PubsMQTT_0:
+      type: radon.nodes.datapipeline.destination.PubsMQTT
+      metadata:
+        x: "1074"
+        y: "93"
+        displayName: "PubsMQTT"
+      properties:
+        Broker_URI: "tcp://localhost:1883"
+        schedulingStrategy: "CRON_DRIVEN"
+        schedulingPeriodCRON: "* * * * * ?"
+        Quality_of_Service: 1
+        name: "PubsMQTT"
+        Client_ID: "Deep_Nifi"
+        TopicName: "New"
+      requirements:
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_3
+            capability: host
+    ConsMQTT_0:
+      type: radon.nodes.datapipeline.source.ConsMQTT
+      metadata:
+        x: "411"
+        y: "102"
+        displayName: "ConsMQTT"
+      properties:
+        Broker_URI: "tcp://localhost:1883"
+        schedulingStrategy: "CRON_DRIVEN"
+        Max_Queue_Size: 1024
+        schedulingPeriodCRON: "* * * * * ?"
+        Quality_of_Service: 1
+        name: "ConsMQTT"
+        Client_ID: "Deep_Nifi"
+        TopicName: "New"
+      requirements:
+        - connectToPipeline:
+            node: PubsMQTT_0
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_2
+            capability: host
+    MosquittoBroker_0:
+      type: radon.nodes.mqtt.MosquittoBroker
+      metadata:
+        x: "758"
+        y: "447"
+        displayName: "MosquittoBroker"
+      properties:
+        port: 8081
+        component_version: 1.1
+      requirements:
+        - host:
+            node: OpenStack_0
+            relationship: con_HostedOn_0
+            capability: host
+    OpenStack_0:
+      type: radon.nodes.VM.OpenStack
+      metadata:
+        x: "755"
+        y: "308"
+        displayName: "OpenStack"
+      properties:
+        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
+        key_name: "Guha_Roy_RADON"
+        image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
+        ssh_username: "centos"
+        name: "MQTT_Datapipeline_Deep_CRON"
+        network: "provider_64_net"
+    Nifi_0:
+      type: radon.nodes.nifi.Nifi
+      metadata:
+        x: "755"
+        y: "190"
+        displayName: "Nifi"
+      properties:
+        port: 8080
+        component_version: "1.12.1"
+      requirements:
+        - host:
+            node: OpenStack_0
+            relationship: con_HostedOn_1
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_3:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectNifiLocal_0:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
