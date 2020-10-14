@@ -2,6 +2,7 @@
 ![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
 ## OpenFaaS Pipeline Node Type
+
 A node type to invoke OpenFaaS function.
 
 | Name | URI | Version | Derived From |

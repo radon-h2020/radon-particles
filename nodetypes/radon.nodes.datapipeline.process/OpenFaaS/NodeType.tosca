@@ -17,7 +17,7 @@ node_types:
     properties:
       content_type:
         type: string
-        description: The type of the content (text/html, text/plain, image/jpeg, ... )        
+        description: The type of the content (text/html, text/plain, image/jpeg, ... )  
       schedulingStrategy:
         type: string
         description: Either EVENT_DRIVEN (default) or CRON_DRIVEN. EVENT_DRIVEN is similar with TIMER_DRIVEN with 0 sec value in NiFi.
@@ -25,7 +25,7 @@ node_types:
         default: "EVENT_DRIVEN"
       function_URL:
         type: string
-        description: Remote URL of the OpenFaaS function      
+        description: Remote URL of the OpenFaaS function
       schedulingPeriodCRON:
         type: string
         description: For CRON_DRIVEN give in CRON syntax.
@@ -36,7 +36,7 @@ node_types:
         type: string
         description: Function invokation method.
         required: false
-        default: "POST"        
+        default: "POST"
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -58,7 +58,7 @@ node_types:
                 default: { get_attribute: [ SELF, id ] }
             implementation:
               primary: start
-              timeout: 0          
+              timeout: 0
           create:
             inputs:
               template_name:

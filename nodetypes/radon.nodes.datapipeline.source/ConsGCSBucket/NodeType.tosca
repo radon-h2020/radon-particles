@@ -17,7 +17,7 @@ node_types:
         description: ID of the project.
       credential_JSON_file:
         type: string
-        description: Path of the credentials in the form of JSON file        
+        description: Path of the credentials in the form of JSON file
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
