@@ -2,32 +2,6 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
   example.org.tosca.nodetypes.ConsGCSBucket:
-    description: >
-      Copyright (c) 2019 Contributors to the RADON project
-
-      
-
-      Licensed under the Apache License, Version 2.0 (the "License");
-
-      you may not use this file except in compliance with the License.
-
-      You may obtain a copy of the License at
-
-      
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-      
-
-      Unless required by applicable law or agreed to in writing, software
-
-      distributed under the License is distributed on an "AS IS" BASIS,
-
-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-
-      See the License for the specific language governing permissions and
-
-      limitations under the License.
     derived_from: radon.nodes.datapipeline.source.ConsumeRemote
     metadata:
       targetNamespace: "radon.nodes.datapipeline.source"
@@ -38,14 +12,12 @@ node_types:
         type: string
         description: Name of the bucket
         required: false
-<<<<<<< HEAD
       project_ID:
         type: string
         description: ID of the project.
       credential_JSON_file:
         type: string
         description: Path of the credentials in the form of JSON file
-=======
         status: supported
       project_ID:
         type: string
@@ -57,7 +29,6 @@ node_types:
         description: Path of the credentials in the form of JSON file
         required: true
         status: supported
->>>>>>> 0f03cfb... updating interface
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -68,18 +39,14 @@ node_types:
                 type: string
                 required: false
                 default: { get_property: [ SELF, template_name ] }
-<<<<<<< HEAD
               template_file:
                 type: string
                 required: false
                 default: "GCSObject_consume.xml"
-=======
->>>>>>> 0f03cfb... updating interface
             implementation:
               primary: create
               timeout: 0
           configure:
-<<<<<<< HEAD
             inputs:
               bucket:
                 type: string
@@ -96,8 +63,6 @@ node_types:
             implementation:
               primary: configure
               timeout: 0
-=======
->>>>>>> 0f03cfb... updating interface
     artifacts:
       create:
         type: tosca.artifacts.File
