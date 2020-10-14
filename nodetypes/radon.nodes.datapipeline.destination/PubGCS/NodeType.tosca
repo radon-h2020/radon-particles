@@ -14,12 +14,10 @@ node_types:
     properties:
       BucketName:
         type: string
-<<<<<<< HEAD
       cred_file_path:
         type: string
       ProjectID:
         type: string
-=======
         required: true
         status: supported
       cred_file_path:
@@ -30,7 +28,6 @@ node_types:
         type: string
         required: true
         status: supported
->>>>>>> 62ff9ce... updating PubGCS
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
