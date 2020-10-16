@@ -54,6 +54,19 @@ node_types:
             implementation:
               primary: configure
               timeout: 0
+          delete:
+            inputs:
+              pushgateway_ip:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, public_ip ] }
+              concul_ip:
+                type: string
+                required: true
+                default: { get_property: [ SELF, concul_ip ] }
+            implementation:
+              primary: delete
+              timeout: 0
     requirements:
       - host:
           capability: radon.capabilities.container.DockerRuntime
@@ -78,3 +91,6 @@ node_types:
       configure:
         type: radon.artifacts.Ansible
         file: configure.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml

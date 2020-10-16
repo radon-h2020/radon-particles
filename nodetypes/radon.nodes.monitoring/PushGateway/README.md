@@ -29,4 +29,5 @@ A type representing prometheus gateway instance deployed on a VM.
 | Name        | Description                         |
 | :---------- | :---------------------------------- |
 | `create`    | deploy prometheus pushgateway       |
-| `configure` | Inject in COnsul and set up Grafana |
+| `configure` | Inject in Consul and set up Grafana |
+| `delete`    | Remove the entry from Consul        |
