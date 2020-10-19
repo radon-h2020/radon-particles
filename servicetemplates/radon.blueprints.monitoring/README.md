@@ -21,7 +21,7 @@ Create a `inputs.yaml` file in the same directory and add the following:
 host_ip: localhost
 
 user_email: a.sidiropoulos@atc.gr         # vreplace with own e-mail. Email has to be the one declared in keycloak
-concul_ip: 3.127.254.144                  # replace with consul ip
+consul_ip: 3.127.254.144                  # replace with consul ip
 pushgateway_service_port: 9091            # pushgateway port
 grafana_api_ip: http://3.127.254.144:3100 # Grafana dashboards ip
 

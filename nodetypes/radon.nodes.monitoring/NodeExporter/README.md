@@ -14,7 +14,7 @@ A type representing a node exporter instance deployed on a VM.
 | Name                         | Required | Type     | Constraint | Default Value | Description        |
 | :--------------------------- | :------- | :------- | :--------- | :------------ | :----------------- |
 | `node_exporter_ip`           | `true`   | `string` |            |               | EC2 VM instance ip |
-| `concul_ip`                  | `true`   | `string` |            |               | Concul Service ip  |
+| `consul_ip`                  | `true`   | `string` |            |               | Consul Service ip  |
 | `node_exporter_service_port` | `true`   | `string` |            |               | Node Exporter port |
 
 ### Artifacts

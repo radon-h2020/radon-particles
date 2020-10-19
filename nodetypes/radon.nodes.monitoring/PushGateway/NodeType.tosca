@@ -11,9 +11,9 @@ node_types:
       user_email:
         type: string
         default: { get_property: [SELF, user_email] }
-      concul_ip:
+      consul_ip:
         type: string
-        default: { get_property: [SELF, concul_ip] }
+        default: { get_property: [SELF, consul_ip] }
       pushgateway_service_port:
         type: string
         default: { get_property: [SELF, pushgateway_service_port] }
@@ -45,9 +45,9 @@ node_types:
               user_email:
                 type: string
                 default: { get_property: [SELF, user_email] }
-              concul_ip:
+              consul_ip:
                 type: string
-                default: { get_property: [SELF, concul_ip] }
+                default: { get_property: [SELF, consul_ip] }
               pushgateway_service_port:
                 type: string
                 default: { get_property: [SELF, pushgateway_service_port] }
@@ -60,10 +60,10 @@ node_types:
                 type: string
                 required: true
                 default: { get_attribute: [ SELF, dependency, public_ip ] }
-              concul_ip:
+              consul_ip:
                 type: string
                 required: true
-                default: { get_property: [ SELF, concul_ip ] }
+                default: { get_property: [ SELF, consul_ip ] }
             implementation:
               primary: delete
               timeout: 0

@@ -11,9 +11,9 @@ node_types:
       node_exporter_ip:
         type: string
         default: { get_attribute: [SELF, dependency, public_ip] }
-      concul_ip:
+      consul_ip:
         type: string
-        default: { get_input: concul_ip }
+        default: { get_input: consul_ip }
       node_exporter_service_port:
         type: string
         default: { get_input: node_exporter_service_port }
@@ -31,9 +31,9 @@ node_types:
                 type: string
                 required: true
                 default: { get_attribute: [SELF, dependency, public_ip] }
-              concul_ip:
+              consul_ip:
                 type: string
-                default: { get_input: concul_ip }
+                default: { get_input: consul_ip }
               node_exporter_service_port:
                 type: string
                 default: { get_input: node_exporter_service_port }

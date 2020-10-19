@@ -14,4 +14,4 @@
         service_name: node_exporter
         service_port: "{{ node_exporter_service_port }}"
         service_address: "{{ node_exporter_ip }}"
-        host: "{{ concul_ip }}"
+        host: "{{ consul_ip }}"

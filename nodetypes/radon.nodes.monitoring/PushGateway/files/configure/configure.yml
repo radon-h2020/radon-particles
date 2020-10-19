@@ -14,4 +14,4 @@
         service_name: "{{ pushgateway_ip }}_push_gateway"
         service_port: "{{ pushgateway_service_port }}"
         service_address: "{{ pushgateway_ip }}"
-        host: "{{ concul_ip }}"
+        host: "{{ consul_ip }}"

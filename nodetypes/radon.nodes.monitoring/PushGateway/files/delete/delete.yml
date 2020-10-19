@@ -8,5 +8,5 @@
     - name: Remove Push Gateway instance from Radon Consul
       consul:
         service_name: "{{ pushgateway_ip }}_push_gateway"
-        host: "{{ concul_ip }}"
+        host: "{{ consul_ip }}"
         state: absent

@@ -49,7 +49,7 @@ topology_template:
       type: string
     aws_platform_region:
       type: string
-    concul_ip:
+    consul_ip:
       type: string
     pushgateway_service_port:
       type: string
@@ -75,7 +75,7 @@ topology_template:
         displayName: "PushGateway"
       properties:
         user_email: { get_input: user_email }
-        concul_ip: { get_input: concul_ip }
+        consul_ip: { get_input: consul_ip }
         pushgateway_service_port: { get_input: pushgateway_service_port }
         grafana_api_ip: { get_input: grafana_api_ip }
       requirements:
