@@ -51,7 +51,7 @@ topology_template:
       type: string
     concul_ip:
       type: string
-    concul_service_port:
+    pushgateway_service_port:
       type: string
     grafana_ip:
       type: string
@@ -76,7 +76,7 @@ topology_template:
       properties:
         user_email: { get_input: user_email }
         concul_ip: { get_input: concul_ip }
-        concul_service_port: { get_input: concul_service_port }
+        pushgateway_service_port: { get_input: pushgateway_service_port }
         grafana_ip: { get_input: grafana_ip }
       requirements:
         - host:

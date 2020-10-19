@@ -12,6 +12,6 @@
     - name: Inject Push Gateway instance to Radon Consul
       consul:
         service_name: "{{ pushgateway_ip }}_push_gateway"
-        service_port: "{{ concul_service_port }}"
+        service_port: "{{ pushgateway_service_port }}"
         service_address: "{{ pushgateway_ip }}"
         host: "{{ concul_ip }}"

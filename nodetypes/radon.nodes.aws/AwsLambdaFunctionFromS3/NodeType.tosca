@@ -66,6 +66,10 @@ node_types:
         required: false
         entry_schema:
           type: string
+     function_name:
+          type: string
+          required: false
+          default: { get_property: [ SELF, name ] }
     requirements:
       - host:
           capability: tosca.capabilities.Container

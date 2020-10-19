@@ -14,9 +14,9 @@ node_types:
       concul_ip:
         type: string
         default: { get_property: [SELF, concul_ip] }
-      concul_service_port:
+      pushgateway_service_port:
         type: string
-        default: { get_property: [SELF, concul_service_port] }
+        default: { get_property: [SELF, pushgateway_service_port] }
       grafana_ip:
         type: string
         default: { get_property: [SELF, grafana_ip] }
@@ -48,9 +48,9 @@ node_types:
               concul_ip:
                 type: string
                 default: { get_property: [SELF, concul_ip] }
-              concul_service_port:
+              pushgateway_service_port:
                 type: string
-                default: { get_property: [SELF, concul_service_port] }
+                default: { get_property: [SELF, pushgateway_service_port] }
             implementation:
               primary: configure
               timeout: 0

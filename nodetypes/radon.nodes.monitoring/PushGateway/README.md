@@ -11,12 +11,12 @@ A type representing prometheus gateway instance deployed on a VM.
 
 ### Properties
 
-| Name                  | Required | Type     | Constraint | Default Value | Description                       |
-| :-------------------- | :------- | :------- | :--------- | :------------ | :-------------------------------- |
-| `user_email`          | `true`   | `string` |            |               | Account to set Graphana dashboard |
-| `concul_ip`           | `true`   | `string` |            |               | Concul Service IP                 |
-| `consul_service_port` | `true`   | `string` |            |               | Port that exposes pushgateway     |
-| `grafana_ip`          | `true`   | `string` |            |               | Grafana ip                        |
+| Name                       | Required | Type     | Constraint | Default Value | Description                       |
+| :------------------------- | :------- | :------- | :--------- | :------------ | :-------------------------------- |
+| `user_email`               | `true`   | `string` |            |               | Account to set Graphana dashboard |
+| `concul_ip`                | `true`   | `string` |            |               | Concul Service IP                 |
+| `pushgateway_service_port` | `true`   | `string` |            |               | Port that exposes pushgateway     |
+| `grafana_ip`               | `true`   | `string` |            |               | Grafana ip                        |
 
 ### Attributes
 

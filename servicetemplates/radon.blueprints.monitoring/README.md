@@ -22,12 +22,12 @@ host_ip: localhost
 
 user_email: a.sidiropoulos@atc.gr     # vreplace with own e-mail. Email has to be the one declared in keycloak
 concul_ip: 3.127.254.144              # replace with consul ip
-concul_service_port: 9091             # pushgateway port
+pushgateway_service_port: 9091        # pushgateway port
 grafana_ip: http://3.127.254.144:3100 # Grafana dashboards ip
 
 project_id: pivotal-gearbox-282913               # replace with google project id
 service_account_file: /tmp/service_account.json  # it is important to place the service account file in /tmp
-bucket_location: us-central1                    
+bucket_location: us-central1
 bucket_in_name: bkt_in_anesid
 bucket_out_name: bkt_out_anesid
 bucket_function_name: bkt_fnc_anesid
@@ -51,14 +51,12 @@ ec2_ssh_user: ubuntu
 
 In addition it is crucial to place credential file located in ~/.aws directory
 
-
 Deployment TOSCA Service Template:
 
 ```
 # note: adapt path to certificate
 OPERA_SSH_USER=ubuntu OPERA_SSH_IDENTITY_FILE=/tmp/push-gateway-key.pem opera deploy --inputs inputs.yml --clean-state _definitions/radonnodesmonitoring__GCPMonitoringAgent.yml
 ```
-
 
 Undeploy instance:
 
