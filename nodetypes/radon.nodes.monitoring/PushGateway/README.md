@@ -16,7 +16,7 @@ A type representing prometheus gateway instance deployed on a VM.
 | `user_email`               | `true`   | `string` |            |               | Account to set Graphana dashboard |
 | `concul_ip`                | `true`   | `string` |            |               | Concul Service IP                 |
 | `pushgateway_service_port` | `true`   | `string` |            |               | Port that exposes pushgateway     |
-| `grafana_ip`               | `true`   | `string` |            |               | Grafana ip                        |
+| `grafana_api_ip`           | `true`   | `string` |            |               | Grafana ip                        |
 
 ### Attributes
 

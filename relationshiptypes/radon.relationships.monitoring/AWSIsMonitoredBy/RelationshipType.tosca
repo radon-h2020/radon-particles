@@ -23,10 +23,10 @@ relationship_types:
             type: string
             required: true
             default: { get_property: [ TARGET, user_email ] }
-          grafana_ip: 
+          grafana_api_ip: 
             type: string
             required: true
-            default: { get_property: [ TARGET, grafana_ip ] }
+            default: { get_property: [ TARGET, grafana_api_ip ] }
         operations:
           post_configure_source:
             implementation:

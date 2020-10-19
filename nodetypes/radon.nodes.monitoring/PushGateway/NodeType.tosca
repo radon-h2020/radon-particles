@@ -17,9 +17,9 @@ node_types:
       pushgateway_service_port:
         type: string
         default: { get_property: [SELF, pushgateway_service_port] }
-      grafana_ip:
+      grafana_api_ip:
         type: string
-        default: { get_property: [SELF, grafana_ip] }
+        default: { get_property: [SELF, grafana_api_ip] }
     attributes:
       pushgateway_ip:
         type: string

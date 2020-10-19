@@ -6,7 +6,7 @@
   tasks:
     - name: Configure Grafana dashboards for the monitored_function of user_email
       uri:
-        url: "{{ grafana_ip }}"
+        url: "{{ grafana_api_ip }}"
         method: POST
         body_format: json
         body:

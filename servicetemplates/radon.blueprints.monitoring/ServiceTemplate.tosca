@@ -53,7 +53,7 @@ topology_template:
       type: string
     pushgateway_service_port:
       type: string
-    grafana_ip:
+    grafana_api_ip:
       type: string
   node_templates:
     DockerEngine_0:
@@ -77,7 +77,7 @@ topology_template:
         user_email: { get_input: user_email }
         concul_ip: { get_input: concul_ip }
         pushgateway_service_port: { get_input: pushgateway_service_port }
-        grafana_ip: { get_input: grafana_ip }
+        grafana_api_ip: { get_input: grafana_api_ip }
       requirements:
         - host:
             node: DockerEngine_0

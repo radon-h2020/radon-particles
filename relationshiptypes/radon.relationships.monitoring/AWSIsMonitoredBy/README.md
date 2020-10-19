@@ -12,4 +12,4 @@ Monitoring-specific relationship type representing Cloud Service-to-PushaGateway
 | :------------------- | :------- | :------- | :--------- | :------------ | :-------------------------------- |
 | `monitored_function` | `true`   | `string` |            |               | Function for the generated graphs |
 | `user_email`         | `true`   | `string` |            |               | User Email to Grafana             |
-| `grafana_ip`         | `true`   | `string` |            |               | Grafana ip                        |
+| `grafana_api_ip`     | `true`   | `string` |            |               | Grafana ip                        |
