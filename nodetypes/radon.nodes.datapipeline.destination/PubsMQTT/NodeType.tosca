@@ -14,7 +14,9 @@ node_types:
     properties:
       Broker_URI:
         type: string
+        description: User can put the IP address in place or localhost and the configured port address of Mosquitto Broker.
         required: true
+        default: "tcp://localhost:1883"
         status: supported
       schedulingStrategy:
         type: string
