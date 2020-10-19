@@ -13,11 +13,11 @@ topology_template:
       properties:
         Broker_URI: "tcp://localhost:1883"
         schedulingStrategy: "CRON_DRIVEN"
-        schedulingPeriodCRON: "* * * * * ?"
-        Quality_of_Service: 1
         name: "PubsMQTT"
-        Client_ID: "Deep_Nifi"
-        TopicName: "New"
+        Quality_of_Service: 1
+        schedulingPeriodCRON: "* * * * * ?"
+        Client_ID: "Nifi_Deep"
+        TopicName: "Deep"
       requirements:
         - host:
             node: Nifi_0
@@ -33,9 +33,9 @@ topology_template:
         Broker_URI: "tcp://localhost:1883"
         schedulingStrategy: "CRON_DRIVEN"
         Max_Queue_Size: 1024
-        schedulingPeriodCRON: "* * * * * ?"
-        Quality_of_Service: 1
         name: "ConsMQTT"
+        Quality_of_Service: 1
+        schedulingPeriodCRON: "* * * * * ?"
         Client_ID: "Deep_Nifi"
         TopicName: "New"
       requirements:
@@ -50,11 +50,11 @@ topology_template:
     MosquittoBroker_0:
       type: radon.nodes.mqtt.MosquittoBroker
       metadata:
-        x: "758"
-        y: "447"
+        x: "756"
+        y: "425"
         displayName: "MosquittoBroker"
       properties:
-        port: 8081
+        port: 8888
         component_version: 1.1
       requirements:
         - host:
@@ -68,11 +68,11 @@ topology_template:
         y: "308"
         displayName: "OpenStack"
       properties:
-        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
         key_name: "Guha_Roy_RADON"
+        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
         image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
         ssh_username: "centos"
-        name: "MQTT_Datapipeline_Deep_CRON"
+        name: "MQTT_Datapipeline_Deep_CRON_Mosq_Port"
         network: "provider_64_net"
     Nifi_0:
       type: radon.nodes.nifi.Nifi

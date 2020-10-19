@@ -13,9 +13,7 @@
         path: /etc/mosquitto/mosquitto.conf
         block: |
           listener {{port}}
-          protocol websockets
-          listener 1883
           protocol mqtt
-          
+                    
           allow_anonymous false
           password_file /etc/mosquitto/passwd
