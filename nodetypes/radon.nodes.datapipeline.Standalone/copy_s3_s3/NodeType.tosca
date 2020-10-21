@@ -1,0 +1,147 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.Standalone.copy_s3_s3:
+    derived_from: radon.nodes.datapipeline.Standalone
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.Standalone"
+      abstract: "false"
+      final: "false"
+    attributes:
+      pipeline_id:
+        description: ID of the pipeline
+        type: string
+    properties:
+      log_directory:
+        type: string
+        description: The directory name in the log_bucket.
+      schedule:
+        type: string
+        description: The scheduling info using CRON syntax.
+      configure_file_path:
+        type: string
+        description: AWS configuration file
+      dp_name:
+        type: string
+        description: name of the data pipeline
+      credential_file_path:
+        type: string
+        description: Path to the AWS credential file.
+        required: false
+      destination_bucket:
+        type: string
+        description: Destination S3 Bucket name.
+      file_name:
+        type: string
+        description: object from the soruce bucket.
+      source_bucket:
+        type: string
+        description: Source S3 bucket name
+      log_bucket:
+        type: string
+        description: The bucket name where logs will be kept.
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          log_directory:
+            type: string
+            required: false
+            default: { get_property: [ SELF, log_directory ] }
+          dp_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, dp_name ] }
+          configure_file_path:
+            type: string
+            required: true
+            default: { get_property: [ SELF, configure_file_path ] }
+          credential_file_path:
+            type: string
+            required: true
+            default: { get_property: [ SELF, credential_file_path ] }
+          destination_bucket:
+            type: string
+            required: true
+            default: { get_property: [ SELF, destination_bucket ] }
+          file_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, file_name ] }
+          edit_schedule:
+            type: string
+            required: true
+            default: { get_property: [ SELF, schedule ] }
+          source_bucket:
+            type: string
+            required: true
+            default: { get_property: [ SELF, source_bucket ] }
+          log_bucket:
+            type: string
+            required: true
+            default: { get_property: [ SELF, log_bucket ] }
+        operations:
+          stop:
+            description: The standard stop operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: false
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: stop
+              timeout: 0
+          start:
+            description: The standard start operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: false
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: start
+              timeout: 0
+          create:
+            description: The standard create operation
+            implementation:
+              primary: create
+              timeout: 0
+          configure:
+            description: The standard configure operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: false
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: configure
+              timeout: 0
+          delete:
+            description: The standard delete operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: false
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      CopyActivityTemplate:
+        type: tosca.artifacts.File
+        file: CopyActivity.json
+      stop:
+        type: tosca.artifacts.File
+        file: Stop.yml
+      start:
+        type: tosca.artifacts.File
+        file: Start.yml
+      create:
+        type: tosca.artifacts.File
+        file: create.yml
+      configure:
+        type: tosca.artifacts.File
+        file: configure.yml
+      delete:
+        type: tosca.artifacts.File
+        file: Delete.yml
