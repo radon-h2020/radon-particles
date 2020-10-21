@@ -7,30 +7,44 @@ topology_template:
     PubsS3Bucket:
       type: radon.nodes.datapipeline.destination.PubsS3Bucket
       metadata:
-        x: "906"
-        y: "174"
+        x: "778"
+        y: "95"
         displayName: "PubsS3Bucket"
       properties:
         BucketName: "radon-jakovits-output"
         cred_file_path: "/home/jakovits/aws/credentials"
         name: "sendToS3"
         Region: "eu-central-1"
+      requirements:
+        - host:
+            node: Nifi
+            relationship: con_HostedOn_2
+            capability: host
     ConsS3Bucket:
       type: radon.nodes.datapipeline.source.ConsS3Bucket
       metadata:
-        x: "474"
-        y: "182"
+        x: "380"
+        y: "92"
         displayName: "ConsS3Bucket"
       properties:
         BucketName: "radon-jakovits"
         cred_file_path: "/home/jakovits/aws/credentials"
         name: "getFromS3"
         Region: "eu-central-1"
+      requirements:
+        - connectToPipeline:
+            node: PubsS3Bucket
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi
+            relationship: con_HostedOn_1
+            capability: host
     OpenStack:
       type: radon.nodes.VM.OpenStack
       metadata:
-        x: "761"
-        y: "632"
+        x: "543"
+        y: "469"
         displayName: "OpenStack"
       properties:
         flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
@@ -42,9 +56,23 @@ topology_template:
     Nifi:
       type: radon.nodes.nifi.Nifi
       metadata:
-        x: "765"
-        y: "490"
+        x: "556"
+        y: "358"
         displayName: "Nifi"
       properties:
         port: 8080
         component_version: "1.11.4"
+      requirements:
+        - host:
+            node: OpenStack
+            relationship: con_HostedOn_0
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectNifiLocal_0:
+      type: radon.relationships.datapipeline.ConnectNifiLocal

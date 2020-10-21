@@ -16,4 +16,5 @@ node_types:
     capabilities:
       ConnectToPipeline:
         occurrences: [ 1, UNBOUNDED ]
+        valid_source_types: [ radon.nodes.datapipeline.MidwayPB, radon.nodes.datapipeline.SourcePB ]
         type: radon.capabilities.datapipeline.ConnectToPipeline
