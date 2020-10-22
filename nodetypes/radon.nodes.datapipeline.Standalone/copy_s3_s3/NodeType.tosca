@@ -40,6 +40,12 @@ node_types:
       log_bucket:
         type: string
         description: The bucket name where logs will be kept.
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
