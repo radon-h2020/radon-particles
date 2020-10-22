@@ -49,5 +49,5 @@ node_types:
         file: start_mqtt_centos.yaml
       configure:
         type: tosca.artifacts.File
-        description: Configure Ansible Script for Mosquitto Broker
+        description: Configure Ansible Script
         file: configure_mqtt_centos.yaml

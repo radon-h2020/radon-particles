@@ -7,15 +7,15 @@ topology_template:
     PubsMQTT_0:
       type: radon.nodes.datapipeline.destination.PubsMQTT
       metadata:
-        x: "1074"
-        y: "93"
+        x: "1127"
+        y: "206"
         displayName: "PubsMQTT"
       properties:
-        Broker_URI: "tcp://localhost:1883"
+        Broker_URI: "tcp://localhost:8888"
         schedulingStrategy: "CRON_DRIVEN"
-        schedulingPeriodCRON: "* * * * * ?"
-        Quality_of_Service: 1
         name: "PubsMQTT"
+        Quality_of_Service: 1
+        schedulingPeriodCRON: "* * * * * ?"
         Client_ID: "Nifi_Deep"
         TopicName: "Deep"
       requirements:
@@ -26,32 +26,50 @@ topology_template:
     ConsMQTT_0:
       type: radon.nodes.datapipeline.source.ConsMQTT
       metadata:
-        x: "411"
-        y: "102"
+        x: "267"
+        y: "199"
         displayName: "ConsMQTT"
       properties:
-        Broker_URI: "tcp://localhost:1883"
+        Broker_URI: "tcp://localhost:8888"
         schedulingStrategy: "CRON_DRIVEN"
         Max_Queue_Size: 1024
-        schedulingPeriodCRON: "* * * * * ?"
-        Quality_of_Service: 1
         name: "ConsMQTT"
+        Quality_of_Service: 1
+        schedulingPeriodCRON: "* * * * * ?"
         Client_ID: "Deep_Nifi"
         TopicName: "New"
       requirements:
-        - connectToPipeline:
-            node: PubsMQTT_0
-            relationship: con_ConnectNifiLocal_0
-            capability: ConnectToPipeline
         - host:
             node: Nifi_0
             relationship: con_HostedOn_2
             capability: host
+        - connectToPipeline:
+            node: Encrypt_0
+            relationship: con_ConnectNifiLocal_2
+            capability: ConnectToPipeline
+    Encrypt_0:
+      type: radon.nodes.datapipeline.MidwayPB.Encrypt
+      metadata:
+        x: "355"
+        y: "52"
+        displayName: "Encrypt"
+      properties:
+        name: "Encrypt"
+        Password: "Deepsubhra Guha Roy"
+      requirements:
+        - ConnectToPipeline:
+            node: Decrypt_0
+            relationship: con_ConnectNifiLocal_1
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_4
+            capability: host
     MosquittoBroker_0:
       type: radon.nodes.mqtt.MosquittoBroker
       metadata:
-        x: "756"
-        y: "425"
+        x: "747"
+        y: "633"
         displayName: "MosquittoBroker"
       properties:
         port: 8888
@@ -61,15 +79,33 @@ topology_template:
             node: OpenStack_0
             relationship: con_HostedOn_0
             capability: host
+    Decrypt_0:
+      type: radon.nodes.datapipeline.MidwayPB.Decrypt
+      metadata:
+        x: "1058"
+        y: "60"
+        displayName: "Decrypt"
+      properties:
+        name: "Decrypt"
+        Password: "Deepsubhra Guha Roy"
+      requirements:
+        - ConnectToPipeline:
+            node: PubsMQTT_0
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_5
+            capability: host
     OpenStack_0:
       type: radon.nodes.VM.OpenStack
       metadata:
-        x: "755"
-        y: "308"
+        x: "747"
+        y: "507"
         displayName: "OpenStack"
       properties:
-        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
         key_name: "Guha_Roy_RADON"
+        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
         image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
         ssh_username: "centos"
         name: "MQTT_Datapipeline_Deep_CRON_Mosq_Port"
@@ -77,8 +113,8 @@ topology_template:
     Nifi_0:
       type: radon.nodes.nifi.Nifi
       metadata:
-        x: "755"
-        y: "190"
+        x: "747"
+        y: "389"
         displayName: "Nifi"
       properties:
         port: 8080
@@ -99,3 +135,11 @@ topology_template:
       type: tosca.relationships.HostedOn
     con_ConnectNifiLocal_0:
       type: radon.relationships.datapipeline.ConnectNifiLocal
+    con_ConnectNifiLocal_2:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+    con_ConnectNifiLocal_1:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+    con_HostedOn_4:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_5:
+      type: tosca.relationships.HostedOn
