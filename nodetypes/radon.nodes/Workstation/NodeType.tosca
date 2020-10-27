@@ -16,7 +16,7 @@ node_types:
         default: "localhost"
     properties:
       pypi_dependencies:
-        type: map
+        type: list
         description: pypi_dependencies that will be installed in workstation
         entry_schema:
           type: string
