@@ -17,7 +17,7 @@ topology_template:
         runtime: "nodejs12.x"
         alias: "dev"
         statement_id: "get-stmt"
-        zip_file: { get-artifact: [ SELF, get-item ] }
+        zip_file: { get_artifact: [ SELF, get-item ] }
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
