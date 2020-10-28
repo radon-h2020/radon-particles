@@ -77,3 +77,4 @@ topology_template:
       description: Address of the deployed EC2 instance running the DeploymentTestAgent
       required: true
       value: { get_attribute: [ EC2_0, public_address ] }
+

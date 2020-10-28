@@ -16,4 +16,3 @@ policy_types:
         type: string
         description: Convenience property to specify a port as the target of the load test (optional)
         required: false
-    targets: [ tosca.nodes.SoftwareComponent ]
