@@ -30,7 +30,9 @@
                 "Topic":"{{TopicName}}",
                 "Broker URI":"{{Broker_URI}}",
                 "Client ID":"{{Client_ID}}",
-                "Quality of Service(QoS)":"{{Quality_of_Service}}"
+                "Quality of Service(QoS)":"{{Quality_of_Service}}",
+                "Username":"{{Username}}",
+                "Password":"{{Password}}"
               }
               "schedulingStrategy": "{{schedulingStrategyValue}}"
               "schedulingPeriod": "{{schedulingPeriodValue}}"              

@@ -8,9 +8,17 @@ node_types:
       abstract: "false"
       final: "false"
     properties:
+      Username:
+        type: string
+        required: true
+        status: supported
       port:
         type: string
         description: Listen Port
+        required: true
+        status: supported
+      Password:
+        type: string
         required: true
         status: supported
     capabilities:
@@ -31,10 +39,18 @@ node_types:
               timeout: 0
           configure:
             inputs:
+              Username:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Username ] }
               port:
                 type: string
                 required: true
                 default: { get_property: [ SELF, port ] }
+              Password:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Password ] }
             implementation:
               primary: configure
               timeout: 0

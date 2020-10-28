@@ -4,51 +4,34 @@ metadata:
   targetNamespace: "radon.blueprints.examples"
 topology_template:
   node_templates:
-    PubsMQTT_0:
-      type: radon.nodes.datapipeline.destination.PubsMQTT
-      metadata:
-        x: "1127"
-        y: "206"
-        displayName: "PubsMQTT"
-      properties:
-        Broker_URI: "tcp://localhost:8888"
-        schedulingStrategy: "CRON_DRIVEN"
-        name: "PubsMQTT"
-        Quality_of_Service: 1
-        schedulingPeriodCRON: "* * * * * ?"
-        Client_ID: "Nifi_Deep"
-        TopicName: "Deep"
-      requirements:
-        - host:
-            node: Nifi_0
-            relationship: con_HostedOn_3
-            capability: host
-    ConsMQTT_0:
+    ConsMQTT_1:
       type: radon.nodes.datapipeline.source.ConsMQTT
       metadata:
-        x: "267"
-        y: "199"
+        x: "352"
+        y: "340"
         displayName: "ConsMQTT"
       properties:
-        Broker_URI: "tcp://localhost:8888"
+        Broker_URI: "tcp://localhost:8889"
+        Username: "Deep"
         schedulingStrategy: "CRON_DRIVEN"
         Max_Queue_Size: 1024
-        name: "ConsMQTT"
-        Quality_of_Service: 1
         schedulingPeriodCRON: "* * * * * ?"
+        Quality_of_Service: 1
+        name: "ConsMQTT"
         Client_ID: "Deep_Nifi"
+        Password: "Deep"
         TopicName: "New"
       requirements:
-        - host:
-            node: Nifi_0
-            relationship: con_HostedOn_2
-            capability: host
         - connectToPipeline:
             node: Encrypt_0
             relationship: con_ConnectNifiLocal_2
             capability: ConnectToPipeline
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_2
+            capability: host
     Encrypt_0:
-      type: radon.nodes.datapipeline.MidwayPB.Encrypt
+      type: radon.nodes.datapipeline.process.Encrypt
       metadata:
         x: "355"
         y: "52"
@@ -65,14 +48,37 @@ topology_template:
             node: Nifi_0
             relationship: con_HostedOn_4
             capability: host
+    PubsMQTT_1:
+      type: radon.nodes.datapipeline.destination.PubsMQTT
+      metadata:
+        x: "1103"
+        y: "385"
+        displayName: "PubsMQTT"
+      properties:
+        Broker_URI: "tcp://localhost:8889"
+        Username: "Deep"
+        schedulingStrategy: "CRON_DRIVEN"
+        schedulingPeriodCRON: "* * * * * ?"
+        Quality_of_Service: 1
+        name: "PubsMQTT"
+        Client_ID: "Nifi_Deep"
+        Password: "Deep"
+        TopicName: "Deepsubhra"
+      requirements:
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_3
+            capability: host
     MosquittoBroker_0:
       type: radon.nodes.mqtt.MosquittoBroker
       metadata:
-        x: "747"
-        y: "633"
+        x: "743"
+        y: "759"
         displayName: "MosquittoBroker"
       properties:
-        port: 8888
+        Username: "Deep"
+        port: 8889
+        Password: "Deep"
         component_version: 1.1
       requirements:
         - host:
@@ -80,17 +86,17 @@ topology_template:
             relationship: con_HostedOn_0
             capability: host
     Decrypt_0:
-      type: radon.nodes.datapipeline.MidwayPB.Decrypt
+      type: radon.nodes.datapipeline.process.Decrypt
       metadata:
-        x: "1058"
-        y: "60"
+        x: "1085"
+        y: "56"
         displayName: "Decrypt"
       properties:
         name: "Decrypt"
         Password: "Deepsubhra Guha Roy"
       requirements:
         - ConnectToPipeline:
-            node: PubsMQTT_0
+            node: PubsMQTT_1
             relationship: con_ConnectNifiLocal_0
             capability: ConnectToPipeline
         - host:
@@ -100,8 +106,8 @@ topology_template:
     OpenStack_0:
       type: radon.nodes.VM.OpenStack
       metadata:
-        x: "747"
-        y: "507"
+        x: "745"
+        y: "554"
         displayName: "OpenStack"
       properties:
         key_name: "Guha_Roy_RADON"
@@ -113,8 +119,8 @@ topology_template:
     Nifi_0:
       type: radon.nodes.nifi.Nifi
       metadata:
-        x: "747"
-        y: "389"
+        x: "740"
+        y: "270"
         displayName: "Nifi"
       properties:
         port: 8080

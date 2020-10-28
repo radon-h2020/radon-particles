@@ -18,6 +18,10 @@ node_types:
         required: true
         default: "tcp://localhost:1883"
         status: supported
+      Username:
+        type: string
+        required: true
+        status: supported
       schedulingStrategy:
         type: string
         description: Either EVENT_DRIVEN (default) or CRON_DRIVEN. EVENT_DRIVEN is similar with TIMER_DRIVEN with 0 sec value in NiFi.
@@ -35,6 +39,10 @@ node_types:
         required: true
         status: supported
       Client_ID:
+        type: string
+        required: true
+        status: supported
+      Password:
         type: string
         required: true
         status: supported
@@ -67,6 +75,10 @@ node_types:
                 type: string
                 required: true
                 default: { get_property: [ SELF, Broker_URI ] }
+              Username:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Username ] }
               schedulingStrategy:
                 type: string
                 required: false
@@ -87,6 +99,10 @@ node_types:
                 type: string
                 required: true
                 default: { get_property: [ SELF, Client_ID ] }
+              Password:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Password ] }
               TopicName:
                 type: string
                 required: true
@@ -105,5 +121,5 @@ node_types:
         file: create.yml
       configure:
         type: tosca.artifacts.File
-        description: Ansible Script for Configure
+        description: Configure Ansible Script
         file: configure.yml

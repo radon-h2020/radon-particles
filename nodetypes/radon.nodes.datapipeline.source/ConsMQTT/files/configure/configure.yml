@@ -30,7 +30,9 @@
                 "Broker URI":"{{Broker_URI}}",
                 "Client ID":"{{Client_ID}}",
                 "Quality of Service(QoS)":"{{Quality_of_Service}}",
-                "Max Queue Size":"{{Max_Queue_Size}}"
+                "Max Queue Size":"{{Max_Queue_Size}}",
+                "Username":"{{Username}}",
+                "Password":"{{Password}}"
               }
                 
               "schedulingStrategy": "{{schedulingStrategyValue}}"
