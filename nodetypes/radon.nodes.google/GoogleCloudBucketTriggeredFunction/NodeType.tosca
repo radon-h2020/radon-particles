@@ -16,6 +16,12 @@ node_types:
         occurrences: [ 1, 1 ]
         valid_source_types: [ radon.nodes.google.GoogleCloudBucket ]
         type: radon.capabilities.Invocable
+    requirements:
+      - monitor:
+          capability: radon.capabilities.monitoring.Monitor
+          node: radon.nodes.monitoring.PushGateway
+          relationship: radon.relationships.monitoring.GCPIsMonitoredBy
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

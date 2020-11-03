@@ -26,5 +26,6 @@
       set_stats:
         data:
           public_address: "{{ ec2.instances[0].public_dns_name }}"
+          public_ip: "{{ ec2.instances[0].public_ip }}"
           private_address: "{{ ec2.instances[0].private_dns_name }}"
           id: "{{ ec2.instance_ids[0] }}"

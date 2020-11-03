@@ -66,12 +66,21 @@ node_types:
         required: false
         entry_schema:
           type: string
+      function_name:
+        type: string
+        required: false
+        default: { get_property: [ SELF, name ] }
     requirements:
       - host:
           capability: tosca.capabilities.Container
           node: radon.nodes.aws.AwsPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
+      - monitor:
+          capability: radon.capabilities.monitoring.Monitor
+          node: radon.nodes.monitoring.PushGateway
+          relationship: radon.relationships.monitoring.AWSIsMonitoredBy
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

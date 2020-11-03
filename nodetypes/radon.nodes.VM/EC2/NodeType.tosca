@@ -10,6 +10,8 @@ node_types:
     attributes:
       id:
         type: string
+      public_ip:
+        type: string
     properties:
       image:
         type: string
