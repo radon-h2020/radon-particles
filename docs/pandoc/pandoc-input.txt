@@ -80,6 +80,7 @@
 ./relationshiptypes/radon.relationships.google/GoogleTriggers/README.md
 ./relationshiptypes/radon.relationships.nifi/ConnectsToNifi/README.md
 ./relationshiptypes/radon.relationships.openfaas/OpenFaasKafkaTriggers/README.md
+./policytypes/radon.policies/Performance/README.md
 ./policytypes/radon.policies.performance/MeanResponseTime/README.md
 ./policytypes/radon.policies.performance/MeanTotalResponseTime/README.md
 ./policytypes/radon.policies.scaling/AutoScale/README.md
