@@ -6,6 +6,7 @@
 ./nodetypes/radon.nodes.abstract/Service/README.md
 ./nodetypes/radon.nodes.abstract/Workload/README.md
 ./nodetypes/radon.nodes.abstract/WebApplication/README.md
+./nodetypes/radon.nodes.abstract/WebServer/README.md
 ./nodetypes/radon.nodes.abstract.workload/ClosedWorkload/README.md
 ./nodetypes/radon.nodes.abstract.workload/OpenWorkload/README.md
 ./nodetypes/radon.nodes.apache.kafka/KafkaBroker/README.md
