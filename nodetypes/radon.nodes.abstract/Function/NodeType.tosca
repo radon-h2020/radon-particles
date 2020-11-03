@@ -20,6 +20,10 @@ node_types:
           node: radon.nodes.abstract.CloudPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
+      - invoker:
+          capability: radon.capabilities.Invocable
+          relationship: radon.relationships.Triggers
+          occurrences: [ 0, UNBOUNDED ]
       - endpoint:
           capability: tosca.capabilities.Endpoint
           relationship: radon.relationships.ConnectsTo
