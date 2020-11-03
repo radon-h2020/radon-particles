@@ -10,16 +10,12 @@ node_types:
     properties:
       user_email:
         type: string
-        default: { get_property: [SELF, user_email] }
       consul_ip:
         type: string
-        default: { get_property: [SELF, consul_ip] }
       pushgateway_service_port:
         type: string
-        default: { get_property: [SELF, pushgateway_service_port] }
       grafana_api_ip:
         type: string
-        default: { get_property: [SELF, grafana_api_ip] }
     attributes:
       pushgateway_ip:
         type: string
