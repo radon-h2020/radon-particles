@@ -8,11 +8,12 @@ node_types:
       abstract: "false"
       final: "false"
     properties:
+      name:
+        type: string
+        required: true
       entries:
         type: radon.datatypes.function.Entries
         required: false
-      name:
-        type: string
     requirements:
       - host:
           capability: tosca.capabilities.Container

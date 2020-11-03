@@ -12,8 +12,8 @@ Abstract node type representing an object storage independently of the underlyin
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `entries` | `false` | `map: radon.datatypes.Entry` |   |   | Map of entries<sup>[1](#fn1)</sup> |
-<sup name="fn1">1</sup> Entry names must be prefixed with an operation, e.g. `get` and `get_image`. The supported operations include `get`, `put` and `delete`.
+| `entries`<sup>[1](#fn1)</sup> | `false` | `map: radon.datatypes.Entry` |   |   | Map of entries |
+<sup name="fn1">1</sup> The name of each `Entry` must be prefixed with the name of the operation that it is associated with, e.g. "get", "get_image" and and "getImage". This enables the decomposition tool to compute the operating cost of the `ObjectStorage`. The supported operations currently include GET, PUT and DELETE.
 
 ### Requirements
 

@@ -3,6 +3,7 @@
 ./nodetypes/radon.nodes.abstract/DataPipeline/README.md
 ./nodetypes/radon.nodes.abstract/Function/README.md
 ./nodetypes/radon.nodes.abstract/ObjectStorage/README.md
+./nodetypes/radon.nodes.abstract/Service/README.md
 ./nodetypes/radon.nodes.abstract/Workload/README.md
 ./nodetypes/radon.nodes.abstract.workload/ClosedWorkload/README.md
 ./nodetypes/radon.nodes.abstract.workload/OpenWorkload/README.md
