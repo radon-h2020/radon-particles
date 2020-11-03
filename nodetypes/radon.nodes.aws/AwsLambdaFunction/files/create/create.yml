@@ -33,7 +33,7 @@
           --function-name {{ function_name }}
           --reserved-concurrent-executions {{ lambda_concurrency }}
           --region {{ aws_region }}
-      when: (lambda_concurrency is defined) and (lambda_concurrency != 0)
+      when: lambda_concurrency is defined
 
     - name: Create function alias name
       lambda_alias:
