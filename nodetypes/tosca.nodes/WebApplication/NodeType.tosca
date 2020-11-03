@@ -10,7 +10,7 @@ node_types:
     properties:
       context_root:
         type: string
-        required: true
+        required: false
         status: supported
     requirements:
       - host:
