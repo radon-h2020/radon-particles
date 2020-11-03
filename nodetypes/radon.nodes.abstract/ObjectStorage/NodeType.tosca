@@ -23,5 +23,5 @@ node_types:
       - invoker:
           capability: radon.capabilities.Invocable
           node: radon.nodes.abstract.Function
-          relationship: radon.relationships.abstract.Triggers
+          relationship: radon.relationships.Triggers
           occurrences: [ 0, UNBOUNDED ]

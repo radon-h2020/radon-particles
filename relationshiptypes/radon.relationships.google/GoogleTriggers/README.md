@@ -4,4 +4,4 @@ Google Cloud-specific relationship type representing GCResource-to-GCFunction co
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `GoogleTriggers` | `radon.relationships.google.GoogleTriggers` | 1.0.0 | `radon.relationships.abstract.Triggers` |
+| `GoogleTriggers` | `radon.relationships.google.GoogleTriggers` | 1.0.0 | `radon.relationships.Triggers` |

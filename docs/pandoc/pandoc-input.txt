@@ -70,7 +70,7 @@
 ./nodetypes/radon.nodes/SockShop/README.md
 ./nodetypes/radon.nodes/Workstation/README.md
 ./relationshiptypes/radon.relationships/ConnectsTo/README.md
-./relationshiptypes/radon.relationships.abstract/Triggers/README.md
+./relationshiptypes/radon.relationships/Triggers/README.md
 ./relationshiptypes/radon.relationships.apache.kafka/PublishToKafkaTopic/README.md
 ./relationshiptypes/radon.relationships.apache.openwhisk/OpenWhiskKafkaTriggers/README.md
 ./relationshiptypes/radon.relationships.aws/AwsTriggers/README.md
