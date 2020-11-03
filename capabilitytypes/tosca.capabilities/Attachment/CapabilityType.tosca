@@ -4,6 +4,6 @@ capability_types:
   tosca.capabilities.Attachment:
     derived_from: tosca.capabilities.Root
     metadata:
+      targetNamespace: "tosca.capabilities"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.capabilities"

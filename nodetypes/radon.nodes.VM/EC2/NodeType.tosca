@@ -10,33 +10,23 @@ node_types:
     attributes:
       id:
         type: string
+      public_ip:
+        type: string
     properties:
       image:
         type: string
-        required: true
         default: "ami-00890f614e48ce866"
-        status: supported
       ssh_key_name:
         type: string
-        required: true
-        status: supported
       vpc_subnet_id:
         type: string
-        required: true
-        status: supported
       instance_type:
         type: string
-        required: true
         default: "t2.micro"
-        status: supported
       ssh_key_file:
         type: string
-        required: true
-        status: supported
       ssh_user:
         type: string
-        required: true
-        status: supported
     requirements:
       - host:
           capability: tosca.capabilities.Container

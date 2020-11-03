@@ -4,20 +4,18 @@ relationship_types:
   radon.relationships.Triggers:
     derived_from: tosca.relationships.ConnectsTo
     metadata:
+      targetNamespace: "radon.relationships.abstract"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.relationships"
     properties:
       events:
         type: list
         required: false
-        status: supported
         entry_schema:
           type: radon.datatypes.Event
       interactions:
         type: list
         required: false
-        status: supported
         entry_schema:
           type: radon.datatypes.Interaction
     valid_target_types: [ radon.capabilities.Invocable ]

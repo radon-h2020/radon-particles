@@ -5,9 +5,9 @@ node_types:
     description: The TOSCA Node Type all other TOSCA base Node Types derive from
     derived_from: tosca.entity.Root
     metadata:
+      targetNamespace: "tosca.nodes"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.nodes"
     attributes:
       tosca_name:
         type: string

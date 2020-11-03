@@ -7,15 +7,15 @@ topology_template:
     ssh_key_name:
       type: string
       required: true
-      default: opera
+      default: "opera"
     vpc_subnet_id:
       type: string
       required: true
-      default: subnet-08d3705c8a484736a
+      default: "subnet-08d3705c8a484736a"
     ssh_key_file:
       type: string
       required: true
-      default: ~/opera.pem
+      default: "~/opera.pem"
   node_templates:
     DockerEngine_0:
       type: radon.nodes.docker.DockerEngine

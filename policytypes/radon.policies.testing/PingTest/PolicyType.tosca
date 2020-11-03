@@ -11,5 +11,3 @@ policy_types:
       hostname:
         type: string
         description: The hostname to be used as the destination for the ping test
-        required: true
-        status: supported

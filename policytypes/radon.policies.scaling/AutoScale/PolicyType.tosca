@@ -4,19 +4,15 @@ policy_types:
   radon.policies.scaling.AutoScale:
     derived_from: tosca.policies.Scaling
     metadata:
+      targetNamespace: "radon.policies.scaling"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.policies.scaling"
     properties:
       min_size:
         type: integer
         description: The minimum number of instances
-        required: true
-        status: supported
         constraints:
           - greater_or_equal: 1
       max_size:
         type: integer
         description: The maximum number of instances
-        required: true
-        status: supported

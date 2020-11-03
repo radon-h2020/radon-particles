@@ -4,21 +4,15 @@ capability_types:
   tosca.capabilities.Scalable:
     derived_from: tosca.capabilities.Root
     metadata:
+      targetNamespace: "tosca.capabilities"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.capabilities"
     properties:
       min_instances:
         type: integer
-        required: true
         default: 1
-        status: supported
       max_instances:
         type: integer
-        required: true
         default: 1
-        status: supported
       default_instances:
         type: integer
-        required: true
-        status: supported

@@ -4,9 +4,9 @@ node_types:
   radon.nodes.VM.OpenStack:
     derived_from: tosca.nodes.Compute
     metadata:
+      targetNamespace: "radon.nodes.VM"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.VM"
     attributes:
       public_address:
         description: OpenStack public IP address of the VM
@@ -18,33 +18,21 @@ node_types:
       flavor:
         type: string
         description: OpenStack flavor id (flavor names are not accepted)
-        required: true
-        status: supported
       key_name:
         type: string
         description: OpenStack SSH key name that should be placed on the VM
-        required: true
-        status: supported
       image:
         type: string
         description: OpenStack image id (image names are not accepted)
-        required: true
-        status: supported
       ssh_username:
         type: string
         description: ssh username of the base image
-        required: true
-        status: supported
       name:
         type: string
         description: Name that should be given to the VM in OpenStack
-        required: true
-        status: supported
       network:
         type: string
         description: OpenStack network id (network names are not accepted)
-        required: true
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

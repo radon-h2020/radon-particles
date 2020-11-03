@@ -8,13 +8,16 @@ policy_types:
       abstract: "false"
       final: "false"
     properties:
-      jmx_file:
+      jmx_file_name:
         type: string
-        description: Location and filename of the JMeter test plan
+        description: The name of the test plan file (.jmx) inside the resources ZIP archive. If resources is a .jmx file itself, this property is ignored (default: testplan.jmx).
         required: true
-        status: supported
+        default: testplan.jmx
+      resources:
+        type: string
+        description: Either a single test plan file (.jmx) or a ZIP archive containing all resources for the test.
+        required: true
       user.properties:
         type: string
-        description: Location and filename of a file with properties for the test plan (optional)
+        description: Location and filename of a file with properties for the test plan (optional).
         required: false
-        status: supported

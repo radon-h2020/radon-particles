@@ -4,16 +4,13 @@ policy_types:
   radon.policies.testing.TcpPingTest:
     derived_from: radon.policies.testing.Test
     metadata:
+      targetNamespace: "radon.policies.testing"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.policies.testing"
     properties:
       hostname:
         type: string
         description: The host to ping during the test
         required: false
-        status: supported
       port:
         type: integer
-        required: true
-        status: supported

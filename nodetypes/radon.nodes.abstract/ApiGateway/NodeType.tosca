@@ -4,9 +4,9 @@ node_types:
   radon.nodes.abstract.ApiGateway:
     derived_from: tosca.nodes.Root
     metadata:
+      targetNamespace: "radon.nodes.abstract"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.abstract"
     requirements:
       - host:
           capability: tosca.capabilities.Container

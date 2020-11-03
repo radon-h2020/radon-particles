@@ -5,15 +5,13 @@ relationship_types:
     description: AWS-specific relationship type representing AwsResource-to-AwsLambdaFunction communication
     derived_from: radon.relationships.Triggers
     metadata:
+      targetNamespace: "radon.relationships.aws"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.relationships.aws"
     properties:
       events:
         type: string
         description: List of events
-        required: true
-        status: supported
     interfaces:
       Configure:
         type: tosca.interfaces.relationship.Configure

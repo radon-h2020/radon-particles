@@ -7,6 +7,14 @@ node_types:
       targetNamespace: "radon.nodes.testing"
       abstract: "false"
       final: "false"
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            implementation:
+              primary: create
+              timeout: 0
     artifacts:
       create:
         type: radon.artifacts.Ansible

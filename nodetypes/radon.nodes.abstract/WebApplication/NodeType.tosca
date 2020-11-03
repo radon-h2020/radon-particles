@@ -4,24 +4,21 @@ node_types:
   radon.nodes.abstract.WebApplication:
     derived_from: tosca.nodes.WebApplication
     metadata:
+      targetNamespace: "radon.nodes.abstract"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.abstract"
     properties:
       name:
         type: string
         required: false
-        status: supported
       granularity:
         type: string
         required: false
-        status: supported
         constraints:
           - valid_values: [ monolithic, coarse-grained, fine-grained ]
       entries:
         type: map
         required: false
-        status: supported
         entry_schema:
           type: radon.datatypes.Entry
     requirements:

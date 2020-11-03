@@ -5,6 +5,6 @@ artifact_types:
     description: Virtual Machine (VM) Image
     derived_from: tosca.artifacts.Deployment.Image
     metadata:
+      targetNamespace: "tosca.artifacts.Deployment.Image"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.artifacts.Deployment.Image"

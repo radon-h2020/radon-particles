@@ -5,8 +5,8 @@ artifact_types:
     description: Artifact for the interpreted Python language
     derived_from: tosca.artifacts.Implementation
     metadata:
+      targetNamespace: "tosca.artifacts.Implementation"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.artifacts.Implementation"
     mime_type: application/x-python
     file_ext: [ py ]

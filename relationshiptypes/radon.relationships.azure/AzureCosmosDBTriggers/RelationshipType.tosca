@@ -5,6 +5,6 @@ relationship_types:
     description: Azure-specific relationship type representing CosmosDB-to-AzureFunction communication
     derived_from: radon.relationships.azure.AzureTriggers
     metadata:
+      targetNamespace: "radon.relationships.azure"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.relationships.azure"

@@ -5,40 +5,36 @@ relationship_types:
     description: AWS-specific relationship type representing ApiGateway-to-AwsLambdaFunction communication
     derived_from: radon.relationships.Triggers
     metadata:
+      targetNamespace: "radon.relationships.aws"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.relationships.aws"
     properties:
       endpoint:
         type: string
         description: Endpoint name
-        required: true
-        status: supported
       http_methods:
         type: string
         description: List of HTTP methods
-        required: true
-        status: supported      
     interfaces:
       Configure:
         type: tosca.interfaces.relationship.Configure
         inputs:
-          aws_region:
-            type: string
-            required: true
-            default: { get_attribute: [ TARGET, region ] }
-          function_arn:
-            type: string
-            required: true
-            default: { get_attribute: [ TARGET, arn ] }
-          role_arn:
-            type: string
-            required: true
-            default: { get_attribute: [ TARGET, role_arn ] }
           endpoint:
             type: string
             required: true
             default: { get_property: [ SELF, endpoint ] }
+          aws_region:
+            type: string
+            required: true
+            default: { get_attribute: [ TARGET, region ] }
+          role_arn:
+            type: string
+            required: true
+            default: { get_attribute: [ TARGET, role_arn ] }
+          function_arn:
+            type: string
+            required: true
+            default: { get_attribute: [ TARGET, arn ] }
           http_methods:
             type: string
             required: true

@@ -4,13 +4,12 @@ relationship_types:
   radon.relationships.ConnectsTo:
     derived_from: tosca.relationships.ConnectsTo
     metadata:
+      targetNamespace: "radon.relationships"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.relationships"
     properties:
       interactions:
         type: list
         required: false
-        status: supported
         entry_schema:
           type: radon.datatypes.Interaction

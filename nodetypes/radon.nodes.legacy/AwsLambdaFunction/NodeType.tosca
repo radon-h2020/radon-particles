@@ -14,45 +14,27 @@ node_types:
     properties:
       aws_region:
         type: string
-        required: true
-        status: supported
       lambda_runtime:
         type: string
         description: Runtime for lambda (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-        required: true
-        status: supported
       function_name:
         type: string
-        required: true
-        status: supported
       lambda_timeout:
         type: string
         description: Function timeout in seconds
-        required: true
-        status: supported
       lambda_memory:
         type: string
         description: Function memory in MB
-        required: true
-        status: supported
       function_alias:
         type: string
-        required: true
-        status: supported
       permission_id:
         type: string
-        required: true
-        status: supported
       zip_file:
         type: string
         description: path to a function zip file
-        required: true
-        status: supported
       lambda_handler:
         type: string
         description: Handler for lambda function
-        required: true
-        status: supported
     requirements:
       - bucket:
           capability: tosca.capabilities.Compute

@@ -4,6 +4,6 @@ artifact_types:
   tosca.artifacts.File:
     derived_from: tosca.artifacts.Root
     metadata:
+      targetNamespace: "tosca.artifacts"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.artifacts"

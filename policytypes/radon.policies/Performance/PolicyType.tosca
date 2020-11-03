@@ -4,9 +4,9 @@ policy_types:
   radon.policies.Performance:
     derived_from: tosca.policies.Performance
     metadata:
+      targetNamespace: "radon.policies"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.policies"
     properties:
       target_entries:
         type: list

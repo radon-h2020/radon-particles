@@ -30,7 +30,7 @@ OPERA_SSH_USER=ubuntu OPERA_SSH_IDENTITY_FILE=~/opera.pem opera deploy --inputs 
 
 You can login with SSH to the create instance:
 ```
-ssh -i opera.pem ubuntu@ec2-<public-ip>.eu-west-1.compute.amazonaws.com
+ssh -i ~/opera.pem ubuntu@<public ip from aws console>
 ```
 
 Undeploy instance:

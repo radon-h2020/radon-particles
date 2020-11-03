@@ -4,6 +4,6 @@ artifact_types:
   tosca.artifacts.Deployment.Image:
     derived_from: tosca.artifacts.Deployment
     metadata:
+      targetNamespace: "tosca.artifacts.Deployment"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.artifacts.Deployment"

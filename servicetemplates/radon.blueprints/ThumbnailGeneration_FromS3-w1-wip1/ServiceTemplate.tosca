@@ -31,14 +31,14 @@ topology_template:
       properties:
         handler: "<adjust the handler, e.g., index.handler>"
         memory: 128
+        s3_bucket_key: "<add the S3 filename here>"
+        name: "thumbgen"
         runtime: "<adjust runtime, e.g., nodejs"
+        alias: "thumbgen"
         statement_id: "thumbgen"
         s3_bucket_name: "<add you S3 bucket name here>"
         timeout: 300
         concurrency: 0
-        s3_bucket_key: "<add the S3 filename here>"
-        name: "thumbgen"
-        alias: "thumbgen"
       requirements:
         - endpoint:
             node: AwsS3Bucket_2

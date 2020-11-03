@@ -12,10 +12,7 @@ policy_types:
         type: string
         description: Convenience property to specify a hostname as the target of the load test (optional)
         required: false
-        status: supported
       port:
         type: string
         description: Convenience property to specify a port as the target of the load test (optional)
         required: false
-        status: supported
-    targets: [ tosca.nodes.SoftwareComponent ]

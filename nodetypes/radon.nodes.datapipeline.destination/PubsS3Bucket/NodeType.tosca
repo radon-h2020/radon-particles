@@ -14,16 +14,10 @@ node_types:
     properties:
       BucketName:
         type: string
-        required: true
-        status: supported
       cred_file_path:
         type: string
-        required: true
-        status: supported
       Region:
         type: string
-        required: true
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -64,15 +58,15 @@ node_types:
               primary: configure
               timeout: 0
     artifacts:
+      templateFile_LocalConn:
+        type: tosca.artifacts.File
+        file: S3Bucket_dest_PG_LocalConn.xml
       create:
         type: tosca.artifacts.File
         file: create.yml
       configure:
         type: tosca.artifacts.File
         file: configure.yml
-      templateFile_LocalConn:
-        type: tosca.artifacts.File
-        file: S3Bucket_dest_PG_LocalConn.xml
       templateFile_RmtConn:
         type: tosca.artifacts.File
         file: S3Bucket_dest_PG_RmtConn.xml

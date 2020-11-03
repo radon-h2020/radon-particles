@@ -4,9 +4,9 @@ node_types:
   radon.nodes.mongodb.MongoDBMS:
     derived_from: tosca.nodes.DBMS
     metadata:
+      targetNamespace: "radon.nodes.mongodb"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.mongodb"
     attributes:
       url:
         type: string
@@ -14,29 +14,20 @@ node_types:
       administrator:
         type: string
         required: false
-        status: supported
       port:
         type: string
-        required: true
         default: 27017
-        status: supported
       authorization_enabled:
         type: boolean
-        required: true
         default: false
-        status: supported
       component_version:
         type: version
-        required: true
         default: 3.6
-        status: supported
         constraints:
-          - valid_values: [ 3.2,3.4,3.6 ]
+          - valid_values: [ 3.2, 3.4, 3.6 ]
       db_path:
         type: string
-        required: true
         default: "/var/lib/mongo"
-        status: supported
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]

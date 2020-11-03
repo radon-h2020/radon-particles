@@ -2,6 +2,7 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 policy_types:
   radon.policies.testing.Test:
+    derived_from: tosca.policies.Root
     metadata:
       targetNamespace: "radon.policies.testing"
       abstract: "true"
@@ -10,10 +11,7 @@ policy_types:
       ti_blueprint:
         type: string
         description: Reference to a RADON test infrastructure blueprint
-        required: true
-        status: supported
       test_id:
         type: string
         description: Identifier for this test case
         required: false
-        status: supported

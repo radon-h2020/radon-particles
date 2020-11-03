@@ -4,6 +4,6 @@ capability_types:
   radon.capabilities.Invocable:
     derived_from: tosca.capabilities.Root
     metadata:
+      targetNamespace: "radon.capabilities"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.capabilities"

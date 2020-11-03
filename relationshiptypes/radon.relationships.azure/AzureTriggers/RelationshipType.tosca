@@ -5,13 +5,11 @@ relationship_types:
     description: Azure-specific relationship type representing AzureResource-to-AzureFunction communication
     derived_from: radon.relationships.Triggers
     metadata:
+      targetNamespace: "radon.relationships.azure"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.relationships.azure"
     properties:
       events:
         type: string
-        required: true
-        status: supported
         constraints:
           - length: 1

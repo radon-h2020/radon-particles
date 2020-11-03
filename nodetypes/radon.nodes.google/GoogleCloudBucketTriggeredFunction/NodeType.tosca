@@ -16,6 +16,12 @@ node_types:
         occurrences: [ 1, 1 ]
         valid_source_types: [ radon.nodes.google.GoogleCloudBucket ]
         type: radon.capabilities.Invocable
+    requirements:
+      - monitor:
+          capability: radon.capabilities.monitoring.Monitor
+          node: radon.nodes.monitoring.PushGateway
+          relationship: radon.relationships.monitoring.GCPIsMonitoredBy
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -44,14 +50,14 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, host, project_id ] }
-          function_name:
-            type: string
-            required: true
-            default: { get_property: [ SELF, function_name ] }
           trigger_bucket_name:
             type: string
             required: true
             default: { get_property: [ SELF, trigger_bucket_name ] }
+          function_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, function_name ] }
           function_runtime:
             type: string
             required: true

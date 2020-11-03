@@ -4,14 +4,13 @@ node_types:
   tosca.nodes.SoftwareComponent:
     derived_from: tosca.nodes.Root
     metadata:
+      targetNamespace: "tosca.nodes"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.nodes"
     properties:
       component_version:
         type: version
         required: false
-        status: supported
     requirements:
       - host:
           capability: tosca.capabilities.Compute

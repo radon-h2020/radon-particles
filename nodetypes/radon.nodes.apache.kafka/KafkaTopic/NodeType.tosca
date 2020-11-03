@@ -4,9 +4,9 @@ node_types:
   radon.nodes.apache.kafka.KafkaTopic:
     derived_from: tosca.nodes.Root
     metadata:
+      targetNamespace: "radon.nodes.apache.kafka"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.apache.kafka"
     attributes:
       broker_urls:
         description: represents a list of one or more urls that corresponds to the brokers of the kafka cluster this topic is hosted on
@@ -17,42 +17,34 @@ node_types:
         type: integer
         required: false
         default: 1
-        status: supported
       min_insync_replicas:
         type: integer
         required: false
         default: 1
-        status: supported
         constraints:
           - greater_or_equal: 0
       segment_size:
         type: integer
         required: false
         default: 1000000
-        status: supported
         constraints:
           - greater_or_equal: 1
       replicas:
         type: integer
         required: false
         default: 1
-        status: supported
       roll_time:
         type: integer
         required: false
         default: 10080
-        status: supported
         constraints:
           - greater_or_equal: 1
       topic_name:
         type: string
-        required: true
-        status: supported
       retention:
         type: integer
         required: false
         default: 10080
-        status: supported
     requirements:
       - host:
           capability: radon.capabilities.kafka.KafkaHosting

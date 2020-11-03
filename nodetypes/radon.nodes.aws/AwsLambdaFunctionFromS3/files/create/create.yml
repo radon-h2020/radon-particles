@@ -1,7 +1,5 @@
 ---
 - hosts: localhost
-  vars:
-    - pwd: "{{ lookup('env', 'PWD') }}"
   tasks:
     - name: Lambda "{{ function_name }}" deploy
       lambda:

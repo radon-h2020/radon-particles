@@ -4,21 +4,19 @@ node_types:
   radon.nodes.abstract.Service:
     derived_from: tosca.nodes.Root
     metadata:
+      targetNamespace: "radon.nodes.abstract"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.abstract"
     properties:
       name:
         type: string
         required: false
-        status: supported
       entries:
         type: map
         required: false
-        status: supported
         entry_schema:
           type: radon.datatypes.Entry
     capabilities:
       endpoint_service:
-        type: tosca.capabilities.Endpoint
         occurrences: [ 1, UNBOUNDED ]
+        type: tosca.capabilities.Endpoint

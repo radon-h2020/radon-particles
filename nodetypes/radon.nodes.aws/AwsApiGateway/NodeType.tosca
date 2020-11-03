@@ -14,18 +14,12 @@ node_types:
       api_title:
         type: string
         description: Name of the API
-        required: true
-        status: supported
       api_description:
         type: string
         description: Description of the API
-        required: true
-        status: supported
       api_version:
         type: string
         description: Version of the API
-        required: true
-        status: supported
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -45,6 +39,10 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, api_title ] }
+          aws_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, host, region ] }
           api_description:
             type: string
             required: true
@@ -52,11 +50,7 @@ node_types:
           api_version:
             type: string
             required: true
-            default: { get_property: [ SELF, api_version ] }          
-          aws_region:
-            type: string
-            required: true
-            default: { get_property: [ SELF, host, region ] }
+            default: { get_property: [ SELF, api_version ] }
         operations:
           create:
             implementation:

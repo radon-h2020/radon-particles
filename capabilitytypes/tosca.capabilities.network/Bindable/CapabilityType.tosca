@@ -4,6 +4,6 @@ capability_types:
   tosca.capabilities.network.Bindable:
     derived_from: tosca.capabilities.Node
     metadata:
+      targetNamespace: "tosca.capabilities.network"
       abstract: "false"
       final: "false"
-      targetNamespace: "tosca.capabilities.network"

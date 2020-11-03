@@ -4,9 +4,9 @@ node_types:
   radon.nodes.azure.AzureHttpTriggeredFunction:
     derived_from: radon.nodes.azure.AzureFunction
     metadata:
+      targetNamespace: "radon.nodes.azure"
       abstract: "false"
       final: "false"
-      targetNamespace: "radon.nodes.azure"
     attributes:
       url:
         type: string
@@ -14,33 +14,24 @@ node_types:
     properties:
       max_outstanding_requests:
         type: integer
-        required: true
         default: 200
-        status: supported
       max_concurrent_requests:
         type: integer
-        required: true
         default: 100
-        status: supported
       route:
         type: string
         required: false
-        status: supported
       auth_level:
         type: string
         required: false
-        status: supported
         constraints:
-          - valid_values: [ anonymous,function,admin ]
+          - valid_values: [ anonymous, function, admin ]
       methods:
         type: list
         required: false
-        status: supported
       route_prefix:
         type: string
-        required: true
         default: "api"
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

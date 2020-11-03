@@ -71,6 +71,11 @@ node_types:
           node: radon.nodes.aws.AwsPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
+      - monitor:
+          capability: radon.capabilities.monitoring.Monitor
+          node: radon.nodes.monitoring.PushGateway
+          relationship: radon.relationships.monitoring.AWSIsMonitoredBy
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -78,7 +83,7 @@ node_types:
           s3_bucket_key:
             type: string
             required: true
-            default: { get_property: [SELF, s3_bucket_key] }
+            default: { get_property: [ SELF, s3_bucket_key ] }
           aws_region:
             type: string
             required: true
@@ -122,7 +127,7 @@ node_types:
           s3_bucket_name:
             type: string
             required: true
-            default: { get_property: [SELF, s3_bucket_name] }
+            default: { get_property: [ SELF, s3_bucket_name ] }
           env_vars:
             type: string
             required: false
