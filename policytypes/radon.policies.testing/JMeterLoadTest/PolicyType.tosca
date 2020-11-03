@@ -10,7 +10,7 @@ policy_types:
     properties:
       jmx_file_name:
         type: string
-        description: The name of the test plan file (.jmx) inside the resources ZIP archive. If resources is a .jmx file itself, this property is ignored.
+        description: The name of the test plan file (.jmx) inside the resources ZIP archive. If resources is a .jmx file itself, this property is ignored (defaults to testplan.jmx).
         required: true
         default: testplan.jmx
       resources:
