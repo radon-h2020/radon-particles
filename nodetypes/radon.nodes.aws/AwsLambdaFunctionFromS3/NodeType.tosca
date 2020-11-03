@@ -32,6 +32,14 @@ node_types:
         type: range
         description: Range of function memory in MB to search
         required: false
+      concurrency:
+        type: integer
+        description: Function concurrency
+        required: false
+      concurrency_range:
+        type: range
+        description: Range of function concurrency to search
+        required: false
       alias:
         type: string
         description: Lambda function's alias
@@ -44,10 +52,6 @@ node_types:
       statement_id:
         type: string
         description: Lambda policy statement identifier
-      concurrency_range:
-        type: range
-        description: Range of function concurrency to search
-        required: false
       s3_bucket_name:
         type: string
         description: The S3 bucket name containing the function package to be deployed
@@ -55,11 +59,6 @@ node_types:
         type: integer
         description: Function timeout in seconds
         default: 300
-      concurrency:
-        type: integer
-        description: Function concurrency
-        required: false
-        default: 0
       env_vars:
         type: map
         description: Function's environment variables
@@ -104,6 +103,10 @@ node_types:
             type: integer
             required: true
             default: { get_property: [ SELF, memory ] }
+          lambda_concurrency:
+            type: integer
+            required: false
+            default: { get_property: [ SELF, concurrency ] }
           func_alias:
             type: string
             required: true
@@ -120,10 +123,6 @@ node_types:
             type: string
             required: true
             default: { get_property: [SELF, s3_bucket_name] }
-          lambda_concurrency:
-            type: integer
-            required: true
-            default: { get_property: [ SELF, concurrency ] }
           env_vars:
             type: string
             required: false

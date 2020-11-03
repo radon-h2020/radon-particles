@@ -18,7 +18,7 @@ A node type that represents an AWS Lambda Function that is instrumented based on
 | `handler` | `true` | `string` |   | `index.handler` | The name of the method within your code that Lambda calls to execute your function |
 | `memory` | `true` | `integer` | `in_range: [128, 3008]` |   | The amount of memory in megabytes that your function has access to |
 | `memory_range` | `true` | `range` | `in_range: [128, 3008]` |   | Range of function memory in MB to search |
-| `concurrency` | `false` | `integer` | `in_range: [0, UNBOUNDED]` |   | The amount of concurrency that your function has access to |
+| `concurrency` | `false` | `integer` | `in_range: [1, UNBOUNDED]` |   | The amount of concurrency that your function has access to |
 | `concurrency_range` | `false` | `range` | `in_range: [1, UNBOUNDED]` |   | Range of function concurrency to search |
 | `timeout` | `true` | `integer` | `in_range: [1, 900]` | 3 | The amount of time that Lambda allows a function to run before stopping it |
 | `statement_id` | `true` | `string` |  |  | Lambda policy statement identifier |
