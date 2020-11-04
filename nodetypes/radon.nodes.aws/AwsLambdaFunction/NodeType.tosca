@@ -37,8 +37,9 @@ node_types:
         type: integer
         description: Function concurrency
         required: false
+        default: 0
         constraints:
-          - in_range: [ 1, UNBOUNDED ]
+          - in_range: [ 0, UNBOUNDED ]
       concurrency_range:
         type: range
         description: Range of function concurrency to search
@@ -115,7 +116,7 @@ node_types:
             default: { get_property: [ SELF, memory ] }
           lambda_concurrency:
             type: integer
-            required: false
+            required: true
             default: { get_property: [ SELF, concurrency ] }
           func_alias:
             type: string
