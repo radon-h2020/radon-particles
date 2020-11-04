@@ -10,6 +10,7 @@ node_types:
     properties:
       context_root:
         type: string
+        required: false
     requirements:
       - host:
           capability: tosca.capabilities.Compute

@@ -1,9 +1,14 @@
 ./nodetypes/radon.nodes.abstract/ApiGateway/README.md
 ./nodetypes/radon.nodes.abstract/CloudPlatform/README.md
+./nodetypes/radon.nodes.abstract/ContainerApplication/README.md
+./nodetypes/radon.nodes.abstract/ContainerRuntime/README.md
 ./nodetypes/radon.nodes.abstract/DataPipeline/README.md
 ./nodetypes/radon.nodes.abstract/Function/README.md
 ./nodetypes/radon.nodes.abstract/ObjectStorage/README.md
+./nodetypes/radon.nodes.abstract/Service/README.md
 ./nodetypes/radon.nodes.abstract/Workload/README.md
+./nodetypes/radon.nodes.abstract/WebApplication/README.md
+./nodetypes/radon.nodes.abstract/WebServer/README.md
 ./nodetypes/radon.nodes.abstract.workload/ClosedWorkload/README.md
 ./nodetypes/radon.nodes.abstract.workload/OpenWorkload/README.md
 ./nodetypes/radon.nodes.apache.kafka/KafkaBroker/README.md
@@ -69,7 +74,7 @@
 ./nodetypes/radon.nodes/SockShop/README.md
 ./nodetypes/radon.nodes/Workstation/README.md
 ./relationshiptypes/radon.relationships/ConnectsTo/README.md
-./relationshiptypes/radon.relationships.abstract/Triggers/README.md
+./relationshiptypes/radon.relationships/Triggers/README.md
 ./relationshiptypes/radon.relationships.apache.kafka/PublishToKafkaTopic/README.md
 ./relationshiptypes/radon.relationships.apache.openwhisk/OpenWhiskKafkaTriggers/README.md
 ./relationshiptypes/radon.relationships.aws/AwsTriggers/README.md
@@ -79,6 +84,7 @@
 ./relationshiptypes/radon.relationships.google/GoogleTriggers/README.md
 ./relationshiptypes/radon.relationships.nifi/ConnectsToNifi/README.md
 ./relationshiptypes/radon.relationships.openfaas/OpenFaasKafkaTriggers/README.md
+./policytypes/radon.policies/Performance/README.md
 ./policytypes/radon.policies.performance/MeanResponseTime/README.md
 ./policytypes/radon.policies.performance/MeanTotalResponseTime/README.md
 ./policytypes/radon.policies.scaling/AutoScale/README.md

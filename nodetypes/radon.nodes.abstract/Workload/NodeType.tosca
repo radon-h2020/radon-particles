@@ -17,7 +17,7 @@ node_types:
     requirements:
       - invoker:
           capability: radon.capabilities.Invocable
-          relationship: radon.relationships.abstract.Triggers
+          relationship: radon.relationships.Triggers
           occurrences: [ 0, UNBOUNDED ]
       - endpoint:
           capability: tosca.capabilities.Endpoint

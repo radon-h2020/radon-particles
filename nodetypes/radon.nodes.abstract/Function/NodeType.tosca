@@ -8,17 +8,22 @@ node_types:
       abstract: "false"
       final: "false"
     properties:
+      name:
+        type: string
+        required: true
       entries:
         type: radon.datatypes.function.Entries
         required: false
-      name:
-        type: string
     requirements:
       - host:
           capability: tosca.capabilities.Container
           node: radon.nodes.abstract.CloudPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
+      - invoker:
+          capability: radon.capabilities.Invocable
+          relationship: radon.relationships.Triggers
+          occurrences: [ 0, UNBOUNDED ]
       - endpoint:
           capability: tosca.capabilities.Endpoint
           relationship: radon.relationships.ConnectsTo
