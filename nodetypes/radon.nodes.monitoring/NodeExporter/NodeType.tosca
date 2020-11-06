@@ -10,13 +10,30 @@ node_types:
     properties:
       node_exporter_ip:
         type: string
-        default: { get_attribute: [SELF, dependency, public_ip] }
+        default: { get_attribute: [ SELF, dependency, public_ip ] }
       consul_ip:
         type: string
         default: { get_input: consul_ip }
       node_exporter_service_port:
         type: string
         default: { get_input: node_exporter_service_port }
+    requirements:
+      - host:
+          capability: radon.capabilities.container.DockerRuntime
+          node: tosca.nodes.Container.Runtime
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - storage:
+          capability: tosca.capabilities.Storage
+          occurrences: [ 0, 1 ]
+      - network:
+          capability: tosca.capabilities.Endpoint
+          occurrences: [ 0, 1 ]
+      - dependency:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.VM.EC2
+          relationship: tosca.relationships.DependsOn
+          occurrences: [ 0, 1 ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -30,33 +47,18 @@ node_types:
               node_exporter_ip:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, dependency, public_ip] }
+                default: { get_attribute: [ SELF, dependency, public_ip ] }
               consul_ip:
                 type: string
+                required: true
                 default: { get_input: consul_ip }
               node_exporter_service_port:
                 type: string
+                required: true
                 default: { get_input: node_exporter_service_port }
             implementation:
               primary: configure
               timeout: 0
-    requirements:
-      - host:
-          capability: radon.capabilities.container.DockerRuntime
-          node: tosca.nodes.Container.Runtime
-          relationship: tosca.relationships.HostedOn
-          occurrences: [1, 1]
-      - storage:
-          capability: tosca.capabilities.Storage
-          occurrences: [0, 1]
-      - network:
-          capability: tosca.capabilities.Endpoint
-          occurrences: [0, 1]
-      - dependency:
-          capability: tosca.capabilities.Container
-          node: radon.nodes.VM.EC2
-          relationship: tosca.relationships.DependsOn
-          occurrences: [ 0, 1 ]
     artifacts:
       create:
         type: radon.artifacts.Ansible

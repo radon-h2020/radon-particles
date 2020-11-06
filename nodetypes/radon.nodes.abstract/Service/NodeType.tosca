@@ -8,14 +8,14 @@ node_types:
       abstract: "false"
       final: "false"
     properties:
-      name:
-        type: string
-        required: false
       entries:
         type: map
         required: false
         entry_schema:
           type: radon.datatypes.Entry
+      name:
+        type: string
+        required: false
     capabilities:
       endpoint_service:
         occurrences: [ 1, UNBOUNDED ]
