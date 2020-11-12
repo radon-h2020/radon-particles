@@ -1,0 +1,25 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.examples"
+topology_template:
+  node_templates:
+    AWSCopyS3ToS3_1:
+      type: radon.nodes.datapipeline.Standalone.AWSCopyS3ToS3
+      metadata:
+        x: "429"
+        y: "450"
+        displayName: "AWSCopyS3ToS3"
+      properties:
+        log_directory: "log"
+        file_path: "output.json"
+        schedule: "1 Days"
+        configure_file_path: "/home/gaurav/AWS_Ansible/config.txt"
+        dp_name: "testing5"
+        credential_file_path: "/home/gaurav/AWS_Ansible/credentials.txt"
+        destination_bucket: "musicbackup-gaurav"
+        schedulingStrategy: "EVENT_DRIVEN"
+        schedulingPeriodCRON: "* * * * * ?"
+        name: "test5"
+        source_bucket: "music-gaurav"
+        log_bucket: "log-gaurav"
