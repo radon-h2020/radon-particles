@@ -18,3 +18,8 @@ node_types:
           node: radon.nodes.nifi.Nifi
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
+      - connectToPipelineRemote:
+          capability: radon.capabilities.datapipeline.ConnectToPipeline
+          node: radon.nodes.abstract.DataPipeline
+          relationship: radon.relationships.datapipeline.ConnectNifiRemote
+          occurrences: [ 1, UNBOUNDED ]
