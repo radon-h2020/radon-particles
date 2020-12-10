@@ -7,21 +7,25 @@
       pip:
         name: awscli
         state: present
+        extra_args: --user
 
     - name: install boto
       pip:
         name: boto
         state: present
+        extra_args: --user
 
     - name: install boto3
       pip:
         name: boto3
-        state: present   
+        state: present
+        extra_args: --user   
      
     - name: install botocore
       pip:
         name: botocore
         state: present
+        extra_args: --user
 
     - name: Create global AWS role
       iam_role:
