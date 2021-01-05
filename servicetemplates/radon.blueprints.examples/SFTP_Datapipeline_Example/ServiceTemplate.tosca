@@ -1,0 +1,85 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.examples"
+topology_template:
+  node_templates:
+    ConsSFTP_0:
+      type: radon.nodes.datapipeline.source.ConsSFTP
+      metadata:
+        x: "385"
+        y: "110"
+        displayName: "ConsSFTP"
+      properties:
+        Remote_Path: "/upload"
+        Username: "deep"
+        Delete_Original: false
+        Port: 32
+        Hostname: "172.17.65.10"
+        name: "ConsSFTP"
+        Search_Recursively: true
+        Password: "deepsubhra"
+      requirements:
+        - connectToPipeline:
+            node: PubsSFTP_0
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_2
+            capability: host
+    PubsSFTP_0:
+      type: radon.nodes.datapipeline.destination.PubsSFTP
+      metadata:
+        x: "1005"
+        y: "103"
+        displayName: "PubsSFTP"
+      properties:
+        Remote_Path: "/download"
+        Username: "deep"
+        Port: 42
+        Hostname: "deep"
+        name: "PubsSFTP"
+        Create_Directory: false
+        Password: "deepsubhra"
+      requirements:
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_1
+            capability: host
+    OpenStack_0:
+      type: radon.nodes.VM.OpenStack
+      metadata:
+        x: "691"
+        y: "432"
+        displayName: "OpenStack"
+      properties:
+        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
+        key_name: "Guha_Roy_RADON"
+        image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
+        ssh_username: "centos"
+        name: "SFTP_Datapipeline_Deep"
+        network: "provider_64_net"
+    Nifi_0:
+      type: radon.nodes.nifi.Nifi
+      metadata:
+        x: "696"
+        y: "243"
+        displayName: "Nifi"
+      properties:
+        port: 8080
+        component_version: "1.12.1"
+      requirements:
+        - host:
+            node: OpenStack_0
+            relationship: con_HostedOn_0
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectNifiLocal_0:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
