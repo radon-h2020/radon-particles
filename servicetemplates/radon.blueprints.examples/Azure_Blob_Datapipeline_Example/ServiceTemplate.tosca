@@ -1,0 +1,80 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.examples"
+topology_template:
+  node_templates:
+    ConsAzureBlob_0:
+      type: radon.nodes.datapipeline.source.ConsAzureBlob
+      metadata:
+        x: "363"
+        y: "76"
+        displayName: "ConsAzureBlob"
+      properties:
+        storage_account_name: "radondeepsubhra"
+        container_name: "deepsrc"
+        prefix: "g"
+        name: "ConsAzureBlob"
+        storage_account_key: "wqe3s03ihij5rWLntXtKA1DwyMkb7XTfRAm3OCGdIa+bF6waGgJrTSO/HvtiHBDC5Hytc98hQQtG2IsA2aCDNg=="
+      requirements:
+        - connectToPipeline:
+            node: PubsAzureBlob_0
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_1
+            capability: host
+    PubsAzureBlob_0:
+      type: radon.nodes.datapipeline.destination.PubsAzureBlob
+      metadata:
+        x: "1030"
+        y: "77"
+        displayName: "PubsAzureBlob"
+      properties:
+        azure_create_container: false
+        container_name: "deepdst"
+        storage_account_name: "radondeepsubhra"
+        name: "PubsAzureBlob"
+        storage_account_key: "wqe3s03ihij5rWLntXtKA1DwyMkb7XTfRAm3OCGdIa+bF6waGgJrTSO/HvtiHBDC5Hytc98hQQtG2IsA2aCDNg=="
+      requirements:
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_0
+            capability: host
+    OpenStack_0:
+      type: radon.nodes.VM.OpenStack
+      metadata:
+        x: "700"
+        y: "470"
+        displayName: "OpenStack"
+      properties:
+        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
+        key_name: "Guha_Roy_RADON"
+        image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
+        ssh_username: "centos"
+        name: "Azure_Blob_Datapipeline_Deep"
+        network: "provider_64_net"
+    Nifi_0:
+      type: radon.nodes.nifi.Nifi
+      metadata:
+        x: "700"
+        y: "236"
+        displayName: "Nifi"
+      properties:
+        port: 8080
+        component_version: "1.12.1"
+      requirements:
+        - host:
+            node: OpenStack_0
+            relationship: con_HostedOn_2
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectNifiLocal_0:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
