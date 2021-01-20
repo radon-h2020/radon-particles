@@ -2,24 +2,8 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 policy_types:
   radon.policies.performance.MeanTotalResponseTime:
-    derived_from: tosca.policies.Performance
+    derived_from: radon.policies.Performance
     metadata:
       targetNamespace: "radon.policies.performance"
       abstract: "false"
       final: "false"
-    properties:
-      target_entries:
-        type: list
-        required: false
-        entry_schema:
-          type: string
-      lower_bound:
-        type: float
-        required: false
-        constraints:
-          - greater_or_equal: 0.0
-      upper_bound:
-        type: float
-        required: false
-        constraints:
-          - greater_or_equal: 0.0

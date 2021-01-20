@@ -4,7 +4,7 @@ OpenFaaS-specific relationship type representing Kafka-to-OpenFaaS Function comm
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `OpenFaasKafkaTriggers` | `radon.relationships.openfaas.OpenFaasKafkaTriggers` | 1.0.0 | `radon.relationships.abstract.Triggers` |
+| `OpenFaasKafkaTriggers` | `radon.relationships.openfaas.OpenFaasKafkaTriggers` | 1.0.0 | `radon.relationships.Triggers` |
 
 ### Valid Target types
 

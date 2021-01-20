@@ -1,25 +1,12 @@
 ---
 - hosts: all
   gather_facts: no
-  vars:
-    - pwd: "{{ lookup('env', 'PWD') }}"  
   tasks:
-    - name: Find the deployment package (temporary substitute for TOSCA get_artifact)
-      find:
-        paths: 
-          - '{{ pwd }}'
-        file_type: file
-        recurse: yes
-        use_regex: yes
-        patterns:
-          - "{{ zip_file }}"
-      register: deployment_package
-
     - name: Authenticate to GCP with service account JSON key file
       shell: "gcloud auth activate-service-account --key-file {{ service_account_file }}"
 
     - name: Upload zip archive with function to the GCP bucket
-      shell: "gsutil cp {{ deployment_package.files[0].path }} gs://{{ function_bucket_name }}/function.zip"
+      shell: "gsutil cp {{ zip_file }} gs://{{ function_bucket_name }}/function.zip"
 
     - name: Create a new Google Cloud function
       gcp_cloudfunctions_cloud_function:

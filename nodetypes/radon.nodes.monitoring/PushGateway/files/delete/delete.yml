@@ -1,0 +1,12 @@
+---
+- name: delete
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Remove Push Gateway instance from Radon Consul
+      consul:
+        service_name: "{{ pushgateway_ip }}_push_gateway"
+        host: "{{ consul_ip }}"
+        state: absent

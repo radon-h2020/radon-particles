@@ -4,7 +4,7 @@ OpenWhisk-specific relationship type representing Kafka-to-OpenWhisk Function co
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `OpenWhiskKafkaTriggers` | `radon.relationships.apache.openwhisk.OpenWhiskKafkaTriggers` | 1.0.0 | `radon.relationships.abstract.Triggers` |
+| `OpenWhiskKafkaTriggers` | `radon.relationships.apache.openwhisk.OpenWhiskKafkaTriggers` | 1.0.0 | `radon.relationships.Triggers` |
 
 ### Valid Target types
 

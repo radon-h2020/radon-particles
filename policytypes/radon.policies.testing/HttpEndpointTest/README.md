@@ -15,7 +15,7 @@ Policy type representing a test case specification for a HTTP endpoint test.
 | `hostname` | `true` | `string` |   |   | The host to use |
 | `port` | `true` | `integer` |   | 80 | The port to use |
 | `path` | `true` | `string` |   | `/` | The path to use |
-| `test_body` | `false` | `json` |   |   | The body to use as json |
+| `test_body` | `false` | `string` |   |   | The body to use as json |
 | `test_header` | `false` | `map of string` |   |   | The http headers to use |
 | `expected_status` | `true` | `integer` |   | 200 | The expected http status return code |
-| `expected_body` | `false` | `json` |   |   | The expected body value as json |
+| `expected_body` | `false` | `string` |   |   | The expected body value as json |
