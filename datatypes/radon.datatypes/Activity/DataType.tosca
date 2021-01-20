@@ -10,6 +10,7 @@ data_types:
     properties:
       service_time:
         type: radon.datatypes.RandomVariable
+        required: false
       bound_to_entry:
         type: boolean
         required: false

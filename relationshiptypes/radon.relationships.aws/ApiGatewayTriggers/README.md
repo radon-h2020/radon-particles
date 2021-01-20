@@ -4,7 +4,7 @@ AWS-specific relationship type representing AwsResource-to-AwsLambdaFunction com
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `AwsTriggers` | `radon.relationships.aws.AwsTriggers` | 1.0.0 | `radon.relationships.abstract.Triggers` |
+| `AwsTriggers` | `radon.relationships.aws.AwsTriggers` | 1.0.0 | `radon.relationships.Triggers` |
 
 ### Properties
 

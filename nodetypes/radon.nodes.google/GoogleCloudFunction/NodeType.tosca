@@ -47,3 +47,8 @@ node_types:
           node: radon.nodes.google.GoogleCloudPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
+      - monitor:
+          capability: radon.capabilities.monitoring.Monitor
+          node: radon.nodes.monitoring.PushGateway
+          relationship: radon.relationships.monitoring.GCPIsMonitoredBy
+          occurrences: [ 0, UNBOUNDED ]

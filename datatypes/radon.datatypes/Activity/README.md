@@ -10,7 +10,7 @@ Data type representing an activity of an entry.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `service_time` | `true` | `radon.datatypes.RandomVariable` |   |   | Service time in seconds |
+| `service_time` | `false` | `radon.datatypes.RandomVariable` |   |   | Service time in seconds |
 | `bound_to_entry` | `false` | `boolean` |   |   | True if it is bound to the entry |
 | `replies_to_entry` | `false` | `boolean` |   |   | True if it replies to the entry |
 | `request_pattern` | `false` | `string` | `valid_values: [stochastic, deterministic]` |   | Request pattern |

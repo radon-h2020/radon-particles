@@ -4,15 +4,13 @@
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `DockerApplication` | `radon.nodes.docker.DockerApplication` | 1.0.0 | `tosca.nodes.Container.Application` |
+| `DockerApplication` | `radon.nodes.docker.DockerApplication` | 1.0.0 | `radon.nodes.abstract.ContainerApplication` |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `radon.capabilities.container.DockerRuntime` | `node: tosca.nodes.Container.Runtime` | `tosca.relationships.HostedOn` | [1, 1] |
-| `storage` | `tosca.capabilities.Storage` | | | [0, 1] |
-| `network` | `tosca.capabilities.Endpoint` | | | [0, 1] |
+| `host` | `radon.capabilities.container.DockerRuntime` | `radon.nodes.abstract.ContainerRuntime` | `tosca.relationships.HostedOn` | [1, 1] |
 
 ### Notes
 

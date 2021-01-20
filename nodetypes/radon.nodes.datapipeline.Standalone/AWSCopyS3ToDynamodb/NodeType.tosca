@@ -1,0 +1,170 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.Standalone.AWSCopyS3ToDynamodb:
+    derived_from: radon.nodes.datapipeline.Standalone
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.Standalone"
+      abstract: "false"
+      final: "false"
+    attributes:
+      pipeline_id:
+        description: Id of the pipeline
+        type: string
+    properties:
+      source_s3:
+        type: string
+        description: source s3 bucket from which data needs to be copied to dynamodb table
+      log_directory:
+        type: string
+        description: The directory name in the log_bucket.
+      throughput_ratio:
+        type: float
+        description: DynamoDB write throughput ratio, value between 0.1-1.0
+        required: false
+        default: 0.25
+      schedule:
+        type: string
+        description: The scheduling info using CRON syntax.
+        required: false
+        default: "1 Days"
+      dp_name:
+        type: string
+        description: name of data pipeline
+      configure_file_path:
+        type: string
+        description: AWS configuration file
+      dynamodb_table:
+        type: string
+        description: Mention destination dynamodb table name
+      credential_file_path:
+        type: string
+        description: Path to the AWS credential file
+      source_s3_directory:
+        type: string
+        description: source s3 directory in s3 bucket where backup is saved
+      dynamodb_region:
+        type: string
+        description: region in which destination dynamodb is created
+      log_bucket:
+        type: string
+        description: The s3 bucket name where logs related to datapipeline exxectuion will be stored.
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          source_s3:
+            type: string
+            required: true
+            default: { get_property: [ SELF, source_s3 ] }
+          log_directory:
+            type: string
+            required: true
+            default: { get_property: [ SELF, log_directory ] }
+          throughput_ratio:
+            type: float
+            required: false
+            default: { get_property: [ SELF, throughput_ratio ] }
+          configure_file_path:
+            type: string
+            required: true
+            default: { get_property: [ SELF, configure_file_path ] }
+          dp_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, dp_name ] }
+          dynamodb_table:
+            type: string
+            required: true
+            default: { get_property: [ SELF, dynamodb_table ] }
+          credential_file_path:
+            type: string
+            required: true
+            default: { get_property: [ SELF, credential_file_path ] }
+          source_s3_directory:
+            type: string
+            required: true
+            default: { get_property: [ SELF, source_s3_directory ] }
+          edit_schedule:
+            type: string
+            required: false
+            default: { get_property: [ SELF, schedule ] }
+          dynamodb_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, dynamodb_region ] }
+          log_bucket:
+            type: string
+            required: true
+            default: { get_property: [ SELF, log_bucket ] }
+        operations:
+          stop:
+            description: The standard stop operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: stop
+              timeout: 0
+          start:
+            description: The standard start operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: start
+              timeout: 0
+          create:
+            description: The standard create operation
+            implementation:
+              primary: create
+              timeout: 0
+          configure:
+            description: The standard configure operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: configure
+              timeout: 0
+          delete:
+            description: The standard delete operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      stop:
+        type: tosca.artifacts.File
+        file: Stop.yml
+      S3ToDynamodbTemplate:
+        type: tosca.artifacts.File
+        file: S3ToDynamodb.json
+      start:
+        type: tosca.artifacts.File
+        file: Start.yml
+      create:
+        type: tosca.artifacts.File
+        file: create.yml
+      configure:
+        type: tosca.artifacts.File
+        file: configure.yml
+      delete:
+        type: tosca.artifacts.File
+        file: Delete.yml

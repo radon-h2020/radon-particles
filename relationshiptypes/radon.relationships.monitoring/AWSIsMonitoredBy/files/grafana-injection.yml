@@ -1,0 +1,18 @@
+---
+- name: configure
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Configure Grafana dashboards for the monitored_function of user_email
+      uri:
+        url: "{{ grafana_api_ip }}"
+        method: POST
+        body_format: json
+        body:
+          "email": "{{ user_email }}"
+          "jobid": "{{ monitored_function }}"
+          "type": "custom"
+
+    - name: Inject the PUSH_GATEWAY_HOST env variable to the function to create the AWS-PushGateway relation
+      shell: "aws lambda update-function-configuration --function-name {{ monitored_function }} --environment Variables={PUSH_GATEWAY_HOST={{ pushgateway_ip }}:9091}"
