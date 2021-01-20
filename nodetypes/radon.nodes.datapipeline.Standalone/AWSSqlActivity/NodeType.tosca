@@ -1,0 +1,180 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.Standalone.AWSSqlActivity:
+    derived_from: radon.nodes.datapipeline.Standalone
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.Standalone"
+      abstract: "false"
+      final: "false"
+    attributes:
+      pipeline_id:
+        description: ID of rhe pipeline, this is generated after exectution of Create.yml
+        type: string
+    properties:
+      log_directory:
+        type: string
+        description: The dicrectory name inside S3 bucket where you want to store your log related to DP execution
+      schedule:
+        type: string
+        description: The scheduling info using CRON syntax
+        required: false
+        default: "1 Days"
+      MySqldb_region:
+        type: string
+        description: Region in which RDS is defined e.g eu-west-1
+      dp_name:
+        type: string
+        description: name of the datapipeline
+      configure_file_path:
+        type: string
+        description: AWS configuration file
+      MySqldb_username:
+        type: string
+        description: Username of the RDS database (MySql)
+      credential_file_path:
+        type: string
+        description: Path to the AWS credential file
+      MySqldb_script:
+        type: string
+        description: MySql DB script such as update, delete, insert into a table
+      MySqldb_name:
+        type: string
+        description: Name of the database which is defined inside the RDS-instance ID
+      MySqlrds_instanceid:
+        type: string
+        description: Relational DB ID which is located in AWS->RDS->Databases, select the ID on which you want to execute the script
+      MySqldb_password:
+        type: string
+        description: Password of the RDS database (MySql)
+      log_bucket:
+        type: string
+        description: S3 bucket name in which the log related to DP execution will be stored
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          log_directory:
+            type: string
+            required: true
+            default: { get_property: [ SELF, log_directory ] }
+          configure_file_path:
+            type: string
+            required: true
+            default: { get_property: [ SELF, configure_file_path ] }
+          dp_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, dp_name ] }
+          MySqldb_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqldb_region ] }
+          MySqldb_username:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqldb_username ] }
+          credential_file_path:
+            type: string
+            required: true
+            default: { get_property: [ SELF, credential_file_path ] }
+          MySqldb_script:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqldb_script ] }
+          MySqldb_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqldb_name ] }
+          edit_schedule:
+            type: string
+            required: false
+            default: { get_property: [ SELF, schedule ] }
+          MySqlrds_instanceid:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqlrds_instanceid ] }
+          MySqldb_password:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqldb_password ] }
+          log_bucket:
+            type: string
+            required: true
+            default: { get_property: [ SELF, log_bucket ] }
+        operations:
+          stop:
+            description: The standard stop operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: Stop
+              timeout: 0
+          start:
+            description: The standard start operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: Start
+              timeout: 0
+          create:
+            description: The standard create operation
+            inputs:
+              dp_name:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dp_name ] }
+            implementation:
+              primary: Create
+              timeout: 0
+          configure:
+            description: The standard configure operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: Configure
+              timeout: 0
+          delete:
+            description: The standard delete operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: Delete
+              timeout: 0
+    artifacts:
+      Delete:
+        type: tosca.artifacts.File
+        file: Delete.yml
+      Start:
+        type: tosca.artifacts.File
+        file: Start.yml
+      Stop:
+        type: tosca.artifacts.File
+        file: Stop.yml
+      SqlActivityTemplate:
+        type: tosca.artifacts.File
+        file: SqlActivityDP.json
+      Create:
+        type: tosca.artifacts.File
+        file: Create.yml
+      Configure:
+        type: tosca.artifacts.File
+        file: Configure.yml
