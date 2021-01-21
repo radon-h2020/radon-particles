@@ -1,0 +1,87 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.source.ConsAzureBlob:
+    derived_from: radon.nodes.datapipeline.source.ConsumeRemote
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.source"
+      abstract: "false"
+      final: "false"
+    attributes:
+      template_name:
+        description: XML file
+        type: string
+        default: "In_Azure_Blob"
+    properties:
+      storage_account_name:
+        type: string
+        required: true
+        status: supported
+      container_name:
+        type: string
+        required: true
+        status: supported
+      prefix:
+        type: string
+        required: false
+        status: supported
+      storage_account_key:
+        type: string
+        required: true
+        status: supported
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              template_name:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, template_name ] }
+              template_file:
+                type: string
+                required: true
+                default: "In_Azure_Blob.xml"
+            implementation:
+              primary: create
+              dependencies: [ templateFile_localConn ]
+              timeout: 0
+          configure:
+            inputs:
+              storage_account_name:
+                type: string
+                required: true
+                default: { get_property: [ SELF, storage_account_name ] }
+              container_name:
+                type: string
+                required: true
+                default: { get_property: [ SELF, container_name ] }
+              prefix:
+                type: string
+                required: false
+                default: { get_property: [ SELF, prefix ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              storage_account_key:
+                type: string
+                required: true
+                default: { get_property: [ SELF, storage_account_key ] }
+            implementation:
+              primary: configure
+              timeout: 0
+    artifacts:
+      templateFile_localConn:
+        type: tosca.artifacts.File
+        description: XML In Azure Template
+        file: In_Azure_Blob.xml
+      create:
+        type: tosca.artifacts.File
+        description: create ansible script
+        file: create.yml
+      configure:
+        type: tosca.artifacts.File
+        description: Configure Ansible Script
+        file: configure.yml

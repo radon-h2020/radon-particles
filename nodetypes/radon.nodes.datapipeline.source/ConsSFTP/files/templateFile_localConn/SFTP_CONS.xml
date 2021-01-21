@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<template encoding-version="1.3">
+    <description></description>
+    <groupId>22fe380f-0173-1000-ca4f-eb7ca188da84</groupId>
+    <name>SFTP_CONS</name>
+    <snippet>
+        <processGroups>
+            <id>2427a575-2d30-3f55-0000-000000000000</id>
+            <parentGroupId>7c6a3dd1-f3ce-3187-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>0.0</y>
+            </position>
+            <comments></comments>
+            <contents>
+                <connections>
+                    <id>ff5ef78c-1a7c-3315-0000-000000000000</id>
+                    <parentGroupId>2427a575-2d30-3f55-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>2427a575-2d30-3f55-0000-000000000000</groupId>
+                        <id>f99f92d5-dd0b-365e-0000-000000000000</id>
+                        <type>OUTPUT_PORT</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>2427a575-2d30-3f55-0000-000000000000</groupId>
+                        <id>ea53fd58-63b4-39d2-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <outputPorts>
+                    <id>f99f92d5-dd0b-365e-0000-000000000000</id>
+                    <parentGroupId>2427a575-2d30-3f55-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>2072.0</x>
+                        <y>616.0</y>
+                    </position>
+                    <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                    <name>SFTP_Out</name>
+                    <state>RUNNING</state>
+                    <type>OUTPUT_PORT</type>
+                </outputPorts>
+                <processors>
+                    <id>ea53fd58-63b4-39d2-0000-000000000000</id>
+                    <parentGroupId>2427a575-2d30-3f55-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>1392.0</x>
+                        <y>560.0</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-standard-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.11.4</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>Hostname</key>
+<value>
+    <name>Hostname</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Port</key>
+<value>
+    <name>Port</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Username</key>
+<value>
+    <name>Username</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Password</key>
+<value>
+    <name>Password</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Private Key Path</key>
+<value>
+    <name>Private Key Path</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Private Key Passphrase</key>
+<value>
+    <name>Private Key Passphrase</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Remote Path</key>
+<value>
+    <name>Remote Path</name>
+</value>
+                            </entry>
+                            <entry>
+<key>File Filter Regex</key>
+<value>
+    <name>File Filter Regex</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Path Filter Regex</key>
+<value>
+    <name>Path Filter Regex</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Polling Interval</key>
+<value>
+    <name>Polling Interval</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Search Recursively</key>
+<value>
+    <name>Search Recursively</name>
+</value>
+                            </entry>
+                            <entry>
+<key>follow-symlink</key>
+<value>
+    <name>follow-symlink</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Ignore Dotted Files</key>
+<value>
+    <name>Ignore Dotted Files</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Delete Original</key>
+<value>
+    <name>Delete Original</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Connection Timeout</key>
+<value>
+    <name>Connection Timeout</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Data Timeout</key>
+<value>
+    <name>Data Timeout</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Host Key File</key>
+<value>
+    <name>Host Key File</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Max Selects</key>
+<value>
+    <name>Max Selects</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Remote Poll Batch Size</key>
+<value>
+    <name>Remote Poll Batch Size</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Strict Host Key Checking</key>
+<value>
+    <name>Strict Host Key Checking</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Send Keep Alive On Timeout</key>
+<value>
+    <name>Send Keep Alive On Timeout</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Use Compression</key>
+<value>
+    <name>Use Compression</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Use Natural Ordering</key>
+<value>
+    <name>Use Natural Ordering</name>
+</value>
+                            </entry>
+                            <entry>
+<key>proxy-configuration-service</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.proxy.ProxyConfigurationService</identifiesControllerService>
+    <name>proxy-configuration-service</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Proxy Type</key>
+<value>
+    <name>Proxy Type</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Proxy Host</key>
+<value>
+    <name>Proxy Host</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Proxy Port</key>
+<value>
+    <name>Proxy Port</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Http Proxy Username</key>
+<value>
+    <name>Http Proxy Username</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Http Proxy Password</key>
+<value>
+    <name>Http Proxy Password</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>Hostname</key>
+<value>172.17.65.10</value>
+                            </entry>
+                            <entry>
+<key>Port</key>
+<value>32</value>
+                            </entry>
+                            <entry>
+<key>Username</key>
+<value>deep</value>
+                            </entry>
+                            <entry>
+<key>Password</key>
+                            </entry>
+                            <entry>
+<key>Private Key Path</key>
+                            </entry>
+                            <entry>
+<key>Private Key Passphrase</key>
+                            </entry>
+                            <entry>
+<key>Remote Path</key>
+<value>/upload</value>
+                            </entry>
+                            <entry>
+<key>File Filter Regex</key>
+                            </entry>
+                            <entry>
+<key>Path Filter Regex</key>
+                            </entry>
+                            <entry>
+<key>Polling Interval</key>
+<value>60 sec</value>
+                            </entry>
+                            <entry>
+<key>Search Recursively</key>
+<value>false</value>
+                            </entry>
+                            <entry>
+<key>follow-symlink</key>
+<value>false</value>
+                            </entry>
+                            <entry>
+<key>Ignore Dotted Files</key>
+<value>true</value>
+                            </entry>
+                            <entry>
+<key>Delete Original</key>
+<value>true</value>
+                            </entry>
+                            <entry>
+<key>Connection Timeout</key>
+<value>30 sec</value>
+                            </entry>
+                            <entry>
+<key>Data Timeout</key>
+<value>30 sec</value>
+                            </entry>
+                            <entry>
+<key>Host Key File</key>
+                            </entry>
+                            <entry>
+<key>Max Selects</key>
+<value>100</value>
+                            </entry>
+                            <entry>
+<key>Remote Poll Batch Size</key>
+<value>5000</value>
+                            </entry>
+                            <entry>
+<key>Strict Host Key Checking</key>
+<value>false</value>
+                            </entry>
+                            <entry>
+<key>Send Keep Alive On Timeout</key>
+<value>true</value>
+                            </entry>
+                            <entry>
+<key>Use Compression</key>
+<value>false</value>
+                            </entry>
+                            <entry>
+<key>Use Natural Ordering</key>
+<value>false</value>
+                            </entry>
+                            <entry>
+<key>proxy-configuration-service</key>
+                            </entry>
+                            <entry>
+<key>Proxy Type</key>
+<value>DIRECT</value>
+                            </entry>
+                            <entry>
+<key>Proxy Host</key>
+                            </entry>
+                            <entry>
+<key>Proxy Port</key>
+                            </entry>
+                            <entry>
+<key>Http Proxy Username</key>
+                            </entry>
+                            <entry>
+<key>Http Proxy Password</key>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>0 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>GetSFTP</name>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>RUNNING</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.standard.GetSFTP</type>
+                </processors>
+            </contents>
+            <name>In_SFTP</name>
+            <variables/>
+        </processGroups>
+    </snippet>
+    <timestamp>12/21/2020 10:49:18 UTC</timestamp>
+</template>
