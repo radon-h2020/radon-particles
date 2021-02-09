@@ -10,6 +10,8 @@ node_types:
     attributes:
       arn:
         type: string
+      endpoint_url: 
+        type: string
     properties:
       api_title:
         type: string
