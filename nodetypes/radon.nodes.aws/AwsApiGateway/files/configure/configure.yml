@@ -1,9 +1,16 @@
 ---
 - hosts: all
+  vars:
+    api_gw_stage: "production"
   tasks:
     - name: Deploy API gateway
       aws_api_gateway:
         state: present
         swagger_file: "/tmp/swagger.json"
-        stage: production
+        stage: "{{ api_gw_stage }}"
         region: "{{ aws_region }}"
+      register: api_gw
+    - name: Set attributes
+      set_stats:
+        data:
+          endpoint_url: "https://{{ api_gw.api_id }}.execute-api.{{ aws_region }}.amazonaws.com/{{ api_gw_stage }}"
