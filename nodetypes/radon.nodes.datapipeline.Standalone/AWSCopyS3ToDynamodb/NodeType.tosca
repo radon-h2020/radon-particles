@@ -28,18 +28,9 @@ node_types:
         description: The scheduling info using CRON syntax.
         required: false
         default: "1 Days"
-      dp_name:
-        type: string
-        description: name of data pipeline
-      configure_file_path:
-        type: string
-        description: AWS configuration file
       dynamodb_table:
         type: string
         description: Mention destination dynamodb table name
-      credential_file_path:
-        type: string
-        description: Path to the AWS credential file
       source_s3_directory:
         type: string
         description: source s3 directory in s3 bucket where backup is saved
@@ -71,22 +62,10 @@ node_types:
             type: float
             required: false
             default: { get_property: [ SELF, throughput_ratio ] }
-          configure_file_path:
-            type: string
-            required: true
-            default: { get_property: [ SELF, configure_file_path ] }
-          dp_name:
-            type: string
-            required: true
-            default: { get_property: [ SELF, dp_name ] }
           dynamodb_table:
             type: string
             required: true
             default: { get_property: [ SELF, dynamodb_table ] }
-          credential_file_path:
-            type: string
-            required: true
-            default: { get_property: [ SELF, credential_file_path ] }
           source_s3_directory:
             type: string
             required: true
@@ -104,31 +83,6 @@ node_types:
             required: true
             default: { get_property: [ SELF, log_bucket ] }
         operations:
-          stop:
-            description: The standard stop operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: stop
-              timeout: 0
-          start:
-            description: The standard start operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: start
-              timeout: 0
-          create:
-            description: The standard create operation
-            implementation:
-              primary: create
-              timeout: 0
           configure:
             description: The standard configure operation
             inputs:
@@ -139,32 +93,10 @@ node_types:
             implementation:
               primary: configure
               timeout: 0
-          delete:
-            description: The standard delete operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: delete
-              timeout: 0
     artifacts:
-      stop:
-        type: tosca.artifacts.File
-        file: Stop.yml
       S3ToDynamodbTemplate:
         type: tosca.artifacts.File
         file: S3ToDynamodb.json
-      start:
-        type: tosca.artifacts.File
-        file: Start.yml
-      create:
-        type: tosca.artifacts.File
-        file: create.yml
       configure:
         type: tosca.artifacts.File
         file: configure.yml
-      delete:
-        type: tosca.artifacts.File
-        file: Delete.yml
