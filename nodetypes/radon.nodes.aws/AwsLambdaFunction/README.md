@@ -14,7 +14,7 @@ A node type that represents an AWS Lambda Function.
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `alias` | `true` | `string` |  |  | Lambda function's alias |
-| `runtime` | `true` | `string` | `valid_values: [nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5]` |   | The identifier of the function's runtime |
+| `runtime` | `true` | `string` | `valid_values: [nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5]` |   | The identifier of the function's runtime |
 | `handler` | `true` | `string` |   | `index.handler` | The name of the method within your code that Lambda calls to execute your function |
 | `memory` | `true` | `integer` | `in_range: [128, 3008]` | 128 | The amount of memory in megabytes that your function has access to |
 | `memory_range` | `true` | `range` | `in_range: [128, 3008]` |   | Range of function memory in MB to search |
