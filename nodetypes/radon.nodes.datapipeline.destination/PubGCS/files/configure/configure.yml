@@ -56,8 +56,10 @@
             "config": 
               "properties": { 
                 "gcp-project-id": "{{ProjectID}}",
-                "gcs-bucket":"{{BucketName}}",
-            }                       
+                "gcs-bucket": "{{BucketName}}",
+              }
+              "schedulingStrategy": "{{schedulingStrategyValue}}"
+              "schedulingPeriod": "{{schedulingPeriodValue}}"                       
         status_code: 200
         body_format: json
 

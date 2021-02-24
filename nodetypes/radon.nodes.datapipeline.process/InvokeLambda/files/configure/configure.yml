@@ -58,7 +58,9 @@
                 "Credentials File": "{{dest_cred_file_path}}/credentials",
                 "Amazon Lambda Name":"{{function_name}}",
                 "Region": "{{region}}"
-            }                       
+              } 
+              "schedulingStrategy": "{{schedulingStrategyValue}}"
+              "schedulingPeriod": "{{schedulingPeriodValue}}"                      
         status_code: 200
         body_format: json
 
