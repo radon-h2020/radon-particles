@@ -34,7 +34,7 @@ node_types:
         type: string
         description: The type of the hash key {STRING, NUMBER, BINARY}
         required: false
-      table_name:
+      name:
         type: string
         description: The name of the AWS DynamoDB table
     requirements:
@@ -75,7 +75,7 @@ node_types:
           table_name:
             type: string
             required: true
-            default: { get_property: [ SELF, table_name ] }
+            default: { get_property: [ SELF, name ] }
         operations:
           create:
             implementation:
