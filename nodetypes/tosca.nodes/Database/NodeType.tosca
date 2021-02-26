@@ -14,6 +14,7 @@ node_types:
         required: false
       port:
         type: integer
+        required: false
         description: the port the underlying database service will listen to for data
       name:
         type: string
