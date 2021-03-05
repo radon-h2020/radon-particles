@@ -4,7 +4,7 @@ An abstract relationship type representing AzureResource-to-AzureCFunction commu
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `AzureTriggers` | `radon.relationships.azure.AzureTriggers` | 1.0.0 | `radon.relationships.abstract.Triggers` |
+| `AzureTriggers` | `radon.relationships.azure.AzureTriggers` | 1.0.0 | `radon.relationships.Triggers` |
 
 ### Properties
 

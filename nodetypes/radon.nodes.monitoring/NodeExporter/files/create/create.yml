@@ -1,0 +1,25 @@
+---
+- name: create
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Install Python pip module prerequisites (Linux)
+      apt:
+        name:
+          - python3-pip
+          - python3-virtualenv
+          - python3-setuptools
+          - python3-docker
+        update_cache: yes
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Run Node Exporter Docker image
+      docker_container:
+        name: NodeExporter
+        image: prom/node-exporter
+        pull: yes
+        ports:
+          - "{{ node_exporter_service_port }}:{{ node_exporter_service_port }}"

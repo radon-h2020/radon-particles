@@ -7,7 +7,7 @@ Type that represents a Docker runtime to run multiple Docker container applicati
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `DockerRuntime` | `radon.nodes.docker.DockerRuntime` | 1.0.0 | `tosca.nodes.Container.Runtime` |
+| `DockerRuntime` | `radon.nodes.docker.DockerRuntime` | 1.0.0 | `radon.nodes.abstract.ContainerRuntime` |
 
 ### Attributes
 

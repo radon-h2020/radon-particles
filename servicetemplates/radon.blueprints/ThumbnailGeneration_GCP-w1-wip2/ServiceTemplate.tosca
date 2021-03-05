@@ -44,7 +44,7 @@ topology_template:
         function_name: "resize"
         name: "resize"
         function_runtime: "python37"
-        zip_file: "function.zip"
+        zip_file: { get_artifact: [ SELF, function ] }
         function_entry_point: "entry_point"
       requirements:
         - dependency:

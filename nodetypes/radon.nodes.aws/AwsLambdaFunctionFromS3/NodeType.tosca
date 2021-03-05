@@ -41,13 +41,13 @@ node_types:
         type: string
         description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
         default: "nodejs"
-      statement_id:
-        type: string
-        description: Lambda policy statement identifier
       concurrency_range:
         type: range
         description: Range of function concurrency to search
         required: false
+      statement_id:
+        type: string
+        description: Lambda policy statement identifier
       s3_bucket_name:
         type: string
         description: The S3 bucket name containing the function package to be deployed
@@ -72,6 +72,11 @@ node_types:
           node: radon.nodes.aws.AwsPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
+      - monitor:
+          capability: radon.capabilities.monitoring.Monitor
+          node: radon.nodes.monitoring.PushGateway
+          relationship: radon.relationships.monitoring.AWSIsMonitoredBy
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

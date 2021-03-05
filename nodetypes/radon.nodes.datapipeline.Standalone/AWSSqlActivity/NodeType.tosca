@@ -51,6 +51,14 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, log_directory ] }
+          configure_file_path:
+            type: string
+            required: true
+            default: { get_property: [ SELF, configure_file_path ] }
+          dp_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, dp_name ] }
           MySqldb_region:
             type: string
             required: true
@@ -59,6 +67,10 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, MySqldb_username ] }
+          credential_file_path:
+            type: string
+            required: true
+            default: { get_property: [ SELF, credential_file_path ] }
           MySqldb_script:
             type: string
             required: true

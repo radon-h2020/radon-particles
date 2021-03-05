@@ -1,0 +1,18 @@
+## Triggers Relationship (Abstract)
+
+Abstract relationship type representing triggering of an invocable node.
+
+| Name | URI | Version | Derived From |
+|:---- |:--- |:------- |:------------ |
+| `Triggers` | `radon.relationships.Triggers` | 1.0.0 | `tosca.relationships.ConnectsTo` |
+
+### Valid Target types
+
+* `radon.capabilities.Invocable`
+
+### Properties
+
+| Name | Required | Type | Constraint | Default Value| Description |
+|:---- |:-------- |:---- |:---------- |:-----------  |:----------- |
+| `events` | `false` | `list: radon.datatypes.Event` |   |   | List of events |
+| `interactions` | `false` | `list: radon.datatypes.Interaction` |   |   | List of interactions |

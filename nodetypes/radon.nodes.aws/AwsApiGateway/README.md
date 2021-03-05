@@ -14,6 +14,8 @@ A node type that represents an AWS Lambda Function.
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
 | `arn` | `string` |   | Amazon's resource name for this entity |
+| `endpoint_url` | `string` |   | Base URL for endpoints provided by this API |
+
 
 ### Properties
 
