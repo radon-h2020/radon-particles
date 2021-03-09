@@ -59,7 +59,9 @@
                 "Credentials File": "{{dest_cred_file_path}}/credentials",
                 "Bucket":"{{BucketName}}",
                 "Region": "{{Region}}"
-            }                       
+              }   
+              "schedulingStrategy": "{{schedulingStrategyValue}}"
+              "schedulingPeriod": "{{schedulingPeriodValue}}"                   
         status_code: 200
         body_format: json
 
