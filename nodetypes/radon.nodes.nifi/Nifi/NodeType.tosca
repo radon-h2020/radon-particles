@@ -9,8 +9,9 @@ node_types:
       final: "false"
     properties:
       port:
-        type: string
+        type: integer
         description: The port exposed by Apache Nifi
+        required: false
         default: 8080
       component_version:
         type: string
@@ -43,6 +44,10 @@ node_types:
               timeout: 0
           configure:
             inputs:
+              port:
+                type: integer
+                required: true
+                default: { get_property: [ SELF, port ] }
               tarball_version:
                 type: string
                 required: true

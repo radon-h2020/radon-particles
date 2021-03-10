@@ -25,6 +25,12 @@ node_types:
         type: string
         description: The type of the range key {STRING, NUMBER, BINARY}
         required: false
+      port:
+        type: integer
+        default: 1337
+      name:
+        type: string
+        description: The name of the AWS DynamoDB table
       write_capacity:
         type: integer
         description: Write throughput capacity (units) to provision
@@ -34,12 +40,6 @@ node_types:
         type: string
         description: The type of the hash key {STRING, NUMBER, BINARY}
         required: false
-      name:
-        type: string
-        description: The name of the AWS DynamoDB table
-      port:
-        type: integer
-        default: 1337
     requirements:
       - host:
           capability: tosca.capabilities.Container

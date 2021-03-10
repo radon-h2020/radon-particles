@@ -96,4 +96,3 @@ node_types:
       configure:
         type: tosca.artifacts.File
         file: configure.yml
-

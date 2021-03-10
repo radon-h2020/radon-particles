@@ -46,6 +46,8 @@
     - name: Configure the first processor within the process group
       vars:
         first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
+        schedulingPeriodValue: "{{ '0 sec' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingPeriodCRON }}"
+        schedulingStrategyValue: "{{ 'TIMER_DRIVEN' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingStrategy }}"
       uri:
         url: "http://localhost:8080/nifi-api/processors/{{first_prcsr_id}}"
         method: PUT
@@ -63,30 +65,29 @@
         status_code: 200
         body_format: json
 
-    - name: Get list of available NiFi resources for fetching the ids of credential service
+
+    - name: Get id of the first processor within the process group.
+      vars:
+        first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
       uri:
-        url: http://localhost:8080/nifi-api/resources
-        method: GET
-      register: nifi_resources
+        url: "http://localhost:8080/nifi-api/processors/{{first_prcsr_id}}"
+        method: Get
+      register: first_prcsr_id
+
 
     - name: start the credential service
-      vars:
-        service_id: "{{ nifi_resources.json  | to_json | from_json | json_query(service_id_query) | first}}"
+      vars: 
+        GCPcontrollerID: "{{first_prcsr_id.json.component.config.properties['GCP Credentials Provider Service']}}"
       uri:
-        url: "http://localhost:8080/nifi-api/controller-services/{{ service_id.split('/')[2] }}"
+        url: "http://localhost:8080/nifi-api/controller-services/{{ GCPcontrollerID }}"
         method: PUT
         body:
           "revision": 
               "version": 0
           "component": 
-            "id": "{{ service_id.split('/')[2] }}"
+            "id": "{{GCPcontrollerID}}"
             "state": "ENABLED"
           "status":
             "runStatus": "ENABLED"
         status_code: 200
-        body_format: json      
-    
-
-
-
-
+        body_format: json 
