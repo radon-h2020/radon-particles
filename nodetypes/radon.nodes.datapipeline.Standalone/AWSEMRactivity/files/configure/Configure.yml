@@ -1,0 +1,13 @@
+---
+  - hosts: localhost
+    vars: 
+       ansible_python_interpreter: /usr/bin/python3
+    
+
+    tasks:
+
+      - name: Edit Pipeline definition  
+        shell: aws datapipeline put-pipeline-definition --pipeline-id {{pipeline_id}} --parameter-values myLogBucket=s3://{{log_directory}} myEMRReleaseLabel="{{myEMRReleaseLabel}}" myMasterInstanceType="{{myMasterInstanceType}}" myEmrStep="{{myEmrStep}}" myCoreInstanceCount="{{myCoreInstanceCount}}" myCoreInstanceType="{{myCoreInstanceType}}" myApplications="{{myApplications}}" --pipeline-definition file://EMR_Template.json
+
+        
+

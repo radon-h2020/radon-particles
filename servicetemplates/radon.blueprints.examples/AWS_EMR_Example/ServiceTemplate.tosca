@@ -1,0 +1,24 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.examples"
+topology_template:
+  node_templates:
+    AWSEMRactivity_0:
+      type: radon.nodes.datapipeline.Standalone.AWSEMRactivity
+      metadata:
+        x: "671"
+        y: "93"
+        displayName: "AWSEMRactivity"
+      properties:
+        log_directory: "radon-deepsubhra/Deepsubhra/"
+        dp_name: "Go_EMR_opera"
+        myMasterInstanceType: "m1.medium"
+        myEMRReleaseLabel: "emr-5.13.0"
+        schedulingStrategy: "EVENT_DRIVEN"
+        myEmrStep: "command-runner.jar,spark-submit,--master,yarn-cluster,--deploy-mode,cluster,s3://radon-deepsubhra/Deepsubhra/for-jar/test.py,s3://radon-deepsubhra/Deepsubhra/for-jar/test.txt,s3://radon-deepsubhra/Deepsubhra/go/"
+        schedulingPeriodCRON: "* * * * * ?"
+        name: "AWSEMR"
+        myCoreInstanceType: "m1.medium"
+        myCoreInstanceCount: 2
+        myApplications: "Spark"
