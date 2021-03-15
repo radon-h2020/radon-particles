@@ -1,5 +1,5 @@
 ---
-  - name: CreateAWSEMRDataPipeline
+  - name: CreateShellActivityDataPipeline
     vars: 
        ansible_python_interpreter: /usr/bin/python3
     hosts: localhost

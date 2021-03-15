@@ -68,36 +68,6 @@ node_types:
             required: true
             default: { get_property: [ SELF, myApplications ] }
         operations:
-          stop:
-            description: The standard stop operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: stop
-              timeout: 0
-          start:
-            description: The standard start operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: start
-              timeout: 0
-          create:
-            description: The standard create operation
-            inputs:
-              dp_name:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, dp_name ] }
-            implementation:
-              primary: create
-              timeout: 0
           configure:
             description: The standard configure operation
             inputs:
@@ -108,32 +78,10 @@ node_types:
             implementation:
               primary: configure
               timeout: 0
-          delete:
-            description: The standard delete operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: delete
-              timeout: 0
     artifacts:
       EMR_Template:
         type: tosca.artifacts.File
         file: EMR_Template.json
-      stop:
-        type: tosca.artifacts.File
-        file: Stop.yml
-      start:
-        type: tosca.artifacts.File
-        file: Start.yml
-      create:
-        type: tosca.artifacts.File
-        file: Create.yml
       configure:
         type: tosca.artifacts.File
         file: Configure.yml
-      delete:
-        type: tosca.artifacts.File
-        file: Delete.yml
