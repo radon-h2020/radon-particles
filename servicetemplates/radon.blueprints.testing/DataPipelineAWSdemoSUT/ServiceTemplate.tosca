@@ -92,7 +92,7 @@ topology_template:
         displayName: "Nifi"
       properties:
         port: 8080
-        component_version: "1.12.1"
+        component_version: "1.13.1"
       requirements:
         - host:
             node: EC2_0
