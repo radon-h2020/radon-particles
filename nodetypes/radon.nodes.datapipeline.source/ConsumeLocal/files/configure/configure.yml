@@ -41,7 +41,9 @@
           "component": 
             "id": "{{first_prcsr_id}}"
             "config": 
-              "properties": { "Input Directory": "{{directory}}"}                       
+              "properties": { "Input Directory": "{{directory}}"}
+              "schedulingStrategy": "{{schedulingStrategyValue}}"
+              "schedulingPeriod": "{{schedulingPeriodValue}}"                       
         status_code: 200
         body_format: json
       

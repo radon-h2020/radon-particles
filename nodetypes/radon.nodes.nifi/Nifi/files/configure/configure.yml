@@ -15,3 +15,10 @@
         regexp: '^(.*)nifi.remote.input.socket.port=(.*)$' 
         line: 'nifi.remote.input.socket.port=8043'
         backrefs: yes
+
+    - name: disable HTTP, by removing the port number
+      lineinfile: 
+        path: "/usr/local/bin/nifi-{{ tarball_version }}/conf/nifi.properties"
+        regexp: '^(.*)nifi.web.http.port=(.*)$' 
+        line: 'nifi.web.http.port={{ port }}'
+        backrefs: yes

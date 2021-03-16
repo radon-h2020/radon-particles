@@ -7,10 +7,6 @@ node_types:
       targetNamespace: "radon.nodes.datapipeline.Standalone"
       abstract: "false"
       final: "false"
-    attributes:
-      pipeline_id:
-        description: ID of rhe pipeline, this is generated after exectution of Create.yml
-        type: string
     properties:
       log_directory:
         type: string
@@ -23,18 +19,9 @@ node_types:
       MySqldb_region:
         type: string
         description: Region in which RDS is defined e.g eu-west-1
-      dp_name:
-        type: string
-        description: name of the datapipeline
-      configure_file_path:
-        type: string
-        description: AWS configuration file
       MySqldb_username:
         type: string
         description: Username of the RDS database (MySql)
-      credential_file_path:
-        type: string
-        description: Path to the AWS credential file
       MySqldb_script:
         type: string
         description: MySql DB script such as update, delete, insert into a table
@@ -109,36 +96,6 @@ node_types:
             required: true
             default: { get_property: [ SELF, log_bucket ] }
         operations:
-          stop:
-            description: The standard stop operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: Stop
-              timeout: 0
-          start:
-            description: The standard start operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: Start
-              timeout: 0
-          create:
-            description: The standard create operation
-            inputs:
-              dp_name:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, dp_name ] }
-            implementation:
-              primary: Create
-              timeout: 0
           configure:
             description: The standard configure operation
             inputs:
@@ -149,32 +106,10 @@ node_types:
             implementation:
               primary: Configure
               timeout: 0
-          delete:
-            description: The standard delete operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: Delete
-              timeout: 0
     artifacts:
-      Delete:
-        type: tosca.artifacts.File
-        file: Delete.yml
-      Start:
-        type: tosca.artifacts.File
-        file: Start.yml
-      Stop:
-        type: tosca.artifacts.File
-        file: Stop.yml
       SqlActivityTemplate:
         type: tosca.artifacts.File
         file: SqlActivityDP.json
-      Create:
-        type: tosca.artifacts.File
-        file: Create.yml
       Configure:
         type: tosca.artifacts.File
         file: Configure.yml
