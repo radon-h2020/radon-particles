@@ -29,5 +29,5 @@
         regexp: '^(.*)nifi.web.http.host=(.*)$' 
         line: 'nifi.web.http.port='
         backrefs: yes        
-      when: webinterface_public == "True"
+      when: (webinterface_public is defined) and (webinterface_public == "True")
 
