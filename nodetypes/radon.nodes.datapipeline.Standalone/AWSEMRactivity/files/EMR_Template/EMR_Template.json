@@ -10,7 +10,7 @@
       "type": "EmrActivity"
     },
     {
-      "period": "1 days",
+      "period": "#{mySchedule}",
       "name": "Every 1 day",
       "id": "DefaultSchedule",
       "type": "Schedule",

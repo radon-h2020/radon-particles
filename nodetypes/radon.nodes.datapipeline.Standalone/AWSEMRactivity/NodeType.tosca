@@ -7,9 +7,6 @@ node_types:
       targetNamespace: "radon.nodes.datapipeline.Standalone"
       abstract: "false"
       final: "false"
-    attributes:
-      pipeline_id:
-        type: string
     properties:
       log_directory:
         type: string
@@ -21,8 +18,18 @@ node_types:
       myEMRReleaseLabel:
         type: string
         default: "emr-5.13.0"
+      sns_arn_topic:
+        type: string
+        description: In case, sns notification service is active in AWS. Add arnTopic name here
+        required: false
+        default: "None"
       myEmrStep:
         type: string
+      edit_schedule:
+        type: string
+        description: pipeline can be scheduled to run every 15 minutes to days, weeks or months period
+        required: false
+        default: "1 Days"
       myCoreInstanceType:
         type: string
         default: "m1.medium"
@@ -31,6 +38,15 @@ node_types:
         default: 2
       myApplications:
         type: string
+      log_bucket:
+        type: string
+        description: define the s3 bucket name to which logs can be stored
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -51,10 +67,18 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, myEMRReleaseLabel ] }
+          sns_arn_topic:
+            type: string
+            required: false
+            default: { get_property: [ SELF, sns_arn_topic ] }
           myEmrStep:
             type: string
             required: true
             default: { get_property: [ SELF, myEmrStep ] }
+          edit_schedule:
+            type: string
+            required: false
+            default: { get_property: [ SELF, edit_schedule ] }
           myCoreInstanceType:
             type: string
             required: true
@@ -67,10 +91,18 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, myApplications ] }
+          log_bucket:
+            type: string
+            required: true
+            default: { get_property: [ SELF, log_bucket ] }
         operations:
           configure:
             description: The standard configure operation
             inputs:
+              edit_template:
+                type: string
+                required: false
+                default: { get_artifact: [ SELF, edit_template ] }
               pipeline_id:
                 type: string
                 required: true

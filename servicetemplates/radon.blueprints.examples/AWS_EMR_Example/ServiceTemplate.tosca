@@ -13,12 +13,15 @@ topology_template:
       properties:
         log_directory: "radon-deepsubhra/Deepsubhra/"
         dp_name: "Go_EMR_opera"
-        myMasterInstanceType: "m1.medium"
         myEMRReleaseLabel: "emr-5.13.0"
-        schedulingStrategy: "EVENT_DRIVEN"
+        credential_file_path: "credential.txt"
         myEmrStep: "command-runner.jar,spark-submit,--master,yarn-cluster,--deploy-mode,cluster,s3://radon-deepsubhra/Deepsubhra/for-jar/test.py,s3://radon-deepsubhra/Deepsubhra/for-jar/test.txt,s3://radon-deepsubhra/Deepsubhra/go/"
+        myApplications: "Spark"
+        log_bucket: "log-gaurav"
+        configure_file_path: "config.txt"
+        myMasterInstanceType: "m1.medium"
+        schedulingStrategy: "EVENT_DRIVEN"
         schedulingPeriodCRON: "* * * * * ?"
         name: "AWSEMR"
         myCoreInstanceType: "m1.medium"
         myCoreInstanceCount: 2
-        myApplications: "Spark"
