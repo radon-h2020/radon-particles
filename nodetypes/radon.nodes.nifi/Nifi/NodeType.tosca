@@ -15,6 +15,7 @@ node_types:
       component_version:
         type: string
         description: The version of Apache Nifi
+        default: "1.13.1"
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
