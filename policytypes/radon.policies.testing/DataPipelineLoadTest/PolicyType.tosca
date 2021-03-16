@@ -1,0 +1,14 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+policy_types:
+  radon.policies.testing.DataPipelineLoadTest:
+    derived_from: radon.policies.testing.LoadTest
+    metadata:
+      targetNamespace: "radon.policies.testing"
+      abstract: "false"
+      final: "false"
+    properties:
+      user.properties	:
+        type: string
+      resources:
+        type: string

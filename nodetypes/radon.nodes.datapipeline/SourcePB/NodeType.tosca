@@ -15,7 +15,6 @@ node_types:
           occurrences: [ 1, UNBOUNDED ]
       - host:
           capability: tosca.capabilities.Container
-          node: radon.nodes.nifi.Nifi
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
       - connectToPipelineRemote:

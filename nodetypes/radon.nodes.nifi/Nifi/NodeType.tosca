@@ -29,6 +29,11 @@ node_types:
               primary: stop
               timeout: 0
           start:
+            inputs:
+              tarball_version:
+                type: string
+                required: true
+                default: { get_property: [ SELF, component_version ] }
             implementation:
               primary: start
               timeout: 0

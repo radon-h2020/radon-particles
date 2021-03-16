@@ -1,0 +1,139 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.testing"
+topology_template:
+  inputs:
+    ssh_key_name:
+      type: string
+      required: true
+    cred_file_path:
+      type: string
+      required: true
+    vpc_subnet_id:
+      type: string
+      required: true
+    ssh_key_file:
+      type: string
+      required: false
+  node_templates:
+    DockerEngine_0:
+      type: radon.nodes.docker.DockerEngine
+      metadata:
+        x: "804"
+        y: "457"
+        displayName: "DockerEngine"
+      requirements:
+        - host:
+            node: EC2_0
+            relationship: con_HostedOn_4
+            capability: host
+    NiFiDocker_0:
+      type: radon.nodes.nifi.NiFiDocker
+      metadata:
+        x: "802"
+        y: "244"
+        displayName: "NiFiDocker"
+      properties:
+        port: 8080
+        dockerhub_tag: "latest"
+      requirements:
+        - host:
+            node: DockerEngine_0
+            relationship: con_HostedOn_3
+            capability: host
+    DataPipeline_0:
+      type: radon.nodes.testing.DataPipeline
+      metadata:
+        x: "1201"
+        y: "457"
+        displayName: "DataPipelineAgent"
+      requirements:
+        - host:
+            node: DockerEngine_0
+            relationship: con_HostedOn_5
+            capability: host
+    AwsPlatform_0:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "406"
+        y: "660"
+        displayName: "AwsPlatform"
+      properties:
+        name: "AWS"
+        region: "eu-central-1"
+    PubsS3Bucket_0:
+      type: radon.nodes.datapipeline.destination.PubsS3Bucket
+      metadata:
+        x: "1244"
+        y: "140"
+        displayName: "PubsS3Bucket"
+      properties:
+        BucketName: "radon-jakovits"
+        cred_file_path: { get_input: cred_file_path }
+        schedulingStrategy: "EVENT_DRIVENsend_to_s3"
+        schedulingPeriodCRON: "* * * * * ?"
+        Region: "eu-central-1"
+      requirements:
+        - host:
+            node: NiFiDocker_0
+            relationship: con_HostedOn_1
+            capability: host
+    ConsumeLocal_0:
+      type: radon.nodes.datapipeline.source.ConsumeLocal
+      metadata:
+        x: "403"
+        y: "135"
+        displayName: "ConsumeLocal"
+      properties:
+        schedulingStrategy: "EVENT_DRIVEN"
+        name: "read_test_files"
+        schedulingPeriodCRON: "* * * * * ?"
+        directory: "/mnt"
+      requirements:
+        - connectToPipeline:
+            node: PubsS3Bucket_0
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
+        - host:
+            node: NiFiDocker_0
+            relationship: con_HostedOn_0
+            capability: host
+    EC2_0:
+      type: radon.nodes.VM.EC2
+      metadata:
+        x: "802"
+        y: "659"
+        displayName: "EC2"
+      properties:
+        image: "ami-0e0102e3ff768559b"
+        ssh_key_name: { get_input: ssh_key_name }
+        vpc_subnet_id: { get_input: vpc_subnet_id }
+        instance_type: "t3.medium"
+        ssh_key_file: { get_input: ssh_key_file }
+        ssh_user: "ubuntu"
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_2
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_3:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectNifiLocal_0:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+    con_HostedOn_4:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_5:
+      type: tosca.relationships.HostedOn
+  outputs:
+    public_address:
+      type: string
+      required: false
+      value: { get_attribute: [ EC2_0, public_address ] }

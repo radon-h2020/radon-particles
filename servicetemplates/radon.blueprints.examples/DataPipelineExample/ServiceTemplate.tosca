@@ -7,8 +7,8 @@ topology_template:
     PubsS3Bucket:
       type: radon.nodes.datapipeline.destination.PubsS3Bucket
       metadata:
-        x: "778"
-        y: "95"
+        x: "883"
+        y: "96"
         displayName: "PubsS3Bucket"
       properties:
         BucketName: "radon-jakovits-output"
@@ -23,8 +23,8 @@ topology_template:
     ConsS3Bucket:
       type: radon.nodes.datapipeline.source.ConsS3Bucket
       metadata:
-        x: "380"
-        y: "92"
+        x: "265"
+        y: "98"
         displayName: "ConsS3Bucket"
       properties:
         BucketName: "radon-jakovits"
@@ -43,25 +43,25 @@ topology_template:
     OpenStack:
       type: radon.nodes.VM.OpenStack
       metadata:
-        x: "543"
-        y: "469"
+        x: "571"
+        y: "692"
         displayName: "OpenStack"
       properties:
         flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
         key_name: "jakovits_ldpc"
         image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
         ssh_username: "centos"
-        name: "nifihost2"
+        name: "nifihost7"
         network: "provider_64_net"
     Nifi:
       type: radon.nodes.nifi.Nifi
       metadata:
-        x: "556"
-        y: "358"
+        x: "575"
+        y: "394"
         displayName: "Nifi"
       properties:
         port: 8080
-        component_version: "1.11.4"
+        component_version: "1.12.1"
       requirements:
         - host:
             node: OpenStack
