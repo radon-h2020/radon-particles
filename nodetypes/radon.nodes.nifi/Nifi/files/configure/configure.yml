@@ -28,5 +28,6 @@
         path: "/usr/local/bin/nifi-{{ tarball_version }}/conf/nifi.properties"
         regexp: '^(.*)nifi.web.http.host=(.*)$' 
         line: 'nifi.web.http.port='
-        backrefs: yes
-        
+        backrefs: yes        
+      when: webinterface_public == "True"
+

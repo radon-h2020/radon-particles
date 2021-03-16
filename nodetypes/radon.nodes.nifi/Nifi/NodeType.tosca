@@ -57,6 +57,10 @@ node_types:
                 type: string
                 required: true
                 default: { get_property: [ SELF, port ] }
+              webinterface_public:
+                type: string
+                required: true
+                default: { get_property: [ SELF, webinterface_public ] }
             implementation:
               primary: configure
               timeout: 0
