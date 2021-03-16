@@ -16,6 +16,10 @@ node_types:
         type: string
         description: The version of Apache Nifi
         default: "1.13.1"
+      webinterface_public:
+        type: string
+        description: Whether NiFi web intefrace should be publicly accessible
+        default: "False"
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
