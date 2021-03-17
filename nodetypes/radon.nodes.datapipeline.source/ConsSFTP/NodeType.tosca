@@ -15,34 +15,20 @@ node_types:
     properties:
       Remote_Path:
         type: string
-        required: true
-        status: supported
       Username:
         type: string
-        required: true
-        status: supported
       Delete_Original:
         type: string
-        required: true
         default: true
-        status: supported
       Port:
         type: string
-        required: true
-        status: supported
       Hostname:
         type: string
-        required: true
-        status: supported
       Search_Recursively:
         type: string
-        required: true
         default: false
-        status: supported
       Password:
         type: string
-        required: true
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

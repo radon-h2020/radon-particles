@@ -22,6 +22,11 @@ node_types:
       MySqldb_username:
         type: string
         description: Username of the RDS database (MySql)
+      sns_arn_topic:
+        type: string
+        description: enter the arn_topic address of sns service defined under AWS SNS
+        required: false
+        default: "None"
       MySqldb_script:
         type: string
         description: MySql DB script such as update, delete, insert into a table
@@ -67,6 +72,11 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, MySqldb_username ] }
+          sns_arn_topic:
+            type: string
+            description: enter the arn_topic address of sns service defined under AWS SNS
+            required: false
+            default: { get_property: [ SELF, sns_arn_topic ] }
           credential_file_path:
             type: string
             required: true
@@ -99,6 +109,10 @@ node_types:
           configure:
             description: The standard configure operation
             inputs:
+              edit_template:
+                type: string
+                required: false
+                default: { get_artifact: [ SELF, edit_template ] }
               pipeline_id:
                 type: string
                 required: true

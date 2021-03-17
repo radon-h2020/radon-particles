@@ -4,71 +4,118 @@ metadata:
   targetNamespace: "radon.blueprints.examples"
 topology_template:
   node_templates:
-    PubsS3Bucket:
-      type: radon.nodes.datapipeline.destination.PubsS3Bucket
+    ConsGCSBucket_0:
+      type: radon.nodes.datapipeline.source.ConsGCSBucket
       metadata:
-        x: "778"
-        y: "95"
-        displayName: "PubsS3Bucket"
+        x: "906"
+        y: "408"
+        displayName: "ConsGCSBucket"
       properties:
-        BucketName: "radon-jakovits-output"
-        cred_file_path: "/home/jakovits/aws/credentials"
-        name: "sendToS3"
-        Region: "eu-central-1"
-      requirements:
-        - host:
-            node: Nifi
-            relationship: con_HostedOn_2
-            capability: host
-    ConsS3Bucket:
-      type: radon.nodes.datapipeline.source.ConsS3Bucket
-      metadata:
-        x: "380"
-        y: "92"
-        displayName: "ConsS3Bucket"
-      properties:
-        BucketName: "radon-jakovits"
-        cred_file_path: "/home/jakovits/aws/credentials"
-        name: "getFromS3"
-        Region: "eu-central-1"
+        bucket: "congcs"
+        project_ID: "radonfadjk"
+        schedulingStrategy: "EVENT_DRIVEN"
+        schedulingPeriodCRON: "* * * * * ?"
+        name: "getFrmGoogle"
+        credential_JSON_file: "/home/chinmaya/.aws/credentials"
       requirements:
         - connectToPipeline:
-            node: PubsS3Bucket
+            node: PubsAzureBlob_0
+            relationship: con_ConnectNifiLocal_1
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_1
+            capability: host
+    PubGCS_0:
+      type: radon.nodes.datapipeline.destination.PubGCS
+      metadata:
+        x: "351"
+        y: "299"
+        displayName: "PubGCS"
+      properties:
+        BucketName: "nobucket"
+        cred_file_path: "/home/chinmaya/.aws/credentials"
+        schedulingStrategy: "CRON_DRIVEN"
+        ProjectID: "rdon-65747"
+        schedulingPeriodCRON: "* * * * * ?"
+        name: "pubgcs"
+      requirements:
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_7
+            capability: host
+    ConsS3Bucket_0:
+      type: radon.nodes.datapipeline.source.ConsS3Bucket
+      metadata:
+        x: "354"
+        y: "448"
+        displayName: "ConsS3Bucket"
+      properties:
+        BucketName: "cons3bucket"
+        cred_file_path: "/home/chinmaya/.aws/credentials"
+        schedulingStrategy: "EVENT_DRIVEN"
+        schedulingPeriodCRON: "* * * * * ?"
+        name: "getS3"
+        Region: "eu-west-1"
+      requirements:
+        - connectToPipeline:
+            node: PubGCS_0
             relationship: con_ConnectNifiLocal_0
             capability: ConnectToPipeline
         - host:
-            node: Nifi
-            relationship: con_HostedOn_1
+            node: Nifi_0
+            relationship: con_HostedOn_0
             capability: host
-    OpenStack:
+    PubsAzureBlob_0:
+      type: radon.nodes.datapipeline.destination.PubsAzureBlob
+      metadata:
+        x: "822"
+        y: "212"
+        displayName: "PubsAzureBlob"
+      properties:
+        azure_create_container: false
+        storage_account_name: "noacname"
+        container_name: "nocontainer"
+        schedulingStrategy: "EVENT_DRIVEN"
+        schedulingPeriodCRON: "* * * * * ?"
+        name: "pubazure"
+        storage_account_key: "nokey"
+      requirements:
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_3
+            capability: host
+    OpenStack_0:
       type: radon.nodes.VM.OpenStack
       metadata:
-        x: "543"
-        y: "469"
+        x: "523"
+        y: "828"
         displayName: "OpenStack"
       properties:
-        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
-        key_name: "jakovits_ldpc"
+        flavor: "m1.medium"
+        key_name: "chinmayadehury"
         image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
         ssh_username: "centos"
-        name: "nifihost2"
+        name: "NifiHost2-temp"
         network: "provider_64_net"
-    Nifi:
+    Nifi_0:
       type: radon.nodes.nifi.Nifi
       metadata:
-        x: "556"
-        y: "358"
+        x: "522"
+        y: "619"
         displayName: "Nifi"
       properties:
         port: 8080
-        component_version: "1.11.4"
+        component_version: "1.12.1"
       requirements:
         - host:
-            node: OpenStack
-            relationship: con_HostedOn_0
+            node: OpenStack_0
+            relationship: con_HostedOn_2
             capability: host
   relationship_templates:
     con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_3:
       type: tosca.relationships.HostedOn
     con_HostedOn_0:
       type: tosca.relationships.HostedOn
@@ -76,3 +123,7 @@ topology_template:
       type: tosca.relationships.HostedOn
     con_ConnectNifiLocal_0:
       type: radon.relationships.datapipeline.ConnectNifiLocal
+    con_ConnectNifiLocal_1:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+    con_HostedOn_7:
+      type: tosca.relationships.HostedOn
