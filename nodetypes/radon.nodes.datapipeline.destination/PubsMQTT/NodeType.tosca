@@ -22,18 +22,6 @@ node_types:
         type: string
         required: true
         status: supported
-      schedulingStrategy:
-        type: string
-        description: Either EVENT_DRIVEN (default) or CRON_DRIVEN. EVENT_DRIVEN is similar with TIMER_DRIVEN with 0 sec value in NiFi.
-        required: false
-        default: "EVENT_DRIVEN"
-        status: supported
-      schedulingPeriodCRON:
-        type: string
-        description: For CRON_DRIVEN give in CRON syntax.
-        required: false
-        default: "* * * * * ?"
-        status: supported
       Quality_of_Service:
         type: integer
         required: true
