@@ -17,7 +17,7 @@
 
     - name: upload template file to NiFi template repository
       shell: 'curl  -X "POST" "http://localhost:8080/nifi-api/process-groups/root/templates/upload" \
-                 -H "Content-Type: multipart/form-data; charset=utf-8; boundary=__X_PAW_BOUNDARY__" \
+                 -H "Content-Type: multipart/form-data" \
                  -k \
                  --form template=@template.xml'
       register: response 
