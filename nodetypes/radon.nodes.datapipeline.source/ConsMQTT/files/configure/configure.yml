@@ -8,7 +8,7 @@
     
     - name: Get list of available NiFi processors within the process group
       uri:
-        url: "http://localhost:8080/nifi-api/process-groups/{{pipeline_id}}/processors"
+        url: "http://localhost:{{port}}/nifi-api/process-groups/{{pipeline_id}}/processors"
         method: Get
       register: nifi_resources
       
@@ -18,7 +18,7 @@
         schedulingPeriodValue: "{{ '0 sec' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingPeriodCRON }}"
         schedulingStrategyValue: "{{ 'TIMER_DRIVEN' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingStrategy }}"
       uri:
-        url: "http://localhost:8080/nifi-api/processors/{{first_prcsr_id}}"
+        url: "http://localhost:{{port}}/nifi-api/processors/{{first_prcsr_id}}"
         method: PUT
         body:
           "revision": { "version": 0}

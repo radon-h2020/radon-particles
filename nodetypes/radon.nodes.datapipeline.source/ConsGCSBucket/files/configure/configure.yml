@@ -38,7 +38,7 @@
 
     - name: Get list of available NiFi processors within the process group
       uri:
-        url: "http://localhost:8080/nifi-api/process-groups/{{pipeline_id}}/processors"
+        url: "http://localhost:{{port}}/nifi-api/process-groups/{{pipeline_id}}/processors"
         method: Get
       register: nifi_resources
       # when: cred_file_path != "none" or cred_file_path != "None"
@@ -49,7 +49,7 @@
       vars:
         first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
       uri:
-        url: "http://localhost:8080/nifi-api/processors/{{first_prcsr_id}}"
+        url: "http://localhost:{{port}}/nifi-api/processors/{{first_prcsr_id}}"
         method: PUT
         body:
           "revision": { "version": 0}
@@ -71,7 +71,7 @@
 # work with the controller service 
     - name: Get list of available NiFi resources for fetching the id of the template by its name
       uri:
-        url: http://localhost:8080/nifi-api/resources
+        url: http://localhost:{{port}}/nifi-api/resources
         method: Get
       register: nifi_resources
 
@@ -81,7 +81,7 @@
         GCPcontroller: "{{ nifi_resources.json  | to_json | from_json | json_query(query) | first}}"
         GCPcontrollerID: "{{GCPcontroller.split('/')[2]}}"
       uri: 
-        url: "http://localhost:8080/nifi-api/controller-services/{{GCPcontrollerID}}"
+        url: "http://localhost:{{port}}/nifi-api/controller-services/{{GCPcontrollerID}}"
         method: PUT
         body:
           "revision": 

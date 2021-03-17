@@ -21,7 +21,7 @@
   tasks:
     - name: start the PROCESS GROUP. This will start everything with in.
       uri:
-        url: "http://localhost:8080/nifi-api/flow/process-groups/{{pipeline_id}}"
+        url: "http://localhost:{{port}}/nifi-api/flow/process-groups/{{pipeline_id}}"
         method: PUT
         body:
           "id": "{{pipeline_id}}"
