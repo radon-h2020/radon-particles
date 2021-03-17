@@ -15,45 +15,29 @@ node_types:
       Broker_URI:
         type: string
         description: User can put the IP address in place or localhost and the configured port address of Mosquitto Broker.
-        required: true
         default: "tcp://localhost:1883"
-        status: supported
       Username:
         type: string
-        required: true
-        status: supported
       schedulingStrategy:
         type: string
         description: Either EVENT_DRIVEN (default) or CRON_DRIVEN. EVENT_DRIVEN is similar with TIMER_DRIVEN with 0 sec value in NiFi.
         required: false
         default: "EVENT_DRIVEN"
-        status: supported
       Max_Queue_Size:
         type: integer
-        required: true
-        status: supported
       schedulingPeriodCRON:
         type: string
         description: For CRON_DRIVEN give in CRON syntax.
         required: false
         default: "* * * * * ?"
-        status: supported
       Quality_of_Service:
         type: integer
-        required: true
-        status: supported
       Client_ID:
         type: string
-        required: true
-        status: supported
       Password:
         type: string
-        required: true
-        status: supported
       TopicName:
         type: string
-        required: true
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

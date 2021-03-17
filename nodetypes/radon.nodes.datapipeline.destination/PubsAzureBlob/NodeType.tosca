@@ -14,21 +14,13 @@ node_types:
     properties:
       azure_create_container:
         type: string
-        required: true
         default: false
-        status: supported
       storage_account_name:
         type: string
-        required: true
-        status: supported
       container_name:
         type: string
-        required: true
-        status: supported
       storage_account_key:
         type: string
-        required: true
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

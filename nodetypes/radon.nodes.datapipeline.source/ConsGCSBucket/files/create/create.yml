@@ -71,7 +71,7 @@
       set_stats:
         data:
           id: "{{ pipeline_info.json.flow.remoteProcessGroups[0].id }}"        
-          pipeline_type: "remoteProcessGroups"
+          # pipeline_type: "remoteProcessGroups"
       when: pipeline_info.json.flow.remoteProcessGroups|length > 0
       register: id
     - name: Ansible create file if it doesn't exist example
@@ -85,7 +85,7 @@
       set_stats:
         data:
           id: "{{ pipeline_info.json.flow.processGroups[0].id }}"        
-          pipeline_type: "processGroups"
+          # pipeline_type: "processGroups"
       when: pipeline_info.json.flow.processGroups|length > 0
     - name: Ansible create file if it doesn't exist example
       copy:

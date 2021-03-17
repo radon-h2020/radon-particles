@@ -65,5 +65,5 @@ node_types:
         type: tosca.artifacts.File
         file: create.yml
       configure:
-        type: tosca.artifacts.File
+        type: radon.artifacts.Ansible
         file: configure.yml

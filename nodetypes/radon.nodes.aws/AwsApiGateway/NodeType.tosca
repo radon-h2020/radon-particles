@@ -8,9 +8,9 @@ node_types:
       abstract: "false"
       final: "false"
     attributes:
-      arn:
+      endpoint_url:
         type: string
-      endpoint_url: 
+      arn:
         type: string
     properties:
       api_title:

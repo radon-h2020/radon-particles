@@ -33,6 +33,8 @@
     - name: set the 'directory' property for GetFile
       vars:
         first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id) }}"
+        schedulingPeriodValue: "{{ '0 sec' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingPeriodCRON }}"
+        schedulingStrategyValue: "{{ 'TIMER_DRIVEN' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingStrategy }}"
       uri:
         url: "http://localhost:8080/nifi-api/processors/{{first_prcsr_id}}"
         method: PUT
@@ -41,7 +43,9 @@
           "component": 
             "id": "{{first_prcsr_id}}"
             "config": 
-              "properties": { "Input Directory": "{{directory}}"}                       
+              "properties": { "Input Directory": "{{directory}}"}
+              "schedulingStrategy": "{{schedulingStrategyValue}}"
+              "schedulingPeriod": "{{schedulingPeriodValue}}"                       
         status_code: 200
         body_format: json
       
