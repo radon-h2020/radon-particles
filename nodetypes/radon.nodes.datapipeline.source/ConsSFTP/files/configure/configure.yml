@@ -3,6 +3,7 @@
 - hosts: all
   vars: 
     get_id1: "processors[0].id"
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
       
   tasks:
     

@@ -21,7 +21,7 @@
     get_id1: "processors[0].id" 
     # get_id2: "processors[1].id" 
     dest_cred_file_path: "/tmp/.opera/aws/cred"
-  
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"  
   tasks:
     - name: create directory for cred file
       file:

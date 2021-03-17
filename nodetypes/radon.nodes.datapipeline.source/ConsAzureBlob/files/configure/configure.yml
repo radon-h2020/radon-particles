@@ -4,6 +4,7 @@
   vars: 
     get_id1: "processors[0].id"
     get_id2: "processors[1].id"
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
       
   tasks:
     

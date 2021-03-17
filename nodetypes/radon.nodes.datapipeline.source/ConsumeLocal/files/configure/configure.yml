@@ -20,6 +20,7 @@
   vars: 
     # query_GetFileID: "resources[?name=='GetFile'].identifier"
     get_id: "processors[0].id" 
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
 
   tasks:
 

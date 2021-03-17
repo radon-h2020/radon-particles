@@ -22,6 +22,7 @@
     # This will return the putlambda processor id (not the other processors)
     get_id2: "processors[1].id" 
     dest_cred_file_path: "/tmp/.opera/gcs/cred"
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
   
   tasks:
     - name: create directory for cred file

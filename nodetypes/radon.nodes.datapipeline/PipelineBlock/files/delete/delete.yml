@@ -17,6 +17,8 @@
 
 ---
 - hosts: all
+  vars:
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
   tasks:
     - name: Get process group info
       uri:

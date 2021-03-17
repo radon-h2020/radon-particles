@@ -20,7 +20,7 @@ node_types:
         type: string
         description: For CRON_DRIVEN give in CRON syntax.
         required: false
-        default: "* * * * * ?"
+        default: "0 sec"
       name:
         type: string
         description: Name of the pipeline node
@@ -29,18 +29,14 @@ node_types:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          schedulingStrategy:
+          schedulingStrategyValue:
             type: string
             required: false
             default: { get_property: [ SELF, schedulingStrategy ] }
-          schedulingPeriodCRON:
+          schedulingPeriodValue:
             type: string
             required: true
             default: { get_property: [ SELF, schedulingPeriodCRON ] }
-          port:
-            type: string
-            required: true
-            default: { get_property: [ HOST, port ] }
         operations:
           stop:
             inputs:
