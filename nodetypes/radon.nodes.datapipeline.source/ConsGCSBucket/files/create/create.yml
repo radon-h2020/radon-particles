@@ -65,34 +65,11 @@
         dest: "/tmp/pipeline_info{{template_name}}.txt"
         content: "pipeline_info are : {{ pipeline_info }}"
 
-
-## FOR REMOTE-PROCESS-GROUP
-    - name: Set pipeline id property value (remoteProcessGroups)
-      set_stats:
-        data:
-          id: "{{ pipeline_info.json.flow.remoteProcessGroups[0].id }}"        
-          pipeline_type: "remoteProcessGroups"
-      when: pipeline_info.json.flow.remoteProcessGroups|length > 0
-      register: id
-    - name: Ansible create file if it doesn't exist example
-      copy:
-        dest: "/tmp/id_remoteProcessGroups.txt"
-        content: "{{pipeline_info.json.flow.remoteProcessGroups[0].id}}"
-      when: pipeline_info.json.flow.remoteProcessGroups|length > 0
-
-## set PROCESS-GROUP
     - name: Set pipeline id property value (process-groups)
       set_stats:
         data:
-          id: "{{ pipeline_info.json.flow.processGroups[0].id }}"        
-          pipeline_type: "processGroups"
-      when: pipeline_info.json.flow.processGroups|length > 0
-    - name: Ansible create file if it doesn't exist example
-      copy:
-        dest: "/tmp/id_processGroups.txt"
-        content: "{{pipeline_info.json.flow.processGroups[0].id}}"
+          id: "{{ pipeline_info.json.flow.processGroups[0].id }}"
       when: pipeline_info.json.flow.processGroups|length > 0
 
 
 
-    

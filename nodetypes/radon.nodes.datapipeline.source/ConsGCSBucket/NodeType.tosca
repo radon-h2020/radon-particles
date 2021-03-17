@@ -7,6 +7,10 @@ node_types:
       targetNamespace: "radon.nodes.datapipeline.source"
       abstract: "false"
       final: "false"
+    attributes:
+      template_name:
+        type: string
+        default: "GCSObject_consume"
     properties:
       bucket:
         type: string
@@ -27,7 +31,7 @@ node_types:
               template_name:
                 type: string
                 required: false
-                default: { get_property: [ SELF, template_name ] }
+                default: { get_attribute: [ SELF, template_name ] }
               template_file:
                 type: string
                 required: false
@@ -41,6 +45,10 @@ node_types:
                 type: string
                 required: false
                 default: { get_property: [ SELF, bucket ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
               project_ID:
                 type: string
                 required: false

@@ -34,8 +34,7 @@
                 "Max Queue Size":"{{Max_Queue_Size}}",
                 "Username":"{{Username}}",
                 "Password":"{{Password}}"
-              }
-                
+              }                
               "schedulingStrategy": "{{schedulingStrategyValue}}"
               "schedulingPeriod": "{{schedulingPeriodValue}}"
                                                   
