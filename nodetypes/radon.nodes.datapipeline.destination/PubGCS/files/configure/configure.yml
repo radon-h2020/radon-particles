@@ -17,8 +17,8 @@
 
 ---
 - hosts: all
-  vars: 
-    get_id1: "processors[0].id" 
+  vars:
+    get_id1: "processors[0].id"
     dest_cred_file_path: "/tmp/.opera/gc/cred"
     service_id_query: "resources[?name=='GCPCredentialsControllerService' && starts_with(identifier, '/controller-services/')].identifier"
     port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
@@ -28,7 +28,7 @@
         path: "{{dest_cred_file_path}}"
         state: directory
 
-    - name: Upload the credentials file to the current directory. 
+    - name: Upload the credentials file to the current directory.
       copy:
         src: "{{cred_file_path}}"
         dest: "{{dest_cred_file_path}}/credentials"
@@ -54,15 +54,15 @@
         method: PUT
         body:
           "revision": { "version": 0}
-          "component": 
+          "component":
             "id": "{{first_prcsr_id}}"
-            "config": 
-              "properties": { 
+            "config":
+              "properties": {
                 "gcp-project-id": "{{ProjectID}}",
                 "gcs-bucket": "{{BucketName}}",
               }
               "schedulingStrategy": "{{schedulingStrategyValue}}"
-              "schedulingPeriod": "{{schedulingPeriodValue}}"                       
+              "schedulingPeriod": "{{schedulingPeriodValue}}"
         status_code: 200
         body_format: json
 
@@ -71,34 +71,16 @@
       vars:
         first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
       uri:
-        url: http://localhost:{{port}}/nifi-api/resources
-        method: GET
-      register: nifi_resources
+        url: "http://localhost:{{port}}/nifi-api/processors/{{first_prcsr_id}}"
+        method: Get
+      register: first_prcsr_id
 
-#    - name: start the credential service
-#      vars:
-#        service_id: "{{ nifi_resources.json  | to_json | from_json | json_query(service_id_query) | first}}"
-#      uri:
-#        url: "http://localhost:{{port}}/nifi-api/controller-services/{{ service_id.split('/')[2] }}"
-#        method: PUT
-#        body:
-#          "revision": 
-#              "version": 0
-#          "component": 
-#            "id": "{{ service_id.split('/')[2] }}"
-#            "state": "ENABLED"
-#          "status":
-#            "runStatus": "ENABLED"
-#        body_format: json      
-    
 
-    - name: get the id of the controller
+    - name: start the credential service
       vars:
-        query: "resources[?name=='GCPCredentialsControllerService' && starts_with(identifier, '/controller-services/')].identifier"
-        GCPcontroller: "{{ nifi_resources.json  | to_json | from_json | json_query(query) | first}}"
-        GCPcontrollerID: "{{GCPcontroller.split('/')[2]}}"
+        GCPcontrollerID: "{{first_prcsr_id.json.component.config.properties['GCP Credentials Provider Service']}}"
       uri:
-        url: "http://localhost:{{port}}/nifi-api/controller-services/{{GCPcontrollerID}}"
+        url: "http://localhost:{{port}}/nifi-api/controller-services/{{ GCPcontrollerID }}"
         method: PUT
         body:
           "revision":
@@ -108,4 +90,5 @@
             "state": "ENABLED"
           "status":
             "runStatus": "ENABLED"
+        status_code: 200
         body_format: json

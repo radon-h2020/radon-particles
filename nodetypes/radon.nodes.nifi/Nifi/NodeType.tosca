@@ -14,9 +14,9 @@ node_types:
         required: false
         default: 8080
       webinterface_public:
-        type: string
+        type: boolean
         description: Whether NiFi web intefrace should be publicly accessible
-        default: False
+        default: false
       component_version:
         type: string
         description: The version of Apache Nifi
@@ -55,7 +55,7 @@ node_types:
           configure:
             inputs:
               port:
-                type: string
+                type: integer
                 required: true
                 default: { get_property: [ SELF, port ] }
               tarball_version:
@@ -63,7 +63,7 @@ node_types:
                 required: true
                 default: { get_property: [ SELF, component_version ] }
               webinterface_public:
-                type: string
+                type: boolean
                 required: true
                 default: { get_property: [ SELF, webinterface_public ] }
             implementation:

@@ -20,6 +20,11 @@ node_types:
         type: string
         description: For CRON_DRIVEN give in CRON syntax.
         required: false
+        default: "* * * * * ?"
+      schedulingPeriodCRON:
+        type: string
+        description: For CRON_DRIVEN give in CRON syntax.
+        required: false
         default: "0 sec"
       name:
         type: string
@@ -29,11 +34,11 @@ node_types:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          schedulingPeriodValue:
+          schedulingPeriodCRON:
             type: string
             required: true
             default: { get_property: [ SELF, schedulingPeriodCRON ] }
-          schedulingStrategyValue:
+          schedulingStrategy:
             type: string
             required: false
             default: { get_property: [ SELF, schedulingStrategy ] }

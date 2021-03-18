@@ -29,7 +29,7 @@
         regexp: '^(.*)nifi.web.http.host=(.*)$' 
         line: 'nifi.web.http.host='
         backrefs: yes        
-      when: (webinterface_public is defined) and (webinterface_public == "True")
+      when: (webinterface_public is defined) and (webinterface_public)
 
     - name: Write port variable to file
       copy:

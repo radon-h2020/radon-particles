@@ -57,18 +57,10 @@ node_types:
                 type: string
                 required: true
                 default: { get_property: [ SELF, Username ] }
-              schedulingStrategy:
-                type: string
-                required: false
-                default: { get_property: [ SELF, schedulingStrategy ] }
               Max_Queue_Size:
                 type: integer
                 required: true
                 default: { get_property: [ SELF, Max_Queue_Size ] }
-              schedulingPeriodCRON:
-                type: string
-                required: false
-                default: { get_property: [ SELF, schedulingPeriodCRON ] }
               pipeline_id:
                 type: string
                 required: true
