@@ -115,9 +115,10 @@ topology_template:
         properties:
           hostname: "https://radon-jakovits.s3.eu-central-1.amazonaws.com/"
           port: "8080"
-          resources: "resources.zip"
           ti_blueprint: "radon.blueprints.testing.NiFiTIDocker"
-          user.properties: "None"
+          velocity_per_minute: 60
+          test_duration: 60
+          resource_location: "resources.zip"
           test_id: "loadtest556"
         targets: [ ConsS3Bucket_1 ]
   outputs:
