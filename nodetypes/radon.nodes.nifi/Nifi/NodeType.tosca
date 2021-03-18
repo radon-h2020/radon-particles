@@ -13,14 +13,14 @@ node_types:
         description: The port exposed by Apache Nifi
         required: false
         default: 8080
+      webinterface_public:
+        type: string
+        description: Whether NiFi web intefrace should be publicly accessible
+        default: False
       component_version:
         type: string
         description: The version of Apache Nifi
         default: "1.13.1"
-      webinterface_public:
-        type: string
-        description: Whether NiFi web intefrace should be publicly accessible
-        default: "False"
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
@@ -55,17 +55,13 @@ node_types:
           configure:
             inputs:
               port:
-                type: integer
+                type: string
                 required: true
                 default: { get_property: [ SELF, port ] }
               tarball_version:
                 type: string
                 required: true
                 default: { get_property: [ SELF, component_version ] }
-              port:
-                type: string
-                required: true
-                default: { get_property: [ SELF, port ] }
               webinterface_public:
                 type: string
                 required: true

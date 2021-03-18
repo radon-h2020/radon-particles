@@ -18,24 +18,14 @@ node_types:
         default: "tcp://localhost:1883"
       Username:
         type: string
-        required: true
-        status: supported
       Quality_of_Service:
         type: integer
-        required: true
-        status: supported
       Client_ID:
         type: string
-        required: true
-        status: supported
       Password:
         type: string
-        required: true
-        status: supported
       TopicName:
         type: string
-        required: true
-        status: supported
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

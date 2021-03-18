@@ -29,14 +29,14 @@ node_types:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          schedulingStrategyValue:
-            type: string
-            required: false
-            default: { get_property: [ SELF, schedulingStrategy ] }
           schedulingPeriodValue:
             type: string
             required: true
             default: { get_property: [ SELF, schedulingPeriodCRON ] }
+          schedulingStrategyValue:
+            type: string
+            required: false
+            default: { get_property: [ SELF, schedulingStrategy ] }
         operations:
           stop:
             inputs:

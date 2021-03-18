@@ -45,10 +45,6 @@ node_types:
                 type: string
                 required: false
                 default: { get_property: [ SELF, bucket ] }
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, id ] }
               project_ID:
                 type: string
                 required: false
