@@ -16,7 +16,7 @@
     - name: Wait for port 8080 to become open on the host ( dont start checking for 4 seconds )
       wait_for:
         port: "{{port}}"
-        timeout: 90
+        timeout: 180
 
     - name: upload template file to NiFi template repository
       shell: 'curl  -X "POST" "http://localhost:{{port}}/nifi-api/process-groups/root/templates/upload" \
