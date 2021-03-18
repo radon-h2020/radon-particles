@@ -8,7 +8,9 @@ policy_types:
       abstract: "false"
       final: "false"
     properties:
-      user.properties	:
-        type: string
-      resources:
+      velocity_per_minute:
+        type: integer
+      test_duration:
+        type: integer
+      resource_location:
         type: string
