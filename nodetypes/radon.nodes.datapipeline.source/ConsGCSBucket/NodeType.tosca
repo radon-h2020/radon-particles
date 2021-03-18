@@ -53,6 +53,10 @@ node_types:
                 type: string
                 required: false
                 default: { get_property: [ SELF, project_ID ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
               credential_JSON_file:
                 type: string
                 required: false

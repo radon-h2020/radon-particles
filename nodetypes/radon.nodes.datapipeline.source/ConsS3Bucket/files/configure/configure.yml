@@ -67,6 +67,8 @@
     - name: Configure the SECOND processor within the process group
       vars:       
         second_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id2) }}"
+        schedulingPeriodValue: "{{ '0 sec' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingPeriodCRON }}"
+        schedulingStrategyValue: "{{ 'TIMER_DRIVEN' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingStrategy }}"
       uri:
         url: "http://localhost:{{port}}/nifi-api/processors/{{second_prcsr_id}}"
         method: PUT

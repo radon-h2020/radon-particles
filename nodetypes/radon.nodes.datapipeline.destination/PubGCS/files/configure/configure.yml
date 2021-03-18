@@ -47,6 +47,8 @@
     - name: Configure the first processor within the process group
       vars:
         first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
+        schedulingPeriodValue: "{{ '0 sec' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingPeriodCRON }}"
+        schedulingStrategyValue: "{{ 'TIMER_DRIVEN' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingStrategy }}"
       uri:
         url: "http://localhost:{{port}}/nifi-api/processors/{{first_prcsr_id}}"
         method: PUT
@@ -64,7 +66,10 @@
         status_code: 200
         body_format: json
 
-    - name: Get list of available NiFi resources for fetching the ids of credential service
+
+    - name: Get id of the first processor within the process group.
+      vars:
+        first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
       uri:
         url: http://localhost:{{port}}/nifi-api/resources
         method: GET
@@ -104,7 +109,3 @@
           "status":
             "runStatus": "ENABLED"
         body_format: json
-
-
-
-

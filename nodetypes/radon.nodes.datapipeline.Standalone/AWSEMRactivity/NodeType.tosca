@@ -1,7 +1,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  radon.nodes.datapipeline.Standalone.AWSSqlActivity:
+  radon.nodes.datapipeline.Standalone.AWSEMRactivity:
     derived_from: radon.nodes.datapipeline.Standalone
     metadata:
       targetNamespace: "radon.nodes.datapipeline.Standalone"
@@ -10,38 +10,37 @@ node_types:
     properties:
       log_directory:
         type: string
-        description: The dicrectory name inside S3 bucket where you want to store your log related to DP execution
-      schedule:
+      dp_name:
         type: string
-        description: The scheduling info using CRON syntax
-        required: false
-        default: "1 Days"
-      MySqldb_region:
+      myMasterInstanceType:
         type: string
-        description: Region in which RDS is defined e.g eu-west-1
-      MySqldb_username:
+        default: "m1.medium"
+      myEMRReleaseLabel:
         type: string
-        description: Username of the RDS database (MySql)
+        default: "emr-5.13.0"
       sns_arn_topic:
         type: string
-        description: enter the arn_topic address of sns service defined under AWS SNS
+        description: In case, sns notification service is active in AWS. Add arnTopic name here
         required: false
         default: "None"
-      MySqldb_script:
+      myEmrStep:
         type: string
-        description: MySql DB script such as update, delete, insert into a table
-      MySqldb_name:
+      edit_schedule:
         type: string
-        description: Name of the database which is defined inside the RDS-instance ID
-      MySqlrds_instanceid:
+        description: pipeline can be scheduled to run every 15 minutes to days, weeks or months period
+        required: false
+        default: "1 Days"
+      myCoreInstanceType:
         type: string
-        description: Relational DB ID which is located in AWS->RDS->Databases, select the ID on which you want to execute the script
-      MySqldb_password:
+        default: "m1.medium"
+      myCoreInstanceCount:
         type: string
-        description: Password of the RDS database (MySql)
+        default: 2
+      myApplications:
+        type: string
       log_bucket:
         type: string
-        description: S3 bucket name in which the log related to DP execution will be stored
+        description: define the s3 bucket name to which logs can be stored
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -56,51 +55,42 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, log_directory ] }
-          configure_file_path:
-            type: string
-            required: true
-            default: { get_property: [ SELF, configure_file_path ] }
           dp_name:
             type: string
             required: true
             default: { get_property: [ SELF, dp_name ] }
-          MySqldb_region:
+          myMasterInstanceType:
             type: string
             required: true
-            default: { get_property: [ SELF, MySqldb_region ] }
-          MySqldb_username:
+            default: { get_property: [ SELF, myMasterInstanceType ] }
+          myEMRReleaseLabel:
             type: string
             required: true
-            default: { get_property: [ SELF, MySqldb_username ] }
+            default: { get_property: [ SELF, myEMRReleaseLabel ] }
           sns_arn_topic:
             type: string
-            description: enter the arn_topic address of sns service defined under AWS SNS
             required: false
             default: { get_property: [ SELF, sns_arn_topic ] }
-          credential_file_path:
+          myEmrStep:
             type: string
             required: true
-            default: { get_property: [ SELF, credential_file_path ] }
-          MySqldb_script:
-            type: string
-            required: true
-            default: { get_property: [ SELF, MySqldb_script ] }
-          MySqldb_name:
-            type: string
-            required: true
-            default: { get_property: [ SELF, MySqldb_name ] }
+            default: { get_property: [ SELF, myEmrStep ] }
           edit_schedule:
             type: string
             required: false
-            default: { get_property: [ SELF, schedule ] }
-          MySqlrds_instanceid:
+            default: { get_property: [ SELF, edit_schedule ] }
+          myCoreInstanceType:
             type: string
             required: true
-            default: { get_property: [ SELF, MySqlrds_instanceid ] }
-          MySqldb_password:
+            default: { get_property: [ SELF, myCoreInstanceType ] }
+          myCoreInstanceCount:
             type: string
             required: true
-            default: { get_property: [ SELF, MySqldb_password ] }
+            default: { get_property: [ SELF, myCoreInstanceCount ] }
+          myApplications:
+            type: string
+            required: true
+            default: { get_property: [ SELF, myApplications ] }
           log_bucket:
             type: string
             required: true
@@ -118,12 +108,12 @@ node_types:
                 required: true
                 default: { get_attribute: [ SELF, pipeline_id ] }
             implementation:
-              primary: Configure
+              primary: configure
               timeout: 0
     artifacts:
-      SqlActivityTemplate:
+      EMR_Template:
         type: tosca.artifacts.File
-        file: SqlActivityDP.json
-      Configure:
+        file: EMR_Template.json
+      configure:
         type: tosca.artifacts.File
         file: Configure.yml

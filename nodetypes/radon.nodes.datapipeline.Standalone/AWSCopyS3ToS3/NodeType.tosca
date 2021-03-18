@@ -19,6 +19,11 @@ node_types:
         description: The scheduling info using CRON syntax.
         required: false
         default: "1 Days"
+      sns_arn_topic:
+        type: string
+        description: Submit the arntopic address defined in SNS notification service, which is activated by user with the preferred email list
+        required: false
+        default: "None"
       destination_bucket:
         type: string
         description: Destination S3 Bucket name.
@@ -46,6 +51,10 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, file_path ] }
+          sns_arn_topic:
+            type: string
+            required: true
+            default: { get_property: [ SELF, sns_arn_topic ] }
           destination_bucket:
             type: string
             required: true
@@ -66,6 +75,10 @@ node_types:
           configure:
             description: The standard configure operation
             inputs:
+              edit_template:
+                type: string
+                required: false
+                default: { get_artifact: [ SELF, edit_template ] }
               pipeline_id:
                 type: string
                 required: true
