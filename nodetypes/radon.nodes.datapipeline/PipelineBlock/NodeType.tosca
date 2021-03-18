@@ -20,7 +20,7 @@ node_types:
         type: string
         description: For CRON_DRIVEN give in CRON syntax.
         required: false
-        default: "0 sec"
+        default: "* * * * * ?"
       name:
         type: string
         description: Name of the pipeline node
