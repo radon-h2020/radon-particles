@@ -2,8 +2,6 @@
 - hosts: all
   become: yes
   tasks:
-    - name: Start nifi service
-      service:
-        name: nifi
-        enabled: yes
-        state: started
+    - name: Start nifi services on ubuntu
+      shell: "nohup /usr/local/bin/nifi-{{ tarball_version }}/bin/nifi.sh start  </dev/null >/dev/null 2>&1 &"
+ 

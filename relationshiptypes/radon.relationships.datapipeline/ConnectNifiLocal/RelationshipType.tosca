@@ -13,14 +13,6 @@ relationship_types:
         operations:
           post_configure_source:
             inputs:
-              source_pipeline_server_ip:
-                type: string
-                required: true
-                default: { get_attribute: [ SOURCE, host, host, public_address ] }
-              target_pipeline_server_ip:
-                type: string
-                required: true
-                default: { get_attribute: [ TARGET, host, host, public_address ] }
               source_pipeline_id:
                 type: string
                 required: true

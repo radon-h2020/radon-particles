@@ -95,4 +95,3 @@ node_types:
         type: tosca.artifacts.File
         description: Create datapipeline and generates the Pipeline ID
         file: create.yml
-      
