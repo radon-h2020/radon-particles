@@ -2,7 +2,8 @@
 
 This blueprint represents a serverless API for managing a list of TODO items implemented using Amazon Web Services (AWS Lambda, AWS API Gateway, AWS DynamoDB).
 The functions are implemented in node.js based on <https://github.com/kraigh/serverless-todo-api>.
-This version also includes a DNS configuration using AWS Route53.
+
+This version also includes an example DNS configuration using AWS Route53, which has to be updated using actual DNS configuration values.
 
 ## API Specification
 
