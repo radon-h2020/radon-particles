@@ -4,11 +4,27 @@ metadata:
   targetNamespace: "radon.blueprints"
 topology_template:
   node_templates:
+    AwsRoute53_0:
+      type: radon.nodes.aws.AwsRoute53
+      metadata:
+        x: "638"
+        y: "134"
+        displayName: "AwsRoute53"
+      properties:
+        alias_zone: "YOUR_ZONE_ALIAS"
+        zone: "YOUR_ZONE"
+        record: "YOUR_DNS_RECORD"
+        component_version: "1.0.0"
+      requirements:
+        - dependency:
+            node: AwsApiGateway_0
+            relationship: con_DependsOn_0
+            capability: feature
     AwsLambdaFunction_1:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "894"
-        y: "207"
+        x: "1072"
+        y: "193"
         displayName: "GetTodoItem"
       properties:
         handler: "get.handler"
@@ -37,8 +53,8 @@ topology_template:
     AwsLambdaFunction_2:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "893"
-        y: "298"
+        x: "1070"
+        y: "287"
         displayName: "CreateTodoItem"
       properties:
         handler: "create.handler"
@@ -73,9 +89,9 @@ topology_template:
       properties:
         hash_key_name: "id"
         read_capacity: 1
+        name: "items"
         write_capacity: 1
         hash_key_type: "STRING"
-        name: "items"
       requirements:
         - host:
             node: AwsPlatform_0
@@ -84,8 +100,8 @@ topology_template:
     AwsLambdaFunction_0:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "894"
-        y: "110"
+        x: "1072"
+        y: "107"
         displayName: "ListTodos"
       properties:
         handler: "list.handler"
@@ -114,8 +130,8 @@ topology_template:
     AwsLambdaFunction_3:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "888"
-        y: "397"
+        x: "1065"
+        y: "386"
         displayName: "UpdateTodoItem"
       properties:
         handler: "update.handler"
@@ -144,8 +160,8 @@ topology_template:
     AwsPlatform_0:
       type: radon.nodes.aws.AwsPlatform
       metadata:
-        x: "549"
-        y: "589"
+        x: "635"
+        y: "621"
         displayName: "AwsPlatform"
       properties:
         name: "AWS"
@@ -153,8 +169,8 @@ topology_template:
     AwsLambdaFunction_4:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "888"
-        y: "499"
+        x: "1065"
+        y: "488"
         displayName: "DeleteTodoItem"
       properties:
         handler: "delete.handler"
@@ -183,8 +199,8 @@ topology_template:
     AwsApiGateway_0:
       type: radon.nodes.aws.AwsApiGateway
       metadata:
-        x: "355"
-        y: "300"
+        x: "638"
+        y: "313"
         displayName: "AwsApiGateway"
       properties:
         api_title: "ServerlessToDoListAPI"
@@ -237,6 +253,8 @@ topology_template:
       properties:
         endpoint: "/todos"
         http_methods: "get"
+    con_DependsOn_0:
+      type: tosca.relationships.DependsOn
     con_ConnectsTo_3:
       type: radon.relationships.ConnectsTo
     con_ConnectsTo_4:
