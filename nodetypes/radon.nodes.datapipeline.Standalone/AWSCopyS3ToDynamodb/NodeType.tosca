@@ -28,6 +28,11 @@ node_types:
         description: The scheduling info using CRON syntax.
         required: false
         default: "1 Days"
+      sns_arn_topic:
+        type: string
+        description: enter the arn_topic address of sns service defined under AWS SNS
+        required: false
+        default: "None"
       dynamodb_table:
         type: string
         description: Mention destination dynamodb table name
@@ -62,6 +67,11 @@ node_types:
             type: float
             required: false
             default: { get_property: [ SELF, throughput_ratio ] }
+          sns_arn_topic:
+            type: string
+            description: enter the arn_topic address of sns service defined under AWS SNS
+            required: false
+            default: { get_property: [ SELF, sns_arn_topic ] }
           dynamodb_table:
             type: string
             required: true
@@ -86,6 +96,10 @@ node_types:
           configure:
             description: The standard configure operation
             inputs:
+              edit_template:
+                type: string
+                required: false
+                default: { get_artifact: [ SELF, edit_template ] }
               pipeline_id:
                 type: string
                 required: true

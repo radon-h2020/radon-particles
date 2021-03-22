@@ -22,3 +22,19 @@
         regexp: '^(.*)nifi.web.http.port=(.*)$' 
         line: 'nifi.web.http.port={{ port }}'
         backrefs: yes
+        
+    - name: remove listening only on localhost
+      lineinfile: 
+        path: "/usr/local/bin/nifi-{{ tarball_version }}/conf/nifi.properties"
+        regexp: '^(.*)nifi.web.http.host=(.*)$' 
+        line: 'nifi.web.http.host='
+        backrefs: yes        
+      when: (webinterface_public is defined) and (webinterface_public)
+
+    - name: Write port variable to file
+      copy:
+         content: '{{ port | to_json }}'
+         dest: /tmp/nifi.json
+      delegate_to: 127.0.0.1
+      become: no
+

@@ -4,13 +4,34 @@ metadata:
   targetNamespace: "radon.blueprints.monitoring"
 topology_template:
   inputs:
+    function_memory:
+      type: string
+      required: true
+    host_ip:
+      type: string
+      required: true
+    user_email:
+      type: string
+      required: true
+    grafana_api_ip:
+      type: string
+      required: true
     ec2_ssh_key_file:
       type: string
       required: true
     function_entry_point:
       type: string
       required: true
+    ec2_ssh_user:
+      type: string
+      required: true
+    function_location:
+      type: string
+      required: true
     ec2_image:
+      type: string
+      required: true
+    aws_platform_region:
       type: string
       required: true
     function_timeout:
@@ -28,7 +49,13 @@ topology_template:
     ec2_vpc_subnet_id:
       type: string
       required: true
+    pushgateway_service_port:
+      type: string
+      required: true
     ec2_instance_type:
+      type: string
+      required: true
+    function_name:
       type: string
       required: true
     consul_ip:
@@ -37,43 +64,16 @@ topology_template:
     function_runtime:
       type: string
       required: true
-    service_account_file:
-      type: string
-      required: true
-    zip_file:
-      type: string
-      required: true
-    function_memory:
-      type: string
-      required: true
-    host_ip:
-      type: string
-      required: true
-    user_email:
-      type: string
-      required: true
-    grafana_api_ip:
-      type: string
-      required: true
-    ec2_ssh_user:
-      type: string
-      required: true
-    function_location:
-      type: string
-      required: true
-    aws_platform_region:
-      type: string
-      required: true
-    pushgateway_service_port:
-      type: string
-      required: true
-    function_name:
-      type: string
-      required: true
     ec2_ssh_key_name:
       type: string
       required: true
     bucket_out_name:
+      type: string
+      required: true
+    service_account_file:
+      type: string
+      required: true
+    zip_file:
       type: string
       required: true
     bucket_in_name:

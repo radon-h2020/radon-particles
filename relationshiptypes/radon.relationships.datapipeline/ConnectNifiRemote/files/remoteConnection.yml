@@ -4,20 +4,19 @@
   vars:
     query_output_port_id: "outputPorts[0].id"
     query_input_port_id: "inputPorts[0].id"
-    
-
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true) }}"
   tasks:
     # ROOT INFO of source machine
     - name: Get list of available NiFi resources for fetching the ids of root reource group, input port and output port
       uri:
-        url: http://localhost:8080/nifi-api/resources
+        url: "http://localhost:{{port}}/nifi-api/resources"
         method: GET
       register: nifi_resources
 
     # ROOT INFO of destination machine
     - name: Get list of available NiFi resources for fetching the ids of root reource group, input port and output port
       uri:
-        url: "http://{{target_pipeline_server_ip}}:8080/nifi-api/resources"
+        url: "http://{{target_pipeline_server_ip}}:{{port}}/nifi-api/resources"
         method: GET
       register: nifi_resources_target
 
@@ -26,7 +25,7 @@
         query_rootPG_id_target: "resources[?name=='NiFi Flow' && starts_with(identifier, '/process-groups/')].identifier"
         targetRootPG_ID: "{{ nifi_resources_target.json  | to_json | from_json | json_query(query_rootPG_id_target) | first }}" 
       uri:
-        url: "http://{{target_pipeline_server_ip}}:8080/nifi-api/process-groups/{{targetRootPG_ID.split('/')[2]}}/input-ports"
+        url: "http://{{target_pipeline_server_ip}}:{{port}}/nifi-api/process-groups/{{targetRootPG_ID.split('/')[2]}}/input-ports"
         method: POST
         body:
           "revision":
@@ -42,7 +41,7 @@
     # INPUT PORT INFO of the target PIPELINE
     - name: Get the list of input port of target pipeline
       uri:
-        url: "http://{{target_pipeline_server_ip}}:8080/nifi-api/process-groups/{{target_pipeline_id}}/input-ports"
+        url: "http://{{target_pipeline_server_ip}}:{{port}}/nifi-api/process-groups/{{target_pipeline_id}}/input-ports"
         method: GET
       register: target_input_ports_list
 
@@ -53,7 +52,7 @@
         query_rootPG_id_target: "resources[?name=='NiFi Flow' && starts_with(identifier, '/process-groups/')].identifier"
         targetRootPG_ID: "{{ nifi_resources_target.json  | to_json | from_json | json_query(query_rootPG_id_target) | first }}" 
       uri:
-            url: http://{{target_pipeline_server_ip}}:8080/nifi-api/process-groups/{{targetRootPG_ID.split('/')[2]}}/connections
+            url: http://{{target_pipeline_server_ip}}:{{port}}/nifi-api/process-groups/{{targetRootPG_ID.split('/')[2]}}/connections
             method: POST
             body:
               "revision": 
@@ -72,7 +71,7 @@
 
     - name: start the root input port of the target machine 
       uri:
-          url: http://{{target_pipeline_server_ip}}:8080/nifi-api/input-ports/{{target_input_port_info.json.component.id}}/run-status
+          url: http://{{target_pipeline_server_ip}}:{{port}}/nifi-api/input-ports/{{target_input_port_info.json.component.id}}/run-status
           method: PUT
           body:
             "revision": 
@@ -86,13 +85,13 @@
         query_rootPG_id: "resources[?name=='NiFi Flow' && starts_with(identifier, '/process-groups/')].identifier"
         rootPG_ID: "{{ nifi_resources.json  | to_json | from_json | json_query(query_rootPG_id) | first }}" 
       uri:
-            url: http://localhost:8080/nifi-api/process-groups/{{rootPG_ID.split('/')[2]}}/remote-process-groups
+            url: http://localhost:{{port}}/nifi-api/process-groups/{{rootPG_ID.split('/')[2]}}/remote-process-groups
             method: POST
             body:
               "revision":
                  "version": 0
               "component":
-                  "targetUri": "http://{{target_pipeline_server_ip}}:8080/nifi/"
+                  "targetUri": "http://{{target_pipeline_server_ip}}:{{port}}/nifi/"
                   "transportProtocol": "HTTP"
             status_code: 201
             body_format: json
@@ -106,7 +105,7 @@
     # OUTPUT PORT INFO
     - name: Get the list of output port of source pipeline
       uri:
-        url: "http://localhost:8080/nifi-api/process-groups/{{source_pipeline_id}}/output-ports"
+        url: "http://localhost:{{port}}/nifi-api/process-groups/{{source_pipeline_id}}/output-ports"
         method: GET
       register: output_ports_list
     
@@ -114,7 +113,7 @@
     # INPUT PORT INFO
     - name: Get the list of input port of new RPG
       uri:
-        url: "http://localhost:8080/nifi-api/remote-process-groups/{{newRPG.json.id}}"
+        url: "http://localhost:{{port}}/nifi-api/remote-process-groups/{{newRPG.json.id}}"
         method: GET
       register: input_ports_list
 
@@ -129,7 +128,7 @@
         query_rootPG_id: "resources[?name=='NiFi Flow' && starts_with(identifier, '/process-groups/')].identifier"
         rootPG_ID: "{{ nifi_resources.json  | to_json | from_json | json_query(query_rootPG_id) | first }}"
       uri:
-            url: http://localhost:8080/nifi-api/process-groups/{{rootPG_ID.split('/')[2]}}/connections
+            url: http://localhost:{{port}}/nifi-api/process-groups/{{rootPG_ID.split('/')[2]}}/connections
             method: POST
             body:
               "revision": 

@@ -28,6 +28,15 @@ node_types:
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          schedulingStrategy:
+            type: string
+            required: false
+            default: { get_property: [ SELF, schedulingStrategy ] }
+          schedulingPeriodCRON:
+            type: string
+            required: true
+            default: { get_property: [ SELF, schedulingPeriodCRON ] }
         operations:
           stop:
             inputs:
@@ -47,16 +56,6 @@ node_types:
             implementation:
               primary: start
               timeout: 0
-          configure:
-            inputs:
-              schedulingStrategy:
-                type: string
-                required: false
-                default: { get_property: [ SELF, schedulingStrategy ] }
-              schedulingPeriodCRON:
-                type: string
-                required: false
-                default: { get_property: [ SELF, schedulingPeriodCRON ] }
           delete:
             inputs:
               pipeline_id:
