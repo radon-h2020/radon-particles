@@ -18,6 +18,16 @@ node_types:
         default: "tcp://localhost:1883"
       Username:
         type: string
+      schedulingStrategy:
+        type: string
+        description: Either EVENT_DRIVEN (default) or CRON_DRIVEN. EVENT_DRIVEN is similar with TIMER_DRIVEN with 0 sec value in NiFi.
+        required: false
+        default: "EVENT_DRIVEN"
+      schedulingPeriodCRON:
+        type: string
+        description: For CRON_DRIVEN give in CRON syntax.
+        required: false
+        default: "* * * * * ?"
       Quality_of_Service:
         type: integer
       Client_ID:
