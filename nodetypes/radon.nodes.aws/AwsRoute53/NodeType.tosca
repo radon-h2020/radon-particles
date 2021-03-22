@@ -8,41 +8,41 @@ node_types:
       abstract: "false"
       final: "false"
     properties:
-      record:
-        type: string
-        description: The full DNS record to create or delete
       alias_zone:
         type: string
         description: The hosted zone identifier
       zone:
         type: string
         description: The DNS zone to modify
+      record:
+        type: string
+        description: The full DNS record to create or delete
     requirements:
       - host:
           capability: tosca.capabilities.Container
           node: radon.nodes.aws.AwsPlatform
           relationship: tosca.relationships.HostedOn
-          occurrences: [ 1, 1 ]    
+          occurrences: [ 1, 1 ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          record:
-            type: string
-            required: true
-            default: { get_property: [ SELF, record ] }
           alias_zone:
             type: string
             required: true
             default: { get_property: [ SELF, alias_zone ] }
-          zone:
-            type: string
-            required: true
-            default: { get_property: [ SELF, zone ] }
           endpoint_url:
             type: string
             required: true
             default: { get_attribute: [ SELF, dependency, endpoint_url ] }
+          zone:
+            type: string
+            required: true
+            default: { get_property: [ SELF, zone ] }
+          record:
+            type: string
+            required: true
+            default: { get_property: [ SELF, record ] }
         operations:
           create:
             implementation:

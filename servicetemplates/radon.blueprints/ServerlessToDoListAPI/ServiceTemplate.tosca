@@ -73,9 +73,9 @@ topology_template:
       properties:
         hash_key_name: "id"
         read_capacity: 1
+        name: "items"
         write_capacity: 1
         hash_key_type: "STRING"
-        name: "items"
       requirements:
         - host:
             node: AwsPlatform_0

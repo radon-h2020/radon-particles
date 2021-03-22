@@ -1,60 +1,84 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 metadata:
-  targetNamespace: "example.org.tosca.servicetemplates"
-  name: "Monitoring_w1-wip1"
+  targetNamespace: "radon.blueprints.monitoring"
 topology_template:
   inputs:
-    host_ip:
-      type: string
-    project_id:
-      type: string
-    user_email:
-      type: string
-    service_account_file:
-      type: string
-    bucket_location:
-      type: string
-    bucket_in_name:
-      type: string
-    bucket_out_name:
-      type: string
-    bucket_function_name:
-      type: string
-    function_name:
-      type: string
-    zip_file:
-      type: string
-    function_location:
-      type: string
-    function_runtime:
-      type: string
-    function_entry_point:
-      type: string
-    function_timeout:
-      type: string
-    function_memory:
-      type: string
-    ec2_image:
-      type: string
-    ec2_ssh_key_name:
-      type: string
-    ec2_vpc_subnet_id:
-      type: string
-    ec2_instance_type:
-      type: string
     ec2_ssh_key_file:
       type: string
-    ec2_ssh_user:
+      required: true
+    function_entry_point:
       type: string
-    aws_platform_region:
+      required: true
+    ec2_image:
       type: string
+      required: true
+    function_timeout:
+      type: string
+      required: true
+    bucket_location:
+      type: string
+      required: true
+    project_id:
+      type: string
+      required: true
+    bucket_function_name:
+      type: string
+      required: true
+    ec2_vpc_subnet_id:
+      type: string
+      required: true
+    ec2_instance_type:
+      type: string
+      required: true
     consul_ip:
       type: string
-    pushgateway_service_port:
+      required: true
+    function_runtime:
       type: string
+      required: true
+    service_account_file:
+      type: string
+      required: true
+    zip_file:
+      type: string
+      required: true
+    function_memory:
+      type: string
+      required: true
+    host_ip:
+      type: string
+      required: true
+    user_email:
+      type: string
+      required: true
     grafana_api_ip:
       type: string
+      required: true
+    ec2_ssh_user:
+      type: string
+      required: true
+    function_location:
+      type: string
+      required: true
+    aws_platform_region:
+      type: string
+      required: true
+    pushgateway_service_port:
+      type: string
+      required: true
+    function_name:
+      type: string
+      required: true
+    ec2_ssh_key_name:
+      type: string
+      required: true
+    bucket_out_name:
+      type: string
+      required: true
+    bucket_in_name:
+      type: string
+      required: true
   node_templates:
     DockerEngine_0:
       type: radon.nodes.docker.DockerEngine
@@ -67,30 +91,6 @@ topology_template:
             node: EC2_0
             relationship: con_HostedOn_1
             capability: host
-    PushGateway_0:
-      type: radon.nodes.monitoring.PushGateway
-      metadata:
-        x: "818"
-        y: "87"
-        displayName: "PushGateway"
-      properties:
-        user_email: { get_input: user_email }
-        consul_ip: { get_input: consul_ip }
-        pushgateway_service_port: { get_input: pushgateway_service_port }
-        grafana_api_ip: { get_input: grafana_api_ip }
-      requirements:
-        - host:
-            node: DockerEngine_0
-            relationship: con_HostedOn_2
-            capability: host
-        - dependency:
-            node: EC2_0
-            relationship: con_DependsOn_0
-            capability: binding
-      artifacts:
-        create:
-          type: radon.artifacts.Ansible
-          file: /nodetypes/radon.nodes.monitoring/PushGateway/files/create.yml
     GoogleCloudBucket_0:
       type: radon.nodes.google.GoogleCloudBucket
       metadata:
@@ -104,20 +104,6 @@ topology_template:
         - host:
             node: GoogleCloudPlatform_0
             relationship: con_HostedOn_4
-            capability: host
-    GoogleCloudBucket_1:
-      type: radon.nodes.google.GoogleCloudBucket
-      metadata:
-        x: "820"
-        y: "650"
-        displayName: "GoogleCloudBucket"
-      properties:
-        name: { get_input: bucket_function_name }
-        component_version: "v1"
-      requirements:
-        - host:
-            node: GoogleCloudPlatform_0
-            relationship: con_HostedOn_5
             capability: host
     GoogleCloudBucketTriggeredFunction_0:
       type: radon.nodes.google.GoogleCloudBucketTriggeredFunction
@@ -153,6 +139,39 @@ topology_template:
             node: PushGateway_0
             relationship: con_GCPIsMonitoredBy_0
             capability: monitor
+    PushGateway_0:
+      type: radon.nodes.monitoring.PushGateway
+      metadata:
+        x: "818"
+        y: "87"
+        displayName: "PushGateway"
+      properties:
+        user_email: { get_input: user_email }
+        pushgateway_service_port: { get_input: pushgateway_service_port }
+        grafana_api_ip: { get_input: grafana_api_ip }
+        consul_ip: { get_input: consul_ip }
+      requirements:
+        - host:
+            node: DockerEngine_0
+            relationship: con_HostedOn_2
+            capability: host
+        - dependency:
+            node: EC2_0
+            relationship: con_DependsOn_0
+            capability: binding
+      artifacts:
+        create:
+          type: radon.artifacts.Ansible
+          file: /nodetypes/radon.nodes.monitoring/PushGateway/files/create.yml
+    AwsPlatform_0:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "268"
+        y: "144"
+        displayName: "AwsPlatform"
+      properties:
+        name: "Monitoring AWS Platform"
+        region: { get_input: aws_platform_region }
     GoogleCloudPlatform_0:
       type: radon.nodes.google.GoogleCloudPlatform
       metadata:
@@ -168,15 +187,20 @@ topology_template:
             node: PushGateway_0
             relationship: con_DependsOn_1
             capability: binding
-    AwsPlatform_0:
-      type: radon.nodes.aws.AwsPlatform
+    GoogleCloudBucket_1:
+      type: radon.nodes.google.GoogleCloudBucket
       metadata:
-        x: "268"
-        y: "144"
-        displayName: "AwsPlatform"
+        x: "820"
+        y: "650"
+        displayName: "GoogleCloudBucket"
       properties:
-        name: "Monitoring AWS Platform"
-        region: { get_input: aws_platform_region }
+        name: { get_input: bucket_function_name }
+        component_version: "v1"
+      requirements:
+        - host:
+            node: GoogleCloudPlatform_0
+            relationship: con_HostedOn_5
+            capability: host
     EC2_0:
       type: radon.nodes.VM.EC2
       metadata:
@@ -196,25 +220,25 @@ topology_template:
             relationship: con_HostedOn_0
             capability: host
   relationship_templates:
-    con_HostedOn_4:
-      type: tosca.relationships.HostedOn
-    con_HostedOn_3:
-      type: tosca.relationships.HostedOn
     con_HostedOn_2:
       type: tosca.relationships.HostedOn
-    con_HostedOn_5:
+    con_DependsOn_0:
+      type: tosca.relationships.DependsOn
+    con_HostedOn_3:
       type: tosca.relationships.HostedOn
+    con_DependsOn_1:
+      type: tosca.relationships.DependsOn
     con_HostedOn_0:
       type: tosca.relationships.HostedOn
     con_HostedOn_1:
       type: tosca.relationships.HostedOn
-    con_DependsOn_0:
-      type: tosca.relationships.DependsOn
-    con_DependsOn_1:
-      type: tosca.relationships.DependsOn
-    con_GCPIsMonitoredBy_0:
-      type: radon.relationships.GCPIsMonitoredBy
     con_ConnectsTo_0:
       type: radon.relationships.ConnectsTo
     con_ConnectsTo_1:
       type: radon.relationships.ConnectsTo
+    con_GCPIsMonitoredBy_0:
+      type: radon.relationships.GCPIsMonitoredBy
+    con_HostedOn_4:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_5:
+      type: tosca.relationships.HostedOn
