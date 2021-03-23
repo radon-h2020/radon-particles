@@ -13,6 +13,12 @@ topology_template:
     ssh_key_file:
       type: string
       required: true
+  outputs:
+    public_address:
+      type: string
+      value: { get_attribute: [ EC2_0, public_address ] }
+      required: true
+      description: Address of the deployed EC2 instance running the JMeterTestAgent
   node_templates:
     DockerEngine_0:
       type: radon.nodes.docker.DockerEngine
