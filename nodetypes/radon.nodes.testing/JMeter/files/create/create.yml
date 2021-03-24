@@ -1,5 +1,5 @@
 - name: create
-  hosts: localhost
+  hosts: all
   gather_facts: yes
   tasks:
     - name: Install Python pip module prerequisites (Linux)
