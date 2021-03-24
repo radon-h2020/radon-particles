@@ -1,0 +1,83 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.examples"
+topology_template:
+  node_templates:
+    ConsGCSBucket_0:
+      type: radon.nodes.datapipeline.source.ConsGCSBucket
+      metadata:
+        x: "358"
+        y: "96"
+        displayName: "ConsGCSBucket"
+      properties:
+        bucket: "radongcs"
+        project_ID: "radon-825040-utr "
+        schedulingStrategy: "EVENT_DRIVEN"
+        schedulingPeriodCRON: "* * * * * ?"
+        name: "ConsGCS"
+        credential_JSON_file: "/home/ubuntu/radon-825040-utr-a47a92d70742.json"
+      requirements:
+        - connectToPipeline:
+            node: PubGCS_0
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipelineRemote
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_1
+            capability: host
+    PubGCS_0:
+      type: radon.nodes.datapipeline.destination.PubGCS
+      metadata:
+        x: "970"
+        y: "95"
+        displayName: "PubGCS"
+      properties:
+        BucketName: "gcsradon"
+        cred_file_path: "/home/ubuntu/radon-825040-utr-a47a92d70742.json"
+        schedulingStrategy: "EVENT_DRIVEN"
+        ProjectID: "radon-825040-utr "
+        schedulingPeriodCRON: "* * * * * ?"
+        name: "PubsGCS"
+      requirements:
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_2
+            capability: host
+    OpenStack_0:
+      type: radon.nodes.VM.OpenStack
+      metadata:
+        x: "659"
+        y: "367"
+        displayName: "OpenStack"
+      properties:
+        flavor: "6b254b9e-db1c-40de-994c-07d69dd732a6"
+        key_name: "Guha_Roy_RADON"
+        image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
+        ssh_username: "centos"
+        name: "GCS_Object_Datapipeline_Deep"
+        network: "provider_64_net"
+    Nifi_0:
+      type: radon.nodes.nifi.Nifi
+      metadata:
+        x: "660"
+        y: "214"
+        displayName: "Nifi"
+      properties:
+        port: 8080
+        webinterface_public: true
+        component_version: "1.13.2"
+      requirements:
+        - host:
+            node: OpenStack_0
+            relationship: con_HostedOn_0
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectNifiLocal_0:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
