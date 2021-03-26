@@ -10,17 +10,11 @@ node_types:
     properties:
       Username:
         type: string
-        required: true
-        status: supported
       port:
         type: string
         description: Listen Port
-        required: true
-        status: supported
       Password:
         type: string
-        required: true
-        status: supported
     capabilities:
       host:
         occurrences: [ 1, 1 ]

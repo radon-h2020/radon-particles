@@ -7,10 +7,6 @@ node_types:
       targetNamespace: "radon.nodes.datapipeline.Standalone"
       abstract: "false"
       final: "false"
-    attributes:
-      pipeline_id:
-        description: Id of the pipeline which will be generated during execution of create.yml
-        type: string
     properties:
       log_directory:
         type: string
@@ -23,15 +19,11 @@ node_types:
         description: The scheduling info using CRON syntax.
         required: false
         default: "1 Days"
-      configure_file_path:
+      sns_arn_topic:
         type: string
-        description: AWS configuration file
-      dp_name:
-        type: string
-        description: name of the data pipeline
-      credential_file_path:
-        type: string
-        description: Path to the AWS credential file.
+        description: Submit the arntopic address defined in SNS notification service, which is activated by user with the preferred email list
+        required: false
+        default: "None"
       destination_bucket:
         type: string
         description: Destination S3 Bucket name.
@@ -59,22 +51,14 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, file_path ] }
-          configure_file_path:
+          sns_arn_topic:
             type: string
             required: true
-            default: { get_property: [ SELF, configure_file_path ] }
-          dp_name:
-            type: string
-            required: true
-            default: { get_property: [ SELF, dp_name ] }
+            default: { get_property: [ SELF, sns_arn_topic ] }
           destination_bucket:
             type: string
             required: true
             default: { get_property: [ SELF, destination_bucket ] }
-          credential_file_path:
-            type: string
-            required: true
-            default: { get_property: [ SELF, credential_file_path ] }
           source_bucket:
             type: string
             required: true
@@ -88,34 +72,13 @@ node_types:
             required: true
             default: { get_property: [ SELF, log_bucket ] }
         operations:
-          stop:
-            description: The standard stop operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: stop
-              timeout: 0
-          start:
-            description: The standard start operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: start
-              timeout: 0
-          create:
-            description: The standard create operation
-            implementation:
-              primary: create
-              timeout: 0
           configure:
             description: The standard configure operation
             inputs:
+              edit_template:
+                type: string
+                required: false
+                default: { get_artifact: [ SELF, edit_template ] }
               pipeline_id:
                 type: string
                 required: true
@@ -123,32 +86,10 @@ node_types:
             implementation:
               primary: configure
               timeout: 0
-          delete:
-            description: The standard delete operation
-            inputs:
-              pipeline_id:
-                type: string
-                required: true
-                default: { get_attribute: [ SELF, pipeline_id ] }
-            implementation:
-              primary: delete
-              timeout: 0
     artifacts:
       CopyActivityTemplate:
         type: tosca.artifacts.File
         file: CopyActivity.json
-      stop:
-        type: tosca.artifacts.File
-        file: Stop.yml
-      start:
-        type: tosca.artifacts.File
-        file: Start.yml
-      create:
-        type: tosca.artifacts.File
-        file: create.yml
       configure:
         type: tosca.artifacts.File
         file: configure.yml
-      delete:
-        type: tosca.artifacts.File
-        file: Delete.yml

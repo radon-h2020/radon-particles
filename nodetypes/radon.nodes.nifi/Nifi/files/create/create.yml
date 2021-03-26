@@ -2,14 +2,29 @@
 - hosts: all
   become: yes
   tasks:
-    - name: Install Java 8
+    - name: Install Java 8 centos
       package:
         name: "java-1.8.0-openjdk.x86_64"
         state: present
+      when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+
+    - name: Update apt cache 
+      shell: apt-get update
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+    - name: Install Java 8 ubuntu
+      apt:
+        name: "openjdk-8-jdk"
+        state: present
+        update_cache: yes
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+
 
     - name: Download and unpack NiFi binary distribution
       unarchive:
-        src: https://www-eu.apache.org/dist/nifi/{{ tarball_version }}/nifi-{{ tarball_version }}-bin.tar.gz
+        src: https://downloads.apache.org/nifi/{{ tarball_version }}/nifi-{{ tarball_version }}-bin.tar.gz
         dest: /usr/local/bin
         remote_src: yes
         creates: /usr/local/bin/nifi-{{ tarball_version }}/LICENSE
@@ -18,4 +33,5 @@
       shell: "/usr/local/bin/nifi-{{ tarball_version }}/bin/nifi.sh install"
       args: 
         executable: /bin/bash
+
 

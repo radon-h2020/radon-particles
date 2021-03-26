@@ -2,6 +2,7 @@
   hosts: all
   become: yes
   gather_facts: yes
+
   tasks:
     - name: Install Python pip module prerequisites (Linux)
       apt:

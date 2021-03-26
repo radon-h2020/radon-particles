@@ -17,19 +17,19 @@
 
 ---
 - hosts: all
-  vars: 
-    get_id1: "processors[0].id" 
+  vars:
+    get_id1: "processors[?component.name=='ListGCSBucket'].id"  
     # This will return the putlambda processor id (not the other processors)
-    get_id2: "processors[1].id" 
+    #get_id2: ""processors[?component.name==''].id""
     dest_cred_file_path: "/tmp/.opera/gcs/cred"
-  
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
   tasks:
     - name: create directory for cred file
       file:
         path: "{{dest_cred_file_path}}"
         state: directory
 
-    - name: Upload the credentials file to the current directory. 
+    - name: Upload the credentials file to the current directory.
       copy:
         src: "{{credential_JSON_file}}"
         dest: "{{dest_cred_file_path}}/credentials.json"
@@ -38,7 +38,7 @@
 
     - name: Get list of available NiFi processors within the process group
       uri:
-        url: "http://localhost:8080/nifi-api/process-groups/{{pipeline_id}}/processors"
+        url: "http://localhost:{{port}}/nifi-api/process-groups/{{pipeline_id}}/processors"
         method: Get
       register: nifi_resources
       # when: cred_file_path != "none" or cred_file_path != "None"
@@ -47,9 +47,11 @@
 
     - name: Configure the first processor within the process group
       vars:
-        first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
+        first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) | first }}"
+        schedulingPeriodValue: "{{ '0 sec' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingPeriodCRON }}"
+        schedulingStrategyValue: "{{ 'TIMER_DRIVEN' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingStrategy }}"
       uri:
-        url: "http://localhost:8080/nifi-api/processors/{{first_prcsr_id}}"
+        url: "http://localhost:{{port}}/nifi-api/processors/{{first_prcsr_id}}"
         method: PUT
         body:
           "revision": { "version": 0}
@@ -60,39 +62,41 @@
                 # "Credentials File": "{{dest_cred_file_path}}/credentials",
                 "gcs-bucket":"{{bucket}}",
                 "gcp-project-id": "{{project_ID}}"
-            }
+              }
+              "schedulingStrategy": "{{schedulingStrategyValue}}"
+              "schedulingPeriod": "{{schedulingPeriodValue}}"
         status_code: 200
         body_format: json
 
- 
 
-# work with the controller service 
-    - name: Get list of available NiFi resources for fetching the id of the template by its name
+    - name: Get id of the first processor within the process group.
+      vars:
+        first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) | first }}"
       uri:
-        url: http://localhost:8080/nifi-api/resources
+        url: "http://localhost:{{port}}/nifi-api/processors/{{first_prcsr_id}}"
         method: Get
-      register: nifi_resources
+      register: first_prcsr_id
 
-    - name: get the id of the controller
-      vars: 
-        query: "resources[?name=='GCPCredentialsControllerService' && starts_with(identifier, '/controller-services/')].identifier"
-        GCPcontroller: "{{ nifi_resources.json  | to_json | from_json | json_query(query) | first}}"
-        GCPcontrollerID: "{{GCPcontroller.split('/')[2]}}"
-      uri: 
-        url: "http://localhost:8080/nifi-api/controller-services/{{GCPcontrollerID}}"
+
+
+
+
+    - name: get the id of the controller and enabled it
+      vars:
+        GCPcontrollerID: "{{first_prcsr_id.json.component.config.properties['GCP Credentials Provider Service']}}"
+      uri:
+        url: "http://localhost:{{port}}/nifi-api/controller-services/{{GCPcontrollerID}}"
         method: PUT
         body:
-          "revision": 
+          "revision":
               "version": 0
-          "component": 
+          "component":
             "id": "{{GCPcontrollerID}}"
             "state": "ENABLED"
           "status":
             "runStatus": "ENABLED"
         body_format: json
 
-
-    
 
 
 
