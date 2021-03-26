@@ -1,5 +1,6 @@
 - name: create
   hosts: all
+  become: yes
   gather_facts: yes
   tasks:
     - name: Install Python pip module prerequisites (Linux)
@@ -12,7 +13,6 @@
         update_cache: yes
         state: present
       when: ansible_os_family == "Debian"
-      become: yes
 
     - name: Run JMeterAgent Docker image
       docker_container:
