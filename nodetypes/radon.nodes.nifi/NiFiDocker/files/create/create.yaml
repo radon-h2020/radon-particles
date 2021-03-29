@@ -14,6 +14,7 @@
       when: ansible_os_family == "Debian"
       become: yes
       
+
     - name: Run NiFi Docker image
       docker_container:
         name: NiFiDocker
@@ -21,11 +22,22 @@
         pull: yes
         ports: 
           - "{{port}}:8080"
+          - "9093:9093"
         volumes:
-          - /mnt:/mnt
+          - /tmp:/tmp
       become: yes
       
     - name: Wait for port to become open on the host ( dont start checking for 40 seconds )
       wait_for:
         port: "{{port}}"
         delay: 40
+
+
+    - name: Write port variable to file
+      copy:
+         content: '{{ port | to_json }}'
+         dest: /tmp/nifi.json
+      delegate_to: 127.0.0.1
+      become: no
+
+
