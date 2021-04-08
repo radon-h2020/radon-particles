@@ -1,21 +1,14 @@
 ---
   - hosts: localhost
-    vars: 
+    vars:
        ansible_python_interpreter: /usr/bin/python3
-    
-
     tasks:
-
-      - name: Edit Pipeline definition  
-        shell: aws datapipeline put-pipeline-definition --pipeline-id {{pipeline_id}} --parameter-values myMySqldb_Region="{{MySqldb_region}}" myLogBucket=s3://{{log_bucket}}/{{log_directory}} mySchedule="{{edit_schedule}}" myMySqldb_username="{{MySqldb_username}}" myMySqldb_password="{{MySqldb_password}}" myMySqldb_name="{{MySqldb_name}}" myMySqldb_script="{{MySqldb_script}}" myMySqlrds_instanceid="{{MySqlrds_instanceid}}" --pipeline-definition file://SqlActivityDP.json
+      - name: Edit Pipeline definition
+        shell: aws datapipeline put-pipeline-definition --pipeline-id {{ pipeline_id }} --parameter-values myMySqldb_Region="{{ MySqldb_region }}" myLogBucket=s3://{{ log_bucket }}/{{ log_directory }} mySchedule="{{ edit_schedule }}" myMySqldb_username="{{ MySqldb_username }}" myMySqldb_password="{{ MySqldb_password }}" myMySqldb_name="{{ MySqldb_name }}" myMySqldb_script="{{ MySqldb_script }}" myMySqlrds_instanceid="{{ MySqlrds_instanceid }}" --pipeline-definition file://SqlActivityDP.json
         when: sns_arn_topic=="None"
-
-
       - name: edit template file
         script: edit_template.py SqlActivityDP.json
         when: sns_arn_topic!="None"
-
-
-      - name: Edit Pipeline definition  
-        shell: aws datapipeline put-pipeline-definition --pipeline-id {{pipeline_id}} --parameter-values myMySqldb_Region="{{MySqldb_region}}" myLogBucket=s3://{{log_bucket}}/{{log_directory}} mySchedule="{{edit_schedule}}" myMySqldb_username="{{MySqldb_username}}" myMySqldb_password="{{MySqldb_password}}" myMySqldb_name="{{MySqldb_name}}" myMySqldb_script="{{MySqldb_script}}" myMySqlrds_instanceid="{{MySqlrds_instanceid}}" myArnTopic="{{sns_arn_topic}}" --pipeline-definition file://SqlActivityDP.json
+      - name: Edit Pipeline definition
+        shell: aws datapipeline put-pipeline-definition --pipeline-id {{ pipeline_id }} --parameter-values myMySqldb_Region="{{ MySqldb_region }}" myLogBucket=s3://{{ log_bucket }}/{{ log_directory }} mySchedule="{{ edit_schedule }}" myMySqldb_username="{{ MySqldb_username }}" myMySqldb_password="{{ MySqldb_password }}" myMySqldb_name="{{ MySqldb_name }}" myMySqldb_script="{{ MySqldb_script }}" myMySqlrds_instanceid="{{ MySqlrds_instanceid }}" myArnTopic="{{ sns_arn_topic }}" --pipeline-definition file://SqlActivityDP.json
         when: sns_arn_topic!="None"

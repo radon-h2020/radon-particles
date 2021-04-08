@@ -1,13 +1,11 @@
 ---
 - hosts: all
-  gather_facts: no
+  gather_facts: false
   tasks:
     - name: Authenticate to GCP with service account JSON key file
       shell: "gcloud auth activate-service-account --key-file {{ service_account_file }}"
-
     - name: Upload zip archive with function to the GCP bucket
       shell: "gsutil cp {{ zip_file }} gs://{{ function_bucket_name }}/function.zip"
-
     - name: Create a new Google Cloud function
       gcp_cloudfunctions_cloud_function:
         name: "{{ function_name }}"

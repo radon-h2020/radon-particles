@@ -1,6 +1,6 @@
 - name: create
   hosts: all
-  gather_facts: yes
+  gather_facts: true
   tasks:
     - name: Install Python pip module prerequisites (Linux)
       apt:
@@ -9,19 +9,17 @@
           - python3-virtualenv
           - python3-setuptools
           - python3-docker
-        update_cache: yes
+        update_cache: true
         state: present
       when: ansible_os_family == "Debian"
-      become: yes
-
+      become: true
     - name: Run DataPipeline Docker image
       docker_container:
         name: DataPipeline
         image: pjakovits/radon-ctt-agent:datapipeline
-        pull: yes
-        ports: 
+        pull: true
+        ports:
           - "5000:5000"
         volumes:
           - /mnt:/mnt
-      become: yes
-
+      become: true

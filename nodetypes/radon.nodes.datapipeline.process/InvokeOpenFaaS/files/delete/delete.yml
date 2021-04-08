@@ -13,21 +13,16 @@
   # See the License for the specific language governing permissions and
   # limitations under the License.
   ##########################################################################
-
-
 ---
 - hosts: all
   tasks:
     - name: Get process group info
       uri:
-        url: "http://localhost:{{port}}/nifi-api/process-groups/{{pipeline_id}}"
-        method:  GET
+        url: "http://localhost:{{ port }}/nifi-api/process-groups/{{ pipeline_id }}"
+        method: GET
       register: group_info
-
     - name: Delete the pipeline
       uri:
-        url: "http://localhost:{{port}}/nifi-api/process-groups/{{pipeline_id}}?version={{group_info.json.revision.version}}&clientId={{group_info.json.revision.clientId }}"
+        url: "http://localhost:{{ port }}/nifi-api/process-groups/{{ pipeline_id }}?version={{ group_info.json.revision.version }}&clientId={{ group_info.json.revision.clientId }}"
         method: DELETE
         body_format: form-urlencoded
-
-

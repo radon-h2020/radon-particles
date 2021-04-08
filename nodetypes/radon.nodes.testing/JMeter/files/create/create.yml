@@ -1,8 +1,7 @@
 - name: create
   hosts: all
-  become: yes
-  gather_facts: yes
-
+  become: true
+  gather_facts: true
   tasks:
     - name: Install Python pip module prerequisites (Linux)
       apt:
@@ -11,15 +10,13 @@
           - python3-virtualenv
           - python3-setuptools
           - python3-docker
-        update_cache: yes
+        update_cache: true
         state: present
       when: ansible_os_family == "Debian"
-
     - name: Run JMeterAgent Docker image
       docker_container:
         name: JMeterAgent
         image: radonconsortium/radon-ctt-agent:jmeter
-        pull: yes
-        ports: 
+        pull: true
+        ports:
           - "5000:5000"
-

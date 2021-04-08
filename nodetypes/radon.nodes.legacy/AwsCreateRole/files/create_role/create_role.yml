@@ -1,5 +1,5 @@
 - hosts: all
-  gather_facts: no
+  gather_facts: false
   tasks:
     - name: "Create Lambda AWS role : {{ role_name }}"
       iam_role:
@@ -8,12 +8,9 @@
         description: "{{ role_description }}"
         assume_role_policy_document: "{{ lookup('file','/tmp/policy.json') }}"
         managed_policy:
-          -  arn:aws:iam::aws:policy/AWSLambdaFullAccess
-
+          - arn:aws:iam::aws:policy/AWSLambdaFullAccess
       register: iam_role_response
-
     - name: Set attributes
       set_stats:
         data:
-          role_arn: "{{iam_role_response.arn}}"
-
+          role_arn: "{{ iam_role_response.arn }}"

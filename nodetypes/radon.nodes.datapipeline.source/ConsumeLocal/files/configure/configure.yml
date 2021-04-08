@@ -13,46 +13,33 @@
   # See the License for the specific language governing permissions and
   # limitations under the License.
   ##########################################################################
-
-
 ---
 - hosts: all
-  vars: 
+  vars:
     # query_GetFileID: "resources[?name=='GetFile'].identifier"
-    get_id: "processors[0].id" 
-    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
-
+    get_id: "processors[0].id"
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true) }}"
   tasks:
-
     - name: Get list of available NiFi processors within the process group
       uri:
-        url: "http://localhost:{{port}}/nifi-api/process-groups/{{pipeline_id}}/processors"
+        url: "http://localhost:{{ port }}/nifi-api/process-groups/{{ pipeline_id }}/processors"
         method: Get
       register: nifi_resources
-
-    
     - name: set the 'directory' property for GetFile
       vars:
         first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id) }}"
         schedulingPeriodValue: "{{ '0 sec' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingPeriodCRON }}"
         schedulingStrategyValue: "{{ 'TIMER_DRIVEN' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingStrategy }}"
       uri:
-        url: "http://localhost:{{port}}/nifi-api/processors/{{first_prcsr_id}}"
+        url: "http://localhost:{{ port }}/nifi-api/processors/{{ first_prcsr_id }}"
         method: PUT
         body:
-          "revision": { "version": 0}
-          "component": 
-            "id": "{{first_prcsr_id}}"
-            "config": 
-              "properties": { "Input Directory": "{{directory}}"}
-              "schedulingStrategy": "{{schedulingStrategyValue}}"
-              "schedulingPeriod": "{{schedulingPeriodValue}}"                       
+          "revision": {"version": 0}
+          "component":
+            "id": "{{ first_prcsr_id }}"
+            "config":
+              "properties": {"Input Directory": "{{ directory }}"}
+              "schedulingStrategy": "{{ schedulingStrategyValue }}"
+              "schedulingPeriod": "{{ schedulingPeriodValue }}"
         status_code: 200
         body_format: json
-      
-
-
-
-
-
-

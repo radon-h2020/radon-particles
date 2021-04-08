@@ -1,48 +1,37 @@
-
 ---
 - hosts: all
-  vars: 
+  vars:
     get_id1: "processors[0].id"
-    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
-      
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true) }}"
   tasks:
-    
     - name: Get list of available NiFi processors within the process group
       uri:
-        url: "http://localhost:{{port}}/nifi-api/process-groups/{{pipeline_id}}/processors"
+        url: "http://localhost:{{ port }}/nifi-api/process-groups/{{ pipeline_id }}/processors"
         method: Get
       register: nifi_resources
-      
     - name: Configure the first processor within the process group
       vars:
         first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
         schedulingPeriodValue: "{{ '0 sec' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingPeriodCRON }}"
         schedulingStrategyValue: "{{ 'TIMER_DRIVEN' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingStrategy }}"
       uri:
-        url: "http://localhost:{{port}}/nifi-api/processors/{{first_prcsr_id}}"
+        url: "http://localhost:{{ port }}/nifi-api/processors/{{ first_prcsr_id }}"
         method: PUT
         body:
-          "revision": { "version": 0}
-          "component": 
-            "id": "{{first_prcsr_id}}"
-            "config": 
-              "properties": { 
-                "Hostname":"{{Hostname}}",
-                "Port":"{{Port}}",
-                "Remote Path":"{{Remote_Path}}",
-                "Delete Original":"{{Delete_Original}}",
-                "Search Recursively":"{{Search_Recursively}}",
-                "Username":"{{Username}}",
-                "Password":"{{Password}}"
+          "revision": {"version": 0}
+          "component":
+            "id": "{{ first_prcsr_id }}"
+            "config":
+              "properties": {
+                "Hostname":"{{ Hostname }}",
+                "Port":"{{ Port }}",
+                "Remote Path":"{{ Remote_Path }}",
+                "Delete Original":"{{ Delete_Original }}",
+                "Search Recursively":"{{ Search_Recursively }}",
+                "Username":"{{ Username }}",
+                "Password":"{{ Password }}"
               }
-              "schedulingStrategy": "{{schedulingStrategyValue}}"
-              "schedulingPeriod": "{{schedulingPeriodValue}}"  
-              
+              "schedulingStrategy": "{{ schedulingStrategyValue }}"
+              "schedulingPeriod": "{{ schedulingPeriodValue }}"
         status_code: 200
         body_format: json
-
-    
-
-
-
-
