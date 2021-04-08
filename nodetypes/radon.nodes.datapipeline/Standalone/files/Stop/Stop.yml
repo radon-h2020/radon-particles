@@ -1,9 +1,7 @@
 ---
   - hosts: localhost
-    vars: 
+    vars:
        ansible_python_interpreter: /usr/bin/python3
-    
-
     tasks:
       - name: Deactivate datapipeline
-        shell: aws datapipeline deactivate-pipeline --pipeline-id "{{pipeline_id}}"
+        shell: aws datapipeline deactivate-pipeline --pipeline-id "{{ pipeline_id }}"

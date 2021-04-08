@@ -1,32 +1,31 @@
 ---
 - hosts: all
-  become: yes
+  become: true
   tasks:
-            
+
     - name: Backup existing config file
       command: cp /etc/mosquitto/mosquitto.conf /etc/mosquitto/mosquitto.conf.original
-      
+
     - name: Create Mosquitto Passwd file
-      become: yes
-      become_method: sudo  
-      shell: 
+      become: true
+      become_method: sudo
+      shell:
         cmd: touch /etc/mosquitto/passwd
-        
+
     - name: Set Mosquitto Passwd file
-      become: yes
-      become_method: sudo  
-      shell: 
+      become: true
+      become_method: sudo
+      shell:
         cmd: mosquitto_passwd -b /etc/mosquitto/passwd {{Username}} {{Password}}
-      
+
     - name: Edit the mosquitto config file
-      become: yes
+      become: true
       become_method: sudo
       blockinfile:
         path: /etc/mosquitto/mosquitto.conf
         block: |
           listener {{port}}
           protocol mqtt
-          
+
           allow_anonymous false
           password_file /etc/mosquitto/passwd
-          

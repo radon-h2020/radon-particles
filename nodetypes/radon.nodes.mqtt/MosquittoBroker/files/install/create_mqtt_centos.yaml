@@ -1,47 +1,45 @@
 ---
 - hosts: all
-  become: yes
+  become: true
   tasks:
     - name: Install EPEL repo
       package:
-        name: 
+        name:
           - epel-release
-          
+
     - name: install the package from a remote repo
       yum:
         name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
         state: present
-        
+
     - name: Install EPEL repo
       yum:
-        name: 
+        name:
           - yum-utils
-          
+
     - name: Enable remi repo
       shell: |
         sudo yum-config-manager --enable remi-php72 -y
         sudo yum update -y
-        
-    - name: Install mqtt server 
+
+    - name: Install mqtt server
       package:
-        name: 
+        name:
           - mosquitto
-            
+
     - name: Start broker
       service:
-        name: mosquitto  
-        enabled: yes
+        name: mosquitto
+        enabled: true
         state: started
-        
+
     - name: Install apache
       package:
-        name: 
-          - httpd          
-        
+        name:
+          - httpd
+
     - name: Start Apache
       service:
-        name: httpd.service  
-        enabled: yes
+        name: httpd.service
+        enabled: true
         state: started
-     
-    

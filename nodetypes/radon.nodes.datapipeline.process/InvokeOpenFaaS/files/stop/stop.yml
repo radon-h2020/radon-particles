@@ -13,19 +13,17 @@
   # See the License for the specific language governing permissions and
   # limitations under the License.
   ##########################################################################
-
 ---
 - hosts: all
   vars:
-    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true) }}"
   tasks:
     - name: Stop the pipeline
       uri:
-        url: "http://localhost:{{port}}/nifi-api/flow/process-groups/{{pipeline_id}}"
+        url: "http://localhost:{{ port }}/nifi-api/flow/process-groups/{{ pipeline_id }}"
         method: PUT
         body:
-          "id": "{{pipeline_id}}"
-          "state": "STOPPED" 
+          "id": "{{ pipeline_id }}"
+          "state": "STOPPED"
         status: 201
         body_format: json
-

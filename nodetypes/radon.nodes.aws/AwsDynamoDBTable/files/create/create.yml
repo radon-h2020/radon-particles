@@ -12,7 +12,6 @@
         read_capacity: "{{ read_capacity | default(1) | int }}"
         write_capacity: "{{ write_capacity | default(1) | int }}"
       when: hash_key_type == "STRING"
-    
     - name: Create DynamoDB table with an integer key (module requires a type w/o quotes...)
       dynamodb_table:
         name: "{{ table_name }}"
@@ -22,7 +21,6 @@
         read_capacity: "{{ read_capacity | default(1) | int }}"
         write_capacity: "{{ write_capacity | default(1) | int }}"
       when: hash_key_type == "NUMBER"
-
     - name: Create DynamoDB table with a binary key (module requires a type w/o quotes...)
       dynamodb_table:
         name: "{{ table_name }}"
@@ -32,4 +30,3 @@
         read_capacity: "{{ read_capacity | default(1) | int }}"
         write_capacity: "{{ write_capacity | default(1) | int }}"
       when: hash_key_type == "BINARY"
-
