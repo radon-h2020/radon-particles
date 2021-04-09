@@ -6,60 +6,52 @@
     root_id_query: "resources[?name=='NiFi Flow' && starts_with(identifier, '/process-groups/')].identifier"
     port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true) }}"
   tasks:
-    
     # ROOT INFO
     - name: Get list of available NiFi resources for fetching the ids of root reource group, input port and output port
       uri:
-        url: "http://localhost:{{port}}/nifi-api/resources"
+        url: "http://localhost:{{ port }}/nifi-api/resources"
         method: GET
       register: nifi_resources
-    
- 
     # OUTPUT PORT INFO
     - name: Get the list of output port of source pipeline
       uri:
-        url: "http://localhost:{{port}}/nifi-api/process-groups/{{source_pipeline_id}}/output-ports"
+        url: "http://localhost:{{ port }}/nifi-api/process-groups/{{ source_pipeline_id }}/output-ports"
         method: GET
       register: output_ports_list
-
     # INPUT PORT INFO
     - name: Get the list of input port of target pipeline
       uri:
-        url: "http://localhost:{{port}}/nifi-api/process-groups/{{target_pipeline_id}}/input-ports"
+        url: "http://localhost:{{ port }}/nifi-api/process-groups/{{ target_pipeline_id }}/input-ports"
         method: GET
       register: input_ports_list
-
-
-    - name: create NiFi connection  
+    - name: create NiFi connection
       vars:
-        output_port_id: "{{ output_ports_list.json  | to_json | from_json | json_query(query_output_port_id)}}"
-        input_port_id: "{{ input_ports_list.json  | to_json | from_json | json_query(query_input_port_id)}}"
-        root_identifier: "{{ nifi_resources.json  | to_json | from_json | json_query(root_id_query) | first}}"
+        output_port_id: "{{ output_ports_list.json  | to_json | from_json | json_query(query_output_port_id) }}"
+        input_port_id: "{{ input_ports_list.json  | to_json | from_json | json_query(query_input_port_id) }}"
+        root_identifier: "{{ nifi_resources.json  | to_json | from_json | json_query(root_id_query) | first }}"
       uri:
-        url: "http://localhost:{{port}}/nifi-api/process-groups/{{ root_identifier.split('/')[2] }}/connections"
+        url: "http://localhost:{{ port }}/nifi-api/process-groups/{{ root_identifier.split('/')[2] }}/connections"
         method: POST
         body:
-          "revision": 
+          "revision":
              "version": 0
-          "component":            
-            "source": 
+          "component":
+            "source":
                 "id": "{{ output_port_id }}"
                 "groupId": "{{ source_pipeline_id }}"
                 "type": "OUTPUT_PORT"
-            "destination": 
+            "destination":
                 "id": "{{ input_port_id }}"
                 "groupId": "{{ target_pipeline_id }}"
-                "type": "INPUT_PORT"            
+                "type": "INPUT_PORT"
         status_code: 201
         body_format: json
-
-
     - name: start the PROCESS GROUP. This will start everything with in.
       uri:
-        url: "http://localhost:{{port}}/nifi-api/flow/process-groups/{{target_pipeline_id}}"
+        url: "http://localhost:{{ port }}/nifi-api/flow/process-groups/{{ target_pipeline_id }}"
         method: PUT
         body:
-          "id": "{{target_pipeline_id}}"
-          "state": "RUNNING" 
+          "id": "{{ target_pipeline_id }}"
+          "state": "RUNNING"
         status_code: 200
-        body_format: json     
+        body_format: json

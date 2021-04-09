@@ -1,10 +1,10 @@
 ---
 - hosts: localhost
-  gather_facts: False
+  gather_facts: false
   tasks:
     - name: Add "{{ record }}"
       community.aws.route53:
-        alias: True
+        alias: true
         alias_hosted_zone_id: "{{ alias_zone }}"
         zone: "{{ zone }}"
         state: present

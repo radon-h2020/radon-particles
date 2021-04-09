@@ -13,80 +13,68 @@
   # See the License for the specific language governing permissions and
   # limitations under the License.
   ##########################################################################
-
-
 ---
 - hosts: all
   vars:
     get_id1: "processors[0].id"
     dest_cred_file_path: "/tmp/.opera/gc/cred"
     service_id_query: "resources[?name=='GCPCredentialsControllerService' && starts_with(identifier, '/controller-services/')].identifier"
-    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true) }}"
   tasks:
     - name: create directory for cred file
       file:
-        path: "{{dest_cred_file_path}}"
+        path: "{{ dest_cred_file_path }}"
         state: directory
-
     - name: Upload the credentials file to the current directory.
       copy:
-        src: "{{cred_file_path}}"
-        dest: "{{dest_cred_file_path}}/credentials"
+        src: "{{ cred_file_path }}"
+        dest: "{{ dest_cred_file_path }}/credentials"
       when: cred_file_path != "none" or cred_file_path != "None"
-
-
     - name: Get list of available NiFi processors within the process group
       uri:
-        url: "http://localhost:{{port}}/nifi-api/process-groups/{{pipeline_id}}/processors"
+        url: "http://localhost:{{ port }}/nifi-api/process-groups/{{ pipeline_id }}/processors"
         method: Get
       register: nifi_resources
       when: cred_file_path != "none" or cred_file_path != "None"
-
-
-
     - name: Configure the first processor within the process group
       vars:
         first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
         schedulingPeriodValue: "{{ '0 sec' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingPeriodCRON }}"
         schedulingStrategyValue: "{{ 'TIMER_DRIVEN' if schedulingStrategy == 'EVENT_DRIVEN' else schedulingStrategy }}"
       uri:
-        url: "http://localhost:{{port}}/nifi-api/processors/{{first_prcsr_id}}"
+        url: "http://localhost:{{ port }}/nifi-api/processors/{{ first_prcsr_id }}"
         method: PUT
         body:
-          "revision": { "version": 0}
+          "revision": {"version": 0}
           "component":
-            "id": "{{first_prcsr_id}}"
+            "id": "{{ first_prcsr_id }}"
             "config":
               "properties": {
-                "gcp-project-id": "{{ProjectID}}",
-                "gcs-bucket": "{{BucketName}}",
+                "gcp-project-id": "{{ ProjectID }}",
+                "gcs-bucket": "{{ BucketName }}",
               }
-              "schedulingStrategy": "{{schedulingStrategyValue}}"
-              "schedulingPeriod": "{{schedulingPeriodValue}}"
+              "schedulingStrategy": "{{ schedulingStrategyValue }}"
+              "schedulingPeriod": "{{ schedulingPeriodValue }}"
         status_code: 200
         body_format: json
-
-
     - name: Get id of the first processor within the process group.
       vars:
         first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"
       uri:
-        url: "http://localhost:{{port}}/nifi-api/processors/{{first_prcsr_id}}"
+        url: "http://localhost:{{ port }}/nifi-api/processors/{{ first_prcsr_id }}"
         method: Get
       register: first_prcsr_id
-
-
     - name: start the credential service
       vars:
-        GCPcontrollerID: "{{first_prcsr_id.json.component.config.properties['GCP Credentials Provider Service']}}"
+        GCPcontrollerID: "{{ first_prcsr_id.json.component.config.properties['GCP Credentials Provider Service'] }}"
       uri:
-        url: "http://localhost:{{port}}/nifi-api/controller-services/{{ GCPcontrollerID }}"
+        url: "http://localhost:{{ port }}/nifi-api/controller-services/{{ GCPcontrollerID }}"
         method: PUT
         body:
           "revision":
               "version": 0
           "component":
-            "id": "{{GCPcontrollerID}}"
+            "id": "{{ GCPcontrollerID }}"
             "state": "ENABLED"
           "status":
             "runStatus": "ENABLED"

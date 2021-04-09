@@ -1,28 +1,23 @@
 ---
   - name: CreateShellActivityDataPipeline
-    vars: 
+    vars:
        ansible_python_interpreter: /usr/bin/python3
     hosts: localhost
     tasks:
-        
-        # create Datapipeline and register the output pipeline ID  
+        # create Datapipeline and register the output pipeline ID
       - name: Create Datapipeline
-        shell: aws datapipeline create-pipeline --name "{{dp_name}}" --unique-id "{{dp_name}}"-token
+        shell: aws datapipeline create-pipeline --name "{{ dp_name }}" --unique-id "{{ dp_name }}"-token
         register: result
-
       - name: save the Json data to a Variable as a Fact
         set_fact:
           jsondata: "{{ result.stdout | from_json }}"
-
       - name: setPipelineId
         set_fact:
           pipeline_id: "{{ jsondata | json_query(jmesquery) }}"
         vars:
           jmesquery: 'pipelineId'
-        
-        #Set attribute "pipelineID"
+        # Set attribute "pipelineID"
       - name: set attributes
         set_stats:
           data:
-            pipeline_id: "{{pipeline_id}}"
-
+            pipeline_id: "{{ pipeline_id }}"
