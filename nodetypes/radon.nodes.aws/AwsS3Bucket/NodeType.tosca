@@ -12,7 +12,7 @@ node_types:
         type: string
       region:
         type: string
-      bucket_path:
+      bucket_url:
         type: string
     requirements:
       - host:
@@ -37,7 +37,7 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, name ] }
-          bucket_path:
+          bucket_url:
             type: string
             required: true
             default: { concat: [ 'https://s3.', get_property: [ SELF, host, region ], '.amazonaws.com/', get_property: [ SELF, name ] ] }
