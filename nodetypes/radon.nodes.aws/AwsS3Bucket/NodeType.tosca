@@ -40,7 +40,7 @@ node_types:
           bucket_path:
             type: string
             required: true
-            default: { concat: [ 'https://s3.', get_attribute: [ SELF, region ], '.amazonaws.com/', get_property: [ SELF, name ] ] }
+            default: { concat: [ 'https://s3.', get_property: [ SELF, host, region ], '.amazonaws.com/', get_property: [ SELF, name ] ] }
         operations:
           create:
             implementation:
