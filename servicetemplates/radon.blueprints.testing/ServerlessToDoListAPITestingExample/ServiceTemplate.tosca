@@ -283,5 +283,5 @@ topology_template:
       type: string
       description: Endpoint that is used for testing
       required: false
-      default: { concat: [ 'https://', get_property: [ AwsApiGateway_0, endpoint_url ], get_property: [ con_ApiGatewayTriggers_0, endpoint ] ] }
+      default: { concat: [ get_attribute: [ AwsApiGateway_0, endpoint_url ], get_property: [ con_ApiGatewayTriggers_0, endpoint ] ] }
 
