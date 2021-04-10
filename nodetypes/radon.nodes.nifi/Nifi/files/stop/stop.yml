@@ -1,10 +1,9 @@
-
 ---
 - hosts: all
-  become: yes
+  become: true
   tasks:
     - name: Stop nifi service
       service:
         name: nifi
-        enabled: no
+        enabled: false
         state: stopped

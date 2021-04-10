@@ -1,6 +1,6 @@
 - name: create
   hosts: all
-  gather_facts: yes
+  gather_facts: true
   tasks:
     - name: Install Python pip module prerequisites (Linux)
       apt:
@@ -9,22 +9,22 @@
           - python3-virtualenv
           - python3-setuptools
           - python3-docker
-        update_cache: yes
+        update_cache: true
         state: present
       when: ansible_os_family == "Debian"
-      become: yes
-      
+      become: true
+
     - name: Run NiFi Docker image
       docker_container:
         name: NiFiDocker
         image: apache/nifi:{{dockerhub_tag}}
-        pull: yes
-        ports: 
+        pull: true
+        ports:
           - "{{port}}:8080"
         volumes:
           - /mnt:/mnt
-      become: yes
-      
+      become: true
+
     - name: Wait for port to become open on the host ( dont start checking for 40 seconds )
       wait_for:
         port: "{{port}}"

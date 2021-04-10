@@ -13,22 +13,17 @@
   # See the License for the specific language governing permissions and
   # limitations under the License.
   ##########################################################################
-
-
 ---
 - hosts: all
   vars:
-    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"  
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true) }}"
   tasks:
     - name: start the PROCESS GROUP. This will start everything with in.
       uri:
-        url: "http://localhost:{{port}}/nifi-api/flow/process-groups/{{pipeline_id}}"
+        url: "http://localhost:{{ port }}/nifi-api/flow/process-groups/{{ pipeline_id }}"
         method: PUT
         body:
-          "id": "{{pipeline_id}}"
-          "state": "RUNNING" 
+          "id": "{{ pipeline_id }}"
+          "state": "RUNNING"
         status_code: 200
-        body_format: json      
-
-      
-
+        body_format: json

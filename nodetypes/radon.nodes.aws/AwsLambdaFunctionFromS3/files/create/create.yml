@@ -14,7 +14,6 @@
         memory_size: "{{ lambda_memory }}"
         environment_variables: "{{ env_vars }}"
       register: lambda_info
-
     - name: "Put concurrency of Lambda function on AWS : {{ function_name }}"
       command: >-
         aws lambda put-function-concurrency
@@ -22,7 +21,6 @@
           --reserved-concurrent-executions {{ lambda_concurrency }}
           --region {{ aws_region }}
       when: (lambda_concurrency is defined) and (lambda_concurrency != 0)
-
     - name: Create function alias name
       lambda_alias:
         function_name: "{{ function_name }}"
@@ -30,7 +28,6 @@
         region: "{{ aws_region }}"
         state: present
       register: alias_info
-
     - name: "Add invocation permission of Lambda function on AWS : {{ permission_id }}"
       lambda_policy:
         function_name: "{{ function_name }}"
@@ -39,10 +36,9 @@
         region: "{{ aws_region }}"
         alias: "{{ func_alias }}"
         principal: "s3.amazonaws.com"
-
     - name: Set attributes
       set_stats:
-        data: 
-          arn: "{{alias_info.alias_arn}}"
+        data:
+          arn: "{{ alias_info.alias_arn }}"
           role_arn: "{{ role_arn }}"
           region: "{{ aws_region }}"

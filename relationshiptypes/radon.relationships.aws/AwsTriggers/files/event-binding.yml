@@ -1,5 +1,5 @@
 - hosts: all
-  gather_facts: no
+  gather_facts: false
   tasks:
     - name: Set bucket notification
       s3_bucket_notification:
@@ -7,5 +7,5 @@
         event_name: "radon_on_jpg_add"
         bucket_name: "{{ bucket_name }}"
         lambda_function_arn: "{{ function_arn }}"
-        events:  [ "{{ events }}" ]
+        events: ["{{ events }}"]
         region: "{{ aws_region }}"

@@ -13,65 +13,55 @@
   # See the License for the specific language governing permissions and
   # limitations under the License.
   ##########################################################################
-
-
 ---
 - hosts: all
-  vars: 
+  vars:
     query_rootPG_id: "resources[?name=='NiFi Flow' && starts_with(identifier, '/process-groups/')].identifier"
     query_RPG: "resources[?name=='NiFi Flow' && starts_with(identifier, '/remote-process-groups/')].identifier"
-    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true) }}"
   tasks:
-
     - name: Get list of available NiFi resources for fetching the id of the listS3, FetchS3Object, PutS3Object
       uri:
-        url: http://localhost:{{port}}/nifi-api/resources/
+        url: http://localhost:{{ port }}/nifi-api/resources/
         method: Get
       register: nifi_resources
-
-
 ## FOR ROOT PROCESS GROUP. start everything in the root process group
     - name: start the ROOT PROCESS GROUP. This will start everything with in.
-      vars:        
+      vars:
         rootPG_ID: "{{ nifi_resources.json  | to_json | from_json | json_query(query_rootPG_id) | first }}"
       uri:
-        url: "http://localhost:{{port}}/nifi-api/flow/process-groups/{{rootPG_ID.split('/')[2]}}"
+        url: "http://localhost:{{ port }}/nifi-api/flow/process-groups/{{ rootPG_ID.split('/')[2] }}"
         method: PUT
         body:
-          "id": "{{rootPG_ID.split('/')[2]}}"
-          "state": "RUNNING" 
+          "id": "{{ rootPG_ID.split('/')[2] }}"
+          "state": "RUNNING"
         status_code: 200
-        body_format: json      
-
-      
-    #get the VERSION info
+        body_format: json
+    # get the VERSION info
     - name: Check if RPG is present and fetch information if the pipeline is RPG (remoteProcessGroups)
       vars:
         RPG_id: "{{ nifi_resources.json | to_json | from_json | json_query(query_RPG) | first }}"
       uri:
-        url: "http://localhost:{{port}}/nifi-api/remote-process-groups/{{ RPG_id.split('/')[2] }}"
+        url: "http://localhost:{{ port }}/nifi-api/remote-process-groups/{{ RPG_id.split('/')[2] }}"
         method: GET
       register: rpg_version_info
       when: nifi_resources.json | to_json | from_json | json_query(query_RPG) | length > 0
-
     - name: write rpg_version_info to file
       copy:
         dest: /tmp/rpg_version_info.txt
         content: "{{ rpg_version_info }}"
       when: nifi_resources.json | to_json | from_json | json_query(query_RPG) | length > 0
-
-    #start the pipeline
+    # start the pipeline
     - name: Start the pipeline (remoteProcessGroups)
       vars:
         rpg_id: "{{ rpg_version_info.json.id }}"
       uri:
-        url: "http://localhost:{{port}}/nifi-api/remote-process-groups/{{rpg_id}}/run-status"              
+        url: "http://localhost:{{ port }}/nifi-api/remote-process-groups/{{ rpg_id }}/run-status"
         method: PUT
         body:
-          "revision": "{{ rpg_version_info.json.revision}}"
-          "state": "TRANSMITTING" 
+          "revision": "{{ rpg_version_info.json.revision }}"
+          "state": "TRANSMITTING"
           "disconnectedNodeAcknowledged": true
         status_code: 200
         body_format: json
       when: nifi_resources.json | to_json | from_json | json_query(query_RPG) | length > 0
-

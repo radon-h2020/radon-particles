@@ -13,17 +13,15 @@
   # See the License for the specific language governing permissions and
   # limitations under the License.
   ##########################################################################
-
 ---
 - hosts: all
   tasks:
     - name: Stop the pipeline
       uri:
-        url: "http://localhost:8080/nifi-api/flow/process-groups/{{pipeline_id}}"
+        url: "http://localhost:8080/nifi-api/flow/process-groups/{{ pipeline_id }}"
         method: PUT
         body:
-          "id": "{{pipeline_id}}"
-          "state": "STOPPED" 
+          "id": "{{ pipeline_id }}"
+          "state": "STOPPED"
         status: 201
         body_format: json
-

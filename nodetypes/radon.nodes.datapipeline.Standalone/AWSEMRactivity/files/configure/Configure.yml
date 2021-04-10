@@ -1,22 +1,14 @@
 ---
   - hosts: localhost
-    vars: 
+    vars:
        ansible_python_interpreter: /usr/bin/python3
-    
-
     tasks:
-
-      - name: Edit Pipeline definition  
-        shell: aws datapipeline put-pipeline-definition --pipeline-id {{pipeline_id}} --parameter-values myLogBucket=s3://{{log_bucket}}/{{log_directory}} myEMRReleaseLabel="{{myEMRReleaseLabel}}" myMasterInstanceType="{{myMasterInstanceType}}" myEmrStep="{{myEmrStep}}" myCoreInstanceCount="{{myCoreInstanceCount}}" myCoreInstanceType="{{myCoreInstanceType}}" mySchedule="{{edit_schedule}}" myApplications="{{myApplications}}" --pipeline-definition file://EMR_Template.json
+      - name: Edit Pipeline definition
+        shell: aws datapipeline put-pipeline-definition --pipeline-id {{ pipeline_id }} --parameter-values myLogBucket=s3://{{ log_bucket }}/{{ log_directory }} myEMRReleaseLabel="{{ myEMRReleaseLabel }}" myMasterInstanceType="{{ myMasterInstanceType }}" myEmrStep="{{ myEmrStep }}" myCoreInstanceCount="{{ myCoreInstanceCount }}" myCoreInstanceType="{{ myCoreInstanceType }}" mySchedule="{{ edit_schedule }}" myApplications="{{ myApplications }}" --pipeline-definition file://EMR_Template.json
         when: sns_arn_topic=="None"
-
-
       - name: edit template file
         script: edit_template.py EMR_Template.json
         when: sns_arn_topic!="None"
-        
-
-      - name: Edit Pipeline definition  
-        shell: aws datapipeline put-pipeline-definition --pipeline-id {{pipeline_id}} --parameter-values myLogBucket=s3://{{log_bucket}}/{{log_directory}} myEMRReleaseLabel="{{myEMRReleaseLabel}}" myMasterInstanceType="{{myMasterInstanceType}}" myEmrStep="{{myEmrStep}}" myCoreInstanceCount="{{myCoreInstanceCount}}" myCoreInstanceType="{{myCoreInstanceType}}" mySchedule="{{edit_schedule}}" myApplications="{{myApplications}}" myArnTopic="{{sns_arn_topic}}" --pipeline-definition file://EMR_Template.json
+      - name: Edit Pipeline definition
+        shell: aws datapipeline put-pipeline-definition --pipeline-id {{ pipeline_id }} --parameter-values myLogBucket=s3://{{ log_bucket }}/{{ log_directory }} myEMRReleaseLabel="{{ myEMRReleaseLabel }}" myMasterInstanceType="{{ myMasterInstanceType }}" myEmrStep="{{ myEmrStep }}" myCoreInstanceCount="{{ myCoreInstanceCount }}" myCoreInstanceType="{{ myCoreInstanceType }}" mySchedule="{{ edit_schedule }}" myApplications="{{ myApplications }}" myArnTopic="{{ sns_arn_topic }}" --pipeline-definition file://EMR_Template.json
         when: sns_arn_topic!="None"
-

@@ -1,9 +1,9 @@
 ---
 - hosts: all
-  become: yes
+  become: true
   tasks:
     - name: Start mosquitto
       service:
         name: mosquitto
-        enabled: yes
+        enabled: true
         state: started

@@ -1,14 +1,12 @@
 ---
 - name: configure
   hosts: all
-  gather_facts: yes
-  become: yes
-
+  gather_facts: true
+  become: true
   tasks:
     - name: Install consul module for python
       pip:
         name: python-consul
-
     - name: Inject Push Gateway instance to Radon Consul
       consul:
         service_name: "{{ pushgateway_ip }}_push_gateway"
