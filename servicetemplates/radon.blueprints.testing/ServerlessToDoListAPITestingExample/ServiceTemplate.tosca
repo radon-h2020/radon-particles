@@ -278,3 +278,10 @@ topology_template:
           use_https: "true"
           test_id: "exampleTest"
         targets: [ AwsLambdaFunction_0 ]
+  outputs:
+    testing_endpoint:
+      type: string
+      description: Endpoint that is used for testing
+      required: false
+      default: { concat: [ get_attribute: [ AwsApiGateway_0, endpoint_url ], get_property: [ con_ApiGatewayTriggers_0, endpoint ] ] }
+
