@@ -12,9 +12,9 @@ The repository also comprises RADON's FaaS abstraction layer that provides sever
 ---
 
 Node types in this public repository are in a certain state of development, indicated by the following badges:
-* ![](https://img.shields.io/badge/Status:-DEVELOPMENT-red): initially published or currently under development
-* ![](https://img.shields.io/badge/Status:-TESTING-yellow): current version working under certain conditions
-* ![](https://img.shields.io/badge/Status:-RELEASED-green): working as described
-* ![](https://img.shields.io/badge/Status:-DEPRECATED-inactive): no longer supported
+* ![](https://img.shields.io/badge/Status:-DEVELOPMENT-red) - initially published or currently under development
+* ![](https://img.shields.io/badge/Status:-TESTING-yellow) - current version working under certain conditions
+* ![](https://img.shields.io/badge/Status:-RELEASED-green) - working as described
+* ![](https://img.shields.io/badge/Status:-DEPRECATED-inactive) - no longer supported
 
 Further, node types having a ![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet) badge indicate that they represent a resource that can be actually deployed using a TOSCA orchestrator supporting Ansible implementations, such as [xOpera](https://github.com/xlab-si/xopera-opera).

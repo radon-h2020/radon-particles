@@ -33,30 +33,23 @@ node_types:
         required: false
         constraints:
           - in_range: [ 128, 3008 ]
-      concurrency:
-        type: integer
-        description: Function concurrency
-        required: false
-        default: 0
+      runtime:
+        type: string
+        description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
+        default: "nodejs"
         constraints:
-          - in_range: [ 0, UNBOUNDED ]
+          - valid_values: [ nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5 ]
+      alias:
+        type: string
+        description: Lambda function's alias
+        required: false
+        default: "dev"
       concurrency_range:
         type: range
         description: Range of function concurrency to search
         required: false
         constraints:
           - in_range: [ 1, UNBOUNDED ]
-      runtime:
-        type: string
-        description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-        default: "nodejs"
-        constraints:
-          - valid_values: [ nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5 ]
-      alias:
-        type: string
-        description: Lambda function's alias
-        required: false
-        default: "dev"
       statement_id:
         type: string
         description: Lambda policy statement identifier
@@ -69,6 +62,13 @@ node_types:
         default: 300
         constraints:
           - in_range: [ 1, 900 ]
+      concurrency:
+        type: integer
+        description: Function concurrency
+        required: false
+        default: 0
+        constraints:
+          - in_range: [ 0, UNBOUNDED ]
       env_vars:
         type: map
         description: Function's environment variables
@@ -114,10 +114,6 @@ node_types:
             type: integer
             required: true
             default: { get_property: [ SELF, memory ] }
-          lambda_concurrency:
-            type: integer
-            required: true
-            default: { get_property: [ SELF, concurrency ] }
           func_alias:
             type: string
             required: true
@@ -134,6 +130,10 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, zip_file ] }
+          lambda_concurrency:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, concurrency ] }
           env_vars:
             type: string
             required: false

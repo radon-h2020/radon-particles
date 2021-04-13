@@ -1,0 +1,90 @@
+{
+  "objects": [
+    {
+      "period": "#{mySchedule}",
+      "name": "Every 1 day",
+      "id": "DefaultSchedule",
+      "type": "Schedule",
+      "startAt": "FIRST_ACTIVATION_DATE_TIME"
+    },
+    {
+      "failureAndRerunMode": "CASCADE",
+      "schedule": {
+        "ref": "DefaultSchedule"
+      },
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "pipelineLogUri": "#{myLogBucket}",
+      "scheduleType": "cron",
+      "name": "Default",
+      "id": "Default"
+    },
+    {
+      "output": {
+        "ref": "DataNodeId_DIA7U"
+      },
+      "input": {
+        "ref": "DataNodeId_XZxfR"
+      },
+      "schedule": {
+        "ref": "DefaultSchedule"
+      },
+      "name": "DefaultCopyActivity1",
+      "id": "CopyActivityId_2yg1l",
+      "runsOn": {
+        "ref": "ResourceId_3wWms"
+      },
+      "type": "CopyActivity"
+    },
+    {
+      "schedule": {
+        "ref": "DefaultSchedule"
+      },
+      "filePath": "#{myS3InputBucket}",
+      "name": "DefaultDataNode1",
+      "id": "DataNodeId_XZxfR",
+      "type": "S3DataNode"
+    },
+    {
+      "schedule": {
+        "ref": "DefaultSchedule"
+      },
+      "filePath": "#{myS3OutputBucket}",
+      "name": "DefaultDataNode2",
+      "id": "DataNodeId_DIA7U",
+      "type": "S3DataNode"
+    },
+    {
+      "schedule": {
+        "ref": "DefaultSchedule"
+      },
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "name": "DefaultResource1",
+      "id": "ResourceId_3wWms",
+      "type": "Ec2Resource"
+    }
+  ],
+  "parameters": [
+    {
+      "id": "myS3InputBucket",
+      "description": "Input location",
+      "type": "AWS::S3::ObjectKey"     
+    },
+    {
+      "id": "myS3OutputBucket",
+      "description": "S3 output location",
+      "type": "AWS::S3::ObjectKey"
+    },
+    {
+      "id": "mySchedule",
+      "description": "scheduling info",
+      "type": "String"      
+    },
+    {
+      "id": "myLogBucket",
+      "description": "Log bucket location",
+      "type": "AWS::S3::ObjectKey"
+    }
+  ]
+}

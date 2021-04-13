@@ -8,7 +8,11 @@ node_types:
       abstract: "false"
       final: "false"
     attributes:
+      endpoint_url:
+        type: string
       arn:
+        type: string
+      endpoint_url: 
         type: string
     properties:
       api_title:

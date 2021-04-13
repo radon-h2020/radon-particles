@@ -11,19 +11,32 @@ node_types:
       id:
         type: string
     properties:
+      schedulingStrategy:
+        type: string
+        description: Either EVENT_DRIVEN (default) or CRON_DRIVEN. EVENT_DRIVEN is similar with TIMER_DRIVEN with 0 sec value in NiFi.
+        required: false
+        default: "EVENT_DRIVEN"
+      schedulingPeriodCRON:
+        type: string
+        description: For CRON_DRIVEN give in CRON syntax.
+        required: false
+        default: "* * * * * ?"
       name:
         type: string
         description: Name of the pipeline node
         required: false
-    requirements:
-      - host:
-          capability: tosca.capabilities.Container
-          node: radon.nodes.nifi.Nifi
-          relationship: tosca.relationships.HostedOn
-          occurrences: [ 1, 1 ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          schedulingStrategy:
+            type: string
+            required: false
+            default: { get_property: [ SELF, schedulingStrategy ] }
+          schedulingPeriodCRON:
+            type: string
+            required: true
+            default: { get_property: [ SELF, schedulingPeriodCRON ] }
         operations:
           stop:
             inputs:

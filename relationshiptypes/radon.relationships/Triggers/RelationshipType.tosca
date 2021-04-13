@@ -4,7 +4,7 @@ relationship_types:
   radon.relationships.Triggers:
     derived_from: tosca.relationships.ConnectsTo
     metadata:
-      targetNamespace: "radon.relationships.abstract"
+      targetNamespace: "radon.relationships"
       abstract: "false"
       final: "false"
     properties:

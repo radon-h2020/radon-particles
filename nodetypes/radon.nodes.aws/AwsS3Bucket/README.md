@@ -14,6 +14,8 @@ A node type that represents an AWS S3 Bucket.
 | Name | Type | Default Value | Description |
 |:---- |:---- |:------------- |:----------- |
 | `arn` | `string` |   | Amazon's resource name for this bucket |
+| `bucket_url_path` | `string` |  | URL of the bucket using path-style access (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html) |
+| `bucket_url_vhost` | `string` |  | URL of the bucket using virtual-hosted-style access (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html) |
 
 ### Requirements
 

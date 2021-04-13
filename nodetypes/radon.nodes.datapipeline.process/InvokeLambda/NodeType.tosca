@@ -1,0 +1,74 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.process.InvokeLambda:
+    derived_from: radon.nodes.datapipeline.process.FaaSFunction
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.process"
+      abstract: "false"
+      final: "false"
+    attributes:
+      template_name:
+        type: string
+        default: "AWSlambda_localConn"
+    properties:
+      cred_file_path:
+        type: string
+        description: credential file for access and secret key
+        required: false
+      function_name:
+        type: string
+        description: name of the lambda function
+      region:
+        type: string
+        description: Region of the function
+        default: "EU (Frankfurt)"
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              template_name:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, template_name ] }
+              template_file:
+                type: string
+                required: true
+                default: "AWSlambda_localConn.xml"
+            implementation:
+              primary: create
+              dependencies: [ templateFile_localConn ]
+              timeout: 0
+          configure:
+            inputs:
+              cred_file_path:
+                type: string
+                required: true
+                default: { get_property: [ SELF, cred_file_path ] }
+              function_name:
+                type: string
+                required: true
+                default: { get_property: [ SELF, function_name ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              region:
+                type: string
+                required: true
+                default: { get_property: [ SELF, region ] }
+            implementation:
+              primary: configure
+              timeout: 0
+    artifacts:
+      templateFile_localConn:
+        type: tosca.artifacts.File
+        file: AWSlambda_localConn.xml
+      create:
+        type: tosca.artifacts.File
+        file: create.yml
+      configure:
+        type: tosca.artifacts.File
+        file: configure.yml

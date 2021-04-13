@@ -11,19 +11,19 @@ relationship_types:
       Configure:
         type: tosca.interfaces.relationship.Configure
         inputs:
-          monitored_function:
-            type: string
-            required: true
-            default: { get_property: [ SOURCE, function_name ] }
-          pushgateway_ip:
-            type: string
-            required: true
-            default: { get_attribute: [ TARGET, pushgateway_ip ] }
           user_email:
             type: string
             required: true
             default: { get_property: [ TARGET, user_email ] }
-          grafana_api_ip: 
+          monitored_function:
+            type: string
+            required: true
+            default: { get_property: [ SOURCE, name ] }
+          pushgateway_ip:
+            type: string
+            required: true
+            default: { get_attribute: [ TARGET, pushgateway_ip ] }
+          grafana_api_ip:
             type: string
             required: true
             default: { get_property: [ TARGET, grafana_api_ip ] }

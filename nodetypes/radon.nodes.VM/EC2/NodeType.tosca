@@ -8,9 +8,9 @@ node_types:
       abstract: "false"
       final: "false"
     attributes:
-      id:
-        type: string
       public_ip:
+        type: string
+      id:
         type: string
     properties:
       image:
