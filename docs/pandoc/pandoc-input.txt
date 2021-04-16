@@ -2,6 +2,7 @@
 ./nodetypes/radon.nodes.abstract/CloudPlatform/README.md
 ./nodetypes/radon.nodes.abstract/ContainerApplication/README.md
 ./nodetypes/radon.nodes.abstract/ContainerRuntime/README.md
+./nodetypes/radon.nodes.abstract/Database/README.md
 ./nodetypes/radon.nodes.abstract/DataPipeline/README.md
 ./nodetypes/radon.nodes.abstract/Function/README.md
 ./nodetypes/radon.nodes.abstract/ObjectStorage/README.md
