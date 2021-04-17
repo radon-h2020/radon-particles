@@ -1,26 +1,26 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  radon.nodes.mongodb.MongoDBDatabase:
-    derived_from: tosca.nodes.Database
+  radon.nodes.mongodb.MongoDatabase:
+    derived_from: radon.nodes.abstract.Database
     metadata:
       targetNamespace: "radon.nodes.mongodb"
       abstract: "false"
       final: "false"
     properties:
+      password:
+        type: string
       authentication_database:
         type: string
         required: false
+      user:
+        type: string
     requirements:
       - host:
           capability: tosca.capabilities.Compute
           node: radon.nodes.mongodb.MongoDBMS
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
-    capabilities:
-      database_endpoint:
-        occurrences: [ 0, UNBOUNDED ]
-        type: tosca.capabilities.Endpoint.Database
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

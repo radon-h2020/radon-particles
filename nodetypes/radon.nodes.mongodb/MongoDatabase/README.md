@@ -1,24 +1,20 @@
 ![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
 
-## MongoDB Database Node Type
+## Mongo Database Node Type
 
-A node type that describes a MongoDB database.
+A node type that describes a Mongo database.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `MongoDBDatabase` | `radon.nodes.mysql.MongoDBDatabase` | 1.0.0 | `tosca.nodes.Database` |
+| `MongoDatabase` | `radon.nodes.mongodb.MongoDatabase` | 1.0.0 | `radon.nodes.abstract.Database` |
 
 ### Properties
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
+| `user` | `true` | `string` |   |   | The user name for the database |
+| `password` | `true` | `string` |   |   | The user password for the database |
 | `authentication_database` | `false` | `string` |   |   | If authorization is enabled by the host, defines the database where the user authentication data is stored |
-
-### Capabilities
-
-| Name | Type | Valid Source Types | Occurrences |
-|:---- |:---- |:------------------ |:----------- |
-| `database_endpoint` | `tosca.capabilities.Endpoint.Database` |   | [0, UNBOUNDED] |
 
 ### Requirements
 

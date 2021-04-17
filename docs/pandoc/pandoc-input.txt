@@ -57,7 +57,7 @@
 ./nodetypes/radon.nodes.java/JavaRuntime/README.md
 ./nodetypes/radon.nodes.legacy/AwsLambdaFunction/README.md
 ./nodetypes/radon.nodes.legacy/AwsS3Bucket/README.md
-./nodetypes/radon.nodes.mongodb/MongoDBDatabase/README.md
+./nodetypes/radon.nodes.mongodb/MongoDatabase/README.md
 ./nodetypes/radon.nodes.mongodb/MongoDBMS/README.md
 ./nodetypes/radon.nodes.mysql/MySQLDatabase/README.md
 ./nodetypes/radon.nodes.mysql/MySQLDBMS/README.md
