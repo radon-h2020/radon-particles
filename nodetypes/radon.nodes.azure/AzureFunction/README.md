@@ -2,7 +2,7 @@
 
 ## Azure Function Node Type (Abstract)
 
-Abstract node type that represents an function hosted on the Azure cloud platform.
+Abstract node type that represents a function hosted on the Azure platform.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
@@ -12,9 +12,8 @@ Abstract node type that represents an function hosted on the Azure cloud platfor
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `function_name` | `true` | `string` |   |   | The name of the function |
 | `timeout` | `true` | `integer` | `in_range: [1, 600]` | 300 | The timeout in seconds of the function is alive after the first start |
-| `app_name` | `true` | `string` |   |   | The name of the Azure application |
+| `app_name` | `true` | `string` |   |   | The name of the Azure application. |
 | `app_runtime` | `false` | `string` | `valid_values: [dotnet, node, java, python, powershell]` |   | The identifier of the runtime to be used |
 | `app_os_type` | `false` | `string` | `valid_values: [Windows, Linux]` |   | The OS type of the underlying infrastructure |
 | `app_storage_account` | `false` | `string` |   |   | The name of the application's storage account |
@@ -24,4 +23,4 @@ Abstract node type that represents an function hosted on the Azure cloud platfor
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `tosca.capabilities.Container` | `radon.nodes.azure.AzurePlatform` | `tosca.relationships.HostedOn` |   |
+| `host` | `tosca.capabilities.Container` | `radon.nodes.azure.AzurePlatform` | `tosca.relationships.HostedOn` | [1, 1] |

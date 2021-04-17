@@ -28,7 +28,6 @@
 ./nodetypes/radon.nodes.azure/AzureFunction/README.md
 ./nodetypes/radon.nodes.azure/AzureHttpTriggeredFunction/README.md
 ./nodetypes/radon.nodes.azure/AzurePlatform/README.md
-./nodetypes/radon.nodes.azure/AzureResource/README.md
 ./nodetypes/radon.nodes.azure/AzureResourceTriggeredFunction/README.md
 ./nodetypes/radon.nodes.azure/AzureTimerTriggeredFunction/README.md
 ./nodetypes/radon.nodes.datapipeline/DestinationPB/README.md
