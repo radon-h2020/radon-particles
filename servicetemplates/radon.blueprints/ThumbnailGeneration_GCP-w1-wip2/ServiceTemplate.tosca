@@ -37,11 +37,10 @@ topology_template:
       properties:
         environment_variables:
           BUCKET_OUT_NAME: "radon-bucket-output"
-        function_memory: "256"
-        function_timeout: "60"
+        function_memory: 256
+        function_timeout: 60
         trigger_bucket_name: "radon-bucket-input"
         function_bucket_name: "radon-function-bucket"
-        function_name: "resize"
         name: "resize"
         function_runtime: "python37"
         zip_file: { get_artifact: [ SELF, function ] }
