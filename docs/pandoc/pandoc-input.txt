@@ -18,8 +18,11 @@
 ./nodetypes/radon.nodes.apache.openwhisk/OpenWhiskFunction/README.md
 ./nodetypes/radon.nodes.apache.openwhisk/OpenWhiskPlatform/README.md
 ./nodetypes/radon.nodes.aws/AwsApiGateway/README.md
+./nodetypes/radon.nodes.aws/AwsDynamoDBTable/README.md
 ./nodetypes/radon.nodes.aws/AwsLambdaFunction/README.md
+./nodetypes/radon.nodes.aws/AwsLambdaFunctionFromS3/README.md
 ./nodetypes/radon.nodes.aws/AwsPlatform/README.md
+./nodetypes/radon.nodes.aws/AwsRoute53/README.md
 ./nodetypes/radon.nodes.aws/AwsS3Bucket/README.md
 ./nodetypes/radon.nodes.azure/AzureCosmosDB/README.md
 ./nodetypes/radon.nodes.azure/AzureFunction/README.md
@@ -79,6 +82,7 @@
 ./relationshiptypes/radon.relationships/Triggers/README.md
 ./relationshiptypes/radon.relationships.apache.kafka/PublishToKafkaTopic/README.md
 ./relationshiptypes/radon.relationships.apache.openwhisk/OpenWhiskKafkaTriggers/README.md
+./relationshiptypes/radon.relationships.aws/AwsApiGatewayTriggers/README.md
 ./relationshiptypes/radon.relationships.aws/AwsTriggers/README.md
 ./relationshiptypes/radon.relationships.azure/AzureCosmosDBTriggers/README.md
 ./relationshiptypes/radon.relationships.azure/AzureTriggers/README.md
