@@ -3,23 +3,18 @@
 
 ## Google Cloud Bucket Node Type
 
-Node type to deploy an object storage on Google Cloud.
+A node type representing a Google Cloud bucket.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `GoogleCloudBucket` | `radon.nodes.google.GoogleCloudBucket` | 1.0.0 | `radon.nodes.google.GoogleCloudResource` |
+| `GoogleCloudBucket` | `radon.nodes.google.GoogleCloudBucket` | 1.0.0 | `radon.nodes.abstract.ObjectStorage` |
 
-### Properties
+### Requirements
 
-| Name | Required | Type | Constraint | Default Value | Description |
-|:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `name` | `false` | `string` |  |  | The name of the GCP bucket |
-
-### Capabilities
-
-| Name | Type | Valid Source Types | Occurrences |
-|:---- |:---- |:------------------ |:----------- |
-| `storage_endpoint` | `tosca.capabilities.Endpoint` |   | [0, UNBOUNDED] |
+| Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
+|:---- |:--------------- |:-------------------- |:----------------- |:------------|
+| `host` | `tosca.capabilities.Container` | `radon.nodes.google.GoogleCloudPlatform` | `tosca.relationships.HostedOn` | [1, 1] |
+| `invoker` | `radon.capabilities.Invocable` | `radon.nodes.google.GoogleCloudBucketTriggeredFunction` | `radon.relationships.google.GoogleCloudTriggers` | [0, UNBOUNDED] |
 
 ### Notes
 

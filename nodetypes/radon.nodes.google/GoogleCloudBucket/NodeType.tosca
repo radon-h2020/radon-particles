@@ -2,20 +2,22 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
   radon.nodes.google.GoogleCloudBucket:
-    derived_from: radon.nodes.google.GoogleCloudResource
+    derived_from: radon.nodes.abstract.ObjectStorage
     metadata:
       targetNamespace: "radon.nodes.google"
       abstract: "false"
       final: "false"
-    properties:
-      name:
-        type: string
-        description: The name of the GCP bucket
-        required: false
-    capabilities:
-      storage_endpoint:
-        occurrences: [ 0, UNBOUNDED ]
-        type: tosca.capabilities.Endpoint
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.google.GoogleCloudPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - invoker:
+          capability: radon.capabilities.Invocable
+          node: radon.nodes.google.GoogleCloudBucketTriggeredFunction
+          relationship: radon.relationships.google.GoogleCloudTriggers
+          occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -30,7 +32,7 @@ node_types:
             default: { get_property: [ SELF, host, project_id ] }
           bucket_name:
             type: string
-            required: false
+            required: true
             default: { get_property: [ SELF, name ] }
           service_account_file:
             type: string

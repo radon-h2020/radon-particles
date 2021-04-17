@@ -49,10 +49,10 @@
 ./nodetypes/radon.nodes.datapipeline.source/ConsumeRemote/README.md
 ./nodetypes/radon.nodes.docker/DockerApplication/README.md
 ./nodetypes/radon.nodes.docker/DockerEngine/README.md
+./nodetypes/radon.nodes.google/GoogleCloudBucket/README.md
+./nodetypes/radon.nodes.google/GoogleCloudBucketTriggeredFunction/README.md
 ./nodetypes/radon.nodes.google/GoogleCloudFunction/README.md
 ./nodetypes/radon.nodes.google/GoogleCloudPlatform/README.md
-./nodetypes/radon.nodes.google/GoogleCloudResource/README.md
-./nodetypes/radon.nodes.google/GoogleCloudResourceTriggeredFunction/README.md
 ./nodetypes/radon.nodes.java/JavaApplication/README.md
 ./nodetypes/radon.nodes.java/JavaRuntime/README.md
 ./nodetypes/radon.nodes.legacy/AwsLambdaFunction/README.md
@@ -86,7 +86,7 @@
 ./relationshiptypes/radon.relationships.azure/AzureCosmosDBTriggers/README.md
 ./relationshiptypes/radon.relationships.azure/AzureTriggers/README.md
 ./relationshiptypes/radon.relationships.datapipeline/ConnectNifiLocal/README.md
-./relationshiptypes/radon.relationships.google/GoogleTriggers/README.md
+./relationshiptypes/radon.relationships.google/GoogleCloudTriggers/README.md
 ./relationshiptypes/radon.relationships.nifi/ConnectsToNifi/README.md
 ./relationshiptypes/radon.relationships.openfaas/OpenFaasKafkaTriggers/README.md
 ./policytypes/radon.policies/Performance/README.md
