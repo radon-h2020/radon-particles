@@ -8,6 +8,12 @@ A node type that represents an externally managed OpenFaaS Platform.
 |:---- |:--- |:------- |:------------ |
 | `OpenFaasPlatform` | `radon.nodes.opefaas.OpenFaasPlatform` | 1.0.0 | `radon.nodes.abstract.CloudPlatform` |
 
+### Attributes
+
+| Name | Type | Default Value | Description |
+|:---- |:---- |:------------- |:----------- |
+| `url` | `string` | `concat: ["http://", get_property: [SELF, api_gateway_host], get_property: [SELF, api_gateway_port]]` | The full gateway url. |
+
 ### Properties
 
 | Name | Required | Type | Constraint | Default Value | Description |
@@ -19,17 +25,11 @@ A node type that represents an externally managed OpenFaaS Platform.
 | `api_gateway_port` | `true` | `integer` |   | 31112 | The port to access OpenFaaS API gateway at. |
 | `prometheus_port` | `true` | `integer` |   | 31119 | The port to access the Prometheus service at. |
 
-### Attributes
-
-| Name | Type | Default Value | Description |
-|:---- |:---- |:------------- |:----------- |
-| `url` | `string` | `concat: ["http://", get_property: [SELF, api_gateway_host], get_property: [SELF, api_gateway_port] ]` | The full gateway url. |
-
 ### Capabilities
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-|`host`| `tosca.capabilities.Container` | `radon.nodes.openfaas.OpenFaasFunction` | [0, UNBOUNDED]
+| `host` | `tosca.capabilities.Container` | `radon.nodes.openfaas.OpenFaasFunction` | [0, UNBOUNDED] |
 
 ### Notes
 
