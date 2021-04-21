@@ -8,6 +8,13 @@ A node type that represents an externally managed OpenWhisk Platform.
 |:---- |:--- |:------- |:------------ |
 | `OpenWhiskPlatform` | `radon.nodes.apache.openwhisk.OpenWhiskPlatform` | 1.0.0 | `radon.nodes.abstract.CloudPlatform` |
 
+### Attributes
+
+| Name | Type | Default Value | Description |
+|:---- |:---- |:------------- |:----------- |
+| `url` | `string` | `concat: ["http://", get_property: [SELF, api_gateway_host], get_property: [SELF, api_gateway_port]]` | The full gateway url. |
+| `auth_key` | `string` | `concat: [get_property: [SELF, auth_username], get_property: [SELF, auth_password]]` | The string used for basic authentication. |
+
 ### Properties
 
 | Name | Required | Type | Constraint | Default Value | Description |
@@ -19,18 +26,11 @@ A node type that represents an externally managed OpenWhisk Platform.
 | `api_port` | `true` | `integer` |   | 31112 | The port to access OpenWhisk API gateway at. |
 | `default_namespace` | `true` | `string` |   |   | The default namespace in which resources are deployed. |
 
-### Attributes
-
-| Name | Type | Default Value | Description |
-|:---- |:---- |:------------- |:----------- |
-| `url` | `string` | `concat: ["http://", get_property: [SELF, api_gateway_host], get_property: [SELF, api_gateway_port] ]` | The full gateway url. |
-| `auth_key` | `string` | `concat: [get_property: [SELF, auth_username], get_property: [SELF, auth_password] ]` | The string used for basic authentication. |
-
 ### Capabilities
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-|`host`| `tosca.capabilities.Container` | `radon.nodes.apache.openwhisk.OpenWhiskFunction` | [0, UNBOUNDED]
+| `host` | `tosca.capabilities.Container` | `radon.nodes.apache.openwhisk.OpenWhiskFunction` | [0, UNBOUNDED] |
 
 ### Notes
 

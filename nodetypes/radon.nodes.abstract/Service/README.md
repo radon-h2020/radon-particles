@@ -19,4 +19,4 @@ Abstract node type representing a third-party service.
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-| `endpoint_service` | `radon.capabilities.Endpoint` |   | [1, UNBOUNDED] |
+| `service_endpoint` | `radon.capabilities.Endpoint` |   | [1, UNBOUNDED] |

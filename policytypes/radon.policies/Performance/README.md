@@ -1,4 +1,4 @@
-## Mean Response Time Policy
+## Performance Policy
 
 Abstract policy type representing a performance requirement.
 

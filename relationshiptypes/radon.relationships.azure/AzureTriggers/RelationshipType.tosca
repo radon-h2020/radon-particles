@@ -8,8 +8,3 @@ relationship_types:
       targetNamespace: "radon.relationships.azure"
       abstract: "false"
       final: "false"
-    properties:
-      events:
-        type: string
-        constraints:
-          - length: 1

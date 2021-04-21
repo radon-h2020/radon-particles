@@ -2,7 +2,7 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
   radon.nodes.mongodb.MongoDBMS:
-    derived_from: tosca.nodes.DBMS
+    derived_from: radon.nodes.abstract.DBMS
     metadata:
       targetNamespace: "radon.nodes.mongodb"
       abstract: "false"
@@ -31,7 +31,7 @@ node_types:
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.mongodb.MongoDBDatabase ]
+        valid_source_types: [ radon.nodes.mongodb.MongoDatabase ]
         type: tosca.capabilities.Compute
     interfaces:
       Standard:
@@ -59,7 +59,7 @@ node_types:
             default: { get_property: [ SELF, db_path ] }
           MONGODB_ROOT_PASSWORD:
             type: string
-            required: true
+            required: false
             default: { get_property: [ SELF, root_password ] }
           MONGODB_PORT:
             type: integer

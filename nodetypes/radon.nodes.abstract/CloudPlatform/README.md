@@ -17,4 +17,4 @@ Abstract node type representing a provider-managed cloud platform.
 ### Capabilities
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-| `host` | `tosca.capabilities.Container` | `[radon.nodes.abstract.Function, radon.nodes.abstract.ObjectStorage]` | [1, UNBOUNDED] |
+| `host` | `tosca.capabilities.Container` | `[radon.nodes.abstract.Function, radon.nodes.abstract.ObjectStorage, radon.nodes.abstract.ApiGateway, radon.nodes.abstract.Database]` | [1, UNBOUNDED] |
