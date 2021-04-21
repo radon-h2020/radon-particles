@@ -1,9 +1,9 @@
 ![](https://img.shields.io/badge/Status:-TESTING-yellow)
 ![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
-## Lambda Function Node Type
+## AWS Lambda Function From S3 Node Type
 
-A node type that represents an AWS Lambda function which is instrumented based on a function deployment package hosted on S3.
+A node type that represents an AWS Lambda function which is instrumented based on a function deployment package from an AWS S3 bucket.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |

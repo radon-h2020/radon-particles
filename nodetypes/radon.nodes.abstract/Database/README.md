@@ -12,7 +12,13 @@ Abstract node type representing a database.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `entries` | `false` | `map: radon.datatypes.Entry` |   |   | Map of entries |
+| `entries`<sup>[1](#fn1)</sup> | `false` | `map: radon.datatypes.Entry` |   |   | Map of entries |
+
+<sup name="fn1">1</sup> The name of each `Entry` must be prefixed with the name of the operation that it is associated with, e.g. "get", "get_item" and and "getItem". This enables the decomposition tool to compute the operating cost of a `Database` on the target cloud platform. The following table summarizes the supported operations for platform-specific node types derived from `Database`.
+
+| Derived Node Type | Supported Operations |
+|:---- |:-------- |
+| `radon.nodes.aws.AwsDynamoDBTable` | get, put, update, delete, query, scan |
 
 ### Requirements
 

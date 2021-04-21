@@ -1,7 +1,7 @@
 ![](https://img.shields.io/badge/Status:-RELEASED-green)
 ![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
-## S3 Bucket Node Type
+## AWS S3 Bucket Node Type
 
 A node type that represents an AWS S3 bucket.
 
