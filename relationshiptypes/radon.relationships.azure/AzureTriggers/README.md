@@ -1,16 +1,10 @@
 ## Azure Triggers Relationship
 
-An abstract relationship type representing AzureResource-to-AzureCFunction communication.
+Azure-specific relationship type representing AzureResource-to-AzureFunction communication.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
 | `AzureTriggers` | `radon.relationships.azure.AzureTriggers` | 1.0.0 | `radon.relationships.Triggers` |
-
-### Properties
-
-| Name | Required | Type | Constraint | Default Value | Description |
-|:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-|`events`|`true`|`list` of `radon.datatypes.Event`|`length: 1`|   | The event associated with this relationship |
 
 ### Notes
 

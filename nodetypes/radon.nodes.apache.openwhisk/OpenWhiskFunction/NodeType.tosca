@@ -11,14 +11,12 @@ node_types:
       rest_api_endpoint:
         type: string
     properties:
-      function_name:
-        type: string
-      function_package_name:
-        type: string
       function_runtime:
         type: string
         constraints:
           - valid_values: [ go_1_11, java_8, ballerina_0_990, nodejs_12, nodejs_10, nodejs_8, nodejs_6, php_7_3, python_2, python_3, ruby_2_5, swift_4_2, dotnet_2_2 ]
+      function_package_name:
+        type: string
       entry_point:
         type: string
         required: false
@@ -28,10 +26,6 @@ node_types:
           node: radon.nodes.apache.openwhisk.OpenWhiskPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
-    capabilities:
-      invocable:
-        occurrences: [ 0, UNBOUNDED ]
-        type: radon.capabilities.Invocable
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -39,7 +33,7 @@ node_types:
           FUNCTION_NAME:
             type: string
             required: true
-            default: { get_property: [ SELF, function_name ] }
+            default: { get_property: [ SELF, name ] }
           FUNCTION_RUNTIME:
             type: string
             required: true

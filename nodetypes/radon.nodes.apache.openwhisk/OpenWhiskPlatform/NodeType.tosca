@@ -15,14 +15,12 @@ node_types:
     properties:
       auth_username:
         type: string
-        description: the username part of the authorization key used to gain access to the OpenWhisk API
       kubernetes_version:
         type: version
         required: false
         default: 1.8
       auth_password:
         type: string
-        description: the password part of the authorization key used to gain access to the OpenWhisk API
       api_host:
         type: string
       default_namespace:

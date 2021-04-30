@@ -8,22 +8,24 @@ node_types:
       abstract: "false"
       final: "false"
     properties:
-      app_name:
-        type: string
       app_runtime:
         type: string
         description: if empty, assumes app already existing
         required: false
         constraints:
           - valid_values: [ dotnet, node, java, python, powershell ]
-      function_name:
+      app_name:
         type: string
+      app_storage_account:
+        type: string
+        description: if empty, assumes app already existing
+        required: false
       app_os_type:
         type: string
         required: false
         constraints:
           - valid_values: [ Windows, Linux ]
-      app_storage_account:
+      app_resource_group:
         type: string
         description: if empty, assumes app already existing
         required: false
@@ -32,10 +34,6 @@ node_types:
         default: 300
         constraints:
           - in_range: [ 1, 600 ]
-      app_resource_group:
-        type: string
-        description: if empty, assumes app already existing
-        required: false
     requirements:
       - host:
           capability: tosca.capabilities.Container

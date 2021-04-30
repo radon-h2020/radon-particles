@@ -1,7 +1,7 @@
 ![](https://img.shields.io/badge/Status:-RELEASED-green)
 ![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
-## AWS Platform  Node Type
+## AWS Platform Node Type
 
 A node type that represents the AWS platform.
 
@@ -19,8 +19,8 @@ A node type that represents the AWS platform.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `name` | `true` | `string` |  | AWS |  |
-| `region` | `true` | `string` |  |  | The region identifier, e.g., us-west-1 |
+| `name` | `true` | `string` |   | "AWS" | The name of the cloud platform |
+| `region` | `true` | `string` |   |   | The region identifier, e.g., us-west-1 |
 
 ### Capabilities
 

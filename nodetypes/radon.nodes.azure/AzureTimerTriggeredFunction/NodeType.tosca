@@ -10,7 +10,6 @@ node_types:
     properties:
       schedule:
         type: string
-        description: CRON expression or timespan to describe when and at which frequency the function will be triggered.
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

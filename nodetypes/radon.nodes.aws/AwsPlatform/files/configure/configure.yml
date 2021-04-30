@@ -39,7 +39,11 @@
         state: present
         assume_role_policy_document: "{{ lookup('file','policy.json') }}"
         managed_policy:
-          - arn:aws:iam::aws:policy/AWSLambdaFullAccess
+          - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+          - arn:aws:iam::aws:policy/AWSLambda_FullAccess
+          - arn:aws:iam::aws:policy/AmazonS3FullAccess
+          - arn:aws:iam::aws:policy/AmazonAPIGatewayInvokeFullAccess
+          - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
       register: iam_role_response
     - name: Set attributes
       set_stats:

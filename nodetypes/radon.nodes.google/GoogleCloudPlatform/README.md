@@ -3,7 +3,7 @@
 
 ## Google Cloud Platform Node Type
 
-A node type representing the Google Cloud Platform which capable of hosting resources and functions.
+A node type representing the Google Cloud platform.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
@@ -13,7 +13,7 @@ A node type representing the Google Cloud Platform which capable of hosting reso
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `name` | `true` | `string` |  | "GCP" |  |
+| `name` | `true` | `string` |   | "GCP" | The name of the cloud platform |
 | `project_id` | `true` | `string` |   |   | The unique project-id to be used |
 | `region` | `true` | `string` |   |   | The region to be used for deployment |
 
@@ -21,4 +21,4 @@ A node type representing the Google Cloud Platform which capable of hosting reso
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-| `host` | `tosca.capabilities.Container` | `radon.nodes.google.CloudFunction`, `radon.nodes.google.GoogleCloudResource` | [1, UNBOUNDED] |
+| `host` | `tosca.capabilities.Container` | `[radon.nodes.google.CloudFunction`, `radon.nodes.google.GoogleCloudBucket]` | [1, UNBOUNDED] |

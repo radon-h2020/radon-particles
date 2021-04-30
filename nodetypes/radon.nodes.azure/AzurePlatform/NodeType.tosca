@@ -18,7 +18,7 @@ node_types:
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.azure.AzureFunction, radon.nodes.azure.AzureResource ]
+        valid_source_types: [ radon.nodes.azure.AzureFunction, radon.nodes.azure.AzureCosmosDB ]
         type: tosca.capabilities.Container
     interfaces:
       Standard:

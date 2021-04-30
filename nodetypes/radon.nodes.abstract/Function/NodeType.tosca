@@ -9,8 +9,12 @@ node_types:
       final: "false"
     properties:
       entries:
-        type: radon.datatypes.function.Entries
+        type: map
         required: false
+        constraints:
+          - length: 1
+        entry_schema:
+          type: radon.datatypes.Entry
       name:
         type: string
     requirements:
