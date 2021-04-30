@@ -17,7 +17,7 @@ topology_template:
       type: string
       description: AWS EC2 AMI Image
       required: true
-      default: "ami-00890f614e48ce866"
+      default: "ami-089cc16f7f08c4457"
     aws_ec2_vpc_subnet_id:
       type: string
       description: AWS EC2 VPC Subnet ID
