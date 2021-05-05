@@ -1,10 +1,13 @@
 ![](https://img.shields.io/badge/Status:-RELEASED-green)
 ![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
-## OpenFaaS Pipeline Node Type
+## InvokeFaaSFunction Pipeline Node Type
 
-A node type to invoke OpenFaaS function.
+A node type to invoke a generic FaaS function using HTTP endpoint.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `OpenFaaS` | `radon.nodes.datapipeline.process.OpenFaaS` | 1.0.0 | `radon.nodes.datapipeline.process.FaaSFunction` |
+| `InvokeFaaSFunction` | `radon.nodes.datapipeline.process.InvokeFaaSFunction` | 1.0.0 | `radon.nodes.datapipeline.process.FaaSFunction` |
+
+
+Currently this node type is similar to InvokeOpenFaaS node type
