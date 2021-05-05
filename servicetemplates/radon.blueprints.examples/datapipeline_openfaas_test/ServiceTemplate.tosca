@@ -1,0 +1,80 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.examples"
+topology_template:
+  node_templates:
+    InvokeFaaSFunction_0:
+      type: radon.nodes.datapipeline.process.InvokeFaaSFunction
+      metadata:
+        x: "810"
+        y: "252"
+        displayName: "InvokeFaaSFunction"
+      properties:
+        content_type: "application/json"
+        function_URL: "https://balb4ixyse.execute-api.eu-west-1.amazonaws.com/hello-world"
+        schedulingStrategy: "CRON_DRIVEN"
+        schedulingPeriodCRON: "*/30 * * * * ? *"
+        HTTP_method: "POST"
+      requirements:
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_2
+            capability: host
+    InvokeOpenFaaS_0:
+      type: radon.nodes.datapipeline.process.InvokeOpenFaaS
+      metadata:
+        x: "377"
+        y: "221"
+        displayName: "InvokeOpenFaaS"
+      properties:
+        content_type: "application/json"
+        function_URL: "https://balb4ixyse.execute-api.eu-west-1.amazonaws.com/hello-world"
+        schedulingStrategy: "CRON_DRIVEN"
+        schedulingPeriodCRON: "*/20 * * * * ? *"
+        HTTP_method: "POST"
+      requirements:
+        - ConnectToPipeline:
+            node: InvokeFaaSFunction_0
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_0
+            capability: host
+    OpenStack_0:
+      type: radon.nodes.VM.OpenStack
+      metadata:
+        x: "575"
+        y: "671"
+        displayName: "OpenStack"
+      properties:
+        flavor: "m1.medium"
+        key_name: "chinmayadehury"
+        image: "13a94b11-98ee-43a4-ad29-00ae97e8f790"
+        ssh_username: "centos"
+        name: "NifiHost2-temp"
+        network: "provider_64_net"
+    Nifi_0:
+      type: radon.nodes.nifi.Nifi
+      metadata:
+        x: "579"
+        y: "513"
+        displayName: "Nifi"
+      properties:
+        port: 8080
+        component_version: "1.12.1"
+      requirements:
+        - host:
+            node: OpenStack_0
+            relationship: con_HostedOn_1
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectNifiLocal_0:
+      type: radon.relationships.datapipeline.ConnectNifiLocal

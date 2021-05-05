@@ -1,7 +1,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  radon.nodes.datapipeline.process.InvokeOpenFaaS:
+  radon.nodes.datapipeline.process.InvokeFaaSFunction:
     derived_from: radon.nodes.datapipeline.process.FaaSFunction
     metadata:
       targetNamespace: "radon.nodes.datapipeline.process"
@@ -10,7 +10,7 @@ node_types:
     attributes:
       template_name:
         type: string
-        default: "OpenFaaS_localConn"
+        default: "FaaS_localConn"
       id:
         description: Unique ID of the pipeline
         type: string
@@ -20,10 +20,10 @@ node_types:
     properties:
       content_type:
         type: string
-        description: The type of the content (text/html, text/plain, image/jpeg, ... )
+        description: The type of the content (text/html, text/plain, image/jpeg, application/json... )
       function_URL:
         type: string
-        description: Remote URL of the OpenFaaS function
+        description: Remote HTTP URL of the FaaS function
       HTTP_method:
         type: string
         description: Function invokation method.
@@ -60,7 +60,7 @@ node_types:
               template_file:
                 type: string
                 required: true
-                default: "OpenFaaS_localConn.xml"
+                default: "FaaS_localConn.xml"
             implementation:
               primary: create
               timeout: 0
@@ -108,7 +108,7 @@ node_types:
         file: stop.yml
       templateFile_localConn:
         type: tosca.artifacts.File
-        file: OpenFaaS_localConn.xml
+        file: FaaS_localConn.xml
       start:
         type: tosca.artifacts.File
         file: start.yml
