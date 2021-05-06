@@ -1,0 +1,39 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Get Azure subscription ID
+      shell: "az account list --all"
+      register: subscription_info
+
+    - name: Unpack subscription info dictionary
+      debug:
+        msg: "{{ item.key }}: {{ item.value }}"
+      with_dict: "{{ subscription_info.stdout }}"
+      register: subscription_info_dict
+
+    - name: Rescue block for getting a default function key (ignores errors and repeats itself again if not successful)
+      block: &get-default-function-key
+        - name: Get default function key
+          shell: "az rest \
+                --method post \
+                --uri 'https://management.azure.com/subscriptions/{{ subscription_info_dict.results[2].item.value }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.Web/sites/{{ function_app_name }}/functions/{{ function_name }}/listKeys?api-version=2019-08-01'"
+          register: default_function_key
+      rescue:
+        *get-default-function-key
+
+    - name: Unpack function key info dictionary
+      debug:
+        msg: "{{ item.key }}: {{ item.value }}"
+      with_dict: "{{ default_function_key.stdout }}"
+      register: default_function_key_dict
+
+    - name: Create a new Azure event subscription
+      shell: "az eventgrid event-subscription create \
+            --name {{ subscription_name }} \
+            --source-resource-id /subscriptions/{{ subscription_info_dict.results[2].item.value }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ storage_account_name }} \
+            --included-event-types {{ event_types }} \
+            --endpoint https://{{ function_app_name }}.azurewebsites.net/api/{{ function_name }}?code={{ default_function_key_dict.results[0].item.value }} \
+            --subject-begins-with /blobServices/default/containers/{{ container_name }}/ \
+            --max-delivery-attempts {{ max_delivery_attempts }} \
+            --event-ttl {{ event_ttl }}"
