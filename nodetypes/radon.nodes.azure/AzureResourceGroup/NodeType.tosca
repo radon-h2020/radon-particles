@@ -1,44 +1,36 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  radon.nodes.azure.AzurePlatform:
-    derived_from: radon.nodes.abstract.CloudPlatform
+  radon.nodes.azure.AzureResourceGroup:
+    derived_from: tosca.nodes.SoftwareComponent
     metadata:
       targetNamespace: "radon.nodes.azure"
       abstract: "false"
       final: "false"
     properties:
-      username:
+      resource_group_name:
         type: string
         required: true
-        description: Azure username
-      password:
-        type: string
-        required: true
-        description: Azure password
+        description: The name of the new Azure resource group
       region:
         type: string
         required: true
         description: The identifier for Azure region in which resources are/will be deployed
-    capabilities:
-      host:
-        occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.azure.AzureResourceGroup, radon.nodes.azure.AzureStorageAccount, radon.nodes.azure.AzureBlobStorageContainer, radon.nodes.azure.AzureCosmosDB, radon.nodes.azure.AzureFunction, radon.nodes.azure.AzureResourceTriggeredFunction, radon.nodes.azure.AzureHttpTriggeredFunction ]
-        type: tosca.capabilities.Container
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.azure.AzurePlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          username:
+          resource_group_name:
             type: string
             required: true
-            description: Azure username
-            default: { get_property: [ SELF, username ] }
-          password:
-            type: string
-            required: true
-            description: Azure password
-            default: { get_property: [ SELF, password ] }
+            description: The name of the new Azure resource group
+            default: { get_property: [ SELF, resource_group_name ] }
           region:
             type: string
             required: true
