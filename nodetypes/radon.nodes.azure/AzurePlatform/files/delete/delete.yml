@@ -1,0 +1,22 @@
+---
+- hosts: all
+  gather_facts: false
+
+  vars:
+    virtualenv_path: "{{ lookup('env', 'VIRTUAL_ENV') }}"
+    pip_args: '--user'
+
+  tasks:
+    - name: Prepare environment flags if run in virtualenv
+      set_fact:
+        pip_args: ''
+      when: virtualenv_path | length > 0
+
+    - name: Remove Azure CLI Python package
+      pip:
+        state: absent
+        name: azure-cli
+        extra_args: "{{ pip_args }}"
+
+    - name: Logout from Microsoft Azure platform via Azure CLI
+      shell: "az logout --username {{ username }}"
