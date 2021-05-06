@@ -19,7 +19,7 @@ A node type that represents an Azure function which is triggered by an internal 
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-| `invocable` | `radon.capabilities.Invocable` | `[radon.nodes.azure.AzureCosmosDB]` | [1, 1] |
+| `invocable` | `radon.capabilities.Invocable` | `[ radon.nodes.azure.AzureBlobStorageContainer, radon.nodes.azure.AzureCosmosDB ]` | [1, 1] |
 
 ### Notes
 
