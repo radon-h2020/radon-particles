@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Remove Azure resource group
+      azure_rm_resourcegroup:
+        state: absent
+        name: "{{ resource_group_name }}"
+        location: "{{ region }}"
