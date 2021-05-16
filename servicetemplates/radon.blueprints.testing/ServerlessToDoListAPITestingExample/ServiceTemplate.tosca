@@ -7,8 +7,8 @@ topology_template:
     AwsLambdaFunction_1:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "894"
-        y: "207"
+        x: "893"
+        y: "113"
         displayName: "GetTodoItem"
       properties:
         handler: "get.handler"
@@ -38,7 +38,7 @@ topology_template:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
         x: "893"
-        y: "298"
+        y: "208"
         displayName: "CreateTodoItem"
       properties:
         handler: "create.handler"
@@ -84,18 +84,19 @@ topology_template:
     AwsLambdaFunction_0:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "892"
-        y: "62"
-        displayName: "ListTodoItems"
+        x: "893"
+        y: "304"
+        displayName: "ListTodoItem"
       properties:
         handler: "list.handler"
         memory: 128
-        name: "list-items"
+        name: "list-item"
         runtime: "nodejs12.x"
         alias: "dev"
         statement_id: "list-stmt"
         zip_file: { get_artifact: [ SELF, list_items ] }
         timeout: 300
+        concurrency: 0
         env_vars:
           TODOS_TABLE: "items"
       requirements:
@@ -115,7 +116,7 @@ topology_template:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
         x: "888"
-        y: "397"
+        y: "398"
         displayName: "UpdateTodoItem"
       properties:
         handler: "update.handler"
