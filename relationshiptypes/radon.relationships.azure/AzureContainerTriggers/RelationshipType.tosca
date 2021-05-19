@@ -53,8 +53,8 @@ relationship_types:
         required: true
         description: The name of the existing Azure function to set up trigger for
     interfaces:
-      Standard:
-        type: tosca.interfaces.node.lifecycle.Standard
+      Configure:
+        type: tosca.interfaces.relationship.Configure
         inputs:
           event_subscription_name:
             type: string
