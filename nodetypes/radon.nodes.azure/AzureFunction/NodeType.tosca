@@ -25,7 +25,7 @@ node_types:
         required: true
         description: The identifier for Azure region in which resources are/will be deployed
       functions_version:
-        type: int
+        type: integer
         required: false
         description: The version of the Azure function app
         default: 3
@@ -94,7 +94,7 @@ node_types:
             description: The identifier for Azure region in which resources are/will be deployed
             default: { get_property: [ SELF, region ] }
           functions_version:
-            type: int
+            type: integer
             required: false
             description: The version of the Azure function app
             default: { get_property: [ SELF, functions_version ] }
