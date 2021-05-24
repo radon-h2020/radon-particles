@@ -1,8 +1,8 @@
 ![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
 
-## Azure storage account Node Type
+## Azure Storage Account Node Type
 
-A node type that represents the Azure storage account.
+A node type that represents a storage account hosted on the Azure platform.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |

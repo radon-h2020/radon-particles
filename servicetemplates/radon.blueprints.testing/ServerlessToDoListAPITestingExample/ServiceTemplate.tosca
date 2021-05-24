@@ -86,17 +86,16 @@ topology_template:
       metadata:
         x: "893"
         y: "304"
-        displayName: "ListTodoItem"
+        displayName: "ListTodoItems"
       properties:
         handler: "list.handler"
         memory: 128
-        name: "list-item"
+        name: "list-items"
         runtime: "nodejs12.x"
         alias: "dev"
         statement_id: "list-stmt"
         zip_file: { get_artifact: [ SELF, list_items ] }
         timeout: 300
-        concurrency: 0
         env_vars:
           TODOS_TABLE: "items"
       requirements:

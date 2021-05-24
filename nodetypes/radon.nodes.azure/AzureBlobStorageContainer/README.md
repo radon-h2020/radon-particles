@@ -1,8 +1,8 @@
 ![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
 
-## Azure Container Node Type
+## Azure Blob Storage Container Node Type
 
-A node type that represents an Azure BLOB storage container.
+A node type that represents a Blob storage container hosted on the Azure platform.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
@@ -15,7 +15,7 @@ A node type that represents an Azure BLOB storage container.
 | `container_name` | `true` | `string` |   |   | The name of the new Azure container |
 | `resource_group_name` | `true` | `string` |   |   | The name of the existing Azure resource group  |
 | `storage_account_name` | `true` | `string` |   |   | The name of the existing Azure storage account  |
-| `public_access` | `false` | `string` | `valid_values: [ blob, container ]` | container | The container's level of public access  |
+| `public_access` | `false` | `string` | `valid_values: [blob, container]` | "container" | The container's level of public access  |
 
 ### Requirements
 
