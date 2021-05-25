@@ -24,11 +24,14 @@
 ./nodetypes/radon.nodes.aws/AwsPlatform/README.md
 ./nodetypes/radon.nodes.aws/AwsRoute53/README.md
 ./nodetypes/radon.nodes.aws/AwsS3Bucket/README.md
+./nodetypes/radon.nodes.azure/AzureBlobStorageContainer/README.md
 ./nodetypes/radon.nodes.azure/AzureCosmosDB/README.md
 ./nodetypes/radon.nodes.azure/AzureFunction/README.md
 ./nodetypes/radon.nodes.azure/AzureHttpTriggeredFunction/README.md
 ./nodetypes/radon.nodes.azure/AzurePlatform/README.md
+./nodetypes/radon.nodes.azure/AzureResourceGroup/README.md
 ./nodetypes/radon.nodes.azure/AzureResourceTriggeredFunction/README.md
+./nodetypes/radon.nodes.azure/AzureStorageAccount/README.md
 ./nodetypes/radon.nodes.azure/AzureTimerTriggeredFunction/README.md
 ./nodetypes/radon.nodes.datapipeline/DestinationPB/README.md
 ./nodetypes/radon.nodes.datapipeline/MidwayPB/README.md
@@ -76,6 +79,7 @@
 ./nodetypes/radon.nodes.VM/EC2/README.md
 ./nodetypes/radon.nodes.VM/OpenStack/README.md
 ./nodetypes/radon.nodes/SockShop/README.md
+./nodetypes/radon.nodes/SockShopDocker/README.md
 ./nodetypes/radon.nodes/Workstation/README.md
 ./relationshiptypes/radon.relationships/ConnectsTo/README.md
 ./relationshiptypes/radon.relationships/Triggers/README.md
@@ -83,6 +87,7 @@
 ./relationshiptypes/radon.relationships.apache.openwhisk/OpenWhiskKafkaTriggers/README.md
 ./relationshiptypes/radon.relationships.aws/AwsApiGatewayTriggers/README.md
 ./relationshiptypes/radon.relationships.aws/AwsTriggers/README.md
+./relationshiptypes/radon.relationships.azure/AzureContainerTriggers/README.md
 ./relationshiptypes/radon.relationships.azure/AzureCosmosDBTriggers/README.md
 ./relationshiptypes/radon.relationships.azure/AzureTriggers/README.md
 ./relationshiptypes/radon.relationships.datapipeline/ConnectNifiLocal/README.md

@@ -1,14 +1,37 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 metadata:
-  targetNamespace: "radon.blueprints.testing"
+  targetNamespace: "radon.blueprints.optimization"
 topology_template:
   node_templates:
+    ClosedWorkload_0:
+      type: radon.nodes.abstract.workload.ClosedWorkload
+      metadata:
+        x: "355"
+        y: "126"
+        displayName: "ClosedWorkload"
+      properties:
+        think_time:
+          mean: 1.0
+        population: 5
+        entries:
+          start:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.001
+                bound_to_entry: true
+                request_pattern: stochastic
+      requirements:
+        - endpoint:
+            node: AwsApiGateway_0
+            relationship: con_ConnectsTo_5
+            capability: api_endpoint
     AwsLambdaFunction_1:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "893"
-        y: "113"
+        x: "894"
+        y: "207"
         displayName: "GetTodoItem"
       properties:
         handler: "get.handler"
@@ -21,6 +44,15 @@ topology_template:
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
+        entries:
+          execute:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.047
+                bound_to_entry: true
+                replies_to_entry: true
+                request_pattern: deterministic
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -38,7 +70,7 @@ topology_template:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
         x: "893"
-        y: "208"
+        y: "298"
         displayName: "CreateTodoItem"
       properties:
         handler: "create.handler"
@@ -51,6 +83,15 @@ topology_template:
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
+        entries:
+          execute:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.044
+                bound_to_entry: true
+                replies_to_entry: true
+                request_pattern: deterministic
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -76,6 +117,42 @@ topology_template:
         name: "items"
         write_capacity: 1
         hash_key_type: "STRING"
+        entries:
+          scan:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.003
+                bound_to_entry: true
+                replies_to_entry: true
+          get:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.001
+                bound_to_entry: true
+                replies_to_entry: true
+          put:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.004
+                bound_to_entry: true
+                replies_to_entry: true
+          update:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.006
+                bound_to_entry: true
+                replies_to_entry: true
+          delete:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.001
+                bound_to_entry: true
+                replies_to_entry: true
       requirements:
         - host:
             node: AwsPlatform_0
@@ -84,8 +161,8 @@ topology_template:
     AwsLambdaFunction_0:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
-        x: "893"
-        y: "304"
+        x: "894"
+        y: "110"
         displayName: "ListTodoItems"
       properties:
         handler: "list.handler"
@@ -98,6 +175,15 @@ topology_template:
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
+        entries:
+          execute:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.046
+                bound_to_entry: true
+                replies_to_entry: true
+                request_pattern: deterministic
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -115,7 +201,7 @@ topology_template:
       type: radon.nodes.aws.AwsLambdaFunction
       metadata:
         x: "888"
-        y: "398"
+        y: "397"
         displayName: "UpdateTodoItem"
       properties:
         handler: "update.handler"
@@ -128,6 +214,15 @@ topology_template:
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
+        entries:
+          execute:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.042
+                bound_to_entry: true
+                replies_to_entry: true
+                request_pattern: deterministic
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -167,6 +262,15 @@ topology_template:
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
+        entries:
+          execute:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.052
+                bound_to_entry: true
+                replies_to_entry: true
+                request_pattern: deterministic
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -190,6 +294,47 @@ topology_template:
         name: "ServerlessToDoListAPI"
         api_version: "1.0.0"
         api_description: "a simple serverless API example"
+        entries:
+          list:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.125
+                bound_to_entry: true
+                replies_to_entry: true
+                request_pattern: deterministic
+          get:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.111
+                bound_to_entry: true
+                replies_to_entry: true
+                request_pattern: deterministic
+          create:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.112
+                bound_to_entry: true
+                replies_to_entry: true
+                request_pattern: deterministic
+          update:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.114
+                bound_to_entry: true
+                replies_to_entry: true
+                request_pattern: deterministic
+          delete:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.109
+                bound_to_entry: true
+                replies_to_entry: true
+                request_pattern: deterministic
       requirements:
         - host:
             node: AwsPlatform_0
@@ -232,55 +377,122 @@ topology_template:
       type: tosca.relationships.HostedOn
     con_ConnectsTo_2:
       type: radon.relationships.ConnectsTo
+      properties:
+        interactions:
+          - type: synchronous
+            source_activity: execute.a1
+            target_entry: put
+            number_of_requests: 1.0
     con_ConnectsTo_3:
       type: radon.relationships.ConnectsTo
+      properties:
+        interactions:
+          - type: synchronous
+            source_activity: execute.a1
+            target_entry: update
+            number_of_requests: 1.0
     con_ConnectsTo_4:
       type: radon.relationships.ConnectsTo
+      properties:
+        interactions:
+          - type: synchronous
+            source_activity: execute.a1
+            target_entry: delete
+            number_of_requests: 1.0
+    con_ConnectsTo_5:
+      type: radon.relationships.ConnectsTo
+      properties:
+        interactions:
+          - type: synchronous
+            source_activity: start.a1
+            target_entry: list
+            number_of_requests: 0.2
+          - type: synchronous
+            source_activity: start.a1
+            target_entry: get
+            number_of_requests: 0.2
+          - type: synchronous
+            source_activity: start.a1
+            target_entry: create
+            number_of_requests: 0.2
+          - type: synchronous
+            source_activity: start.a1
+            target_entry: update
+            number_of_requests: 0.2
+          - type: synchronous
+            source_activity: start.a1
+            target_entry: delete
+            number_of_requests: 0.2
     con_AwsApiGatewayTriggers_4:
       type: radon.relationships.aws.AwsApiGatewayTriggers
       properties:
         endpoint: "/todos/{id}"
         http_methods: "delete"
+        interactions:
+          - type: synchronous
+            source_activity: delete.a1
+            target_entry: execute
+            number_of_requests: 1.0
     con_AwsApiGatewayTriggers_3:
       type: radon.relationships.aws.AwsApiGatewayTriggers
       properties:
         endpoint: "/todos/{id}"
         http_methods: "put"
+        interactions:
+          - type: synchronous
+            source_activity: update.a1
+            target_entry: execute
+            number_of_requests: 1.0
     con_ConnectsTo_0:
       type: radon.relationships.ConnectsTo
+      properties:
+        interactions:
+          - type: synchronous
+            source_activity: execute.a1
+            target_entry: scan
+            number_of_requests: 1.0
     con_AwsApiGatewayTriggers_2:
       type: radon.relationships.aws.AwsApiGatewayTriggers
       properties:
         endpoint: "/todos"
         http_methods: "post"
+        interactions:
+          - type: synchronous
+            source_activity: create.a1
+            target_entry: execute
+            number_of_requests: 1.0
     con_ConnectsTo_1:
       type: radon.relationships.ConnectsTo
+      properties:
+        interactions:
+          - type: synchronous
+            source_activity: execute.a1
+            target_entry: get
+            number_of_requests: 1.0
     con_AwsApiGatewayTriggers_1:
       type: radon.relationships.aws.AwsApiGatewayTriggers
       properties:
         endpoint: "/todos/{id}"
         http_methods: "get"
+        interactions:
+          - type: synchronous
+            source_activity: get.a1
+            target_entry: execute
+            number_of_requests: 1.0
     con_AwsApiGatewayTriggers_0:
       type: radon.relationships.aws.AwsApiGatewayTriggers
       properties:
         endpoint: "/todos"
         http_methods: "get"
+        interactions:
+          - type: synchronous
+            source_activity: list.a1
+            target_entry: execute
+            number_of_requests: 1.0
   policies:
-    - exampleTestPolicy:
-        type: radon.policies.testing.HttpEndpointTest
+    - MeanResponseTime_0:
+        type: radon.policies.performance.MeanResponseTime
         properties:
-          path: "/"
-          hostname: "google.com"
-          method: "GET"
-          port: "443"
-          expected_status: "200"
-          ti_blueprint: "radon.blueprints.testing.DeploymentTestAgentEC2"
-          use_https: "true"
-          test_id: "exampleTest"
-        targets: [ AwsLambdaFunction_0 ]
-  outputs:
-    testing_endpoint:
-      type: string
-      description: Endpoint that is used for testing
-      required: false
-      default: { concat: [ { get_attribute: [ AwsApiGateway_0, endpoint_url ] }, { get_property: [ con_AwsApiGatewayTriggers_0, endpoint ] } ] }
+          upper_bound: 0.2
+        targets:
+          - AwsApiGateway_0

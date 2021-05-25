@@ -17,7 +17,7 @@ relationship_types:
         type: string
         required: false
         description: A space-separated list of event types
-        default: Microsoft.Storage.BlobCreated
+        default: "Microsoft.Storage.BlobCreated"
       event_ttl:
         type: integer
         required: false

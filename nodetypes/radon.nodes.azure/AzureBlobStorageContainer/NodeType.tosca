@@ -24,7 +24,7 @@ node_types:
         type: string
         required: false
         description: The container's level of public access
-        default: container
+        default: "container"
         constraints:
           - valid_values: [ blob, container ]
     requirements:

@@ -13,9 +13,9 @@ Azure-specific relationship type representing AzureContainer-to-AzureFunction co
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `event_subscription_name` | `true` | `string` |   |   | The name of the new Azure event subscription trigger |
-| `event_types` | `false` | `string` |   | Microsoft.Storage.BlobCreated | A space-separated list of event types |
-| `event_ttl` | `false` | `integer` | `in_range: [ 1, 1440 ]` | 1440 | The event time to live (in minutes) |
-| `may_delivery_attempts` | `false` | `integer` | `in_range: [ 1, 30 ]` |  30 | The maximum number of delivery attempts |
+| `event_types` | `false` | `string` |   | "Microsoft.Storage.BlobCreated" | A space-separated list of event types |
+| `event_ttl` | `false` | `integer` | `in_range: [1, 1440]` | 1440 | The event time to live (in minutes) |
+| `may_delivery_attempts` | `false` | `integer` | `in_range: [1, 30]` |  30 | The maximum number of delivery attempts |
 | `resource_group_name` | `true` | `string` |   |   | The name of the existing Azure resource group |
 | `storage_account_name` | `true` | `string` |   |   | The name of the existing Azure storage account |
 | `container_name` | `true` | `string` |   |   | The name of the existing Azure container to set up trigger for |

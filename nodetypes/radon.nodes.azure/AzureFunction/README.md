@@ -2,7 +2,7 @@
 
 ## Azure Function Node Type
 
-A node type that represents an Azure function app with function hosted on the Azure platform.
+A node type that represents a function app hosted on the Azure platform.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
@@ -16,9 +16,9 @@ A node type that represents an Azure function app with function hosted on the Az
 | `resource_group_name` | `true` | `string` |   |   | The name of the existing Azure resource group |
 | `storage_account_name` | `true` | `string` |   |   | The name of the existing Azure storage account |
 | `region` | `true` | `string` |   |   | The identifier for Azure region in which resources are/will be deployed |
-| `functions_version` | `false` | `integer` | `valid_values: [ 2, 3 ]` | 3 | The version of the Azure function app |
-| `os_type` | `true` | `string` | `valid_values: [ Windows, Linux ]` |   | The Azure function app OS type |
-| `runtime_type` | `true` | `string` | `valid_values: [ dotnet, node, java, python, powershell ]` |   | The Azure function runtime type |
+| `functions_version` | `false` | `integer` | `valid_values: [2, 3]` | 3 | The version of the Azure function app |
+| `os_type` | `true` | `string` | `valid_values: [Windows, Linux]` |   | The Azure function app OS type |
+| `runtime_type` | `true` | `string` | `valid_values: [dotnet, node, java, python, powershell]` |   | The Azure function runtime type |
 | `runtime_version` | `true` | `float` |   |   | The version of the Azure functions runtime stack |
 | `zip_file` | `true` | `string` |   |   | The path to the function zip file |
 | `build_remote` | `false` | `boolean` |   | true | The option to enable remote build during deployment |

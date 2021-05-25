@@ -1,8 +1,8 @@
 ![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
 
-## Azure resource group Node Type
+## Azure Resource Group Node Type
 
-A node type that represents the Azure resource group.
+A node type that represents a resource group hosted on the Azure platform.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
