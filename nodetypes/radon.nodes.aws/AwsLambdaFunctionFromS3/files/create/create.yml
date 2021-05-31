@@ -1,7 +1,5 @@
 ---
 - hosts: localhost
-  vars:
-    - pwd: "{{ lookup('env', 'PWD') }}"
   tasks:
     - name: Lambda "{{ function_name }}" deploy
       lambda:
@@ -44,7 +42,15 @@
 
     - name: Set attributes
       set_stats:
-        data: 
+        data:
           arn: "{{alias_info.alias_arn}}"
           role_arn: "{{ role_arn }}"
           region: "{{ aws_region }}"
+
+    - name: set outputs regarding to scaling policies
+      set_stats:
+        data:
+          cpu_upper_bound: "{{ cpu_upper_bound }}"
+          ram_upper_bound: "{{ ram_upper_bound }}"
+          adjustment: "{{ adjustment }}"
+          callbackUrlCPU: "{{ callbackUrlCPU }}"

@@ -1,57 +1,116 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
+imports:
+  - file: radonnodesdocker__DockerApplication.tosca
+    namespace_uri: radon.nodes.docker
+    namespace_prefix: radonnodesdocker
+  - file: radoncapabilitiesmonitoring__Monitor.tosca
+    namespace_uri: radon.capabilities.monitoring
+    namespace_prefix: radoncapabilitiesmonitoring
+  - file: radonartifacts__Ansible.tosca
+    namespace_uri: radon.artifacts
+    namespace_prefix: radonartifacts
+  - file: radoncapabilitiescontainer__DockerRuntime.tosca
+    namespace_uri: radon.capabilities.container
+    namespace_prefix: radoncapabilitiescontainer
+  - file: radonnodesVM__EC2.tosca
+    namespace_uri: radon.nodes.VM
+    namespace_prefix: radonnodesVM
 node_types:
   radon.nodes.monitoring.PushGateway:
     derived_from: radon.nodes.docker.DockerApplication
     metadata:
-      targetNamespace: "radon.nodes.monitoring.PushGateway"
+      targetNamespace: "radon.nodes.monitoring"
       abstract: "false"
       final: "false"
+    attributes:
+      pushgateway_ip:
+        type: string
+        default: { get_attribute: [ SELF, dependency, public_ip ] }
     properties:
       user_email:
-        type: string
-      consul_ip:
         type: string
       pushgateway_service_port:
         type: string
       grafana_api_ip:
         type: string
-    attributes:
-      pushgateway_ip:
+      consul_ip:
         type: string
-        default: { get_attribute: [SELF, dependency, public_ip] }
+    requirements:
+      - host:
+          capability: radon.capabilities.container.DockerRuntime
+          node: tosca.nodes.Container.Runtime
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - storage:
+          capability: tosca.capabilities.Storage
+          occurrences: [ 0, 1 ]
+      - network:
+          capability: tosca.capabilities.Endpoint
+          occurrences: [ 0, 1 ]
+      - dependency:
+          capability: tosca.capabilities.Node
+          node: radon.nodes.VM.EC2
+          relationship: tosca.relationships.DependsOn
+          occurrences: [ 1, 1 ]
     capabilities:
       monitor:
-        occurrences: [0, UNBOUNDED]
+        occurrences: [ 0, UNBOUNDED ]
         type: radon.capabilities.monitoring.Monitor
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
           create:
+            inputs:
+              ssh_user:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_user ] }
+              ssh_key_file:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_key_file ] }
+              pushgateway_ip:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, public_ip ] }
             implementation:
               primary: create
               timeout: 0
           configure:
             inputs:
+              ssh_user:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_user ] }
+              ssh_key_file:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_key_file ] }
+              user_email:
+                type: string
+                required: true
+                default: { get_property: [ SELF, user_email ] }
               pushgateway_ip:
                 type: string
                 required: true
-                default: { get_attribute: [SELF, dependency, public_ip] }
-              user_email:
-                type: string
-                default: { get_property: [SELF, user_email] }
-              consul_ip:
-                type: string
-                default: { get_property: [SELF, consul_ip] }
+                default: { get_attribute: [ SELF, dependency, public_ip ] }
               pushgateway_service_port:
                 type: string
-                default: { get_property: [SELF, pushgateway_service_port] }
+                required: true
+                default: { get_property: [ SELF, pushgateway_service_port ] }
+              consul_ip:
+                type: string
+                required: true
+                default: { get_property: [ SELF, consul_ip ] }
             implementation:
               primary: configure
               timeout: 0
           delete:
             inputs:
+              ssh_user:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_user ] }
+              ssh_key_file:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_key_file ] }
               pushgateway_ip:
                 type: string
                 required: true
@@ -63,23 +122,6 @@ node_types:
             implementation:
               primary: delete
               timeout: 0
-    requirements:
-      - host:
-          capability: radon.capabilities.container.DockerRuntime
-          node: tosca.nodes.Container.Runtime
-          relationship: tosca.relationships.HostedOn
-          occurrences: [1, 1]
-      - storage:
-          capability: tosca.capabilities.Storage
-          occurrences: [0, 1]
-      - network:
-          capability: tosca.capabilities.Endpoint
-          occurrences: [0, 1]
-      - dependency:
-          capability: tosca.capabilities.Node
-          node: radon.nodes.VM.EC2
-          relationship: tosca.relationships.DependsOn
-          occurrences: [ 1, 1 ]
     artifacts:
       create:
         type: radon.artifacts.Ansible
