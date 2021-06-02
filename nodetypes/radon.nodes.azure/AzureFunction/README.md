@@ -1,8 +1,8 @@
 ![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
 
-## Azure Function Node Type (Abstract)
+## Azure Function Node Type
 
-Abstract node type that represents an function hosted on the Azure cloud platform.
+A node type that represents a function app hosted on the Azure platform.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
@@ -12,16 +12,20 @@ Abstract node type that represents an function hosted on the Azure cloud platfor
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `function_name` | `true` | `string` |   |   | The name of the function |
-| `timeout` | `true` | `integer` | `in_range: [1, 600]` | 300 | The timeout in seconds of the function is alive after the first start |
-| `app_name` | `true` | `string` |   |   | The name of the Azure application |
-| `app_runtime` | `false` | `string` | `valid_values: [dotnet, node, java, python, powershell]` |   | The identifier of the runtime to be used |
-| `app_os_type` | `false` | `string` | `valid_values: [Windows, Linux]` |   | The OS type of the underlying infrastructure |
-| `app_storage_account` | `false` | `string` |   |   | The name of the application's storage account |
-| `app_resource_group` | `false` | `string` |   |   | The name of the application's resource group |
+| `function_app_name` | `true` | `string` |   |   | The name of the new Azure function app |
+| `resource_group_name` | `true` | `string` |   |   | The name of the existing Azure resource group |
+| `storage_account_name` | `true` | `string` |   |   | The name of the existing Azure storage account |
+| `region` | `true` | `string` |   |   | The identifier for Azure region in which resources are/will be deployed |
+| `functions_version` | `false` | `integer` | `valid_values: [2, 3]` | 3 | The version of the Azure function app |
+| `os_type` | `true` | `string` | `valid_values: [Windows, Linux]` |   | The Azure function app OS type |
+| `runtime_type` | `true` | `string` | `valid_values: [dotnet, node, java, python, powershell]` |   | The Azure function runtime type |
+| `runtime_version` | `true` | `float` |   |   | The version of the Azure functions runtime stack |
+| `zip_file` | `true` | `string` |   |   | The path to the function zip file |
+| `build_remote` | `false` | `boolean` |   | true | The option to enable remote build during deployment |
+| `timeout` | `false` | `integer` | `in_range: [1, 600]` | 300 | The timeout in seconds for checking the status of deployment |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `host` | `tosca.capabilities.Container` | `radon.nodes.azure.AzurePlatform` | `tosca.relationships.HostedOn` |   |
+| `host` | `tosca.capabilities.Container` | `radon.nodes.azure.AzurePlatform` | `tosca.relationships.HostedOn` | [1, 1] |

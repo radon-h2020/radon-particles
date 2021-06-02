@@ -1,8 +1,7 @@
 - name: create
   hosts: all
-  gather_facts: yes
-  become: yes
-
+  gather_facts: true
+  become: true
   tasks:
     - name: Install Python pip module prerequisites (Linux)
       apt:
@@ -11,15 +10,13 @@
           - python3-virtualenv
           - python3-setuptools
           - python3-docker
-        update_cache: yes
+        update_cache: true
         state: present
       when: ansible_os_family == "Debian"
-
     - name: Run HttpEndpointAgent Docker image
       docker_container:
         name: DeploymentAgent
         image: radonconsortium/radon-ctt-agent:http
-        pull: yes
+        pull: true
         ports:
           - "5000:5000"
-

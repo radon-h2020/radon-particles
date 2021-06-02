@@ -10,18 +10,17 @@ node_types:
     attributes:
       endpoint_url:
         type: string
+        description: Amazon resource name for this API
       arn:
         type: string
+        description: Base URL for endpoints provided by the API
     properties:
-      api_title:
-        type: string
-        description: Name of the API
-      api_description:
-        type: string
-        description: Description of the API
       api_version:
         type: string
         description: Version of the API
+      api_description:
+        type: string
+        description: Description of the API
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -31,7 +30,7 @@ node_types:
       - invoker:
           capability: radon.capabilities.Invocable
           node: radon.nodes.aws.AwsLambdaFunction
-          relationship: radon.relationships.aws.ApiGatewayTriggers
+          relationship: radon.relationships.aws.AwsApiGatewayTriggers
           occurrences: [ 0, UNBOUNDED ]
     interfaces:
       Standard:
@@ -40,7 +39,7 @@ node_types:
           api_title:
             type: string
             required: true
-            default: { get_property: [ SELF, api_title ] }
+            default: { get_property: [ SELF, name ] }
           aws_region:
             type: string
             required: true

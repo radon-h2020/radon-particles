@@ -18,18 +18,12 @@ node_types:
         type: string
         constraints:
           - valid_values: [ csharp, dockerfile, docekrfile-armhf, go-armhf, go, java8, node-arm64, node-armhf, node, php7, python-armhf, python, python3-armhf, python3, ruby ]
-      function_name:
-        type: string
     requirements:
       - host:
           capability: tosca.capabilities.Container
           node: radon.nodes.openfaas.OpenFaasPlatform
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
-    capabilities:
-      invocable:
-        occurrences: [ 0, UNBOUNDED ]
-        type: radon.capabilities.Invocable
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
@@ -41,7 +35,7 @@ node_types:
           FUNCTION_NAME:
             type: string
             required: true
-            default: { get_property: [ SELF, functiom_name ] }
+            default: { get_property: [ SELF, name ] }
           FUNCTION_LANGUAGE_TEMPLATE:
             type: string
             required: true

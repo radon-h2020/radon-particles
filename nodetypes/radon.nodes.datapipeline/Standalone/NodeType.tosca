@@ -95,7 +95,3 @@ node_types:
         type: tosca.artifacts.File
         description: Create datapipeline and generates the Pipeline ID
         file: create.yml
-      EditTemplate:
-        type: tosca.artifacts.Implementation.Python
-        description: Edits the template file if sns service details are passed to node
-        file: edit_template.py

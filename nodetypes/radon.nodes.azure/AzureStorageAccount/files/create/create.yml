@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Create a new Azure storage account
+      azure_rm_storageaccount:
+        name: "{{ storage_account_name }}"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ region }}"
+        account_type: "{{ account_type }}"
+        access_tier: "{{ access_tier }}"
+        kind: "{{ storage_kind }}"

@@ -1,0 +1,101 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.examples"
+topology_template:
+  inputs:
+    ssh_key_name:
+      type: string
+      description: SSH Key Name
+      required: true
+    aws_region:
+      type: string
+      description: AWS Region
+      required: true
+      default: "eu-west-1"
+    aws_ec2_image:
+      type: string
+      description: AWS EC2 AMI Image
+      required: true
+      default: "ami-089cc16f7f08c4457"
+    aws_ec2_vpc_subnet_id:
+      type: string
+      description: AWS EC2 VPC Subnet ID
+      required: true
+    aws_ec2_instance_type:
+      type: string
+      description: AWS EC2 Instance Type (e.g., t2.nano, t2.small, ..)
+      required: true
+      default: "t2.nano"
+    ssh_key_file:
+      type: string
+      description: SSH Key File
+      required: true
+    ssh_user:
+      type: string
+      description: SSH User
+      required: true
+      default: "ubuntu"
+  node_templates:
+    DockerEngine_0:
+      type: radon.nodes.docker.DockerEngine
+      metadata:
+        x: "720"
+        y: "286"
+        displayName: "DockerEngine"
+      requirements:
+        - host:
+            node: EC2_0
+            relationship: con_HostedOn_1
+            capability: host
+    AwsPlatform_0:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "1379"
+        y: "285"
+        displayName: "AwsPlatform"
+      properties:
+        name: "AWS"
+        region: { get_input: aws_region }
+    SockShopDocker_0:
+      type: radon.nodes.SockShopDocker
+      metadata:
+        x: "412"
+        y: "283"
+        displayName: "SockShopDocker"
+      requirements:
+        - host:
+            node: DockerEngine_0
+            relationship: con_HostedOn_2
+            capability: host
+    EC2_0:
+      type: radon.nodes.VM.EC2
+      metadata:
+        x: "1039"
+        y: "289"
+        displayName: "EC2"
+      properties:
+        image: { get_input: aws_ec2_image }
+        ssh_key_name: { get_input: ssh_key_name }
+        vpc_subnet_id: { get_input: aws_ec2_vpc_subnet_id }
+        instance_type: { get_input: aws_ec2_instance_type }
+        ssh_key_file: { get_input: ssh_key_file }
+        ssh_user: { get_input: ssh_user }
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_0
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+  outputs:
+    public_address:
+      type: string
+      description: Address of the deployed EC2 instance running the SockShop
+      required: true
+      default: { get_attribute: [ EC2_0, public_address ] }

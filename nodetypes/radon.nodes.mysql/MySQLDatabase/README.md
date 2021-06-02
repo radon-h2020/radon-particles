@@ -2,24 +2,18 @@
 
 ## MySQL Database Node Type
 
-Node type to represent the logical database that can be managed and hosted on MySQL.
+A node type that describes a MySQL database.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `MySQLDatabase` | `radon.nodes.mysql.MySQLDatabase` | 1.0.0 | `tosca.nodes.Database` |
+| `MySQLDatabase` | `radon.nodes.mysql.MySQLDatabase` | 1.0.0 | `radon.nodes.abstract.Database` |
 
 ### Properties
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `user` | `true` | `string` |   |   | the required user account name for DB administration |
-| `password` | `true` | `string` |   |   | the required password for the DB user account |
-
-### Capabilities
-
-| Name | Type | Valid Source Types | Occurrences |
-|:---- |:---- |:------------------ |:----------- |
-| `database_endpoint` | `tosca.capabilities.Endpoint.Database` |   | [0, UNBOUNDED] |
+| `user` | `true` | `string` |   |   | The user name for the database |
+| `password` | `true` | `string` |   |   | The user password for the database |
 
 ### Requirements
 

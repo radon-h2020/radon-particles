@@ -1,9 +1,8 @@
 ---
 - name: create
   hosts: localhost
-  gather_facts: yes
-
-  tasks:    
+  gather_facts: true
+  tasks:
     - name: Install module prerequisites (Linux)
       apt:
         name:
@@ -12,33 +11,29 @@
           - python3-virtualenv
           - python3-setuptools
           - python3-docker
-        update_cache: yes
+        update_cache: true
         state: present
-      become: yes
+      become: true
       when: ansible_os_family == "Debian"
-      
     - name: Install docker-compose pip
       pip:
         name:
           - docker-compose
-
     - name: Create SockShop target directory
       tempfile:
         state: directory
         suffix: sockshop
       register: sockshop_target_dir
-
     - name: Clone SockShop repository
       git:
         repo: 'https://github.com/microservices-demo/microservices-demo.git'
         dest: "{{ sockshop_target_dir.path }}"
-
     - name: Start SockShop
       docker_compose:
         project_src: "{{ sockshop_target_dir.path }}/deploy/docker-compose"
         project_name: SockShop
-        pull: yes
-        nocache: yes
+        pull: true
+        nocache: true
         services:
           - carts
           - carts-db
@@ -54,5 +49,4 @@
           - shipping
           - user
           - user-db
-      become: yes
-
+      become: true

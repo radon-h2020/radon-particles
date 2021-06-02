@@ -1,11 +1,9 @@
 - name: create
   hosts: localhost
-  gather_facts: yes
+  gather_facts: true
   remote_user: "{{ ssh_user }}"
-
   vars:
     ansible_ssh_private_key_file: "{{ ssh_key_file }}"
-
   tasks:
     - name: provision instance
       ec2:
@@ -13,9 +11,9 @@
         instance_type: "{{ instance_type }}"
         image: "{{ image }}"
         region: "{{ region }}"
-        wait: yes
+        wait: true
         vpc_subnet_id: "{{ vpc_subnet_id }}"
-        assign_public_ip: yes
+        assign_public_ip: true
       register: ec2
     - name: wait for instance to come up
       delegate_to: "{{ ec2.instances[0].public_dns_name }}"

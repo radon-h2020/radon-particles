@@ -1,0 +1,126 @@
+{
+  "objects": [
+    {
+      "name": "EmrActivityObj",
+      "step": "#{myEmrStep}",
+      "runsOn": {
+        "ref": "EmrClusterObj"
+      },
+      "id": "EmrActivityObj",
+      "type": "EmrActivity"
+    },
+    {
+      "period": "#{mySchedule}",
+      "name": "Every 1 day",
+      "id": "DefaultSchedule",
+      "type": "Schedule",
+      "startAt": "FIRST_ACTIVATION_DATE_TIME"
+    },
+    {
+      "taskInstanceType": "#{myTaskInstanceType}",
+      "coreInstanceCount": "#{myCoreInstanceCount}",
+      "masterInstanceType": "#{myMasterInstanceType}",
+      "releaseLabel": "#{myEMRReleaseLabel}",
+      "type": "EmrCluster",
+      "terminateAfter": "50 Minutes",
+      "bootstrapAction": "#{myBootstrapAction}",
+      "taskInstanceCount": "#{myTaskInstanceCount}",
+      "name": "EmrClusterObj",
+      "coreInstanceType": "#{myCoreInstanceType}",
+      "keyPair": "#{myEC2KeyPair}",
+      "id": "EmrClusterObj",
+      "applications": "#{myApplications}"
+    },
+    {
+      "failureAndRerunMode": "CASCADE",
+      "schedule": {
+        "ref": "DefaultSchedule"
+      },
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "pipelineLogUri": "#{myLogBucket}",
+      "scheduleType": "cron",
+      "name": "Default",
+      "id": "Default"
+    }
+  ],
+  "parameters": [
+    {
+      "helpText": "An existing EC2 key pair to SSH into the master node of the EMR cluster as the user \"hadoop\".",
+      "description": "EC2 key pair",
+      "optional": "true",
+      "id": "myEC2KeyPair",
+      "type": "String"
+    },
+    {
+      "helpLink": "https://docs.aws.amazon.com/console/datapipeline/emrsteps",
+      "watermark": "s3://myBucket/myPath/myStep.jar,firstArg,secondArg",
+      "helpText": "A step is a unit of work you submit to the cluster. You can specify one or more steps",
+      "description": "EMR step(s)",
+      "isArray": "true",
+      "id": "myEmrStep",
+      "type": "String"
+    },
+    {
+      "helpText": "Task instances run Hadoop tasks.",
+      "description": "Task node instance type",
+      "optional": "true",
+      "id": "myTaskInstanceType",
+      "type": "String"
+    },
+	{
+      "description": "Application Script type",
+      "id": "myApplications",
+      "type": "String"
+    },
+    {
+      "default": "m1.medium",
+      "helpText": "Core instances run Hadoop tasks and store data using the Hadoop Distributed File System (HDFS).",
+      "description": "Core node instance type",
+      "id": "myCoreInstanceType",
+      "type": "String"
+    },
+    {
+      "default": "emr-5.13.0",
+      "helpText": "Determines the base configuration of the instances in your cluster, including the Hadoop version.",
+      "description": "EMR Release Label",
+      "id": "myEMRReleaseLabel",
+      "type": "String"
+    },
+    {
+      "default": "2",
+      "description": "Core node instance count",
+      "id": "myCoreInstanceCount",
+      "type": "Integer"
+    },
+    {
+      "description": "Task node instance count",
+      "optional": "true",
+      "id": "myTaskInstanceCount",
+      "type": "Integer"
+    },
+    {
+      "helpLink": "https://docs.aws.amazon.com/console/datapipeline/emr_bootstrap_actions",
+      "helpText": "Bootstrap actions are scripts that are executed during setup before Hadoop starts on every cluster node.",
+      "description": "Bootstrap action(s)",
+      "isArray": "true",
+      "optional": "true",
+      "id": "myBootstrapAction",
+      "type": "String"
+    },
+	
+	{
+      "id": "myLogBucket",
+      "description": "S3 Log Bucket name",
+      "type": "AWS::S3::ObjectKey"
+    },    
+    
+    {
+      "default": "m1.medium",
+      "helpText": "The Master instance assigns Hadoop tasks to core and task nodes, and monitors their status.",
+      "description": "Master node instance type",
+      "id": "myMasterInstanceType",
+      "type": "String"
+    }
+  ]
+}

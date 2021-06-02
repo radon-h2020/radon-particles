@@ -112,12 +112,11 @@ topology_template:
         y: "389"
         displayName: "GoogleCloudBucketTriggeredFunction"
       properties:
-        function_memory: { get_input: function_memory }
         environment_variables: {}
+        function_memory: { get_input: function_memory }
         function_timeout: { get_input: function_timeout }
         trigger_bucket_name: { get_input: bucket_in_name }
         function_bucket_name: { get_input: bucket_function_name }
-        function_name: { get_input: function_name }
         name: { get_input: function_name }
         function_runtime: { get_input: function_runtime }
         zip_file: { get_input: zip_file }

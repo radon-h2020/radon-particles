@@ -7,6 +7,14 @@ node_types:
       targetNamespace: "radon.nodes.abstract"
       abstract: "false"
       final: "false"
+    properties:
+      entries:
+        type: map
+        required: false
+        entry_schema:
+          type: radon.datatypes.Entry
+      name:
+        type: string
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -18,3 +26,7 @@ node_types:
           node: radon.nodes.abstract.Function
           relationship: radon.relationships.Triggers
           occurrences: [ 0, UNBOUNDED ]
+    capabilities:
+      api_endpoint:
+        occurrences: [ 0, UNBOUNDED ]
+        type: tosca.capabilities.Endpoint

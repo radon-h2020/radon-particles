@@ -1,11 +1,11 @@
 - hosts: all
-  gather_facts: no
-  tasks: 
+  gather_facts: false
+  tasks:
     - name: "Install Pypi manager"
-      become: yes
-      apt: 
-        name: python3-pip  
-        state: present 
+      become: true
+      apt:
+        name: python3-pip
+        state: present
     - name: "Install pypi_dependencies : {{ pypi_dependencies }}"
       pip:
         name: "{{ item }}"

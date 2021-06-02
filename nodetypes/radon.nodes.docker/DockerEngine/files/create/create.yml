@@ -1,38 +1,40 @@
 ---
 - name: create
   hosts: all
-  gather_facts: yes  
-  become: yes
-
+  gather_facts: true
+  become: true
   tasks:
+    - name: Prerequirements for apt module
+      shell:
+        cmd: apt-get update && apt-get install python3-apt
+      when: ansible_os_family == "Debian"
     - name: Install required packages
       apt:
         pkg:
-          - apt-transport-https  
-          - ca-certificates  
-          - curl  
+          - apt-transport-https
+          - ca-certificates
+          - curl
           - gnupg
-          - software-properties-common  
+          - software-properties-common
       when: ansible_os_family == "Debian"
-
     - name: Add Docker GPG key
       apt_key:
         url: https://download.docker.com/linux/{{ ansible_distribution|lower }}/gpg
         id: 0EBFCD88
-        state: present  
-
+        state: present
+      when: ansible_os_family == "Debian"
     - name: Add Docker repository
       apt_repository:
         filename: docker
         repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }} stable
-        update_cache: yes  
-
+        update_cache: true
+      when: ansible_os_family == "Debian"
     - name: Install docker-ce
       apt:
-        name: docker-ce  
-
+        name: docker-ce
+      when: ansible_os_family == "Debian"
     - name: Start and enable docker service
-      service: 
+      service:
         name: docker
-        enabled: yes
+        enabled: true
         state: started

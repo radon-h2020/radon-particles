@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Remove Azure function app
+      shell: "az functionapp delete \
+            --name {{ function_app_name }} \
+            --resource-group {{ resource_group_name }}"

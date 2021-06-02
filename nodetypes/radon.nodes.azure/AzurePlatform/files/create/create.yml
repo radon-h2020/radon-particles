@@ -1,0 +1,21 @@
+---
+- hosts: all
+  gather_facts: false
+
+  vars:
+    virtualenv_path: "{{ lookup('env', 'VIRTUAL_ENV') }}"
+    pip_args: '--user'
+
+  tasks:
+    - name: Prepare environment flags if run in virtualenv
+      set_fact:
+        pip_args: ''
+      when: virtualenv_path | length > 0
+
+    - name: Install Azure CLI from PyPI
+      pip:
+        name: azure-cli
+        extra_args: "{{ pip_args }}"
+
+    - name: Login to Microsoft Azure platform via Azure CLI
+      shell: "az login --username {{ username }} --password {{ password }}"

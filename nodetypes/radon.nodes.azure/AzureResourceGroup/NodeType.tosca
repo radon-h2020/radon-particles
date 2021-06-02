@@ -1,0 +1,58 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.azure.AzureResourceGroup:
+    derived_from: tosca.nodes.SoftwareComponent
+    metadata:
+      targetNamespace: "radon.nodes.azure"
+      abstract: "false"
+      final: "false"
+    properties:
+      resource_group_name:
+        type: string
+        required: true
+        description: The name of the new Azure resource group
+      region:
+        type: string
+        required: true
+        description: The identifier for Azure region in which resources are/will be deployed
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.azure.AzurePlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          resource_group_name:
+            type: string
+            required: true
+            description: The name of the new Azure resource group
+            default: { get_property: [ SELF, resource_group_name ] }
+          region:
+            type: string
+            required: true
+            description: The identifier for Azure region in which resources are/will be deployed
+            default: { get_property: [ SELF, region ] }
+        operations:
+          create:
+            implementation:
+              primary: create
+              timeout: 0
+            description: The standard create operation
+          delete:
+            implementation:
+              primary: delete
+              timeout: 0
+            description: The standard delete operation
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+        description: The YAML artifact for creation
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml
+        description: The YAML artifact for deletion

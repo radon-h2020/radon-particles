@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Delete "{{ record }}"
+      community.aws.route53:
+        alias: true
+        alias_hosted_zone_id: "{{ alias_zone }}"
+        zone: "{{ zone }}"
+        state: absent
+        record: "{{ record }}"
+        type: A
+        value: "{{ endpoint_url }}"
