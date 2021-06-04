@@ -8,8 +8,11 @@ node_types:
       abstract: "false"
       final: "false"
     attributes:
+      public_ip:
+        description: Openstack public IP of the VM
+        type: string
       public_address:
-        description: OpenStack public IP address of the VM
+        description: OpenStack public ADDRESS of the VM
         type: string
       id:
         description: OpenStack id of the VM

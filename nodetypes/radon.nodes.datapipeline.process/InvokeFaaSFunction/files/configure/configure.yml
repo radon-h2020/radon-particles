@@ -49,7 +49,6 @@
               "properties": { 
                 "HTTP Method": "{{HTTP_method}}",
                 "Remote URL":"{{function_URL}}",
-                "Content-Type": "{{content_type}}"
               }
               "schedulingStrategy": "{{schedulingStrategyValue}}"
               "schedulingPeriod": "{{schedulingPeriodValue}}"

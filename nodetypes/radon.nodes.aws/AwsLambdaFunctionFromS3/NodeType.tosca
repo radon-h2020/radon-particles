@@ -9,14 +9,14 @@ node_types:
       final: "false"
     attributes:
       role_arn:
-        type: string
         description: ARN for the role of the function
+        type: string
       arn:
-        type: string
         description: Amazon Resource Name (ARN) for this function
-      region:
         type: string
+      region:
         description: AWS region in which the function is deployed
+        type: string
     properties:
       handler:
         type: string
@@ -82,10 +82,26 @@ node_types:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
+          s3_bucket_key:
+            type: string
+            required: true
+            default: { get_property: [ SELF, s3_bucket_key ] }
+          aws_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, host, region ] }
+          role_arn:
+            type: string
+            required: true
+            default: { get_attribute: [ SELF, host, role_arn ] }
           lambda_runtime:
             type: string
             required: true
             default: { get_property: [ SELF, runtime ] }
+          function_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, name ] }
           lambda_timeout:
             type: integer
             required: true
@@ -118,22 +134,6 @@ node_types:
             type: string
             required: false
             default: { get_property: [ SELF, env_vars ] }
-          s3_bucket_key:
-            type: string
-            required: true
-            default: { get_property: [ SELF, s3_bucket_key ] }
-          aws_region:
-            type: string
-            required: true
-            default: { get_property: [ SELF, host, region ] }
-          role_arn:
-            type: string
-            required: true
-            default: { get_attribute: [ SELF, host, role_arn ] }
-          function_name:
-            type: string
-            required: true
-            default: { get_property: [ SELF, name ] }
         operations:
           create:
             implementation:

@@ -54,6 +54,10 @@ node_types:
               timeout: 0
           configure:
             inputs:
+              host_vm_ip:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, host, public_ip ] }
               port:
                 type: integer
                 required: true

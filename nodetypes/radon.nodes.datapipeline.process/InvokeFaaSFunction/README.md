@@ -11,3 +11,19 @@ A node type to invoke a generic FaaS function using HTTP endpoint.
 
 
 Currently this node type is similar to InvokeOpenFaaS node type
+
+This nodetype encode the input to base64 and send a json with following format
+
+```json
+{
+  "blob_name":"${filename}",
+  "body":"base64_encoded_input_file"
+}
+```
+
+Inside the Azure function, you can access those data in following manner (using Python code)
+
+```python
+data_in_base64 = req.get_json().get('body')
+blobname = req.get_json().get('blob_name')
+```

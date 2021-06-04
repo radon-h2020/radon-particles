@@ -9,14 +9,14 @@ node_types:
       final: "false"
     attributes:
       role_arn:
-        type: string
         description: ARN for the role of the function
+        type: string
       arn:
-        type: string
         description: Amazon Resource Name (ARN) for this function
-      region:
         type: string
+      region:
         description: AWS region in which the function is deployed
+        type: string
     properties:
       handler:
         type: string

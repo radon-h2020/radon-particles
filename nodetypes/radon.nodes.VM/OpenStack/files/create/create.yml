@@ -20,6 +20,7 @@
         data:
           private_address: "{{ server_info.server.private_v4 }}"
           public_address: "{{ server_info.server.public_v4 }}"
+          public_ip:      "{{ server_info.server.public_v4 }}" 
           id: "{{ server_info.server.id }}"
     # This task will be removed later
     - name: keep the IP so that later other VM can access this IP
