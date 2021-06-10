@@ -35,6 +35,14 @@
         region: "{{ aws_region }}"
         alias: "{{ func_alias }}"
         principal: "s3.amazonaws.com"
+    - name: Create a CloudWatch rule to enable a scheduled invocation of this function
+      community.aws.cloudwatchevent_rule:
+        name: "{{ function_name }}-CronTask"
+        schedule_expression: "{{ cron_expression }}"
+        targets:
+          - id: "{{ function_name }}-TargetId"
+            arn: "{{ alias_info.alias_arn }}"
+      when: cron_expression is defined
     - name: Set attributes
       set_stats:
         data:

@@ -76,6 +76,10 @@ node_types:
         required: false
         entry_schema:
           type: string
+      cron_expression:
+        type: string
+        description: Cron expression to create a CloudWatch event rule for this function
+        required: false
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -139,6 +143,10 @@ node_types:
             type: string
             required: false
             default: { get_property: [ SELF, env_vars ] }
+          cron_expression:
+            type: string
+            required: false
+            default: { get_property: [ SELF, cron_expression ] }
         operations:
           create:
             implementation:
