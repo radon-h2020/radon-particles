@@ -1,0 +1,69 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints"
+topology_template:
+  node_templates:
+    AwsLambdaFunction_0:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "560"
+        y: "349"
+        displayName: "ScheduledFunction"
+      properties:
+        handler: "__main__.main"
+        memory: 256
+        schedule_expression: "rate(1 minute)"
+        name: "ListOpenAQData"
+        runtime: "python3.7"
+        alias: "dev"
+        statement_id: "scheduled-lambda-stmt"
+        zip_file: { get_artifact: [ SELF, code ] }
+        timeout: 300
+        concurrency: 0
+        env_vars:
+          TARGET_BUCKET: "radon-scheduledfunction-openaq-example"
+      requirements:
+        - endpoint:
+            node: AwsS3Bucket_0
+            relationship: con_ConnectsTo_0
+            capability: storage_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_0
+            capability: host
+      artifacts:
+        code:
+          type: radon.artifacts.archive.Zip
+          file: __main__.zip
+    AwsS3Bucket_0:
+      type: radon.nodes.aws.AwsS3Bucket
+      metadata:
+        x: "1289"
+        y: "349"
+        displayName: "TargetBucket"
+      properties:
+        size: "0 MB"
+        name: "radon-scheduledfunction-openaq-example"
+        maxsize: 512
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_1
+            capability: host
+    AwsPlatform_0:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "933"
+        y: "589"
+        displayName: "AwsPlatform"
+      properties:
+        name: "AWS"
+        region: "eu-central-1"
+  relationship_templates:
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectsTo_0:
+      type: radon.relationships.ConnectsTo
