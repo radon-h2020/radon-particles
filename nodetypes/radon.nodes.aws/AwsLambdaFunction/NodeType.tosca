@@ -80,6 +80,7 @@ node_types:
         type: string
         description: Cron or rate expression to create a CloudWatch event rule for this function
         required: false
+        default: "none"
     requirements:
       - host:
           capability: tosca.capabilities.Container

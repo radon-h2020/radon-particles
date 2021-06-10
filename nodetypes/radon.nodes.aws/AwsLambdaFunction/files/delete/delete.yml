@@ -8,6 +8,7 @@
         region: "{{ aws_region }}"
         state: absent
       ignore_errors: true
+
     - name: "Lambda {{ function_name }} undeploy"
       lambda:
         name: "{{ function_name }}"
@@ -15,8 +16,9 @@
         role: "{{ role_arn }}"
         handler: image_resize.lambda_handler
         state: absent
+
     - name: "Remove EventBrdige ruel if scheduling expression was defined"
       community.aws.cloudwatchevent_rule:
         name: "{{ function_name }}-EventBridgeRule"
         state: absent
-      when: schedule_expression is defined
+      when: (schedule_expression is defined) and (schedule_expression != "none")

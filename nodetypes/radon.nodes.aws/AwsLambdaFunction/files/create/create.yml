@@ -47,7 +47,7 @@
         targets: 
           - id: "{{ function_name }}-TargetId"
             arn: "{{ alias_info.alias_arn }}"
-      when: schedule_expression is defined
+      when: (schedule_expression is defined) and (schedule_expression != "none")
       register: cwevent
     
     - name: "Add invocation permission of Lambda function for AWS EventBridge"
@@ -59,7 +59,7 @@
         alias: "{{ func_alias }}"
         principal: "events.amazonaws.com"
         source_arn: "{{ cwevent.rule.arn }}"
-      when: schedule_expression is defined
+      when: (schedule_expression is defined) and (schedule_expression != "none")
 
     - name: Set attributes
       set_stats:
