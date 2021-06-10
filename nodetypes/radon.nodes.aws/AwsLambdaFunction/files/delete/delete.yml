@@ -15,3 +15,8 @@
         role: "{{ role_arn }}"
         handler: image_resize.lambda_handler
         state: absent
+    - name: "Remove EventBrdige ruel if scheduling expression was defined"
+      community.aws.cloudwatchevent_rule:
+        name: "{{ function_name }}-EventBridgeRule"
+        state: absent
+      when: schedule_expression is defined

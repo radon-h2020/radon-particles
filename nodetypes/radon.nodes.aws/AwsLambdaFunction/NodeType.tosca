@@ -76,9 +76,9 @@ node_types:
         required: false
         entry_schema:
           type: string
-      cron_expression:
+      schedule_expression:
         type: string
-        description: Cron expression to create a CloudWatch event rule for this function
+        description: Cron or rate expression to create a CloudWatch event rule for this function
         required: false
     requirements:
       - host:
@@ -143,10 +143,10 @@ node_types:
             type: string
             required: false
             default: { get_property: [ SELF, env_vars ] }
-          cron_expression:
+          schedule_expression:
             type: string
             required: false
-            default: { get_property: [ SELF, cron_expression ] }
+            default: { get_property: [ SELF, schedule_expression ] }
         operations:
           create:
             implementation:

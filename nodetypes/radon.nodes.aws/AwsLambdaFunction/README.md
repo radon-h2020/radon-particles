@@ -32,7 +32,7 @@ A node type that represents an AWS Lambda function.
 | `statement_id` | `true` | `string` |   |   | Lambda policy statement identifier |
 | `zip_file` | `true` | `string` |   |   | Path to a function zip file |
 | `env_vars` | `false` | `map` of `string` |   |   | The environment variables of the function |
-| `cron_expression` | `false` | `string` |   |   | A cron expression to define a CloudWatch rule for cheduled triggering of the function |
+| `schedule_expression` | `false` | `string` |   |   | A cron or rate expression to define a CloudWatch rule for cheduled triggering of the function |
 
 ### Requirements
 
@@ -56,4 +56,4 @@ A node type that represents an AWS Lambda function.
     * `zip_file`
     * `lambda_concurrency`
     * `env_vars`
-    * `cron_expression`
+    * `schedule_expression`
