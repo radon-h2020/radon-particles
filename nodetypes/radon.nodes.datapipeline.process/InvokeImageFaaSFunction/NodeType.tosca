@@ -1,7 +1,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  radon.nodes.datapipeline.process.InvokeFaaSFunction:
+  radon.nodes.datapipeline.process.InvokeImageFaaSFunction:
     derived_from: radon.nodes.datapipeline.process.FaaSFunction
     metadata:
       targetNamespace: "radon.nodes.datapipeline.process"
@@ -18,9 +18,6 @@ node_types:
         description: type of the pipeline. e.g. processor, process-groups, inputPorts, RPG etc
         type: string
     properties:
-      content_type:
-        type: string
-        description: The type of the content (text/html, text/plain, image/jpeg, application/json... )
       function_URL:
         type: string
         description: Remote HTTP URL of the FaaS function
@@ -66,10 +63,6 @@ node_types:
               timeout: 0
           configure:
             inputs:
-              content_type:
-                type: string
-                required: false
-                default: { get_property: [ SELF, content_type ] }
               schedulingStrategy:
                 type: string
                 required: false
