@@ -9,14 +9,16 @@ node_types:
       final: "false"
     attributes:
       role_arn:
-        description: AWS role arn identifier
         type: string
+        description: AWS role arn identifier
     properties:
       name:
         type: string
+        description: The name of the cloud platform
         default: "AWS"
       region:
         type: string
+        description: The region identifier, e.g., us-west-1
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]

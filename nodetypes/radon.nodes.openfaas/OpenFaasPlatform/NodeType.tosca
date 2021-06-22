@@ -14,24 +14,20 @@ node_types:
     properties:
       api_gateway_port:
         type: integer
-        description: port to access OpenFAAS API gateway at
         default: 31112
       prometheus_port:
         type: integer
         default: 31119
       basic_auth_user:
         type: string
-        description: username used for basic authentication
       basic_auth_password:
         type: string
-        description: password used for basic authentication
       kubernetes_version:
         type: version
         required: false
         default: 1.8
       api_gateway_host:
         type: string
-        description: host name to access OpenFAAS API gateway at
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]

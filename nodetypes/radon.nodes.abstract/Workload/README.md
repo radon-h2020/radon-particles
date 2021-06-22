@@ -12,8 +12,8 @@ Abstract node type representing a workload in general.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `name` | `false` | `string` |  |  | Name of the workload |
-| `entries` | `false` | `radon.datatypes.workload.Entries` |  |  | Set of entries |
+| `name` | `false` | `string` |   |   | Name of the workload |
+| `entries` | `false` | `map: radon.datatypes.Entry` | `length: 1` |   | Map of entries |
 
 ### Requirements
 

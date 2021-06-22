@@ -10,5 +10,5 @@ node_types:
     capabilities:
       invocable:
         occurrences: [ 1, 1 ]
-        valid_source_types: [ radon.nodes.azure.AzureResource ]
+        valid_source_types: [ radon.nodes.azure.AzureBlobStorageContainer, radon.nodes.azure.AzureCosmosDB ]
         type: radon.capabilities.Invocable

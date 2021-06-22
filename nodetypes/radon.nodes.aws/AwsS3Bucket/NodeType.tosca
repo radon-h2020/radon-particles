@@ -10,8 +10,16 @@ node_types:
     attributes:
       bucket_name:
         type: string
+        description: Name of this AWS S3 bucket
       region:
         type: string
+        description: AWS region in which the bucket is deployed
+      bucket_url_path:
+        type: string
+        description: URL of the bucket using path-style access (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html)
+      bucket_url_vhost:
+        type: string
+        description: URL of the bucket using virtual-hosted-style access (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html)
     requirements:
       - host:
           capability: tosca.capabilities.Container

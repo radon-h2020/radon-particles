@@ -17,6 +17,6 @@ node_types:
         type: string
         required: false
     capabilities:
-      endpoint_service:
+      service_endpoint:
         occurrences: [ 1, UNBOUNDED ]
         type: tosca.capabilities.Endpoint

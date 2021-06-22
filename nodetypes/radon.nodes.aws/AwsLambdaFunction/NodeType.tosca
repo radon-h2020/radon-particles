@@ -9,13 +9,14 @@ node_types:
       final: "false"
     attributes:
       role_arn:
-        description: AWS function's role ARN
         type: string
+        description: ARN for the role of the function
       arn:
-        description: AWS function's Amazon Resource Name (ARN)
         type: string
+        description: Amazon Resource Name (ARN) for this function
       region:
         type: string
+        description: AWS region in which the function is deployed
     properties:
       handler:
         type: string
@@ -75,6 +76,11 @@ node_types:
         required: false
         entry_schema:
           type: string
+      schedule_expression:
+        type: string
+        description: Cron or rate expression to create a CloudWatch event rule for this function
+        required: false
+        default: "none"
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -138,6 +144,10 @@ node_types:
             type: string
             required: false
             default: { get_property: [ SELF, env_vars ] }
+          schedule_expression:
+            type: string
+            required: false
+            default: { get_property: [ SELF, schedule_expression ] }
         operations:
           create:
             implementation:

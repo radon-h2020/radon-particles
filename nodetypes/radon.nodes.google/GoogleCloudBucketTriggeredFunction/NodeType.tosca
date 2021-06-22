@@ -11,12 +11,6 @@ node_types:
       trigger_bucket_name:
         type: string
         description: Name of the GCP bucket to trigger this function
-    requirements:
-      - monitor:
-          capability: radon.capabilities.monitoring.Monitor
-          node: radon.nodes.monitoring.PushGateway
-          relationship: radon.relationships.monitoring.GCPIsMonitoredBy
-          occurrences: [ 0, UNBOUNDED ]
     capabilities:
       invocable:
         occurrences: [ 1, 1 ]
@@ -57,7 +51,7 @@ node_types:
           function_name:
             type: string
             required: true
-            default: { get_property: [ SELF, function_name ] }
+            default: { get_property: [ SELF, name ] }
           function_runtime:
             type: string
             required: true

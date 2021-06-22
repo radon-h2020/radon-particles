@@ -1,56 +1,44 @@
 ---
 - hosts: all
-  vars: 
-    query: "resources[?name=='{{template_name}}' && starts_with(identifier, '/templates/')].identifier"
-    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true)}}"    
+  vars:
+    query: "resources[?name=='{{ template_name }}' && starts_with(identifier, '/templates/')].identifier"
+    port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true) }}"
   tasks:
-
-    
     - name: Copy template file to remote system (shell command requires file to be in remote system)
       copy:
         src: "{{ template_file }}"
         dest: template.xml
-
     - name: Wait for port 8080 to become open on the host ( dont start checking for 4 seconds )
       wait_for:
-        port: "{{port}}"
+        port: "{{ port }}"
         timeout: 180
-
     - name: upload template file to NiFi template repository
-      shell: 'curl  -X "POST" "http://localhost:{{port}}/nifi-api/process-groups/root/templates/upload" \
+      shell: 'curl  -X "POST" "http://localhost:{{ port }}/nifi-api/process-groups/root/templates/upload" \
                  -H "Content-Type: multipart/form-data" \
                  -k \
                  --form template=@template.xml'
-      register: response 
-
+      register: response
     - name: Get list of available NiFi resources for fetching the id of the template by its name
       uri:
-        url: http://localhost:{{port}}/nifi-api/resources
+        url: http://localhost:{{ port }}/nifi-api/resources
         method: Get
-      register: nifi_resources 
-
-    - name: Initiate the template 
+      register: nifi_resources
+    - name: Initiate the template
       vars:
-        template_id: "{{ nifi_resources.json  | to_json | from_json | json_query(query) | first}}"
+        template_id: "{{ nifi_resources.json  | to_json | from_json | json_query(query) | first }}"
       uri:
-        url: http://localhost:{{port}}/nifi-api/process-groups/root/template-instance
+        url: http://localhost:{{ port }}/nifi-api/process-groups/root/template-instance
         method: POST
         body:
           "originX": 2.0
-          "originY": 3.0 
-          "templateId": "{{template_id.split('/')[2]}}"
+          "originY": 3.0
+          "templateId": "{{ template_id.split('/')[2] }}"
         status_code: 201
         body_format: json
       register: pipeline_info
-
-    
     - name: Set pipeline id property value (process-groups)
       set_stats:
         data:
-          id: "{{ pipeline_info.json.flow.processGroups[0].id }}"        
+          id: "{{ pipeline_info.json.flow.processGroups[0].id }}"
 #          pipeline_type: "processGroups"
       when: pipeline_info.json.flow.processGroups|length > 0
-    
-
-
-    

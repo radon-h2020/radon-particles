@@ -39,9 +39,31 @@
         alias: "{{ func_alias }}"
         principal: "s3.amazonaws.com"
 
+    - name: Create a CloudWatch rule to enable a scheduled invocation of this function
+      community.aws.cloudwatchevent_rule:
+        name: "{{ function_name }}-EventBridgeRule"
+        region: "{{ aws_region }}"
+        schedule_expression: "{{ schedule_expression }}"
+        targets: 
+          - id: "{{ function_name }}-TargetId"
+            arn: "{{ alias_info.alias_arn }}"
+      when: (schedule_expression is defined) and (schedule_expression != "none")
+      register: cwevent
+    
+    - name: "Add invocation permission of Lambda function for AWS EventBridge"
+      lambda_policy:
+        function_name: "{{ function_name }}"
+        statement_id: "{{ permission_id }}-{{ 99999999 | random | to_uuid }}"
+        action: lambda:InvokeFunction
+        region: "{{ aws_region }}"
+        alias: "{{ func_alias }}"
+        principal: "events.amazonaws.com"
+        source_arn: "{{ cwevent.rule.arn }}"
+      when: (schedule_expression is defined) and (schedule_expression != "none")
+
     - name: Set attributes
       set_stats:
-        data: 
-          arn: "{{alias_info.alias_arn}}"
+        data:
+          arn: "{{ alias_info.alias_arn }}"
           role_arn: "{{ role_arn }}"
           region: "{{ aws_region }}"

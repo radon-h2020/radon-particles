@@ -2,41 +2,50 @@
 - name: configure AWS
   hosts: localhost
   gather_facts: false
+
+  vars:
+    virtualenv_path: "{{ lookup('env', 'VIRTUAL_ENV') }}"
+    pip_args: '--user'
+
   tasks:
+    - name: prepare environment flags if run in virtualenv
+      set_fact:
+        pip_args: ''
+      when: virtualenv_path | length > 0
+
     - name: install awscli
       pip:
         name: awscli
         state: present
-        extra_args: --user
-
+        extra_args: "{{ pip_args }}"
     - name: install boto
       pip:
         name: boto
         state: present
-        extra_args: --user
-
+        extra_args: "{{ pip_args }}"
     - name: install boto3
       pip:
         name: boto3
         state: present
-        extra_args: --user   
-     
+        extra_args: "{{ pip_args }}"
     - name: install botocore
       pip:
         name: botocore
         state: present
-        extra_args: --user
-
+        extra_args: "{{ pip_args }}"
     - name: Create global AWS role
       iam_role:
         name: global-serverless-role
         state: present
         assume_role_policy_document: "{{ lookup('file','policy.json') }}"
         managed_policy:
-          -  arn:aws:iam::aws:policy/AWSLambdaFullAccess
+          - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+          - arn:aws:iam::aws:policy/AWSLambda_FullAccess
+          - arn:aws:iam::aws:policy/AmazonS3FullAccess
+          - arn:aws:iam::aws:policy/AmazonAPIGatewayInvokeFullAccess
+          - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
       register: iam_role_response
-
     - name: Set attributes
       set_stats:
-        data: 
-          role_arn: "{{iam_role_response.arn}}"
+        data:
+          role_arn: "{{ iam_role_response.arn }}"

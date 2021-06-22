@@ -2,7 +2,7 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 relationship_types:
   radon.relationships.azure.AzureCosmosDBTriggers:
-    description: Azure-specific relationship type representing CosmosDB-to-AzureFunction communication
+    description: Azure-specific relationship type representing AzureCosmosDB-to-AzureFunction communication
     derived_from: radon.relationships.azure.AzureTriggers
     metadata:
       targetNamespace: "radon.relationships.azure"
