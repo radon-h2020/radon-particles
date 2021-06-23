@@ -1,0 +1,22 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Create a new Azure function app
+      shell: "az functionapp create \
+            --name {{ function_app_name }} \
+            --resource-group {{ resource_group_name }} \
+            --storage-account {{ storage_account_name }} \
+            --consumption-plan-location {{ region }} \
+            --os-type {{ os_type }} \
+            --runtime {{ runtime_type }} \
+            --runtime-version {{ runtime_version }} \
+            --functions-version {{ functions_version }}"
+
+    - name: Deploy function to Azure function app (using the kudu zip push deployment)
+      shell: "az functionapp deployment source config-zip \
+              --name {{ function_app_name }} \
+              --resource-group {{ resource_group_name }} \
+              --src {{ zip_file }} \
+              --build-remote {{ build_remote }} \
+              --timeout {{ timeout }}"

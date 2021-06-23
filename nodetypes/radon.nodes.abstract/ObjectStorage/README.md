@@ -12,12 +12,17 @@ Abstract node type representing an object storage independently of the underlyin
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `entries` | `false` | `map: radon.datatypes.Entry` |   |   | Map of entries<sup>[1](#fn1)</sup> |
-<sup name="fn1">1</sup> Entry names must be prefixed with an operation, e.g. `get` and `get_image`. The supported operations include `get`, `put` and `delete`.
+| `entries`<sup>[1](#fn1)</sup> | `false` | `map: radon.datatypes.Entry` |   |   | Map of entries |
+
+<sup name="fn1">1</sup> The name of each `Entry` must be prefixed with the name of the operation that it is associated with, e.g. "get", "get_object" and and "getObject". This enables the decomposition tool to compute the operating cost of an `ObjectStorage` on the target cloud platform. The following table summarizes the supported operations for platform-specific node types derived from `ObjectStorage`.
+
+| Derived Node Type | Supported Operations |
+|:---- |:-------- |
+| `radon.nodes.aws.AwsS3Bucket` | get, put, post, list, copy, delete |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
 | `host` | `tosca.capabilities.Container` | `radon.nodes.abstract.CloudPlatform` | `tosca.relationships.HostedOn` | [1, 1] |
-| `invoker` | `radon.capabilities.Invocable` | `radon.nodes.abstract.Function` | `radon.relationships.abstract.Triggers` | [0, UNBOUNDED] |
+| `invoker` | `radon.capabilities.Invocable` | `radon.nodes.abstract.Function` | `radon.relationships.Triggers` | [0, UNBOUNDED] |

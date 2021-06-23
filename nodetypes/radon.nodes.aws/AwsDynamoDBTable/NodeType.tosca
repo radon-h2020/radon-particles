@@ -2,7 +2,7 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
   radon.nodes.aws.AwsDynamoDBTable:
-    derived_from: tosca.nodes.Database
+    derived_from: radon.nodes.abstract.Database
     metadata:
       targetNamespace: "radon.nodes.aws"
       abstract: "false"
@@ -25,6 +25,9 @@ node_types:
         type: string
         description: The type of the range key {STRING, NUMBER, BINARY}
         required: false
+      port:
+        type: integer
+        default: 1337
       write_capacity:
         type: integer
         description: Write throughput capacity (units) to provision
@@ -34,9 +37,6 @@ node_types:
         type: string
         description: The type of the hash key {STRING, NUMBER, BINARY}
         required: false
-      table_name:
-        type: string
-        description: The name of the AWS DynamoDB table
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -75,7 +75,7 @@ node_types:
           table_name:
             type: string
             required: true
-            default: { get_property: [ SELF, table_name ] }
+            default: { get_property: [ SELF, name ] }
         operations:
           create:
             implementation:

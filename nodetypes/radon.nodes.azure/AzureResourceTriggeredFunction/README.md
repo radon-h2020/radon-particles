@@ -1,8 +1,8 @@
 ![](https://img.shields.io/badge/Status:-DEVELOPMENT-red)
 
-## Resource-triggered Azure Function Node Type
+## Azure Resource-Triggered Function Node Type
 
-A node type that represents a function that is triggered by an Azure-specific resource. This includes:
+A node type that represents an Azure function which is triggered by an internal resource. This includes:
 [Blob storage](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-storage-blob),
 [Cosmos DB](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-documentdb),
 [Event Grid](https://docs.microsoft.com/en-in/azure/azure-functions/functions-bindings-event-grid),
@@ -19,7 +19,7 @@ A node type that represents a function that is triggered by an Azure-specific re
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-|`invocable`|`radon.capabilities.Invocable`| `radon.nodes.azure.AzureResource` | [1, 1]|
+| `invocable` | `radon.capabilities.Invocable` | `[ radon.nodes.azure.AzureBlobStorageContainer, radon.nodes.azure.AzureCosmosDB ]` | [1, 1] |
 
 ### Notes
 

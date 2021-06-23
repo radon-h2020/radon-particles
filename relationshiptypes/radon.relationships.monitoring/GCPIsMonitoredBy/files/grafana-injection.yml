@@ -1,8 +1,7 @@
 ---
 - name: configure
   hosts: all
-  gather_facts: no
-
+  gather_facts: false
   tasks:
     - name: Configure Grafana dashboards for the monitored_function of user_email
       uri:

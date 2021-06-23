@@ -13,6 +13,7 @@ node_types:
         description: The unique project-id to be used
       name:
         type: string
+        description: The name of the cloud platform
         default: "GCP"
       region:
         type: string
@@ -20,7 +21,7 @@ node_types:
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.google.GoogleCloudFunction, radon.nodes.google.GoogleCloudResource ]
+        valid_source_types: [ radon.nodes.google.GoogleCloudFunction, radon.nodes.google.GoogleCloudBucket ]
         type: tosca.capabilities.Container
     interfaces:
       Standard:

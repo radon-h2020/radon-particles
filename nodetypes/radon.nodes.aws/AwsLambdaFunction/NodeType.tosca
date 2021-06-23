@@ -9,13 +9,14 @@ node_types:
       final: "false"
     attributes:
       role_arn:
-        description: AWS function's role ARN
         type: string
+        description: ARN for the role of the function
       arn:
-        description: AWS function's Amazon Resource Name (ARN)
         type: string
+        description: Amazon Resource Name (ARN) for this function
       region:
         type: string
+        description: AWS region in which the function is deployed
     properties:
       handler:
         type: string
@@ -38,7 +39,7 @@ node_types:
         description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
         default: "nodejs"
         constraints:
-          - valid_values: [ nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5 ]
+          - valid_values: [ nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5 ]
       alias:
         type: string
         description: Lambda function's alias
@@ -75,6 +76,11 @@ node_types:
         required: false
         entry_schema:
           type: string
+      schedule_expression:
+        type: string
+        description: Cron or rate expression to create a CloudWatch event rule for this function
+        required: false
+        default: "none"
     requirements:
       - host:
           capability: tosca.capabilities.Container
@@ -138,6 +144,10 @@ node_types:
             type: string
             required: false
             default: { get_property: [ SELF, env_vars ] }
+          schedule_expression:
+            type: string
+            required: false
+            default: { get_property: [ SELF, schedule_expression ] }
         operations:
           create:
             implementation:

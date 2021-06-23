@@ -35,7 +35,7 @@ topology_template:
         runtime: "java8"
         alias: "dev"
         statement_id: "lambda_test_permission01"
-        zip_file: "thumbnail-generator-dev.jar"
+        zip_file: { get_artifact: [ SELF, thumbnail-generator ] }
         timeout: 300
         env_vars:
           THUMBNAIL_BUCKET: "h2020radon-examples-target-bucket"

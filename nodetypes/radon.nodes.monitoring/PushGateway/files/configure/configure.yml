@@ -1,5 +1,5 @@
 ---
-- name: create
+- name: configure
   hosts: all
   gather_facts: no
   become: true
@@ -12,7 +12,6 @@
     - name: Install consul module for python
       pip:
         name: python-consul
-
     - name: Inject Push Gateway instance to Radon Consul
       consul:
         service_name: "{{ pushgateway_ip }}_push_gateway"

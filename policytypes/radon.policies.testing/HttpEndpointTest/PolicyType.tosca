@@ -23,13 +23,13 @@ policy_types:
         type: integer
         default: 200
       expected_body:
-        type: json
+        type: string
         required: false
       use_https:
         type: boolean
         default: false
       test_body:
-        type: json
+        type: string
         required: false
       test_header:
         type: map

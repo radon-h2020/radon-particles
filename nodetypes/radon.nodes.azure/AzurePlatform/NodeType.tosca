@@ -8,27 +8,59 @@ node_types:
       abstract: "false"
       final: "false"
     properties:
+      username:
+        type: string
+        required: true
+        description: Azure username
       password:
         type: string
-      user_name:
-        type: string
+        required: true
+        description: Azure password
       region:
         type: string
-        required: false
+        required: true
+        description: The identifier for Azure region in which resources are/will be deployed
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.azure.AzureFunction, radon.nodes.azure.AzureResource ]
+        valid_source_types: [ radon.nodes.azure.AzureResourceGroup, radon.nodes.azure.AzureStorageAccount, radon.nodes.azure.AzureBlobStorageContainer, radon.nodes.azure.AzureCosmosDB, radon.nodes.azure.AzureFunction, radon.nodes.azure.AzureResourceTriggeredFunction, radon.nodes.azure.AzureHttpTriggeredFunction ]
         type: tosca.capabilities.Container
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          PASSWORD:
+          username:
             type: string
             required: true
+            description: Azure username
+            default: { get_property: [ SELF, username ] }
+          password:
+            type: string
+            required: true
+            description: Azure password
             default: { get_property: [ SELF, password ] }
-          USER_NAME:
+          region:
             type: string
             required: true
-            default: { get_property: [ SELF, user_name ] }
+            description: The identifier for Azure region in which resources are/will be deployed
+            default: { get_property: [ SELF, region ] }
+        operations:
+          create:
+            implementation:
+              primary: create
+              timeout: 0
+            description: The standard create operation
+          delete:
+            implementation:
+              primary: delete
+              timeout: 0
+            description: The standard delete operation
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+        description: The YAML artifact for creation
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml
+        description: The YAML artifact for deletion

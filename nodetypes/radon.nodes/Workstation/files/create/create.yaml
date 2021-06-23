@@ -1,0 +1,13 @@
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Install Pypi manager"
+      become: true
+      apt:
+        name: python3-pip
+        state: present
+    - name: "Install pypi_dependencies : {{ pypi_dependencies }}"
+      pip:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ pypi_dependencies }}"

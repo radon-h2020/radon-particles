@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Remove Azure BLOB storage container
+      azure_rm_storageblob:
+        state: absent
+        container: "{{ container_name }}"
+        resource_group: "{{ resource_group_name }}"
+        storage_account_name: "{{ storage_account_name }}"

@@ -9,18 +9,20 @@ node_types:
       final: "false"
     attributes:
       role_arn:
-        description: AWS role arn identifier
         type: string
+        description: AWS role arn identifier
     properties:
       name:
         type: string
+        description: The name of the cloud platform
         default: "AWS"
       region:
         type: string
+        description: The region identifier, e.g., us-west-1
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket, radon.nodes.VM.EC2, radon.nodes.aws.AwsApiGateway, radon.nodes.aws.AwsDynamoDBTable, radon.nodes.aws.AwsLambdaFunctionFromS3 ]
+        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket, radon.nodes.VM.EC2, radon.nodes.aws.AwsApiGateway, radon.nodes.aws.AwsDynamoDBTable, radon.nodes.aws.AwsLambdaFunctionFromS3, radon.nodes.datapipeline.PipelineBlock ]
         type: tosca.capabilities.Container
     interfaces:
       Standard:

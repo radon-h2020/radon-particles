@@ -12,12 +12,12 @@ Abstract node type representing a workload in general.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `name` | `false` | `string` |  |  | Name of the workload |
-| `entries` | `false` | `radon.datatypes.workload.Entries` |  |  | Set of entries |
+| `name` | `false` | `string` |   |   | Name of the workload |
+| `entries` | `false` | `map: radon.datatypes.Entry` | `length: 1` |   | Map of entries |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
-| `invoker` | `radon.capabilities.Invocable` |   | `radon.relationships.abstract.Triggers` | [0, UNBOUNDED] |
+| `invoker` | `radon.capabilities.Invocable` |   | `radon.relationships.Triggers` | [0, UNBOUNDED] |
 | `endpoint` | `tosca.capabilities.Endpoint` |   | `radon.relationships.ConnectsTo` | [0, UNBOUNDED] |

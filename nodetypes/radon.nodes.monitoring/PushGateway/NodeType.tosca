@@ -1,21 +1,5 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
-imports:
-  - file: radonnodesdocker__DockerApplication.tosca
-    namespace_uri: radon.nodes.docker
-    namespace_prefix: radonnodesdocker
-  - file: radoncapabilitiesmonitoring__Monitor.tosca
-    namespace_uri: radon.capabilities.monitoring
-    namespace_prefix: radoncapabilitiesmonitoring
-  - file: radonartifacts__Ansible.tosca
-    namespace_uri: radon.artifacts
-    namespace_prefix: radonartifacts
-  - file: radoncapabilitiescontainer__DockerRuntime.tosca
-    namespace_uri: radon.capabilities.container
-    namespace_prefix: radoncapabilitiescontainer
-  - file: radonnodesVM__EC2.tosca
-    namespace_uri: radon.nodes.VM
-    namespace_prefix: radonnodesVM
 node_types:
   radon.nodes.monitoring.PushGateway:
     derived_from: radon.nodes.docker.DockerApplication

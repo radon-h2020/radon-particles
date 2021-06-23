@@ -1,0 +1,64 @@
+---
+- name: create
+  hosts: all
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Install module prerequisites (Linux)
+      apt:
+        name:
+          - git
+          - python3-pip
+          - python3-virtualenv
+          - python3-setuptools
+          - python3-docker
+          - docker-compose
+        update_cache: true
+        state: present
+      when: ansible_os_family == "Debian"
+    - name: Upgrade pip to latest version
+      pip:
+        name:
+          - pip
+        state: latest
+        executable: pip3
+    - name: Install setuptools_rust
+      pip:
+        name:
+          - setuptools_rust
+        executable: pip3
+    - name: Install docker-compose
+      pip:
+        name:
+          - docker-compose
+        executable: pip3
+    - name: Create SockShop target directory
+      tempfile:
+        state: directory
+        suffix: sockshop
+      register: sockshop_target_dir
+    - name: Clone SockShop repository
+      git:
+        repo: 'https://github.com/microservices-demo/microservices-demo.git'
+        dest: "{{ sockshop_target_dir.path }}"
+    - name: Start SockShop
+      docker_compose:
+        project_src: "{{ sockshop_target_dir.path }}/deploy/docker-compose"
+        project_name: SockShop
+        pull: true
+        nocache: true
+        services:
+          - carts
+          - carts-db
+          - catalogue
+          - catalogue-db
+          - edge-router
+          - front-end
+          - orders
+          - orders-db
+          - payment
+          - queue-master
+          - rabbitmq
+          - shipping
+          - user
+          - user-db

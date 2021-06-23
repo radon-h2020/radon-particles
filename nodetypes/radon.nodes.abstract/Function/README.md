@@ -13,13 +13,14 @@ Abstract node type representing a serverless function independently of the under
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `name` | `true` | `string` |   |   | Name of the function |
-| `entries` | `false` | `radon.datatypes.function.Entries` |   |   | Set of entries |
+| `entries` | `false` | `map: radon.datatypes.Entry` | `length: 1` |   | Map of entries |
 
 ### Requirements
 
 | Name | Capability Type | Node Type Constraint | Relationship Type | Occurrences |
 |:---- |:--------------- |:-------------------- |:----------------- |:------------|
 | `host` | `tosca.capabilities.Container` | `radon.nodes.abstract.CloudPlatform` | `tosca.relationships.HostedOn` | [1, 1] |
+| `invoker` | `radon.capabilities.Invocable` |   | `radon.relationships.Triggers` | [0, UNBOUNDED] |
 | `endpoint` | `tosca.capabilities.Endpoint` |   | `radon.relationships.ConnectsTo` | [0, UNBOUNDED] |
 
 ### Capabilities

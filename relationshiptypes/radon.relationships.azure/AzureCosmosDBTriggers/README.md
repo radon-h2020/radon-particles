@@ -1,10 +1,10 @@
-## CosmosDB Triggers Relationship
+## Azure Cosmos DB Triggers Relationship
 
-A relationship type representing CosmosDB-to-AzureCFunction communication.
+Azure-specific relationship type representing AzureCosmosDB-to-AzureFunction communication.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
-| `AzureCosmosDBTriggers` | `radon.relationships.azure.AzureCosmosDBTriggers` | 1.0.0 | `radon.relationships.azure.Triggers` |
+| `AzureCosmosDBTriggers` | `radon.relationships.azure.AzureCosmosDBTriggers` | 1.0.0 | `radon.relationships.azure.AzureTriggers` |
 
 ### Notes
 

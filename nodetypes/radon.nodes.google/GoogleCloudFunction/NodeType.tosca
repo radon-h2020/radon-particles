@@ -8,30 +8,30 @@ node_types:
       abstract: "false"
       final: "false"
     properties:
-      function_memory:
-        type: integer
-        description: Limit on the amount of memory the function can use.
-        default: 256
-        constraints:
-          - valid_values: [ 128, 256, 512, 1024, 2048 ]
       environment_variables:
         type: map
         description: The function's environment variables
         required: false
         entry_schema:
           type: string
+      function_memory:
+        type: integer
+        description: Limit on the amount of memory the function can use
+        default: 256
+        constraints:
+          - valid_values: [ 128, 256, 512, 1024, 2048 ]
       function_timeout:
         type: integer
+        description: Limit on time the function is allowed to execute
         default: 60
         constraints:
           - in_range: [ 1, 540 ]
       function_bucket_name:
         type: string
-        description: Name of the GCP bucket containing the zipped GCP function
-      function_name:
-        type: string
+        description: Name of the GCP bucket containing the zipped function code
       function_runtime:
         type: string
+        description: The runtime environment to execute the function
         constraints:
           - valid_values: [ nodejs8, nodejs10, python37, go111, nodejs6 ]
       zip_file:

@@ -2,7 +2,7 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
   radon.nodes.mysql.MySQLDBMS:
-    derived_from: tosca.nodes.DBMS
+    derived_from: radon.nodes.abstract.DBMS
     metadata:
       targetNamespace: "radon.nodes.mysql"
       abstract: "false"
@@ -25,6 +25,10 @@ node_types:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
+          DBMS_VERSION:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, component_version ] }
           DBMS_PORT:
             type: integer
             required: true

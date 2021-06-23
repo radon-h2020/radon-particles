@@ -14,5 +14,5 @@ node_types:
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.abstract.Function, radon.nodes.abstract.ObjectStorage ]
+        valid_source_types: [ radon.nodes.abstract.Function, radon.nodes.abstract.ObjectStorage, radon.nodes.abstract.ApiGateway, radon.nodes.abstract.Database ]
         type: tosca.capabilities.Container

@@ -1,0 +1,285 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints"
+topology_template:
+  node_templates:
+    AwsRoute53_0:
+      type: radon.nodes.aws.AwsRoute53
+      metadata:
+        x: "638"
+        y: "134"
+        displayName: "AwsRoute53"
+      properties:
+        alias_zone: "YOUR_ZONE_ALIAS"
+        zone: "YOUR_ZONE"
+        record: "YOUR_DNS_RECORD"
+        component_version: "1.0.0"
+      requirements:
+        - dependency:
+            node: AwsApiGateway_0
+            relationship: con_DependsOn_0
+            capability: feature
+    AwsLambdaFunction_1:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1072"
+        y: "193"
+        displayName: "GetTodoItem"
+      properties:
+        handler: "get.handler"
+        memory: 128
+        name: "get-item"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "get-stmt"
+        zip_file: { get_artifact: [ SELF, get_item ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_1
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_3
+            capability: host
+      artifacts:
+        get_item:
+          type: radon.artifacts.archive.Zip
+          file: get.zip
+    AwsLambdaFunction_2:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1070"
+        y: "287"
+        displayName: "CreateTodoItem"
+      properties:
+        handler: "create.handler"
+        memory: 128
+        name: "create-item"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "create-stmt"
+        zip_file: { get_artifact: [ SELF, create_item ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_2
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_4
+            capability: host
+      artifacts:
+        create_item:
+          type: radon.artifacts.archive.Zip
+          file: create.zip
+    AwsDynamoDBTable_0:
+      type: radon.nodes.aws.AwsDynamoDBTable
+      metadata:
+        x: "1514"
+        y: "301"
+        displayName: "ItemsTable"
+      properties:
+        hash_key_name: "id"
+        read_capacity: 1
+        name: "items"
+        write_capacity: 1
+        hash_key_type: "STRING"
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_0
+            capability: host
+    AwsLambdaFunction_0:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1072"
+        y: "107"
+        displayName: "ListTodoItems"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_0
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_1
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_3:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1065"
+        y: "386"
+        displayName: "UpdateTodoItem"
+      properties:
+        handler: "update.handler"
+        memory: 128
+        name: "update-item"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "update-stmt"
+        zip_file: { get_artifact: [ SELF, update_item ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_3
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_5
+            capability: host
+      artifacts:
+        update_item:
+          type: radon.artifacts.archive.Zip
+          file: update.zip
+    AwsPlatform_0:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "635"
+        y: "621"
+        displayName: "AwsPlatform"
+      properties:
+        name: "AWS"
+        region: "eu-central-1"
+    AwsLambdaFunction_4:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1065"
+        y: "488"
+        displayName: "DeleteTodoItem"
+      properties:
+        handler: "delete.handler"
+        memory: 128
+        name: "delete-item"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "delete-stmt"
+        zip_file: { get_artifact: [ SELF, delete_item ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_4
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_6
+            capability: host
+      artifacts:
+        delete_item:
+          type: radon.artifacts.archive.Zip
+          file: delete.zip
+    AwsApiGateway_0:
+      type: radon.nodes.aws.AwsApiGateway
+      metadata:
+        x: "638"
+        y: "313"
+        displayName: "AwsApiGateway"
+      properties:
+        name: "ServerlessToDoListAPI"
+        api_version: "1.0.0"
+        api_description: "a simple serverless API example"
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_2
+            capability: host
+        - invoker:
+            node: AwsLambdaFunction_0
+            relationship: con_AwsApiGatewayTriggers_0
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_1
+            relationship: con_AwsApiGatewayTriggers_1
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_2
+            relationship: con_AwsApiGatewayTriggers_2
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_3
+            relationship: con_AwsApiGatewayTriggers_3
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_4
+            relationship: con_AwsApiGatewayTriggers_4
+            capability: invocable
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_3:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_6:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_4:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_5:
+      type: tosca.relationships.HostedOn
+    con_ConnectsTo_2:
+      type: radon.relationships.ConnectsTo
+    con_DependsOn_0:
+      type: tosca.relationships.DependsOn
+    con_ConnectsTo_3:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_4:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_4:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos/{id}"
+        http_methods: "delete"
+    con_AwsApiGatewayTriggers_3:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos/{id}"
+        http_methods: "put"
+    con_ConnectsTo_0:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_2:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos"
+        http_methods: "post"
+    con_ConnectsTo_1:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_1:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos/{id}"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_0:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos"
+        http_methods: "get"

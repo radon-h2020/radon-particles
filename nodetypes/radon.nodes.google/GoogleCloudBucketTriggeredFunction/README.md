@@ -1,9 +1,9 @@
 ![](https://img.shields.io/badge/Status:-RELEASED-green)
 ![](https://img.shields.io/badge/%20-DEPLOYABLE-blueviolet)
 
-## Google Bucket-triggered Cloud Function Node Type
+## Google Cloud Bucket-Triggered Function Node Type
 
-A node type that represents a Google Cloud Function that can be triggered by a Google Cloud bucket.
+A node type representing a Google Cloud function that can be triggered by a Google Cloud bucket.
 
 | Name | URI | Version | Derived From |
 |:---- |:--- |:------- |:------------ |
@@ -13,13 +13,13 @@ A node type that represents a Google Cloud Function that can be triggered by a G
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `trigger_bucket_name` | `true` | `string` |  |  | Name of the GCP bucket to trigger this function |
+| `trigger_bucket_name` | `true` | `string` |   |   | Name of the GCP bucket to trigger this function |
 
 ### Capabilities
 
 | Name | Type | Valid Source Types | Occurrences |
 |:---- |:---- |:------------------ |:----------- |
-| `inovcable` | `radon.capabilities.Invocable` | `radon.nodes.google.GoogleCloudResource`| [1, 1] |
+| `inovcable` | `radon.capabilities.Invocable` | `[radon.nodes.google.GoogleCloudBucket]` | [1, 1] |
 
 ### Notes
 

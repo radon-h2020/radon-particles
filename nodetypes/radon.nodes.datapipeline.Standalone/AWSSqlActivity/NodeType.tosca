@@ -1,0 +1,129 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.Standalone.AWSSqlActivity:
+    derived_from: radon.nodes.datapipeline.Standalone
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.Standalone"
+      abstract: "false"
+      final: "false"
+    properties:
+      log_directory:
+        type: string
+        description: The dicrectory name inside S3 bucket where you want to store your log related to DP execution
+      schedule:
+        type: string
+        description: The scheduling info using CRON syntax
+        required: false
+        default: "1 Days"
+      MySqldb_region:
+        type: string
+        description: Region in which RDS is defined e.g eu-west-1
+      MySqldb_username:
+        type: string
+        description: Username of the RDS database (MySql)
+      sns_arn_topic:
+        type: string
+        description: enter the arn_topic address of sns service defined under AWS SNS
+        required: false
+        default: "None"
+      MySqldb_script:
+        type: string
+        description: MySql DB script such as update, delete, insert into a table
+      MySqldb_name:
+        type: string
+        description: Name of the database which is defined inside the RDS-instance ID
+      MySqlrds_instanceid:
+        type: string
+        description: Relational DB ID which is located in AWS->RDS->Databases, select the ID on which you want to execute the script
+      MySqldb_password:
+        type: string
+        description: Password of the RDS database (MySql)
+      log_bucket:
+        type: string
+        description: S3 bucket name in which the log related to DP execution will be stored
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          log_directory:
+            type: string
+            required: true
+            default: { get_property: [ SELF, log_directory ] }
+          configure_file_path:
+            type: string
+            required: true
+            default: { get_property: [ SELF, configure_file_path ] }
+          dp_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, dp_name ] }
+          MySqldb_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqldb_region ] }
+          MySqldb_username:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqldb_username ] }
+          sns_arn_topic:
+            type: string
+            description: enter the arn_topic address of sns service defined under AWS SNS
+            required: false
+            default: { get_property: [ SELF, sns_arn_topic ] }
+          credential_file_path:
+            type: string
+            required: true
+            default: { get_property: [ SELF, credential_file_path ] }
+          MySqldb_script:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqldb_script ] }
+          MySqldb_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqldb_name ] }
+          edit_schedule:
+            type: string
+            required: false
+            default: { get_property: [ SELF, schedule ] }
+          MySqlrds_instanceid:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqlrds_instanceid ] }
+          MySqldb_password:
+            type: string
+            required: true
+            default: { get_property: [ SELF, MySqldb_password ] }
+          log_bucket:
+            type: string
+            required: true
+            default: { get_property: [ SELF, log_bucket ] }
+        operations:
+          configure:
+            description: The standard configure operation
+            inputs:
+              edit_template:
+                type: string
+                required: false
+                default: { get_artifact: [ SELF, edit_template ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: Configure
+              timeout: 0
+    artifacts:
+      SqlActivityTemplate:
+        type: tosca.artifacts.File
+        file: SqlActivityDP.json
+      Configure:
+        type: tosca.artifacts.File
+        file: Configure.yml

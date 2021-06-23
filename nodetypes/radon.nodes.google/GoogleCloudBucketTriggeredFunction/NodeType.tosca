@@ -57,7 +57,7 @@ node_types:
           function_name:
             type: string
             required: true
-            default: { get_property: [ SELF, function_name ] }
+            default: { get_property: [ SELF, name ] }
           function_runtime:
             type: string
             required: true
