@@ -1,5 +1,5 @@
 interface_types:
-  tosca.interfaces.scaling.ScaleUp:
+  radon.interfaces.scaling.ScaleUp:
     derived_from: tosca.interfaces.Root
     operations:
       scale_up
