@@ -1,0 +1,6 @@
+interface_types:
+  radon.interfaces.scaling.ScaleUp:
+    derived_from: tosca.interfaces.Root
+    operations:
+      scale_up
+        description: Interfqace to trigger the scale up action.
