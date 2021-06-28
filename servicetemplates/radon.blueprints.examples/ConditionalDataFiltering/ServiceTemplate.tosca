@@ -1,14 +1,14 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 metadata:
-  targetNamespace: "example.org.tosca.servicetemplates"
+  targetNamespace: "radon.blueprints.examples"
 topology_template:
   node_templates:
     attrMatchCondition_0:
       type: radon.nodes.datapipeline.process.attrMatchCondition
       metadata:
-        x: "666"
-        y: "119"
+        x: "665"
+        y: "107"
         displayName: "attrMatchCondition"
       properties:
         matchvalue: 1000
@@ -28,8 +28,8 @@ topology_template:
     PublishLocal_0:
       type: radon.nodes.datapipeline.destination.PublishLocal
       metadata:
-        x: "1227"
-        y: "127"
+        x: "1294"
+        y: "107"
         displayName: "PublishLocal"
       properties:
         create_if_missing: true
@@ -45,8 +45,8 @@ topology_template:
     jsonValueMatchCondition_0:
       type: radon.nodes.datapipeline.process.jsonValueMatchCondition
       metadata:
-        x: "912"
-        y: "280"
+        x: "667"
+        y: "268"
         displayName: "jsonValueMatchCondition"
       properties:
         schedulingStrategy: "EVENT_DRIVEN"
@@ -66,8 +66,8 @@ topology_template:
     PublishLocal_1:
       type: radon.nodes.datapipeline.destination.PublishLocal
       metadata:
-        x: "1224"
-        y: "383"
+        x: "1361"
+        y: "267"
         displayName: "PublishLocal"
       properties:
         create_if_missing: true
@@ -106,8 +106,8 @@ topology_template:
     OpenStack_0:
       type: radon.nodes.VM.OpenStack
       metadata:
-        x: "1241"
-        y: "549"
+        x: "1275"
+        y: "570"
         displayName: "OpenStack"
       properties:
         flavor: "c1.medium"
