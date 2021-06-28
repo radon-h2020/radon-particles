@@ -1,0 +1,27 @@
+---
+- name: create
+  hosts: all
+  gather_facts: no
+  become: true
+  become_method: sudo
+  vars:
+    ansible_ssh_private_key_file: "{{ ssh_key_file }}"
+    ansible_ssh_user: "{{ ssh_user }}"
+  tasks:
+    - name: Install Python pip module prerequisites (Linux)
+      apt:
+        name:
+          - python3-pip
+          - python3-virtualenv
+          - python3-setuptools
+          - python3-docker
+        update_cache: yes
+        state: present
+
+    - name: Run Prometheus Pushgateway Docker image
+      docker_container:
+        name: DeploymentAgent
+        image: prom/pushgateway
+        pull: yes
+        ports:
+          - "9091:9091"

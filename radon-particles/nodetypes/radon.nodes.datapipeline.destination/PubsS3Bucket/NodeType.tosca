@@ -1,0 +1,72 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.destination.PubsS3Bucket:
+    derived_from: radon.nodes.datapipeline.destination.PublishRemote
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.destination"
+      abstract: "false"
+      final: "false"
+    attributes:
+      template_name:
+        type: string
+        default: "S3Bucket_dest_PG_LocalConn"
+    properties:
+      BucketName:
+        type: string
+      cred_file_path:
+        type: string
+      Region:
+        type: string
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              template_name:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, template_name ] }
+              template_file:
+                type: string
+                required: true
+                default: "S3Bucket_dest_PG_LocalConn.xml"
+            implementation:
+              primary: create
+              dependencies: [ templateFile_localConn ]
+              timeout: 0
+          configure:
+            inputs:
+              cred_file_path:
+                type: string
+                required: true
+                default: { get_property: [ SELF, cred_file_path ] }
+              BucketName:
+                type: string
+                required: true
+                default: { get_property: [ SELF, BucketName ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              Region:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Region ] }
+            implementation:
+              primary: configure
+              timeout: 0
+    artifacts:
+      templateFile_LocalConn:
+        type: tosca.artifacts.File
+        file: S3Bucket_dest_PG_LocalConn.xml
+      create:
+        type: tosca.artifacts.File
+        file: create.yml
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml
+      templateFile_RmtConn:
+        type: tosca.artifacts.File
+        file: S3Bucket_dest_PG_RmtConn.xml

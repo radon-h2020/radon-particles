@@ -1,0 +1,36 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+policy_types:
+  radon.policies.testing.HttpEndpointTest:
+    derived_from: radon.policies.testing.Test
+    metadata:
+      targetNamespace: "radon.policies.testing"
+      abstract: "false"
+      final: "false"
+    properties:
+      path:
+        type: string
+        default: "/"
+      hostname:
+        type: string
+      method:
+        type: string
+        default: "GET"
+      port:
+        type: integer
+        default: 80
+      expected_status:
+        type: integer
+        default: 200
+      expected_body:
+        type: string
+        required: false
+      use_https:
+        type: boolean
+        default: false
+      test_body:
+        type: string
+        required: false
+      test_header:
+        type: map
+        required: false

@@ -1,0 +1,20 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+capability_types:
+  radon.capabilities.container.JavaRuntime:
+    derived_from: tosca.capabilities.Container
+    metadata:
+      targetNamespace: "radon.capabilities.container"
+      abstract: "false"
+      final: "false"
+    properties:
+      headless:
+        type: boolean
+        default: true
+      java_version:
+        type: integer
+        default: 8
+      only_jre:
+        type: boolean
+        default: true
+    valid_source_types: [ radon.nodes.java.JavaApplication ]

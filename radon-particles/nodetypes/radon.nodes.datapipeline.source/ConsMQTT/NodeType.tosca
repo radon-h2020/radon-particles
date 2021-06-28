@@ -1,0 +1,109 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.source.ConsMQTT:
+    derived_from: radon.nodes.datapipeline.source.ConsumeRemote
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.source"
+      abstract: "false"
+      final: "false"
+    attributes:
+      template_name:
+        type: string
+        default: "MQTT_SRC_PG_LocalConn"
+    properties:
+      Broker_URI:
+        type: string
+        description: User can put the IP address in place or localhost and the configured port address of Mosquitto Broker.
+        default: "tcp://localhost:1883"
+      Username:
+        type: string
+      schedulingStrategy:
+        type: string
+        description: Either EVENT_DRIVEN (default) or CRON_DRIVEN. EVENT_DRIVEN is similar with TIMER_DRIVEN with 0 sec value in NiFi.
+        required: false
+        default: "EVENT_DRIVEN"
+      Max_Queue_Size:
+        type: integer
+      schedulingPeriodCRON:
+        type: string
+        description: For CRON_DRIVEN give in CRON syntax.
+        required: false
+        default: "* * * * * ?"
+      Quality_of_Service:
+        type: integer
+      Client_ID:
+        type: string
+      Password:
+        type: string
+      TopicName:
+        type: string
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              template_name:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, template_name ] }
+              template_file:
+                type: string
+                description: SRC xml file
+                required: true
+                default: "MQTT_SRC_PG_LocalConn.xml"
+            implementation:
+              primary: create
+              dependencies: [ templateFile_localConn ]
+              timeout: 0
+          configure:
+            inputs:
+              Broker_URI:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Broker_URI ] }
+              Username:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Username ] }
+              Max_Queue_Size:
+                type: integer
+                required: true
+                default: { get_property: [ SELF, Max_Queue_Size ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              Quality_of_Service:
+                type: integer
+                required: true
+                default: { get_property: [ SELF, Quality_of_Service ] }
+              Client_ID:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Client_ID ] }
+              Password:
+                type: string
+                required: true
+                default: { get_property: [ SELF, Password ] }
+              TopicName:
+                type: string
+                required: true
+                default: { get_property: [ SELF, TopicName ] }
+            implementation:
+              primary: configure
+              timeout: 0
+    artifacts:
+      templateFile_localConn:
+        type: tosca.artifacts.File
+        description: Nifi Template for Consume MQTT
+        file: MQTT_SRC_PG_LocalConn.xml
+      create:
+        type: tosca.artifacts.File
+        description: Ansible Script for Create
+        file: create.yml
+      configure:
+        type: tosca.artifacts.File
+        description: Configure Ansible Script
+        file: configure.yml

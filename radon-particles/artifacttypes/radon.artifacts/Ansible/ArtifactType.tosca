@@ -1,0 +1,10 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+artifact_types:
+  radon.artifacts.Ansible:
+    derived_from: tosca.artifacts.Implementation
+    metadata:
+      targetNamespace: "radon.artifacts"
+      abstract: "false"
+      final: "false"
+    file_ext: [ yml, yaml ]

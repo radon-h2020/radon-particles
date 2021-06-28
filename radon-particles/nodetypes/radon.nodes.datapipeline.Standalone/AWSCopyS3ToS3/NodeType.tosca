@@ -1,0 +1,95 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.Standalone.AWSCopyS3ToS3:
+    derived_from: radon.nodes.datapipeline.Standalone
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.Standalone"
+      abstract: "false"
+      final: "false"
+    properties:
+      log_directory:
+        type: string
+        description: The directory name in the log_bucket.
+      file_path:
+        type: string
+        description: specify the file that needs to be transferred from source s3 to destination s3, if kept empty entire directory content will be transferred
+      schedule:
+        type: string
+        description: The scheduling info using CRON syntax.
+        required: false
+        default: "1 Days"
+      sns_arn_topic:
+        type: string
+        description: Submit the arntopic address defined in SNS notification service, which is activated by user with the preferred email list
+        required: false
+        default: "None"
+      destination_bucket:
+        type: string
+        description: Destination S3 Bucket name.
+      source_bucket:
+        type: string
+        description: Source S3 bucket name
+      log_bucket:
+        type: string
+        description: The bucket name where logs will be kept.
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          log_directory:
+            type: string
+            required: true
+            default: { get_property: [ SELF, log_directory ] }
+          file_path:
+            type: string
+            required: true
+            default: { get_property: [ SELF, file_path ] }
+          sns_arn_topic:
+            type: string
+            required: true
+            default: { get_property: [ SELF, sns_arn_topic ] }
+          destination_bucket:
+            type: string
+            required: true
+            default: { get_property: [ SELF, destination_bucket ] }
+          source_bucket:
+            type: string
+            required: true
+            default: { get_property: [ SELF, source_bucket ] }
+          edit_schedule:
+            type: string
+            required: false
+            default: { get_property: [ SELF, schedule ] }
+          log_bucket:
+            type: string
+            required: true
+            default: { get_property: [ SELF, log_bucket ] }
+        operations:
+          configure:
+            description: The standard configure operation
+            inputs:
+              edit_template:
+                type: string
+                required: false
+                default: { get_artifact: [ SELF, edit_template ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, pipeline_id ] }
+            implementation:
+              primary: configure
+              timeout: 0
+    artifacts:
+      CopyActivityTemplate:
+        type: tosca.artifacts.File
+        file: CopyActivity.json
+      configure:
+        type: tosca.artifacts.File
+        file: configure.yml

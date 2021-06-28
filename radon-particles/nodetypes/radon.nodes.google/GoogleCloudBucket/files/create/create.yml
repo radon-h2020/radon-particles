@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Create a GCP storage bucket
+      gcp_storage_bucket:
+        name: "{{ bucket_name }}"
+        location: "{{ bucket_location }}"
+        project: "{{ project_id }}"
+        auth_kind: serviceaccount
+        service_account_file: "{{ service_account_file }}"

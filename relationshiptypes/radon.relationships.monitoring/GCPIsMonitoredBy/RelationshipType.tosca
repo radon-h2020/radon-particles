@@ -23,11 +23,7 @@ relationship_types:
             type: string
             required: true
             default: { get_attribute: [ TARGET, pushgateway_ip ] }
-          user_email:
-            type: string
-            required: true
-            default: { get_property: [ TARGET, user_email ] }
-          grafana_api_ip: 
+          grafana_api_ip:
             type: string
             required: true
             default: { get_property: [ TARGET, grafana_api_ip ] }

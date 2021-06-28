@@ -1,0 +1,53 @@
+import "ServiceTemplate.tosca";
+import <function_conditions.cdl>;
+
+eu-west-1.hosted_in = ireland;
+eu-west-2.hosted_in = uk;
+
+all_countries = { uk, us, canada, china, india, ireland };
+supported_countries = { uk, us, canada, china, india };
+uk.willing = { uk, us, canada, china, india, ireland};
+us.willing = { us };
+canada.willing = { uk, us, canada };
+china.willing = { china };
+india.willing = { india, uk };
+
+thumbnail_buckets = { AwsS3Bucket_2, AwsS3Bucket_3 };
+
+create_thumbnails.pre_conditions = {
+  supported_countries.includes(input.country_of_origin)
+};
+
+create_thumbnails.post_conditions = {
+  EXISTS($B : thumbnail_buckets, $B.storage.includes(input.thumbnail))
+};
+
+create_thumbnails.invariant_conditions = {
+  FORALL($B : thumbnail_buckets,
+    $B.storage.includes(input.thumbnail)
+    =>
+    input.country_of_origin.willing.includes($B.host.node.region.hosted_in)
+  )
+};
+
+functions = { create_thumbnails };
+
+static_variables = { input.country_of_origin };
+dynamic_variables = { uploads_1.storage, uploads_2.storage, new_node1.storage, new_node2.storage };
+
+
+#@show f;
+
+@show uploads_1.storage;
+@show uploads_2.storage;
+@show input.country_of_origin;
+@show new_node1;
+@show new_node2;
+
+
+@extendable thumbnail_buckets;
+@definable new_node1;
+@definable new_node2;
+
+#@revisable supported_countries;
+#@revisable create_thumbnails.post_conditions;

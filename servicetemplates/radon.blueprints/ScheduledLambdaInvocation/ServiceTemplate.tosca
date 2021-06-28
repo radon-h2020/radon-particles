@@ -13,11 +13,11 @@ topology_template:
       properties:
         handler: "__main__.main"
         memory: 256
-        schedule_expression: "rate(1 minute)"
         name: "ListOpenAQData"
         runtime: "python3.7"
         alias: "dev"
         statement_id: "scheduled-lambda-stmt"
+        schedule_expression: "rate(1 minute)"
         zip_file: { get_artifact: [ SELF, code ] }
         timeout: 300
         concurrency: 0

@@ -1,0 +1,27 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+data_types:
+  radon.datatypes.Interaction:
+    derived_from: tosca.datatypes.Root
+    metadata:
+      targetNamespace: "radon.datatypes"
+      abstract: "false"
+      final: "false"
+    properties:
+      network_delay:
+        type: radon.datatypes.RandomVariable
+        required: false
+      number_of_requests:
+        type: float
+        default: 1.0
+        constraints:
+          - greater_or_equal: 0.0
+      source_activity:
+        type: string
+      target_entry:
+        type: string
+      type:
+        type: string
+        default: "synchronous"
+        constraints:
+          - valid_values: [ synchronous, asynchronous ]

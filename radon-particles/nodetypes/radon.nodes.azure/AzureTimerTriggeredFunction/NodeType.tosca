@@ -1,0 +1,20 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.azure.AzureTimerTriggeredFunction:
+    derived_from: radon.nodes.azure.AzureFunction
+    metadata:
+      targetNamespace: "radon.nodes.azure"
+      abstract: "false"
+      final: "false"
+    properties:
+      schedule:
+        type: string
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          SCHEDULE:
+            type: string
+            required: true
+            default: { get_property: [ SELF, schedule ] }

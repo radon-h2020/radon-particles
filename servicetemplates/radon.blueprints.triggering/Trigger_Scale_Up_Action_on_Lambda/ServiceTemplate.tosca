@@ -1,43 +1,12 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 metadata:
-  targetNamespace: "example.org.tosca.servicetemplates"
-  name: "Alert-Manager_w1-wip1"
-imports:
-  - file: radonnodesdocker__DockerEngine.tosca
-    namespace_uri: radon.nodes.docker
-    namespace_prefix: radonnodesdocker
-  - file: radonnodesmonitoring__PushGateway.tosca
-    namespace_uri: radon.nodes.monitoring
-    namespace_prefix: radonnodesmonitoring
-  - file: radonnodesaws__AwsLambdaFunctionFromS3.tosca
-    namespace_uri: radon.nodes.aws
-    namespace_prefix: radonnodesaws
-  - file: radonnodesaws__AwsS3Bucket.tosca
-    namespace_uri: radon.nodes.aws
-    namespace_prefix: radonnodesaws
-  - file: radonnodesaws__AwsPlatform.tosca
-    namespace_uri: radon.nodes.aws
-    namespace_prefix: radonnodesaws
-  - file: radonnodesVM__EC2.tosca
-    namespace_uri: radon.nodes.VM
-    namespace_prefix: radonnodesVM
-  - file: radonrelationshipsmonitoring__AWSIsMonitoredBy.tosca
-    namespace_uri: radon.relationships.monitoring
-    namespace_prefix: radonrelationshipsmonitoring
-  - file: radonrelationshipsaws__AwsTriggers.tosca
-    namespace_uri: radon.relationships.aws
-    namespace_prefix: radonrelationshipsaws
-  - file: radonpoliciesscaling__ScaleOut.tosca
-    namespace_uri: radon.policies.scaling
-    namespace_prefix: radonpoliciesscaling
-  - file: radonpoliciesscaling__AutoScale.tosca
-    namespace_uri: radon.policies.scaling
-    namespace_prefix: radonpoliciesscaling
+  targetNamespace: "radon.blueprints.triggering"
 topology_template:
   inputs:
     callbackUrlCPU:
       type: string
+      required: true
   node_templates:
     DockerEngine_0:
       type: radon.nodes.docker.DockerEngine
@@ -100,8 +69,8 @@ topology_template:
         handler: "index.handler"
         memory: 1024
         s3_bucket_key: "nodeJS-monitored-function.zip"
-        name: "nodeJS-monitored-function"
         function_name: "nodeJS-monitored-function"
+        name: "nodeJS-monitored-function"
         runtime: "nodejs12.x"
         alias: "nodeJS-monitored-function"
         statement_id: "nodeJS-monitored-function"
@@ -154,6 +123,8 @@ topology_template:
       type: tosca.relationships.HostedOn
     con_HostedOn_0:
       type: tosca.relationships.HostedOn
+    con_HostedOn_6:
+      type: tosca.relationships.HostedOn
     con_AWSIsMonitoredBy_0:
       type: radon.relationships.monitoring.AWSIsMonitoredBy
     con_AwsTriggers_0:
@@ -162,14 +133,12 @@ topology_template:
         events: "s3:ObjectCreated:*"
     con_HostedOn_5:
       type: tosca.relationships.HostedOn
-    con_HostedOn_6:
-      type: tosca.relationships.HostedOn
   policies:
     - scale_up:
         type: radon.policies.scaling.ScaleUp
         properties:
           cpu_upper_bound: 60.0
-          ram_upper_bound: 80
-          adjustment: 2
           callbackUrlCPU: { get_input: callbackUrlCPU }
+          adjustment: 2
+          ram_upper_bound: 80
         targets: [ AwsLambdaFunctionFromS3_0 ]

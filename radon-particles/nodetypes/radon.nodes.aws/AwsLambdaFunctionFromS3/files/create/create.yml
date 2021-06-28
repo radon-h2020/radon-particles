@@ -1,0 +1,52 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Lambda "{{ function_name }}" deploy
+      lambda:
+        name: "{{ function_name }}"
+        s3_bucket: "{{ s3_bucket_name }}"
+        s3_key: "{{ s3_bucket_key }}"
+        runtime: "{{ lambda_runtime }}"
+        region: "{{ aws_region }}"
+        role: "{{ role_arn }}"
+        handler: "{{ lambda_handler }}"
+        timeout: "{{ lambda_timeout }}"
+        memory_size: "{{ lambda_memory }}"
+        environment_variables: "{{ env_vars }}"
+      register: lambda_info
+    - name: "Put concurrency of Lambda function on AWS : {{ function_name }}"
+      command: >-
+        aws lambda put-function-concurrency
+          --function-name {{ function_name }}
+          --reserved-concurrent-executions {{ lambda_concurrency }}
+          --region {{ aws_region }}
+      when: (lambda_concurrency is defined) and (lambda_concurrency != 0)
+    - name: Create function alias name
+      lambda_alias:
+        function_name: "{{ function_name }}"
+        name: "{{ func_alias }}"
+        region: "{{ aws_region }}"
+        state: present
+      register: alias_info
+    - name: "Add invocation permission of Lambda function on AWS : {{ permission_id }}"
+      lambda_policy:
+        function_name: "{{ function_name }}"
+        statement_id: "{{ permission_id }}"
+        action: lambda:InvokeFunction
+        region: "{{ aws_region }}"
+        alias: "{{ func_alias }}"
+        principal: "s3.amazonaws.com"
+    - name: Set attributes
+      set_stats:
+        data:
+          arn: "{{ alias_info.alias_arn }}"
+          role_arn: "{{ role_arn }}"
+          region: "{{ aws_region }}"
+
+    - name: set outputs regarding to scaling policies
+      set_stats:
+        data:
+          cpu_upper_bound: "{{ cpu_upper_bound }}"
+          ram_upper_bound: "{{ ram_upper_bound }}"
+          adjustment: "{{ adjustment }}"
+          callbackUrlCPU: "{{ callbackUrlCPU }}"

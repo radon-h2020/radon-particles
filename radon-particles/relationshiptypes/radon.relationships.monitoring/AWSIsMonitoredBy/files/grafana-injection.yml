@@ -1,0 +1,44 @@
+---
+- hosts: all
+  gather_facts: no
+  become: true
+  become_method: sudo
+  vars:
+    ansible_ssh_private_key_file: "{{ ssh_key_file }}"
+    ansible_ssh_user: "{{ ssh_user }}"
+
+  tasks:
+    - name: "Policy on AWS Lambda. The grafana API should be set to generate the alert towards xOpera SaaS for {{ adjustment }} and {{ cpu_upper_bound }}"
+      debug:
+        msg: "Policy Data: {{ adjustment }} and {{ cpu_upper_bound }}"
+    - name: Configure Grafana dashboards for the monitored_function of user_email and setup Alerts
+      uri:
+        url: "{{ grafana_api_ip }}"
+        method: POST
+        body_format: json
+        body:
+          "email": "{{ user_email }}"
+          "jobid": "{{ monitored_function }}"
+          "type": "custom"
+          "cpuAlertThreshold": "{{ cpu_upper_bound }}"
+          "ramAlertThreshold": "{{ ram_upper_bound }}"
+          "callbackURL": "{{ callbackUrlCPU }}"
+      when: (cpu_upper_bound is defined) and (ram_upper_bound is defined) and (callbackUrlCPU is defined)
+    - name: Configure Grafana dashboards for the monitored_function of user_email
+      uri:
+        url: "{{ grafana_api_ip }}"
+        method: POST
+        body_format: json
+        body:
+          "email": "{{ user_email }}"
+          "jobid": "{{ monitored_function }}"
+          "type": "custom"
+      when: (cpu_upper_bound is undefined) or (ram_upper_bound is undefined) or (callbackUrlCPU is undefined)
+    - name: Install prerequsiste packages
+      apt:
+        name:
+          - awscli
+        state: latest
+
+    - name: Inject the PUSH_GATEWAY_HOST env variable to the function to create the AWS-PushGateway relation
+      shell: aws lambda update-function-configuration --function-name {{ monitored_function }} --region eu-central-1 --environment Variables={PUSH_GATEWAY_HOST=http://{{ pushgateway_ip }}:9091}

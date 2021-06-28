@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Create VM
+      os_server:
+        state: absent
+        name: "{{ id }}"

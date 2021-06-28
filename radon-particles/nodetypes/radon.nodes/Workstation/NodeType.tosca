@@ -1,0 +1,40 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.Workstation:
+    derived_from: tosca.nodes.Compute
+    metadata:
+      targetNamespace: "radon.nodes"
+      abstract: "false"
+      final: "false"
+    attributes:
+      private_address:
+        type: string
+        default: "localhost"
+      public_address:
+        type: string
+        default: "localhost"
+    properties:
+      pypi_dependencies:
+        type: list
+        description: pypi_dependencies that will be installed in workstation
+        entry_schema:
+          type: string
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          pypi_dependencies:
+            type: string
+            required: true
+            default: { get_property: [ SELF, pypi_dependencies ] }
+        operations:
+          create:
+            description: The standard create operation
+            implementation:
+              primary: create
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yaml

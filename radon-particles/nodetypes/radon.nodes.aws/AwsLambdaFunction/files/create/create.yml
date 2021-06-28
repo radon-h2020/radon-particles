@@ -1,0 +1,69 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Lambda "{{ function_name }}" deploy
+      lambda:
+        name: "{{ function_name }}"
+        zip_file: "{{ zip_file }}"
+        runtime: "{{ lambda_runtime }}"
+        region: "{{ aws_region }}"
+        role: "{{ role_arn }}"
+        handler: "{{ lambda_handler }}"
+        timeout: "{{ lambda_timeout }}"
+        memory_size: "{{ lambda_memory }}"
+        environment_variables: "{{ env_vars }}"
+      register: lambda_info
+
+    - name: "Put concurrency of Lambda function on AWS : {{ function_name }}"
+      command: >-
+        aws lambda put-function-concurrency
+          --function-name {{ function_name }}
+          --reserved-concurrent-executions {{ lambda_concurrency }}
+          --region {{ aws_region }}
+      when: (lambda_concurrency is defined) and (lambda_concurrency != 0)
+
+    - name: Create function alias name
+      lambda_alias:
+        function_name: "{{ function_name }}"
+        name: "{{ func_alias }}"
+        region: "{{ aws_region }}"
+        state: present
+      register: alias_info
+
+    - name: "Add invocation permission of Lambda function on AWS : {{ permission_id }}"
+      lambda_policy:
+        function_name: "{{ function_name }}"
+        statement_id: "{{ permission_id }}"
+        action: lambda:InvokeFunction
+        region: "{{ aws_region }}"
+        alias: "{{ func_alias }}"
+        principal: "s3.amazonaws.com"
+
+    - name: Create a CloudWatch rule to enable a scheduled invocation of this function
+      community.aws.cloudwatchevent_rule:
+        name: "{{ function_name }}-EventBridgeRule"
+        region: "{{ aws_region }}"
+        schedule_expression: "{{ schedule_expression }}"
+        targets: 
+          - id: "{{ function_name }}-TargetId"
+            arn: "{{ alias_info.alias_arn }}"
+      when: (schedule_expression is defined) and (schedule_expression != "none")
+      register: cwevent
+    
+    - name: "Add invocation permission of Lambda function for AWS EventBridge"
+      lambda_policy:
+        function_name: "{{ function_name }}"
+        statement_id: "{{ permission_id }}-{{ 99999999 | random | to_uuid }}"
+        action: lambda:InvokeFunction
+        region: "{{ aws_region }}"
+        alias: "{{ func_alias }}"
+        principal: "events.amazonaws.com"
+        source_arn: "{{ cwevent.rule.arn }}"
+      when: (schedule_expression is defined) and (schedule_expression != "none")
+
+    - name: Set attributes
+      set_stats:
+        data:
+          arn: "{{ alias_info.alias_arn }}"
+          role_arn: "{{ role_arn }}"
+          region: "{{ aws_region }}"

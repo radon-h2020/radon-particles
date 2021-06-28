@@ -12,8 +12,6 @@ node_types:
         type: string
       id:
         type: string
-      public_ip:
-        type: string
     properties:
       image:
         type: string

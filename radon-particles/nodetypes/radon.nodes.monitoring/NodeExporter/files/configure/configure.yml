@@ -1,0 +1,28 @@
+---
+- name: configure
+  hosts: all
+<<<<<<< HEAD
+  gather_facts: yes
+  become: yes
+
+=======
+  gather_facts: true
+  become: true
+>>>>>>> remotes/upstream/master
+  tasks:
+    - name: Install consul module for python
+      pip:
+        name: python-consul
+<<<<<<< HEAD
+
+    - name: Inject Push Gateway instance to Radon Consul
+      consul:
+        service_name: node_exporter
+=======
+    - name: Inject Push Gateway instance to Radon Consul
+      consul:
+        service_name: falsede_exporter
+>>>>>>> remotes/upstream/master
+        service_port: "{{ node_exporter_service_port }}"
+        service_address: "{{ node_exporter_ip }}"
+        host: "{{ consul_ip }}"

@@ -1,0 +1,44 @@
+- name: create
+  hosts: all
+  gather_facts: yes
+  remote_user: "{{ ssh_user }}"
+  vars:
+    ansible_ssh_private_key_file: "{{ ssh_key_file }}"
+  tasks:
+    - name: provision instance
+      ec2:
+        key_name: "{{ ssh_key_name }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ image }}"
+        region: "{{ region }}"
+        wait: true
+        vpc_subnet_id: "{{ vpc_subnet_id }}"
+        assign_public_ip: true
+      register: ec2
+    - name: set outputs
+      set_stats:
+        data:
+          public_address: "{{ ec2.instances[0].public_dns_name }}"
+          public_ip: "{{ ec2.instances[0].public_ip }}"
+          private_address: "{{ ec2.instances[0].private_dns_name }}"
+          id: "{{ ec2.instance_ids[0] }}"
+    - name: Create temporary inventory for ssh wait
+      add_host:
+        name: server
+        groups: vms
+        ansible_host: "{{ ec2.instances[0].public_dns_name }}"
+        ansible_user: "{{ ssh_user }}"
+        ansible_ssh_private_key_file: "{{ ssh_key_file }}"
+        ansible_ssh_common_args: >
+          -o IdentitiesOnly=yes
+          -o BatchMode=yes
+          -o UserKnownHostsFile=/dev/null
+          -o StrictHostKeyChecking=no
+- hosts: vms
+  gather_facts: no
+  tasks:
+    - name: Wait for ssh on EC2 instance to come up
+      wait_for_connection:
+        delay: 60
+        sleep: 30
+        timeout: 320

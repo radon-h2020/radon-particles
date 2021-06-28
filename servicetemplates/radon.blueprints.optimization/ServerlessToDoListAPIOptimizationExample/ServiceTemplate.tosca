@@ -20,7 +20,7 @@ topology_template:
                 service_time:
                   mean: 0.001
                 bound_to_entry: true
-                request_pattern: stochastic
+                request_pattern: "stochastic"
       requirements:
         - endpoint:
             node: AwsApiGateway_0
@@ -34,6 +34,15 @@ topology_template:
         displayName: "GetTodoItem"
       properties:
         handler: "get.handler"
+        entries:
+          execute:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.047
+                bound_to_entry: true
+                request_pattern: "deterministic"
+                replies_to_entry: true
         memory: 128
         name: "get-item"
         runtime: "nodejs12.x"
@@ -43,15 +52,6 @@ topology_template:
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
-        entries:
-          execute:
-            activities:
-              a1:
-                service_time:
-                  mean: 0.047
-                bound_to_entry: true
-                replies_to_entry: true
-                request_pattern: deterministic
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -73,6 +73,15 @@ topology_template:
         displayName: "CreateTodoItem"
       properties:
         handler: "create.handler"
+        entries:
+          execute:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.044
+                bound_to_entry: true
+                request_pattern: "deterministic"
+                replies_to_entry: true
         memory: 128
         name: "create-item"
         runtime: "nodejs12.x"
@@ -82,15 +91,6 @@ topology_template:
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
-        entries:
-          execute:
-            activities:
-              a1:
-                service_time:
-                  mean: 0.044
-                bound_to_entry: true
-                replies_to_entry: true
-                request_pattern: deterministic
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -113,17 +113,7 @@ topology_template:
       properties:
         hash_key_name: "id"
         read_capacity: 1
-        name: "items"
-        write_capacity: 1
-        hash_key_type: "STRING"
         entries:
-          scan:
-            activities:
-              a1:
-                service_time:
-                  mean: 0.003
-                bound_to_entry: true
-                replies_to_entry: true
           get:
             activities:
               a1:
@@ -131,11 +121,11 @@ topology_template:
                   mean: 0.001
                 bound_to_entry: true
                 replies_to_entry: true
-          put:
+          scan:
             activities:
               a1:
                 service_time:
-                  mean: 0.004
+                  mean: 0.003
                 bound_to_entry: true
                 replies_to_entry: true
           update:
@@ -152,6 +142,16 @@ topology_template:
                   mean: 0.001
                 bound_to_entry: true
                 replies_to_entry: true
+          put:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.004
+                bound_to_entry: true
+                replies_to_entry: true
+        name: "items"
+        write_capacity: 1
+        hash_key_type: "STRING"
       requirements:
         - host:
             node: AwsPlatform_0
@@ -165,6 +165,15 @@ topology_template:
         displayName: "ListTodoItems"
       properties:
         handler: "list.handler"
+        entries:
+          execute:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.046
+                bound_to_entry: true
+                request_pattern: "deterministic"
+                replies_to_entry: true
         memory: 128
         name: "list-items"
         runtime: "nodejs12.x"
@@ -174,15 +183,6 @@ topology_template:
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
-        entries:
-          execute:
-            activities:
-              a1:
-                service_time:
-                  mean: 0.046
-                bound_to_entry: true
-                replies_to_entry: true
-                request_pattern: deterministic
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -204,6 +204,15 @@ topology_template:
         displayName: "UpdateTodoItem"
       properties:
         handler: "update.handler"
+        entries:
+          execute:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.042
+                bound_to_entry: true
+                request_pattern: "deterministic"
+                replies_to_entry: true
         memory: 128
         name: "update-item"
         runtime: "nodejs12.x"
@@ -213,15 +222,6 @@ topology_template:
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
-        entries:
-          execute:
-            activities:
-              a1:
-                service_time:
-                  mean: 0.042
-                bound_to_entry: true
-                replies_to_entry: true
-                request_pattern: deterministic
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -252,6 +252,15 @@ topology_template:
         displayName: "DeleteTodoItem"
       properties:
         handler: "delete.handler"
+        entries:
+          execute:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.052
+                bound_to_entry: true
+                request_pattern: "deterministic"
+                replies_to_entry: true
         memory: 128
         name: "delete-item"
         runtime: "nodejs12.x"
@@ -261,15 +270,6 @@ topology_template:
         timeout: 300
         env_vars:
           TODOS_TABLE: "items"
-        entries:
-          execute:
-            activities:
-              a1:
-                service_time:
-                  mean: 0.052
-                bound_to_entry: true
-                replies_to_entry: true
-                request_pattern: deterministic
       requirements:
         - endpoint:
             node: AwsDynamoDBTable_0
@@ -290,50 +290,50 @@ topology_template:
         y: "300"
         displayName: "AwsApiGateway"
       properties:
-        name: "ServerlessToDoListAPI"
-        api_version: "1.0.0"
-        api_description: "a simple serverless API example"
         entries:
-          list:
-            activities:
-              a1:
-                service_time:
-                  mean: 0.125
-                bound_to_entry: true
-                replies_to_entry: true
-                request_pattern: deterministic
           get:
             activities:
               a1:
                 service_time:
                   mean: 0.111
                 bound_to_entry: true
+                request_pattern: "deterministic"
                 replies_to_entry: true
-                request_pattern: deterministic
-          create:
-            activities:
-              a1:
-                service_time:
-                  mean: 0.112
-                bound_to_entry: true
-                replies_to_entry: true
-                request_pattern: deterministic
           update:
             activities:
               a1:
                 service_time:
                   mean: 0.114
                 bound_to_entry: true
+                request_pattern: "deterministic"
                 replies_to_entry: true
-                request_pattern: deterministic
+          create:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.112
+                bound_to_entry: true
+                request_pattern: "deterministic"
+                replies_to_entry: true
+          list:
+            activities:
+              a1:
+                service_time:
+                  mean: 0.125
+                bound_to_entry: true
+                request_pattern: "deterministic"
+                replies_to_entry: true
           delete:
             activities:
               a1:
                 service_time:
                   mean: 0.109
                 bound_to_entry: true
+                request_pattern: "deterministic"
                 replies_to_entry: true
-                request_pattern: deterministic
+        name: "ServerlessToDoListAPI"
+        api_version: "1.0.0"
+        api_description: "a simple serverless API example"
       requirements:
         - host:
             node: AwsPlatform_0
@@ -378,120 +378,119 @@ topology_template:
       type: radon.relationships.ConnectsTo
       properties:
         interactions:
-          - type: synchronous
-            source_activity: execute.a1
-            target_entry: put
-            number_of_requests: 1.0
+          - number_of_requests: 1.0
+            source_activity: "execute.a1"
+            target_entry: "put"
+            type: "synchronous"
     con_ConnectsTo_3:
       type: radon.relationships.ConnectsTo
       properties:
         interactions:
-          - type: synchronous
-            source_activity: execute.a1
-            target_entry: update
-            number_of_requests: 1.0
+          - number_of_requests: 1.0
+            source_activity: "execute.a1"
+            target_entry: "update"
+            type: "synchronous"
     con_ConnectsTo_4:
       type: radon.relationships.ConnectsTo
       properties:
         interactions:
-          - type: synchronous
-            source_activity: execute.a1
-            target_entry: delete
-            number_of_requests: 1.0
+          - number_of_requests: 1.0
+            source_activity: "execute.a1"
+            target_entry: "delete"
+            type: "synchronous"
     con_ConnectsTo_5:
       type: radon.relationships.ConnectsTo
       properties:
         interactions:
-          - type: synchronous
-            source_activity: start.a1
-            target_entry: list
-            number_of_requests: 0.2
-          - type: synchronous
-            source_activity: start.a1
-            target_entry: get
-            number_of_requests: 0.2
-          - type: synchronous
-            source_activity: start.a1
-            target_entry: create
-            number_of_requests: 0.2
-          - type: synchronous
-            source_activity: start.a1
-            target_entry: update
-            number_of_requests: 0.2
-          - type: synchronous
-            source_activity: start.a1
-            target_entry: delete
-            number_of_requests: 0.2
+          - number_of_requests: 0.2
+            source_activity: "start.a1"
+            target_entry: "list"
+            type: "synchronous"
+          - number_of_requests: 0.2
+            source_activity: "start.a1"
+            target_entry: "get"
+            type: "synchronous"
+          - number_of_requests: 0.2
+            source_activity: "start.a1"
+            target_entry: "create"
+            type: "synchronous"
+          - number_of_requests: 0.2
+            source_activity: "start.a1"
+            target_entry: "update"
+            type: "synchronous"
+          - number_of_requests: 0.2
+            source_activity: "start.a1"
+            target_entry: "delete"
+            type: "synchronous"
     con_AwsApiGatewayTriggers_4:
       type: radon.relationships.aws.AwsApiGatewayTriggers
       properties:
         endpoint: "/todos/{id}"
         http_methods: "delete"
         interactions:
-          - type: synchronous
-            source_activity: delete.a1
-            target_entry: execute
-            number_of_requests: 1.0
+          - number_of_requests: 1.0
+            source_activity: "delete.a1"
+            target_entry: "execute"
+            type: "synchronous"
     con_AwsApiGatewayTriggers_3:
       type: radon.relationships.aws.AwsApiGatewayTriggers
       properties:
         endpoint: "/todos/{id}"
         http_methods: "put"
         interactions:
-          - type: synchronous
-            source_activity: update.a1
-            target_entry: execute
-            number_of_requests: 1.0
+          - number_of_requests: 1.0
+            source_activity: "update.a1"
+            target_entry: "execute"
+            type: "synchronous"
     con_ConnectsTo_0:
       type: radon.relationships.ConnectsTo
       properties:
         interactions:
-          - type: synchronous
-            source_activity: execute.a1
-            target_entry: scan
-            number_of_requests: 1.0
+          - number_of_requests: 1.0
+            source_activity: "execute.a1"
+            target_entry: "scan"
+            type: "synchronous"
     con_AwsApiGatewayTriggers_2:
       type: radon.relationships.aws.AwsApiGatewayTriggers
       properties:
         endpoint: "/todos"
         http_methods: "post"
         interactions:
-          - type: synchronous
-            source_activity: create.a1
-            target_entry: execute
-            number_of_requests: 1.0
+          - number_of_requests: 1.0
+            source_activity: "create.a1"
+            target_entry: "execute"
+            type: "synchronous"
     con_ConnectsTo_1:
       type: radon.relationships.ConnectsTo
       properties:
         interactions:
-          - type: synchronous
-            source_activity: execute.a1
-            target_entry: get
-            number_of_requests: 1.0
+          - number_of_requests: 1.0
+            source_activity: "execute.a1"
+            target_entry: "get"
+            type: "synchronous"
     con_AwsApiGatewayTriggers_1:
       type: radon.relationships.aws.AwsApiGatewayTriggers
       properties:
         endpoint: "/todos/{id}"
         http_methods: "get"
         interactions:
-          - type: synchronous
-            source_activity: get.a1
-            target_entry: execute
-            number_of_requests: 1.0
+          - number_of_requests: 1.0
+            source_activity: "get.a1"
+            target_entry: "execute"
+            type: "synchronous"
     con_AwsApiGatewayTriggers_0:
       type: radon.relationships.aws.AwsApiGatewayTriggers
       properties:
         endpoint: "/todos"
         http_methods: "get"
         interactions:
-          - type: synchronous
-            source_activity: list.a1
-            target_entry: execute
-            number_of_requests: 1.0
+          - number_of_requests: 1.0
+            source_activity: "list.a1"
+            target_entry: "execute"
+            type: "synchronous"
   policies:
     - MeanResponseTime_0:
         type: radon.policies.performance.MeanResponseTime
         properties:
           upper_bound: 0.2
-        targets:
-          - AwsApiGateway_0
+        targets: [ AwsApiGateway_0 ]

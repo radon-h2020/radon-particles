@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<template encoding-version="1.3">
+    <description></description>
+    <groupId>4ae3b478-0178-1000-c699-b33e0bd0a55a</groupId>
+    <name>GCSObject_consume</name>
+    <snippet>
+        <controllerServices>
+            <id>3991cdeb-1e89-3323-0000-000000000000</id>
+            <parentGroupId>0e87fb60-13ee-3a0a-0000-000000000000</parentGroupId>
+            <bundle>
+                <artifact>nifi-gcp-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.13.1</version>
+            </bundle>
+            <comments></comments>
+            <descriptors>
+                <entry>
+                    <key>proxy-configuration-service</key>
+                    <value>
+                        <identifiesControllerService>org.apache.nifi.proxy.ProxyConfigurationService</identifiesControllerService>
+                        <name>proxy-configuration-service</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>compute-engine-credentials</key>
+                    <value>
+                        <name>compute-engine-credentials</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>application-default-credentials</key>
+                    <value>
+                        <name>application-default-credentials</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>service-account-json-file</key>
+                    <value>
+                        <name>service-account-json-file</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>service-account-json</key>
+                    <value>
+                        <name>service-account-json</name>
+                    </value>
+                </entry>
+            </descriptors>
+            <name>GCPCredentialsControllerService</name>
+            <persistsState>false</persistsState>
+            <properties>
+                <entry>
+                    <key>proxy-configuration-service</key>
+                </entry>
+                <entry>
+                    <key>compute-engine-credentials</key>
+                    <value>false</value>
+                </entry>
+                <entry>
+                    <key>application-default-credentials</key>
+                    <value>false</value>
+                </entry>
+                <entry>
+                    <key>service-account-json-file</key>
+                    <value>/tmp/.opera/gcs/cred/credentials.json</value>
+                </entry>
+                <entry>
+                    <key>service-account-json</key>
+                </entry>
+            </properties>
+            <state>ENABLED</state>
+            <type>org.apache.nifi.processors.gcp.credentials.service.GCPCredentialsControllerService</type>
+        </controllerServices>
+        <processGroups>
+            <id>9e9b397f-9b81-3a80-0000-000000000000</id>
+            <parentGroupId>0e87fb60-13ee-3a0a-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>0.0</y>
+            </position>
+            <comments></comments>
+            <contents>
+                <connections>
+                    <id>2916bd0f-7536-39db-0000-000000000000</id>
+                    <parentGroupId>9e9b397f-9b81-3a80-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>9e9b397f-9b81-3a80-0000-000000000000</groupId>
+                        <id>5b9dce85-9dda-3ca9-0000-000000000000</id>
+                        <type>OUTPUT_PORT</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+                    <name></name>
+                    <selectedRelationships>failure</selectedRelationships>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>9e9b397f-9b81-3a80-0000-000000000000</groupId>
+                        <id>4fcf8a1d-c40e-3149-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>f2f164d0-7242-3dc7-0000-000000000000</id>
+                    <parentGroupId>9e9b397f-9b81-3a80-0000-000000000000</parentGroupId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>9e9b397f-9b81-3a80-0000-000000000000</groupId>
+                        <id>4fcf8a1d-c40e-3149-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>9e9b397f-9b81-3a80-0000-000000000000</groupId>
+                        <id>8c356b90-2816-3f4c-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <outputPorts>
+                    <id>5b9dce85-9dda-3ca9-0000-000000000000</id>
+                    <parentGroupId>9e9b397f-9b81-3a80-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>-224.0</x>
+                        <y>-240.0</y>
+                    </position>
+                    <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                    <name>GCSObject_OP_localConn</name>
+                    <state>STOPPED</state>
+                    <type>OUTPUT_PORT</type>
+                    <validationErrors>'Port 'GCSObject_OP_localConn'' is invalid because Port has no outgoing connections</validationErrors>
+                </outputPorts>
+                <processors>
+                    <id>4fcf8a1d-c40e-3149-0000-000000000000</id>
+                    <parentGroupId>9e9b397f-9b81-3a80-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>-920.0</x>
+                        <y>-272.0</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-gcp-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.13.1</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>GCP Credentials Provider Service</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.gcp.credentials.service.GCPCredentialsService</identifiesControllerService>
+    <name>GCP Credentials Provider Service</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-host</key>
+<value>
+    <name>gcp-proxy-host</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcs-key</key>
+<value>
+    <name>gcs-key</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-user-password</key>
+<value>
+    <name>gcp-proxy-user-password</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-retry-count</key>
+<value>
+    <name>gcp-retry-count</name>
+</value>
+                            </entry>
+                            <entry>
+<key>proxy-configuration-service</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.proxy.ProxyConfigurationService</identifiesControllerService>
+    <name>proxy-configuration-service</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcs-server-side-encryption-key</key>
+<value>
+    <name>gcs-server-side-encryption-key</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-user-name</key>
+<value>
+    <name>gcp-proxy-user-name</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-port</key>
+<value>
+    <name>gcp-proxy-port</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcs-bucket</key>
+<value>
+    <name>gcs-bucket</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-project-id</key>
+<value>
+    <name>gcp-project-id</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcs-generation</key>
+<value>
+    <name>gcs-generation</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>GCP Credentials Provider Service</key>
+<value>3991cdeb-1e89-3323-0000-000000000000</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-host</key>
+                            </entry>
+                            <entry>
+<key>gcs-key</key>
+<value>${filename}</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-user-password</key>
+                            </entry>
+                            <entry>
+<key>gcp-retry-count</key>
+<value>6</value>
+                            </entry>
+                            <entry>
+<key>proxy-configuration-service</key>
+                            </entry>
+                            <entry>
+<key>gcs-server-side-encryption-key</key>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-user-name</key>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-port</key>
+                            </entry>
+                            <entry>
+<key>gcs-bucket</key>
+<value>${gcs.bucket}</value>
+                            </entry>
+                            <entry>
+<key>gcp-project-id</key>
+                            </entry>
+                            <entry>
+<key>gcs-generation</key>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>0 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>FetchGCSObject</name>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>failure</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.gcp.storage.FetchGCSObject</type>
+                </processors>
+                <processors>
+                    <id>8c356b90-2816-3f4c-0000-000000000000</id>
+                    <parentGroupId>9e9b397f-9b81-3a80-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>-920.0</x>
+                        <y>-560.0</y>
+                    </position>
+                    <bundle>
+                        <artifact>nifi-gcp-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.13.1</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>GCP Credentials Provider Service</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.gcp.credentials.service.GCPCredentialsService</identifiesControllerService>
+    <name>GCP Credentials Provider Service</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-host</key>
+<value>
+    <name>gcp-proxy-host</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcs-use-generations</key>
+<value>
+    <name>gcs-use-generations</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-user-password</key>
+<value>
+    <name>gcp-proxy-user-password</name>
+</value>
+                            </entry>
+                            <entry>
+<key>record-writer</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.serialization.RecordSetWriterFactory</identifiesControllerService>
+    <name>record-writer</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-retry-count</key>
+<value>
+    <name>gcp-retry-count</name>
+</value>
+                            </entry>
+                            <entry>
+<key>proxy-configuration-service</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.proxy.ProxyConfigurationService</identifiesControllerService>
+    <name>proxy-configuration-service</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-user-name</key>
+<value>
+    <name>gcp-proxy-user-name</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-port</key>
+<value>
+    <name>gcp-proxy-port</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcs-bucket</key>
+<value>
+    <name>gcs-bucket</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcp-project-id</key>
+<value>
+    <name>gcp-project-id</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcs-prefix</key>
+<value>
+    <name>gcs-prefix</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>PRIMARY</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>GCP Credentials Provider Service</key>
+<value>3991cdeb-1e89-3323-0000-000000000000</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-host</key>
+                            </entry>
+                            <entry>
+<key>gcs-use-generations</key>
+<value>false</value>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-user-password</key>
+                            </entry>
+                            <entry>
+<key>record-writer</key>
+                            </entry>
+                            <entry>
+<key>gcp-retry-count</key>
+<value>6</value>
+                            </entry>
+                            <entry>
+<key>proxy-configuration-service</key>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-user-name</key>
+                            </entry>
+                            <entry>
+<key>gcp-proxy-port</key>
+                            </entry>
+                            <entry>
+<key>gcs-bucket</key>
+<value>pelleradon</value>
+                            </entry>
+                            <entry>
+<key>gcp-project-id</key>
+<value>cloudlab2020tartu</value>
+                            </entry>
+                            <entry>
+<key>gcs-prefix</key>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>0 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>true</executionNodeRestricted>
+                    <name>ListGCSBucket</name>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>STOPPED</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.gcp.storage.ListGCSBucket</type>
+                </processors>
+            </contents>
+            <flowfileConcurrency>UNBOUNDED</flowfileConcurrency>
+            <flowfileOutboundPolicy>STREAM_WHEN_AVAILABLE</flowfileOutboundPolicy>
+            <name>GCSObject_consume</name>
+            <variables/>
+        </processGroups>
+    </snippet>
+    <timestamp>03/19/2021 14:50:58 UTC</timestamp>
+</template>

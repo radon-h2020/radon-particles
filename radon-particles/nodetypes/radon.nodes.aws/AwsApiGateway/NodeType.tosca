@@ -1,0 +1,70 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.aws.AwsApiGateway:
+    derived_from: radon.nodes.abstract.ApiGateway
+    metadata:
+      targetNamespace: "radon.nodes.aws"
+      abstract: "false"
+      final: "false"
+    attributes:
+      endpoint_url:
+        type: string
+        description: Amazon resource name for this API
+      arn:
+        type: string
+        description: Base URL for endpoints provided by the API
+    properties:
+      api_version:
+        type: string
+        description: Version of the API
+      api_description:
+        type: string
+        description: Description of the API
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - invoker:
+          capability: radon.capabilities.Invocable
+          node: radon.nodes.aws.AwsLambdaFunction
+          relationship: radon.relationships.aws.AwsApiGatewayTriggers
+          occurrences: [ 0, UNBOUNDED ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          api_title:
+            type: string
+            required: true
+            default: { get_property: [ SELF, name ] }
+          aws_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, host, region ] }
+          api_description:
+            type: string
+            required: true
+            default: { get_property: [ SELF, api_description ] }
+          api_version:
+            type: string
+            required: true
+            default: { get_property: [ SELF, api_version ] }
+        operations:
+          create:
+            implementation:
+              primary: create
+              timeout: 0
+          configure:
+            implementation:
+              primary: configure
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml

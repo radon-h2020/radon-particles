@@ -1,0 +1,22 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+data_types:
+  tosca.datatypes.network.PortInfo:
+    derived_from: tosca.datatypes.Root
+    metadata:
+      targetNamespace: "tosca.datatypes.network"
+      abstract: "false"
+      final: "false"
+    properties:
+      port_name:
+        type: string
+      network_id:
+        type: string
+      addresses:
+        type: list
+        entry_schema:
+          type: string
+      mac_address:
+        type: string
+      port_id:
+        type: string

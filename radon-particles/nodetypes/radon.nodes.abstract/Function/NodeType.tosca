@@ -1,0 +1,37 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.abstract.Function:
+    derived_from: tosca.nodes.Root
+    metadata:
+      targetNamespace: "radon.nodes.abstract"
+      abstract: "false"
+      final: "false"
+    properties:
+      entries:
+        type: map
+        required: false
+        constraints:
+          - length: 1
+        entry_schema:
+          type: radon.datatypes.Entry
+      name:
+        type: string
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.abstract.CloudPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - invoker:
+          capability: radon.capabilities.Invocable
+          relationship: radon.relationships.Triggers
+          occurrences: [ 0, UNBOUNDED ]
+      - endpoint:
+          capability: tosca.capabilities.Endpoint
+          relationship: radon.relationships.ConnectsTo
+          occurrences: [ 0, UNBOUNDED ]
+    capabilities:
+      invocable:
+        occurrences: [ 0, UNBOUNDED ]
+        type: radon.capabilities.Invocable

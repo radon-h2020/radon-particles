@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Delete NiFi files
+      file:
+        state: absent
+        path: "/usr/local/bin/{{ tarball_version }}/"

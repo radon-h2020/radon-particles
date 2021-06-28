@@ -1,0 +1,9 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+data_types:
+  tosca.datatypes.Root:
+    description: The TOSCA root Data Type all other TOSCA base Data Types derive from
+    metadata:
+      targetNamespace: "tosca.datatypes"
+      abstract: "false"
+      final: "false"

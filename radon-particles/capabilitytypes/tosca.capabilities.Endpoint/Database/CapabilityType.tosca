@@ -1,0 +1,9 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+capability_types:
+  tosca.capabilities.Endpoint.Database:
+    derived_from: tosca.capabilities.Endpoint
+    metadata:
+      targetNamespace: "tosca.capabilities.Endpoint"
+      abstract: "false"
+      final: "false"

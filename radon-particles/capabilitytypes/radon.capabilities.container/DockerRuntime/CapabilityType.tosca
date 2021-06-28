@@ -1,0 +1,25 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+capability_types:
+  radon.capabilities.container.DockerRuntime:
+    derived_from: tosca.capabilities.Container
+    metadata:
+      targetNamespace: "radon.capabilities.container"
+      abstract: "false"
+      final: "false"
+    properties:
+      publish_ports:
+        type: list
+        required: false
+      port:
+        type: integer
+        default: 2375
+      expose_ports:
+        type: list
+        required: false
+      volumes:
+        type: list
+        required: false
+      version:
+        type: list
+        required: false

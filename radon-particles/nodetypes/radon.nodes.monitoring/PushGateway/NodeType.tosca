@@ -1,0 +1,118 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.monitoring.PushGateway:
+    derived_from: radon.nodes.docker.DockerApplication
+    metadata:
+      targetNamespace: "radon.nodes.monitoring"
+      abstract: "false"
+      final: "false"
+    attributes:
+      pushgateway_ip:
+        type: string
+        default: { get_attribute: [ SELF, dependency, public_ip ] }
+    properties:
+      user_email:
+        type: string
+      pushgateway_service_port:
+        type: string
+      grafana_api_ip:
+        type: string
+      consul_ip:
+        type: string
+    requirements:
+      - host:
+          capability: radon.capabilities.container.DockerRuntime
+          node: tosca.nodes.Container.Runtime
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - storage:
+          capability: tosca.capabilities.Storage
+          occurrences: [ 0, 1 ]
+      - network:
+          capability: tosca.capabilities.Endpoint
+          occurrences: [ 0, 1 ]
+      - dependency:
+          capability: tosca.capabilities.Node
+          node: radon.nodes.VM.EC2
+          relationship: tosca.relationships.DependsOn
+          occurrences: [ 1, 1 ]
+    capabilities:
+      monitor:
+        occurrences: [ 0, UNBOUNDED ]
+        type: radon.capabilities.monitoring.Monitor
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              ssh_user:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_user ] }
+              ssh_key_file:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_key_file ] }
+              pushgateway_ip:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, public_ip ] }
+            implementation:
+              primary: create
+              timeout: 0
+          configure:
+            inputs:
+              ssh_user:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_user ] }
+              ssh_key_file:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_key_file ] }
+              user_email:
+                type: string
+                required: true
+                default: { get_property: [ SELF, user_email ] }
+              pushgateway_ip:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, public_ip ] }
+              pushgateway_service_port:
+                type: string
+                required: true
+                default: { get_property: [ SELF, pushgateway_service_port ] }
+              consul_ip:
+                type: string
+                required: true
+                default: { get_property: [ SELF, consul_ip ] }
+            implementation:
+              primary: configure
+              timeout: 0
+          delete:
+            inputs:
+              ssh_user:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_user ] }
+              ssh_key_file:
+                type: string
+                default: { get_attribute: [ SELF, dependency, ssh_key_file ] }
+              pushgateway_ip:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, public_ip ] }
+              consul_ip:
+                type: string
+                required: true
+                default: { get_property: [ SELF, consul_ip ] }
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml

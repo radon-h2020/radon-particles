@@ -1,0 +1,41 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  tosca.nodes.Compute:
+    derived_from: tosca.nodes.Root
+    metadata:
+      targetNamespace: "tosca.nodes"
+      abstract: "false"
+      final: "false"
+    attributes:
+      private_address:
+        type: string
+      public_address:
+        type: string
+      networks:
+        type: map
+      ports:
+        type: map
+    requirements:
+      - local_storage:
+          capability: tosca.capabilities.Attachment
+          node: tosca.nodes.Storage.BlockStorage
+          relationship: tosca.relationships.AttachesTo
+          occurrences: [ 0, UNBOUNDED ]
+    capabilities:
+      scalable:
+        occurrences: [ 1, UNBOUNDED ]
+        type: tosca.capabilities.Scalable
+      endpoint:
+        occurrences: [ 1, UNBOUNDED ]
+        type: tosca.capabilities.Endpoint.Admin
+      os:
+        occurrences: [ 1, UNBOUNDED ]
+        type: tosca.capabilities.OperatingSystem
+      host:
+        occurrences: [ 1, UNBOUNDED ]
+        valid_source_types: [ tosca.nodes.SoftwareComponent ]
+        type: tosca.capabilities.Compute
+      binding:
+        occurrences: [ 1, UNBOUNDED ]
+        type: tosca.capabilities.network.Bindable

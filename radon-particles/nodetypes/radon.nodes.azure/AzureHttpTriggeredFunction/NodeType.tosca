@@ -1,0 +1,62 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.azure.AzureHttpTriggeredFunction:
+    derived_from: radon.nodes.azure.AzureFunction
+    metadata:
+      targetNamespace: "radon.nodes.azure"
+      abstract: "false"
+      final: "false"
+    attributes:
+      url:
+        type: string
+        default: { get_operation_output: [ SELF, Standard, create, URL ] }
+    properties:
+      max_outstanding_requests:
+        type: integer
+        default: 200
+      max_concurrent_requests:
+        type: integer
+        default: 100
+      route:
+        type: string
+        required: false
+      auth_level:
+        type: string
+        required: false
+        constraints:
+          - valid_values: [ anonymous, function, admin ]
+      methods:
+        type: list
+        required: false
+      route_prefix:
+        type: string
+        default: "api"
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          AUTH_LEVEL:
+            type: string
+            required: false
+            default: { get_property: [ SELF, auth_level ] }
+          ROUTE:
+            type: string
+            required: false
+            default: { get_property: [ SELF, route ] }
+          ROUTE_PREFIX:
+            type: string
+            required: true
+            default: { get_property: [ SELF, route_prefix ] }
+          MAX_OUTSTANDING_REQUESTS:
+            type: string
+            required: true
+            default: { get_property: [ SELF, max_outstanding_requests ] }
+          METHODS:
+            type: string
+            required: false
+            default: { get_property: [ SELF, methods ] }
+          MAX_CONCURRENT_REQUESTS:
+            type: string
+            required: true
+            default: { get_property: [ SELF, max_concurrent_requests ] }

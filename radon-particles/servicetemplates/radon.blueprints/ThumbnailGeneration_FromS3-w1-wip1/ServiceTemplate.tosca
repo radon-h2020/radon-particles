@@ -1,0 +1,86 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints"
+topology_template:
+  node_templates:
+    AwsS3Bucket:
+      type: radon.nodes.aws.AwsS3Bucket
+      metadata:
+        x: "437"
+        y: "272"
+        displayName: "SourceBucket"
+      properties:
+        size: "0 MB"
+        name: "h2020radon-examples-source-bucket"
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_1
+            capability: host
+        - invoker:
+            node: AwsLambdaFunctionFromS3_0
+            relationship: con_AwsTriggers_0
+            capability: invocable
+    AwsLambdaFunctionFromS3_0:
+      type: radon.nodes.aws.AwsLambdaFunctionFromS3
+      metadata:
+        x: "874"
+        y: "120"
+        displayName: "AwsLambdaFunctionFromS3"
+      properties:
+        handler: "<adjust the handler, e.g., index.handler>"
+        memory: 128
+        s3_bucket_key: "<add the S3 filename here>"
+        name: "thumbgen"
+        runtime: "<adjust runtime, e.g., nodejs"
+        alias: "thumbgen"
+        statement_id: "thumbgen"
+        s3_bucket_name: "<add you S3 bucket name here>"
+        timeout: 300
+        concurrency: 0
+      requirements:
+        - endpoint:
+            node: AwsS3Bucket_2
+            relationship: con_ConnectsTo_0
+            capability: storage_endpoint
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_0
+            capability: host
+    AwsS3Bucket_2:
+      type: radon.nodes.aws.AwsS3Bucket
+      metadata:
+        x: "1294"
+        y: "271"
+        displayName: "TargetBucket"
+      properties:
+        size: "0 MB"
+        name: "h2020radon-examples-target-bucket"
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_2
+            capability: host
+    AwsPlatform:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "875"
+        y: "467"
+        displayName: "AwsPlatform"
+      properties:
+        name: "AWS"
+        region: "eu-central-1"
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectsTo_0:
+      type: radon.relationships.ConnectsTo
+    con_AwsTriggers_0:
+      type: radon.relationships.aws.AwsTriggers
+      properties:
+        events: "s3:ObjectCreated:*"
