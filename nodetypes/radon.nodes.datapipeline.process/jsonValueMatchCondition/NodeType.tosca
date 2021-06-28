@@ -14,11 +14,11 @@ node_types:
     properties:
       match_condition:
         type: string
+        description: Comparison operator, supported, gt,equals,lt
         default: "gt"
-        description: "Comparison operator, supported, gt,equals,lt"
       match_value:
         type: string
-        default: "70"
+        default: 70
       field_name:
         type: string
         default: "temperature"
