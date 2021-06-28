@@ -1,0 +1,75 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.process.jsonValueMatchCondition:
+    derived_from: radon.nodes.datapipeline.process.LocalAction
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.process"
+      abstract: "false"
+      final: "false"
+    attributes:
+      template_name:
+        type: string
+        default: "jsonvaluematchtemp"
+    properties:
+      match_condition:
+        type: string
+        description: Comparison operator, supported, gt,equals,lt
+        default: "gt"
+      match_value:
+        type: string
+        default: 70
+      field_name:
+        type: string
+        default: "temperature"
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            description: The standard create operation
+            inputs:
+              template_name:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, template_name ] }
+              template_file:
+                type: string
+                required: true
+                default: "jsonvaluematchtemp_localConn.xml"
+            implementation:
+              primary: create
+              dependencies: [ templateFile_localConn ]
+              timeout: 0
+          configure:
+            description: The standard configure operation
+            inputs:
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+              match_condition:
+                type: string
+                required: true
+                default: { get_property: [ SELF, match_condition ] }
+              match_value:
+                type: string
+                required: true
+                default: { get_property: [ SELF, match_value ] }
+              field_name:
+                type: string
+                required: true
+                default: { get_property: [ SELF, field_name ] }
+            implementation:
+              primary: configure
+              timeout: 0
+    artifacts:
+      templateFile_localConn:
+        type: radon.artifacts.Ansible
+        file: jsonvaluematchtemp_localConn.xml
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml
