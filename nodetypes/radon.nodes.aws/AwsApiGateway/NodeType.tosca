@@ -9,11 +9,11 @@ node_types:
       final: "false"
     attributes:
       endpoint_url:
+        type: string
         description: Amazon resource name for this API
-        type: string
       arn:
-        description: Base URL for endpoints provided by the API
         type: string
+        description: Base URL for endpoints provided by the API
     properties:
       api_version:
         type: string

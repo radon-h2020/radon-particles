@@ -37,3 +37,17 @@ policy_types:
         constraints:
           - greater_or_equal: 0.0
     targets: [ radon.nodes.aws.AwsLambdaFunctionFromS3 ]
+    triggers:
+      radon.triggers.scaling.ScaleUp:
+        description: A scale up action
+        event: scale_up_trigger
+        target_filter:
+          node: radon.nodes.aws.AwsLambdaFunctionFromS3
+        action:
+          - call_operation:
+              operation: scale_up.scale_up
+              inputs:
+                adjustment: { get_property: [ SELF, adjustment ] }
+                cpu_upper_bound: { get_property: [ SELF, cpu_upper_bound ] }
+                ram_upper_bound: { get_property: [ SELF, ram_upper_bound ] }
+                callbackUrlCPU: { get_property: [ SELF, callbackUrlCPU ] }

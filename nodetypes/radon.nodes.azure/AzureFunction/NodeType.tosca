@@ -8,50 +8,58 @@ node_types:
       abstract: "false"
       final: "false"
     properties:
-      build_remote:
-        type: boolean
-        description: The option to enable remote build during deployment
-        required: false
-        default: true
-      storage_account_name:
-        type: string
-        description: The name of the existing Azure storage account
-      runtime_version:
-        type: float
-        description: The version of the Azure functions runtime stack
       function_app_name:
         type: string
+        required: true
         description: The name of the new Azure function app
-      os_type:
+      storage_account_name:
         type: string
-        description: The Azure function app OS type
-        constraints:
-          - valid_values: [ Windows, Linux ]
-      functions_version:
-        type: integer
-        description: The version of the Azure function app
-        required: false
-        default: 3
-        constraints:
-          - valid_values: [ 2, 3 ]
+        required: true
+        description: The name of the existing Azure storage account
       resource_group_name:
         type: string
+        required: true
         description: The name of the existing Azure resource group
       region:
         type: string
+        required: true
         description: The identifier for Azure region in which resources are/will be deployed
-      zip_file:
+      functions_version:
+        type: integer
+        required: false
+        description: The version of the Azure function app
+        default: 3
+        constraints:
+          - valid_values: [ 2, 3 ]
+      os_type:
         type: string
-        description: The path to the function zip file
+        required: true
+        description: The Azure function app OS type
+        constraints:
+          - valid_values: [ Windows, Linux ]
       runtime_type:
         type: string
+        required: true
         description: The Azure function runtime type
         constraints:
           - valid_values: [ dotnet, node, java, python, powershell ]
+      runtime_version:
+        type: float
+        required: true
+        description: The version of the Azure functions runtime stack
+      zip_file:
+        type: string
+        required: true
+        description: The path to the function zip file
+      build_remote:
+        type: boolean
+        required: false
+        description: The option to enable remote build during deployment
+        default: true
       timeout:
         type: integer
-        description: The timeout in seconds for checking the status of deployment
         required: false
+        description: The timeout in seconds for checking the status of deployment
         default: 300
         constraints:
           - in_range: [ 1, 600 ]
@@ -65,78 +73,78 @@ node_types:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
-          build_remote:
-            type: boolean
-            description: The option to enable remote build during deployment
-            required: false
-            default: { get_property: [ SELF, build_remote ] }
-          storage_account_name:
-            type: string
-            description: The name of the existing Azure storage account
-            required: true
-            default: { get_property: [ SELF, storage_account_name ] }
-          runtime_version:
-            type: string
-            description: The version of the Azure functions runtime stack
-            required: true
-            default: { get_property: [ SELF, runtime_version ] }
           function_app_name:
             type: string
+            required: true
             description: The name of the new Azure function app
-            required: true
             default: { get_property: [ SELF, function_app_name ] }
-          os_type:
-            type: string
-            description: The Azure function app OS type
-            required: true
-            default: { get_property: [ SELF, os_type ] }
-          functions_version:
-            type: integer
-            description: The version of the Azure function app
-            required: false
-            default: { get_property: [ SELF, functions_version ] }
           resource_group_name:
             type: string
-            description: The name of the existing Azure resource group
             required: true
+            description: The name of the existing Azure resource group
             default: { get_property: [ SELF, resource_group_name ] }
+          storage_account_name:
+            type: string
+            required: true
+            description: The name of the existing Azure storage account
+            default: { get_property: [ SELF, storage_account_name ] }
           region:
             type: string
+            required: true
             description: The identifier for Azure region in which resources are/will be deployed
-            required: true
             default: { get_property: [ SELF, region ] }
-          zip_file:
+          functions_version:
+            type: integer
+            required: false
+            description: The version of the Azure function app
+            default: { get_property: [ SELF, functions_version ] }
+          os_type:
             type: string
-            description: The path to the function zip file
             required: true
-            default: { get_property: [ SELF, zip_file ] }
+            description: The Azure function app OS type
+            default: { get_property: [ SELF, os_type ] }
           runtime_type:
             type: string
-            description: The Azure function runtime type
             required: true
+            description: The Azure function runtime type
             default: { get_property: [ SELF, runtime_type ] }
+          runtime_version:
+            type: string
+            required: true
+            description: The version of the Azure functions runtime stack
+            default: { get_property: [ SELF, runtime_version ] }
+          zip_file:
+            type: string
+            required: true
+            description: The path to the function zip file
+            default: { get_property: [ SELF, zip_file ] }
+          build_remote:
+            type: boolean
+            required: false
+            description: The option to enable remote build during deployment
+            default: { get_property: [ SELF, build_remote ] }
           timeout:
             type: integer
-            description: The timeout in seconds for checking the status of deployment
             required: false
+            description: The timeout in seconds for checking the status of deployment
             default: { get_property: [ SELF, timeout ] }
         operations:
           create:
-            description: The standard create operation
             implementation:
               primary: create
               timeout: 0
+            description: The standard create operation
           delete:
-            description: The standard delete operation
             implementation:
               primary: delete
               timeout: 0
+            description: The standard delete operation
     artifacts:
       create:
         type: radon.artifacts.Ansible
-        description: The YAML artifact for creation
         file: create.yml
+        description: The YAML artifact for creation
       delete:
         type: radon.artifacts.Ansible
-        description: The YAML artifact for deletion
         file: delete.yml
+        description: The YAML artifact for deletion

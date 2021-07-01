@@ -1,7 +1,0 @@
----
-  - hosts: localhost
-    vars:
-       ansible_python_interpreter: /usr/bin/python3
-    tasks:
-      - name: Activate datapipeline
-        shell: aws datapipeline activate-pipeline --pipeline-id "{{ pipeline_id }}"
