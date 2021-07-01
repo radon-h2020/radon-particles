@@ -1,0 +1,61 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.datapipeline.process.compressData:
+    derived_from: radon.nodes.datapipeline.process.LocalAction
+    metadata:
+      targetNamespace: "radon.nodes.datapipeline.process"
+      abstract: "false"
+      final: "false"
+    attributes:
+      template_name:
+        type: string
+        default: "CompressDataTemplate"
+    properties:
+      compression_format:
+        type: string
+        description: Compression format (gzip, snappy,lzma, bzip2)
+        default: "gzip"
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            description: The standard create operation
+            inputs:
+              template_name:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, template_name ] }
+              template_file:
+                type: string
+                required: true
+                default: "compresstemplate_localConn.xml"
+            implementation:
+              primary: create
+              dependencies: [ templateFile_localConn ]
+              timeout: 0
+          configure:
+            description: The standard configure operation
+            inputs:
+              compression_format:
+                type: string
+                required: true
+                default: { get_property: [ SELF, compression_format ] }
+              pipeline_id:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, id ] }
+            implementation:
+              primary: configure
+              timeout: 0
+    artifacts:
+      templateFile_localConn:
+        type: radon.artifacts.Ansible
+        file: compresstemplate_localConn.xml
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml

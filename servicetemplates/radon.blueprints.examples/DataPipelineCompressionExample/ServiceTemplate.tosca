@@ -1,0 +1,150 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints.examples"
+topology_template:
+  node_templates:
+    PublishLocal_0:
+      type: radon.nodes.datapipeline.destination.PublishLocal
+      metadata:
+        x: "1562"
+        y: "96"
+        displayName: "PublishLocal"
+      properties:
+        create_if_missing: true
+        schedulingStrategy: "EVENT_DRIVEN"
+        schedulingPeriodCRON: "* * * * * ?"
+        name: "adsad"
+        directory: "/tmp/out1"
+      requirements:
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_4
+            capability: host
+    PublishLocal_1:
+      type: radon.nodes.datapipeline.destination.PublishLocal
+      metadata:
+        x: "1171"
+        y: "388"
+        displayName: "PublishLocal"
+      properties:
+        create_if_missing: true
+        schedulingStrategy: "EVENT_DRIVEN"
+        schedulingPeriodCRON: "* * * * * ?"
+        name: "asdasd"
+        directory: "/tmp/iout2"
+      requirements:
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_3
+            capability: host
+    compressData_0:
+      type: radon.nodes.datapipeline.process.compressData
+      metadata:
+        x: "483"
+        y: "100"
+        displayName: "compressData"
+      properties:
+        schedulingStrategy: "EVENT_DRIVEN"
+        compression_format: "gzip"
+        schedulingPeriodCRON: "* * * * * ?"
+      requirements:
+        - ConnectToPipeline:
+            node: unCompressData_0
+            relationship: con_ConnectNifiLocal_1
+            capability: ConnectToPipeline
+        - ConnectToPipeline:
+            node: PublishLocal_1
+            relationship: con_ConnectNifiLocal_3
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_5
+            capability: host
+    unCompressData_0:
+      type: radon.nodes.datapipeline.process.unCompressData
+      metadata:
+        x: "995"
+        y: "79"
+        displayName: "unCompressData"
+      properties:
+        schedulingStrategy: "EVENT_DRIVEN"
+        compression_format: "gzip"
+        schedulingPeriodCRON: "* * * * * ?"
+      requirements:
+        - ConnectToPipeline:
+            node: PublishLocal_0
+            relationship: con_ConnectNifiLocal_2
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_2
+            capability: host
+    ConsumeLocal_0:
+      type: radon.nodes.datapipeline.source.ConsumeLocal
+      metadata:
+        x: "78"
+        y: "168"
+        displayName: "ConsumeLocal"
+      properties:
+        schedulingStrategy: "EVENT_DRIVEN"
+        schedulingPeriodCRON: "* * * * * ?"
+        directory: "/tmp/input"
+      requirements:
+        - connectToPipeline:
+            node: compressData_0
+            relationship: con_ConnectNifiLocal_0
+            capability: ConnectToPipeline
+        - host:
+            node: Nifi_0
+            relationship: con_HostedOn_1
+            capability: host
+    OpenStack_0:
+      type: radon.nodes.VM.OpenStack
+      metadata:
+        x: "1275"
+        y: "570"
+        displayName: "OpenStack"
+      properties:
+        flavor: "c1.medium"
+        key_name: "jakovits_ldpc"
+        image: "21cd7486-a2a6-458c-9b05-9207c0b63819"
+        ssh_username: "ubuntu"
+        name: "sdfsdf"
+        network: "provider_64_net"
+    Nifi_0:
+      type: radon.nodes.nifi.Nifi
+      metadata:
+        x: "853"
+        y: "556"
+        displayName: "Nifi"
+      properties:
+        port: 8080
+        webinterface_public: true
+        component_version: "1.13.2"
+      requirements:
+        - host:
+            node: OpenStack_0
+            relationship: con_HostedOn_0
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_ConnectNifiLocal_3:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+    con_HostedOn_3:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectNifiLocal_0:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+    con_ConnectNifiLocal_2:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+    con_ConnectNifiLocal_1:
+      type: radon.relationships.datapipeline.ConnectNifiLocal
+    con_HostedOn_4:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_5:
+      type: tosca.relationships.HostedOn
