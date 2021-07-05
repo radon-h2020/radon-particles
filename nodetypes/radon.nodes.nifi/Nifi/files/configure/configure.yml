@@ -6,7 +6,7 @@
       lineinfile:
         path: "/usr/local/bin/nifi-{{ tarball_version }}/conf/nifi.properties"
         regexp: '^(.*)nifi.remote.input.host=(.*)$'
-        line: 'nifi.remote.input.host={{ ansible_nodename.split(".")[0] | lower }}'
+        line: 'nifi.remote.input.host={{ host_vm_ip }}'
         backrefs: true
     - name: Enable RAW site-to-site protocol, by adding the 8043 port number
       lineinfile:

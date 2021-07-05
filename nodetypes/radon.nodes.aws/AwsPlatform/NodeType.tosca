@@ -9,8 +9,8 @@ node_types:
       final: "false"
     attributes:
       role_arn:
-        type: string
         description: AWS role arn identifier
+        type: string
     properties:
       name:
         type: string

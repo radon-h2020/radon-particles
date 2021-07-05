@@ -57,6 +57,7 @@
               "schedulingPeriod": "{{ schedulingPeriodValue }}"
         status_code: 200
         body_format: json
+
     - name: Get id of the first processor within the process group.
       vars:
         first_prcsr_id: "{{ nifi_resources.json  | to_json | from_json | json_query(get_id1) }}"

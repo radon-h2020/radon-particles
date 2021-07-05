@@ -162,10 +162,16 @@
                         <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
                         <descriptors>
                             <entry>
-<key>GCP Credentials Provider Service</key>
+<key>gcs-bucket</key>
 <value>
-    <identifiesControllerService>org.apache.nifi.gcp.credentials.service.GCPCredentialsService</identifiesControllerService>
-    <name>GCP Credentials Provider Service</name>
+    <name>gcs-bucket</name>
+</value>
+                            </entry>
+                            <entry>
+<key>record-writer</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.serialization.RecordSetWriterFactory</identifiesControllerService>
+    <name>record-writer</name>
 </value>
                             </entry>
                             <entry>
@@ -266,6 +272,7 @@
                             </entry>
                             <entry>
 <key>gcp-proxy-user-name</key>
+
                             </entry>
                             <entry>
 <key>gcp-proxy-port</key>
@@ -318,14 +325,20 @@
                         <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
                         <descriptors>
                             <entry>
-<key>GCP Credentials Provider Service</key>
+<key>gcs-bucket</key>
 <value>
-    <identifiesControllerService>org.apache.nifi.gcp.credentials.service.GCPCredentialsService</identifiesControllerService>
-    <name>GCP Credentials Provider Service</name>
+    <name>gcs-bucket</name>
+</value>
+                            </entry>
+                            <entry>
+<key>gcs-key</key>
+<value>
+    <name>gcs-key</name>
 </value>
                             </entry>
                             <entry>
 <key>gcp-proxy-host</key>
+
 <value>
     <name>gcp-proxy-host</name>
 </value>
@@ -400,6 +413,7 @@
                             <entry>
 <key>GCP Credentials Provider Service</key>
 <value>3991cdeb-1e89-3323-0000-000000000000</value>
+
                             </entry>
                             <entry>
 <key>gcp-proxy-host</key>
