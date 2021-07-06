@@ -13,14 +13,6 @@ node_types:
       role_arn:
         description: ARN for the role of the function
         type: string
-<<<<<<< HEAD
-      arn:
-        description: Amazon Resource Name (ARN) for this function
-        type: string
-      region:
-        description: AWS region in which the function is deployed
-        type: string
-=======
       callbackUrlCPU:
         type: string
       adjustment:
@@ -32,7 +24,6 @@ node_types:
         type: string
       ram_upper_bound:
         type: float
->>>>>>> scaling
     properties:
       handler:
         type: string
@@ -130,17 +121,14 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, runtime ] }
-<<<<<<< HEAD
           function_name:
             type: string
             required: true
             default: { get_property: [ SELF, name ] }
-=======
           callbackUrlCPU:
             type: string
             required: false
             default: { get_property: [ radon.policies.scaling.ScaleUp, callbackUrlCPU ] }
->>>>>>> scaling
           lambda_timeout:
             type: integer
             required: true
@@ -173,8 +161,6 @@ node_types:
             type: string
             required: false
             default: { get_property: [ SELF, env_vars ] }
-<<<<<<< HEAD
-=======
           cpu_upper_bound:
             type: float
             required: false
@@ -203,7 +189,6 @@ node_types:
             type: float
             required: false
             default: { get_property: [ radon.policies.scaling.ScaleUp, ram_upper_bound ] }
->>>>>>> scaling
         operations:
           create:
             implementation:
