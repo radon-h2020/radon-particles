@@ -46,6 +46,19 @@ node_types:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
           create:
+            inputs:
+              pushgateway_ip:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, public_ip ] }
+              ssh_user:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, ssh_user ] }
+              ssh_key_file:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, ssh_key_file ] }
             implementation:
               primary: create
               timeout: 0
@@ -67,6 +80,14 @@ node_types:
                 type: string
                 required: true
                 default: { get_property: [ SELF, consul_ip ] }
+              ssh_user:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, ssh_user ] }
+              ssh_key_file:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, ssh_key_file ] }
             implementation:
               primary: configure
               timeout: 0
@@ -80,6 +101,14 @@ node_types:
                 type: string
                 required: true
                 default: { get_property: [ SELF, consul_ip ] }
+              ssh_user:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, ssh_user ] }
+              ssh_key_file:
+                type: string
+                required: true
+                default: { get_attribute: [ SELF, dependency, ssh_key_file ] }
             implementation:
               primary: delete
               timeout: 0

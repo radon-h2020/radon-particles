@@ -11,6 +11,10 @@ relationship_types:
       Configure:
         type: tosca.interfaces.relationship.Configure
         inputs:
+          cpu_upper_bound:
+            type: string
+            required: true
+            default: { get_attribute: [ SOURCE, cpu_upper_bound ] }
           user_email:
             type: string
             required: true
@@ -18,7 +22,7 @@ relationship_types:
           monitored_function:
             type: string
             required: true
-            default: { get_property: [ SOURCE, name ] }
+            default: { get_property: [ SOURCE, function_name ] }
           pushgateway_ip:
             type: string
             required: true
@@ -27,6 +31,26 @@ relationship_types:
             type: string
             required: true
             default: { get_property: [ TARGET, grafana_api_ip ] }
+          callbackUrlCPU:
+            type: string
+            required: true
+            default: { get_attribute: [ SOURCE, callbackUrlCPU ] }
+          adjustment:
+            type: string
+            required: true
+            default: { get_attribute: [ SOURCE, adjustment ] }
+          ssh_user:
+            type: string
+            required: true
+            default: { get_property: [ TARGET, dependency, ssh_user ] }
+          ssh_key_file:
+            type: string
+            required: true
+            default: { get_property: [ TARGET, dependency, ssh_key_file ] }
+          ram_upper_bound:
+            type: string
+            required: true
+            default: { get_attribute: [ SOURCE, ram_upper_bound ] }
         operations:
           post_configure_source:
             implementation:

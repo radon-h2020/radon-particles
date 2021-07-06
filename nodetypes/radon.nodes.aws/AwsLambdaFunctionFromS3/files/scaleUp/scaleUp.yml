@@ -1,0 +1,40 @@
+---
+- name: scaleUp
+  hosts: localhost
+  gather_facts: no
+  become: true
+  become_method: sudo
+
+  vars:
+    notification_obj: "{{ notification | regex_replace('[^a-zA-Z0-9:,-]') }}"
+    notification_obj1: "{{ notification_obj.split(':') }}"
+    notification_obj2: "{{ notification_obj1[2].split(',') }}"
+    monitored_function_name: "{{ notification_obj2[0] }}"
+
+  tasks:
+    - name: Start scaling up of Lambda function {{ monitored_function_name }}
+      debug:
+        msg: "Scaling up initiated."
+
+    - name: See what's in the notification file from monitoring that was supplied to opera notify "{{ notification }}"
+      debug:
+        msg: "{{ notification }}"
+
+    - name: Fecth the Labda function current memory size in order to increase it.
+      shell: aws lambda get-function-configuration --region eu-central-1 --function-name {{ monitored_function_name }}
+      register: current_function
+
+    - name: Get Current AWS Memory Size
+      set_fact:
+        memory: "{{ (current_function.stdout_lines | join('\n') | from_json).MemorySize }}"
+
+    - name: Adjust AWS Memory size
+      set_fact:
+        memory: "{{ 2*memory|int }}"
+
+    - name: Scale Up Lambda function by incesing the Memory Size.
+      shell: aws lambda update-function-configuration --function-name {{ monitored_function_name }} --region eu-central-1 --memory-size {{ memory }}
+
+    - name: Finish scaling up of {{ monitored_function_name }}
+      debug:
+        msg: "Scaling up concluded."

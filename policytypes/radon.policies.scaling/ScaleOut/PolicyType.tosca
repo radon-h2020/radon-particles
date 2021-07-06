@@ -1,7 +1,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 policy_types:
-  radon.policies.scaling.ScaleOut:
+  radon.policies.scaling.ScaleUp:
     derived_from: tosca.policies.Scaling
     metadata:
       targetNamespace: "radon.policies.scaling"
@@ -14,15 +14,40 @@ policy_types:
         required: false
         constraints:
           - less_or_equal: 100.0
+      callbackUrlCPU:
+        type: string
+        description: The callback URL in SaaS
+        required: false
       adjustment:
         type: integer
         description: The amount by which to scale
         required: false
         constraints:
           - greater_or_equal: 1
+      ram_upper_bound:
+        type: float
+        description: The upper bound for the RAM
+        required: false
+        constraints:
+          - less_or_equal: 100.0
       cpu_lower_bound:
         type: float
         description: The lower bound for the CPU
         required: false
         constraints:
           - greater_or_equal: 0.0
+    targets: [ radon.nodes.aws.AwsLambdaFunctionFromS3 ]
+    triggers:
+      radon.triggers.scaling.ScaleUp:
+        description: A scale up action
+        event: scale_up_trigger
+        target_filter:
+          node: radon.nodes.aws.AwsLambdaFunctionFromS3
+        action:
+          - call_operation:
+              operation: scale_up.scale_up
+              inputs:
+                adjustment: { get_property: [ SELF, adjustment ] }
+                cpu_upper_bound: { get_property: [ SELF, cpu_upper_bound ] }
+                ram_upper_bound: { get_property: [ SELF, ram_upper_bound ] }
+                callbackUrlCPU: { get_property: [ SELF, callbackUrlCPU ] }
