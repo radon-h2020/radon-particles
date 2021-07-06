@@ -11,5 +11,5 @@ This policy type represents a load test case for the Nifi based Data Pipelines.
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `resources` | `true` | `string` |  |  | A single ZIP archive containing all resources for the test. | 
-| `user.properties` | `false` | `string` |   |   | Location and filename of a file with properties for the test plan (optional) |
+
 

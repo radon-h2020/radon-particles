@@ -17,18 +17,18 @@ topology_template:
       type: string
       required: true
   node_templates:
-    ConsS3Bucket_1:
+    ConsS3Bucket_0:
       type: radon.nodes.datapipeline.source.ConsS3Bucket
       metadata:
-        x: "266"
-        y: "91"
+        x: "304"
+        y: "92"
         displayName: "ConsS3Bucket"
       properties:
         BucketName: "radon-jakovits"
         cred_file_path: { get_input: cred_file_path }
         schedulingStrategy: "EVENT_DRIVEN"
         schedulingPeriodCRON: "* * * * * ?"
-        name: "read_from_s3"
+        name: "readfroms3"
         Region: "eu-central-1"
       requirements:
         - connectToPipeline:
@@ -37,13 +37,13 @@ topology_template:
             capability: ConnectToPipeline
         - host:
             node: Nifi_0
-            relationship: con_HostedOn_0
+            relationship: con_HostedOn_2
             capability: host
     AwsPlatform_0:
       type: radon.nodes.aws.AwsPlatform
       metadata:
-        x: "786"
-        y: "939"
+        x: "612"
+        y: "680"
         displayName: "AwsPlatform"
       properties:
         name: "AWS"
@@ -51,26 +51,41 @@ topology_template:
     PubsS3Bucket_0:
       type: radon.nodes.datapipeline.destination.PubsS3Bucket
       metadata:
-        x: "1063"
-        y: "93"
+        x: "1031"
+        y: "81"
         displayName: "PubsS3Bucket"
       properties:
         BucketName: "radon-jakovits-output"
         cred_file_path: { get_input: cred_file_path }
         schedulingStrategy: "EVENT_DRIVEN"
         schedulingPeriodCRON: "* * * * * ?"
-        name: "send_to_s3"
+        name: "sendtos3"
         Region: "eu-central-1"
       requirements:
         - host:
             node: Nifi_0
             relationship: con_HostedOn_1
             capability: host
+    Nifi_0:
+      type: radon.nodes.nifi.Nifi
+      metadata:
+        x: "625"
+        y: "198"
+        displayName: "Nifi"
+      properties:
+        port: 8080
+        webinterface_public: true
+        component_version: "1.13.2"
+      requirements:
+        - host:
+            node: EC2_0
+            relationship: con_HostedOn_0
+            capability: host
     EC2_0:
       type: radon.nodes.VM.EC2
       metadata:
-        x: "694"
-        y: "788"
+        x: "604"
+        y: "446"
         displayName: "EC2"
       properties:
         image: "ami-0e0102e3ff768559b"
@@ -83,20 +98,6 @@ topology_template:
         - host:
             node: AwsPlatform_0
             relationship: con_HostedOn_3
-            capability: host
-    Nifi_0:
-      type: radon.nodes.nifi.Nifi
-      metadata:
-        x: "713"
-        y: "534"
-        displayName: "Nifi"
-      properties:
-        port: 8080
-        component_version: "1.13.1"
-      requirements:
-        - host:
-            node: EC2_0
-            relationship: con_HostedOn_2
             capability: host
   relationship_templates:
     con_HostedOn_2:
@@ -113,13 +114,17 @@ topology_template:
     - pipelineLoadTestPolicy:
         type: radon.policies.testing.DataPipelineLoadTest
         properties:
-          hostname: "https://radon-jakovits.s3.eu-central-1.amazonaws.com/"
+          velocity_per_minute: "80"
+          hostname: "radon-jakovits.s3.eu-central-1.amazonaws.com"
+          test_duration: "80"
+          lower_bound: "0.1"
           port: "8080"
-          resources: "resources.zip"
+          performance_metric: "CPU_Load"
           ti_blueprint: "radon.blueprints.testing.NiFiTIDocker"
-          user.properties: "None"
-          test_id: "loadtest556"
-        targets: [ ConsS3Bucket_1 ]
+          upper_bound: "0.7"
+          resource_location: "radon-ctt/resources.zip"
+          test_id: "datatest67"
+        targets: [ ConsS3Bucket_0 ]
   outputs:
     public_address:
       type: string

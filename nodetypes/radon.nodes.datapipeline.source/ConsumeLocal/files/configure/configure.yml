@@ -20,6 +20,13 @@
     get_id: "processors[0].id"
     port: "{{ (lookup('file', '/tmp/nifi.json') | from_json) | default('8080', true) }}"
   tasks:
+
+    - name: Creates directory
+      file:
+        path: "{{directory}}"
+        state: directory
+        mode: 0777
+
     - name: Get list of available NiFi processors within the process group
       uri:
         url: "http://localhost:{{ port }}/nifi-api/process-groups/{{ pipeline_id }}/processors"

@@ -12,5 +12,15 @@ policy_types:
         type: integer
       test_duration:
         type: integer
+      lower_bound:
+        type: float
+        required: false
+      performance_metric:
+        type: string
+        required: false
+        default: "CPU_Load"
+      upper_bound:
+        type: float
+        required: false
       resource_location:
         type: string

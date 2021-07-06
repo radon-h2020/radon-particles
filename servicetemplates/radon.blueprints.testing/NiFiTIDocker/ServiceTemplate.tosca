@@ -13,6 +13,9 @@ topology_template:
     vpc_subnet_id:
       type: string
       required: true
+    s3_bucket_target:
+      type: string
+      required: true
     ssh_key_file:
       type: string
       required: false
@@ -69,9 +72,10 @@ topology_template:
         y: "140"
         displayName: "PubsS3Bucket"
       properties:
-        BucketName: "radon-jakovits"
+        BucketName: { get_input: s3_bucket_target }
         cred_file_path: { get_input: cred_file_path }
-        schedulingStrategy: "EVENT_DRIVENsend_to_s3"
+        schedulingStrategy: "EVENT_DRIVEN"
+        name: "send_tos3"
         schedulingPeriodCRON: "* * * * * ?"
         Region: "eu-central-1"
       requirements:
@@ -89,7 +93,7 @@ topology_template:
         schedulingStrategy: "EVENT_DRIVEN"
         name: "read_test_files"
         schedulingPeriodCRON: "* * * * * ?"
-        directory: "/mnt"
+        directory: "/tmp/nifi_agent"
       requirements:
         - connectToPipeline:
             node: PubsS3Bucket_0
