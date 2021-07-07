@@ -22,8 +22,8 @@ node_types:
         type: string
     requirements:
       - host:
-          capability: radon.capabilities.container.DockerRuntime
-          node: tosca.nodes.Container.Runtime
+          capability: tosca.capabilities.Node
+          node: radon.nodes.VM.EC2
           relationship: tosca.relationships.HostedOn
           occurrences: [ 1, 1 ]
       - storage:
