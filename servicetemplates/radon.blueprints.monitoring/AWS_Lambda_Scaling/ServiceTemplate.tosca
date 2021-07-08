@@ -1,0 +1,143 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "example.org.tosca.servicetemplates"
+  name: "AWSScalableLambda_w1-wip1"
+imports:
+topology_template:
+  inputs:
+    callbackUrlCPU:
+      type: string
+  node_templates:
+    DockerEngine_0:
+      type: radon.nodes.docker.DockerEngine
+      metadata:
+        x: "418"
+        y: "496"
+        displayName: "DockerEngine"
+      requirements:
+        - host:
+            node: EC2_0
+            relationship: con_HostedOn_0
+            capability: feature
+    PushGateway_0:
+      type: radon.nodes.monitoring.PushGateway
+      metadata:
+        x: "1078"
+        y: "155"
+        displayName: "PushGateway"
+      properties:
+        user_email: "use_email"
+        pushgateway_service_port: 9091
+        grafana_api_ip: "http://3.127.254.144:3100"
+        consul_ip: "3.127.254.144"
+      requirements:
+        - dependency:
+            node: EC2_0
+            relationship: con_DependsOn_0
+            capability: feature
+        - host:
+            node: EC2_0
+            relationship: con_HostedOn_1
+            capability: feature
+    AwsS3Bucket_0:
+      type: radon.nodes.aws.AwsS3Bucket
+      metadata:
+        x: "1616"
+        y: "604"
+        displayName: "anesid"
+      properties:
+        size: "0 MB"
+        name: "anesid"
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_3
+            capability: host
+        - invoker:
+            node: AwsLambdaFunctionFromS3_0
+            relationship: con_AwsTriggers_0
+            capability: invocable
+    AwsLambdaFunctionFromS3_0:
+      type: radon.nodes.aws.AwsLambdaFunctionFromS3
+      metadata:
+        x: "1616"
+        y: "182"
+        displayName: "AwsLambdaFunctionFromS3"
+      properties:
+        handler: "index.handler"
+        memory: 1024
+        s3_bucket_key: "nodeJS-monitored-function.zip"
+        function_name: "nodeJS-monitored-function"
+        name: "nodeJS-monitored-function"
+        runtime: "nodejs12.x"
+        alias: "nodeJS-monitored-function"
+        statement_id: "nodeJS-monitored-function"
+        s3_bucket_name: "layer-deploy"
+        timeout: 300
+        concurrency: 0
+        env_vars: {}
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_2
+            capability: host
+        - monitor:
+            node: PushGateway_0
+            relationship: con_AWSIsMonitoredBy_0
+            capability: monitor
+    AwsPlatform_0:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "1073"
+        y: "579"
+        displayName: "AwsPlatform"
+      properties:
+        name: "AWS"
+        region: "eu-central-1"
+    EC2_0:
+      type: radon.nodes.VM.EC2
+      metadata:
+        x: "416"
+        y: "173"
+        displayName: "EC2"
+      properties:
+        image: "ami-0b418580298265d5c"
+        ssh_key_name: "ssh_key"
+        vpc_subnet_id: "subnet-00268ff84ba97070c"
+        instance_type: "t2.micro"
+        ssh_key_file: "ssh_key_path"
+        ssh_user: "ubuntu"
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_4
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_DependsOn_0:
+      type: tosca.relationships.DependsOn
+    con_HostedOn_3:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_AWSIsMonitoredBy_0:
+      type: radon.relationships.monitoring.AWSIsMonitoredBy
+    con_HostedOn_4:
+      type: tosca.relationships.HostedOn
+    con_AwsTriggers_0:
+      type: radon.relationships.aws.AwsTriggers
+      properties:
+        events: "s3:ObjectCreated:*"
+  policies:
+    - scale_up:
+        type: radon.policies.scaling.ScaleUp
+        properties:
+          cpu_upper_bound: 60.0
+          callbackUrlCPU: { get_input: callbackUrlCPU }
+          adjustment: 2
+          ram_upper_bound: 80
+        targets: [ AwsLambdaFunctionFromS3_0 ]
