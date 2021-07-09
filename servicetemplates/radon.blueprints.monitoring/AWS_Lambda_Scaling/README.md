@@ -17,3 +17,6 @@ Create a `inputs.yaml` file in the same directory and add the following:
 callbackUrlCPU: << Callback URL >>
 
 ```
+
+Modify the service template file with your corresponding keys and credentials.
+Also modify line 137 from type: radon.policies.scaling.ScaleOut to type: radon.policies.scaling.ScaleUp
