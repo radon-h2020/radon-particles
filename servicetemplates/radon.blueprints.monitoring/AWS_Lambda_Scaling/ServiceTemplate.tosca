@@ -134,7 +134,7 @@ topology_template:
         events: "s3:ObjectCreated:*"
   policies:
     - scale_up:
-        type: radon.policies.scaling.ScaleUp
+        type: radon.policies.scaling.ScaleOut
         properties:
           cpu_upper_bound: 60.0
           callbackUrlCPU: { get_input: callbackUrlCPU }
