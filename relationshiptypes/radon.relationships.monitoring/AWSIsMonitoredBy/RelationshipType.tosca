@@ -13,7 +13,7 @@ relationship_types:
         inputs:
           cpu_upper_bound:
             type: string
-            required: true
+            required: false
             default: { get_attribute: [ SOURCE, cpu_upper_bound ] }
           user_email:
             type: string
@@ -33,11 +33,11 @@ relationship_types:
             default: { get_property: [ TARGET, grafana_api_ip ] }
           callbackUrlCPU:
             type: string
-            required: true
+            required: false
             default: { get_attribute: [ SOURCE, callbackUrlCPU ] }
           adjustment:
             type: string
-            required: true
+            required: false
             default: { get_attribute: [ SOURCE, adjustment ] }
           ssh_user:
             type: string
@@ -49,7 +49,7 @@ relationship_types:
             default: { get_property: [ TARGET, dependency, ssh_key_file ] }
           ram_upper_bound:
             type: string
-            required: true
+            required: false
             default: { get_attribute: [ SOURCE, ram_upper_bound ] }
         operations:
           post_configure_source:

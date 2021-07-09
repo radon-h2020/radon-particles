@@ -42,11 +42,3 @@
           arn: "{{ alias_info.alias_arn }}"
           role_arn: "{{ role_arn }}"
           region: "{{ aws_region }}"
-
-    - name: set outputs regarding to scaling policies
-      set_stats:
-        data:
-          cpu_upper_bound: "{{ cpu_upper_bound }}"
-          ram_upper_bound: "{{ ram_upper_bound }}"
-          adjustment: "{{ adjustment }}"
-          callbackUrlCPU: "{{ callbackUrlCPU }}"

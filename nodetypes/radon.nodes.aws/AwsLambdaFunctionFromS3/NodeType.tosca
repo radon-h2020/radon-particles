@@ -8,22 +8,14 @@ node_types:
       abstract: "false"
       final: "false"
     attributes:
-      cpu_upper_bound:
-        type: float
       role_arn:
         description: ARN for the role of the function
         type: string
-      callbackUrlCPU:
-        type: string
-      adjustment:
-        type: float
       arn:
         description: Amazon Resource Name (ARN) for this function
         type: string
       region:
         type: string
-      ram_upper_bound:
-        type: float
     properties:
       handler:
         type: string
@@ -89,19 +81,6 @@ node_types:
           relationship: radon.relationships.monitoring.AWSIsMonitoredBy
           occurrences: [ 0, UNBOUNDED ]
     interfaces:
-      scale_up:
-        type: radon.interfaces.scaling.ScaleUp
-        operations:
-          scale_up:
-            inputs:
-              adjustment: { default: 1, type: integer }
-              cpu_upper_bound: { default: 80.0, type: float }
-              ram_upper_bound: { default: 80.0, type: float }
-              callbackUrlCPU: { default: "null", type: string }
-            description: Operation for scaling up.
-            implementation:
-              primary: scaleUp
-              timeout: 0
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         inputs:
@@ -125,10 +104,6 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, name ] }
-          callbackUrlCPU:
-            type: string
-            required: false
-            default: { get_property: [ radon.policies.scaling.ScaleUp, callbackUrlCPU ] }
           lambda_timeout:
             type: integer
             required: true
@@ -161,10 +136,6 @@ node_types:
             type: string
             required: false
             default: { get_property: [ SELF, env_vars ] }
-          cpu_upper_bound:
-            type: float
-            required: false
-            default: { get_property: [ radon.policies.scaling.ScaleUp, cpu_upper_bound ] }
           s3_bucket_key:
             type: string
             required: true
@@ -181,14 +152,6 @@ node_types:
             type: string
             required: true
             default: { get_property: [ SELF, name ] }
-          adjustment:
-            type: float
-            required: false
-            default: { get_property: [ radon.policies.scaling.ScaleUp, adjustment ] }
-          ram_upper_bound:
-            type: float
-            required: false
-            default: { get_property: [ radon.policies.scaling.ScaleUp, ram_upper_bound ] }
         operations:
           create:
             implementation:
@@ -205,6 +168,3 @@ node_types:
       delete:
         type: radon.artifacts.Ansible
         file: delete.yml
-      scaleUp:
-        type: radon.artifacts.Ansible
-        file: scaleUp.yml
