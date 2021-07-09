@@ -1,0 +1,210 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  radon.nodes.aws.AwsLambdaFunctionFromS3Scalable:
+    derived_from: radon.nodes.abstract.Function
+    metadata:
+      targetNamespace: "radon.nodes.aws"
+      abstract: "false"
+      final: "false"
+    attributes:
+      cpu_upper_bound:
+        type: float
+      role_arn:
+        description: ARN for the role of the function
+        type: string
+      callbackUrlCPU:
+        type: string
+      adjustment:
+        type: float
+      arn:
+        description: Amazon Resource Name (ARN) for this function
+        type: string
+      region:
+        type: string
+      ram_upper_bound:
+        type: float
+    properties:
+      handler:
+        type: string
+        description: Handler for lambda function
+        default: "index.handler"
+      s3_bucket_key:
+        type: string
+        description: The S3 key aka. filename referencing the file to be deployed
+      memory:
+        type: integer
+        description: Function memory in MB
+        default: 128
+      function_name:
+        type: string
+        description: Lambda Function name
+      memory_range:
+        type: range
+        description: Range of function memory in MB to search
+        required: false
+      alias:
+        type: string
+        description: Lambda function's alias
+        required: false
+        default: "dev"
+      runtime:
+        type: string
+        description: Function runtime (List of possible values - https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
+        default: "nodejs"
+      concurrency_range:
+        type: range
+        description: Range of function concurrency to search
+        required: false
+      statement_id:
+        type: string
+        description: Lambda policy statement identifier
+      s3_bucket_name:
+        type: string
+        description: The S3 bucket name containing the function package to be deployed
+      timeout:
+        type: integer
+        description: Function timeout in seconds
+        default: 300
+      concurrency:
+        type: integer
+        description: Function concurrency
+        required: false
+        default: 0
+      env_vars:
+        type: map
+        description: Function's environment variables
+        required: false
+        entry_schema:
+          type: string
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: radon.nodes.aws.AwsPlatform
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - monitor:
+          capability: radon.capabilities.monitoring.Monitor
+          node: radon.nodes.monitoring.PushGateway
+          relationship: radon.relationships.monitoring.AWSIsMonitoredBy
+          occurrences: [ 0, UNBOUNDED ]
+    interfaces:
+      scale_up:
+        type: radon.interfaces.scaling.ScaleUp
+        operations:
+          scale_up:
+            inputs:
+              adjustment: { default: 1, type: integer }
+              cpu_upper_bound: { default: 80.0, type: float }
+              ram_upper_bound: { default: 80.0, type: float }
+              callbackUrlCPU: { default: "null", type: string }
+            description: Operation for scaling up.
+            implementation:
+              primary: scaleUp
+              timeout: 0
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+          s3_bucket_key:
+            type: string
+            required: true
+            default: { get_property: [ SELF, s3_bucket_key ] }
+          aws_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, host, region ] }
+          role_arn:
+            type: string
+            required: true
+            default: { get_attribute: [ SELF, host, role_arn ] }
+          lambda_runtime:
+            type: string
+            required: true
+            default: { get_property: [ SELF, runtime ] }
+          function_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, name ] }
+          callbackUrlCPU:
+            type: string
+            required: false
+            default: { get_property: [ radon.policies.scaling.ScaleUp, callbackUrlCPU ] }
+          lambda_timeout:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, timeout ] }
+          lambda_memory:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, memory ] }
+          func_alias:
+            type: string
+            required: true
+            default: { get_property: [ SELF, alias ] }
+          permission_id:
+            type: string
+            required: true
+            default: { get_property: [ SELF, statement_id ] }
+          lambda_handler:
+            type: string
+            required: true
+            default: { get_property: [ SELF, handler ] }
+          s3_bucket_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, s3_bucket_name ] }
+          lambda_concurrency:
+            type: integer
+            required: true
+            default: { get_property: [ SELF, concurrency ] }
+          env_vars:
+            type: string
+            required: false
+            default: { get_property: [ SELF, env_vars ] }
+          cpu_upper_bound:
+            type: float
+            required: false
+            default: { get_property: [ radon.policies.scaling.ScaleUp, cpu_upper_bound ] }
+          s3_bucket_key:
+            type: string
+            required: true
+            default: { get_property: [ SELF, s3_bucket_key ] }
+          aws_region:
+            type: string
+            required: true
+            default: { get_property: [ SELF, host, region ] }
+          role_arn:
+            type: string
+            required: true
+            default: { get_attribute: [ SELF, host, role_arn ] }
+          function_name:
+            type: string
+            required: true
+            default: { get_property: [ SELF, name ] }
+          adjustment:
+            type: float
+            required: false
+            default: { get_property: [ radon.policies.scaling.ScaleUp, adjustment ] }
+          ram_upper_bound:
+            type: float
+            required: false
+            default: { get_property: [ radon.policies.scaling.ScaleUp, ram_upper_bound ] }
+        operations:
+          create:
+            implementation:
+              primary: create
+              timeout: 0
+          delete:
+            implementation:
+              primary: delete
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      delete:
+        type: radon.artifacts.Ansible
+        file: delete.yml
+      scaleUp:
+        type: radon.artifacts.Ansible
+        file: scaleUp.yml

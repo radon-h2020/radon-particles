@@ -22,7 +22,7 @@ node_types:
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
-        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket, radon.nodes.VM.EC2, radon.nodes.aws.AwsApiGateway, radon.nodes.aws.AwsDynamoDBTable, radon.nodes.aws.AwsLambdaFunctionFromS3, radon.nodes.datapipeline.PipelineBlock ]
+        valid_source_types: [ radon.nodes.aws.AwsLambdaFunction, radon.nodes.aws.AwsS3Bucket, radon.nodes.VM.EC2, radon.nodes.aws.AwsApiGateway, radon.nodes.aws.AwsDynamoDBTable, radon.nodes.aws.AwsLambdaFunctionFromS3, radon.nodes.datapipeline.PipelineBlock, radon.nodes.aws.AwsLambdaFunctionFromS3 ]
         type: tosca.capabilities.Container
     interfaces:
       Standard:

@@ -55,15 +55,15 @@ topology_template:
             relationship: con_HostedOn_3
             capability: host
         - invoker:
-            node: AwsLambdaFunctionFromS3_0
+            node: AwsLambdaFunctionFromS3Scalable_0
             relationship: con_AwsTriggers_0
             capability: invocable
-    AwsLambdaFunctionFromS3_0:
-      type: radon.nodes.aws.AwsLambdaFunctionFromS3
+    AwsLambdaFunctionFromS3Scalable_0:
+      type: radon.nodes.aws.AwsLambdaFunctionFromS3Scalable
       metadata:
         x: "1616"
         y: "182"
-        displayName: "AwsLambdaFunctionFromS3"
+        displayName: "AwsLambdaFunctionFromS3Scalable"
       properties:
         handler: "index.handler"
         memory: 1024
@@ -140,4 +140,4 @@ topology_template:
           callbackUrlCPU: { get_input: callbackUrlCPU }
           adjustment: 2
           ram_upper_bound: 80
-        targets: [ AwsLambdaFunctionFromS3_0 ]
+        targets: [ AwsLambdaFunctionFromS3Scalable_0 ]
