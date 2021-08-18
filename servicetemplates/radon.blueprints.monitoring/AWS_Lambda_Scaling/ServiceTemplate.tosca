@@ -68,7 +68,6 @@ topology_template:
         handler: "index.handler"
         memory: 1024
         s3_bucket_key: "nodeJS-monitored-function.zip"
-        function_name: "nodeJS-monitored-function"
         name: "nodeJS-monitored-function"
         runtime: "nodejs12.x"
         alias: "nodeJS-monitored-function"
