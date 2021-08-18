@@ -36,9 +36,6 @@ node_types:
         type: integer
         description: Function memory in MB
         default: 128
-      function_name:
-        type: string
-        description: Lambda Function name
       memory_range:
         type: range
         description: Range of function memory in MB to search
