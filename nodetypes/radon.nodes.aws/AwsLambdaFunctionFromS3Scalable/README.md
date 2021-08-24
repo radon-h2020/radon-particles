@@ -5,9 +5,9 @@
 
 A node type that represents an AWS Lambda function which is instrumented based on a function deployment package from an AWS S3 bucket.
 
-| Name                      | URI                                       | Version | Derived From                    |
-| :------------------------ | :---------------------------------------- | :------ | :------------------------------ |
-| `AwsLambdaFunctionFromS3` | `radon.nodes.aws.AwsLambdaFunctionFromS3` | 1.0.0   | `radon.nodes.abstract.Function` |
+| Name                              | URI                                               | Version | Derived From                    |
+| :-------------------------------- | :------------------------------------------------ | :------ | :------------------------------ |
+| `AwsLambdaFunctionFromS3Scalable` | `radon.nodes.aws.AwsLambdaFunctionFromS3Scalable` | 1.0.0   | `radon.nodes.abstract.Function` |
 
 ### Attributes
 

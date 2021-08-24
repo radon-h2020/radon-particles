@@ -1,8 +1,13 @@
 ---
 - name: configure
   hosts: all
-  gather_facts: true
+  gather_facts: no
   become: true
+  become_method: sudo
+  vars:
+    ansible_ssh_private_key_file: "{{ ssh_key_file }}"
+    ansible_ssh_user: "{{ ssh_user }}"
+
   tasks:
     - name: Install consul module for python
       pip:

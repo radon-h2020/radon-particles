@@ -11,6 +11,11 @@ node_types:
       port:
         type: integer
         default: { get_attribute: [ SELF, docker, port ] }
+    requirements:
+      - host:
+          capability: tosca.capabilities.Node
+          node: radon.nodes.VM.EC2
+          relationship: tosca.relationships.HostedOn
     capabilities:
       host:
         occurrences: [ 1, UNBOUNDED ]
@@ -21,6 +26,13 @@ node_types:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
           configure:
+            inputs:
+              ssh_user:
+                type: string
+                default: { get_attribute: [ SELF, host, ssh_user ] }
+              ssh_key_file:
+                type: string
+                default: { get_attribute: [ SELF, host, ssh_key_file ] }
             implementation:
               primary: create
               timeout: 0

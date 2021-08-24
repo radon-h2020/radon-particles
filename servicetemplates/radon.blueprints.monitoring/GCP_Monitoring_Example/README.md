@@ -1,4 +1,4 @@
-# Monitoring Stack and Google Hosted Cloud Function service Templaye
+# Monitoring Stack and Google Hosted Cloud Function service Template
 
 TOSCA Service Template to deploy the RADON Monitoring Stack over a GCP function
 
