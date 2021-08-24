@@ -15,6 +15,7 @@ node_types:
         description: Amazon Resource Name (ARN) for this function
         type: string
       region:
+        description: AWS region in which the function is deployed
         type: string
     properties:
       handler:
@@ -133,22 +134,6 @@ node_types:
             type: string
             required: false
             default: { get_property: [ SELF, env_vars ] }
-          s3_bucket_key:
-            type: string
-            required: true
-            default: { get_property: [ SELF, s3_bucket_key ] }
-          aws_region:
-            type: string
-            required: true
-            default: { get_property: [ SELF, host, region ] }
-          role_arn:
-            type: string
-            required: true
-            default: { get_attribute: [ SELF, host, role_arn ] }
-          function_name:
-            type: string
-            required: true
-            default: { get_property: [ SELF, name ] }
         operations:
           create:
             implementation:
