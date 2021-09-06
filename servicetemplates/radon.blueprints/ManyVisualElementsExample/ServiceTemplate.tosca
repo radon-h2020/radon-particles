@@ -1,0 +1,2202 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.blueprints"
+topology_template:
+  node_templates:
+    AwsLambdaFunction_49:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2063"
+        y: "170"
+        displayName: "F49"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_49
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_51
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_45:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2336"
+        y: "372"
+        displayName: "F45"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_45
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_47
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_46:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2336"
+        y: "309"
+        displayName: "F46"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_46
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_48
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_47:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2334"
+        y: "246"
+        displayName: "F47"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_47
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_49
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_48:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2330"
+        y: "182"
+        displayName: "F48"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_48
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_50
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_41:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2080"
+        y: "1616"
+        displayName: "F41"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_41
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_43
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_42:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2077"
+        y: "1551"
+        displayName: "F42"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_42
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_44
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_43:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2083"
+        y: "1491"
+        displayName: "F43"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_43
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_45
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_44:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2083"
+        y: "1429"
+        displayName: "F44"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_44
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_46
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_40:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2083"
+        y: "1364"
+        displayName: "F40"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_40
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_42
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_1:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1805"
+        y: "245"
+        displayName: "F1"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_1
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_3
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_2:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1805"
+        y: "306"
+        displayName: "F2"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_2
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_4
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_0:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1795"
+        y: "179"
+        displayName: "F0"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_0
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_1
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_38:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2082"
+        y: "1301"
+        displayName: "F38"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_38
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_40
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_39:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2080"
+        y: "1239"
+        displayName: "F39"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_39
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_41
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_5:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1823"
+        y: "495"
+        displayName: "F5"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_5
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_7
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_34:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2078"
+        y: "1177"
+        displayName: "F34"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_34
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_36
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_6:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1816"
+        y: "559"
+        displayName: "F6"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_6
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_8
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_35:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2078"
+        y: "1113"
+        displayName: "F35"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_35
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_37
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_3:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1826"
+        y: "365"
+        displayName: "F3"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_3
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_5
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_36:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2072"
+        y: "1048"
+        displayName: "F36"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_36
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_38
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_4:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1824"
+        y: "434"
+        displayName: "F4"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_4
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_6
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_37:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2079"
+        y: "977"
+        displayName: "F37"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_37
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_39
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_9:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1806"
+        y: "765"
+        displayName: "F9"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_9
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_11
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_30:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2078"
+        y: "911"
+        displayName: "F30"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_30
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_32
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_31:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2076"
+        y: "843"
+        displayName: "F31"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_31
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_33
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_32:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2074"
+        y: "768"
+        displayName: "F32"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_32
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_34
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_7:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1811"
+        y: "630"
+        displayName: "F7"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_7
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_9
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_33:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2070"
+        y: "701"
+        displayName: "F33"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_33
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_35
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_8:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1802"
+        y: "698"
+        displayName: "F8"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_8
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_10
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsDynamoDBTable_0:
+      type: radon.nodes.aws.AwsDynamoDBTable
+      metadata:
+        x: "3203"
+        y: "902"
+        displayName: "ItemsTable"
+      properties:
+        hash_key_name: "id"
+        read_capacity: 1
+        name: "items"
+        write_capacity: 1
+        hash_key_type: "STRING"
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_0
+            capability: host
+    AwsPlatform_0:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "1102"
+        y: "1670"
+        displayName: "AwsPlatform"
+      properties:
+        name: "AWS"
+        region: "eu-central-1"
+    AwsLambdaFunction_27:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2071"
+        y: "629"
+        displayName: "F27"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_27
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_29
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_28:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2066"
+        y: "568"
+        displayName: "F28"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_28
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_30
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_29:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2066"
+        y: "504"
+        displayName: "F29"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_29
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_31
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_23:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2066"
+        y: "439"
+        displayName: "F23"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_23
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_25
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_24:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2069"
+        y: "369"
+        displayName: "F24"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_24
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_26
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_25:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2063"
+        y: "304"
+        displayName: "F25"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_25
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_27
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_26:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "2062"
+        y: "238"
+        displayName: "F26"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_26
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_28
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_20:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1806"
+        y: "1478"
+        displayName: "F20"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_20
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_22
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_21:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1797"
+        y: "1544"
+        displayName: "F21"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_21
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_23
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_22:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1800"
+        y: "1608"
+        displayName: "F22"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_22
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_24
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsApiGateway_0:
+      type: radon.nodes.aws.AwsApiGateway
+      metadata:
+        x: "651"
+        y: "803"
+        displayName: "AwsApiGateway"
+      properties:
+        name: "ServerlessToDoListAPI"
+        api_version: "1.0.0"
+        api_description: "a simple serverless API example"
+      requirements:
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_2
+            capability: host
+        - invoker:
+            node: AwsLambdaFunction_0
+            relationship: con_AwsApiGatewayTriggers_0
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_1
+            relationship: con_AwsApiGatewayTriggers_1
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_2
+            relationship: con_AwsApiGatewayTriggers_2
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_3
+            relationship: con_AwsApiGatewayTriggers_3
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_4
+            relationship: con_AwsApiGatewayTriggers_4
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_5
+            relationship: con_AwsApiGatewayTriggers_5
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_6
+            relationship: con_AwsApiGatewayTriggers_6
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_7
+            relationship: con_AwsApiGatewayTriggers_7
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_8
+            relationship: con_AwsApiGatewayTriggers_8
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_9
+            relationship: con_AwsApiGatewayTriggers_9
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_10
+            relationship: con_AwsApiGatewayTriggers_10
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_11
+            relationship: con_AwsApiGatewayTriggers_11
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_12
+            relationship: con_AwsApiGatewayTriggers_12
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_13
+            relationship: con_AwsApiGatewayTriggers_13
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_14
+            relationship: con_AwsApiGatewayTriggers_14
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_15
+            relationship: con_AwsApiGatewayTriggers_15
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_16
+            relationship: con_AwsApiGatewayTriggers_16
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_17
+            relationship: con_AwsApiGatewayTriggers_17
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_18
+            relationship: con_AwsApiGatewayTriggers_18
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_19
+            relationship: con_AwsApiGatewayTriggers_19
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_20
+            relationship: con_AwsApiGatewayTriggers_20
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_21
+            relationship: con_AwsApiGatewayTriggers_21
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_22
+            relationship: con_AwsApiGatewayTriggers_22
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_23
+            relationship: con_AwsApiGatewayTriggers_23
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_24
+            relationship: con_AwsApiGatewayTriggers_24
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_25
+            relationship: con_AwsApiGatewayTriggers_25
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_26
+            relationship: con_AwsApiGatewayTriggers_26
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_27
+            relationship: con_AwsApiGatewayTriggers_27
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_28
+            relationship: con_AwsApiGatewayTriggers_28
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_29
+            relationship: con_AwsApiGatewayTriggers_29
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_30
+            relationship: con_AwsApiGatewayTriggers_30
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_31
+            relationship: con_AwsApiGatewayTriggers_31
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_32
+            relationship: con_AwsApiGatewayTriggers_32
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_33
+            relationship: con_AwsApiGatewayTriggers_33
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_34
+            relationship: con_AwsApiGatewayTriggers_34
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_35
+            relationship: con_AwsApiGatewayTriggers_35
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_36
+            relationship: con_AwsApiGatewayTriggers_36
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_37
+            relationship: con_AwsApiGatewayTriggers_37
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_38
+            relationship: con_AwsApiGatewayTriggers_38
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_39
+            relationship: con_AwsApiGatewayTriggers_39
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_40
+            relationship: con_AwsApiGatewayTriggers_40
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_41
+            relationship: con_AwsApiGatewayTriggers_41
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_42
+            relationship: con_AwsApiGatewayTriggers_42
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_43
+            relationship: con_AwsApiGatewayTriggers_43
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_44
+            relationship: con_AwsApiGatewayTriggers_44
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_45
+            relationship: con_AwsApiGatewayTriggers_45
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_46
+            relationship: con_AwsApiGatewayTriggers_46
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_47
+            relationship: con_AwsApiGatewayTriggers_47
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_48
+            relationship: con_AwsApiGatewayTriggers_48
+            capability: invocable
+        - invoker:
+            node: AwsLambdaFunction_49
+            relationship: con_AwsApiGatewayTriggers_49
+            capability: invocable
+    AwsLambdaFunction_16:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1808"
+        y: "1220"
+        displayName: "F16"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_16
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_18
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_17:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1810"
+        y: "1283"
+        displayName: "F17"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_17
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_19
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_18:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1803"
+        y: "1349"
+        displayName: "F18"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_18
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_20
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_19:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1803"
+        y: "1415"
+        displayName: "F19"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_19
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_21
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_12:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1800"
+        y: "960"
+        displayName: "F12"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_12
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_14
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_13:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1806"
+        y: "1031"
+        displayName: "F13"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_13
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_15
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_14:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1809"
+        y: "1097"
+        displayName: "F14"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_14
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_16
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_15:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1808"
+        y: "1161"
+        displayName: "F15"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_15
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_17
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_10:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1808"
+        y: "832"
+        displayName: "F10"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_10
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_12
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+    AwsLambdaFunction_11:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1802"
+        y: "897"
+        displayName: "F11"
+      properties:
+        handler: "list.handler"
+        memory: 128
+        name: "list-items"
+        runtime: "nodejs12.x"
+        alias: "dev"
+        statement_id: "list-stmt"
+        zip_file: { get_artifact: [ SELF, list_items ] }
+        timeout: 300
+        env_vars:
+          TODOS_TABLE: "items"
+      requirements:
+        - endpoint:
+            node: AwsDynamoDBTable_0
+            relationship: con_ConnectsTo_11
+            capability: database_endpoint
+        - host:
+            node: AwsPlatform_0
+            relationship: con_HostedOn_13
+            capability: host
+      artifacts:
+        list_items:
+          type: radon.artifacts.archive.Zip
+          file: list.zip
+  relationship_templates:
+    con_ConnectsTo_26:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_27:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_24:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_25:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_28:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_29:
+      type: radon.relationships.ConnectsTo
+    con_HostedOn_22:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_29:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos29"
+        http_methods: "get"
+    con_HostedOn_23:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_28:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos28"
+        http_methods: "get"
+    con_HostedOn_24:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_25:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_20:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_21:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_19:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_32:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos32"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_31:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos31"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_34:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos34"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_33:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos33"
+        http_methods: "get"
+    con_HostedOn_15:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_36:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos36"
+        http_methods: "get"
+    con_HostedOn_16:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_35:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos35"
+        http_methods: "get"
+    con_HostedOn_17:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_38:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos38"
+        http_methods: "get"
+    con_HostedOn_18:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_37:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos37"
+        http_methods: "get"
+    con_ConnectsTo_30:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_33:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_34:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_31:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_30:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos30"
+        http_methods: "get"
+    con_ConnectsTo_32:
+      type: radon.relationships.ConnectsTo
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_ConnectsTo_15:
+      type: radon.relationships.ConnectsTo
+    con_HostedOn_3:
+      type: tosca.relationships.HostedOn
+    con_ConnectsTo_16:
+      type: radon.relationships.ConnectsTo
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_ConnectsTo_13:
+      type: radon.relationships.ConnectsTo
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_ConnectsTo_14:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_19:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_17:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_18:
+      type: radon.relationships.ConnectsTo
+    con_HostedOn_11:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_18:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos18"
+        http_methods: "get"
+    con_HostedOn_12:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_17:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos17"
+        http_methods: "get"
+    con_HostedOn_8:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_13:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_9:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_14:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_19:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos19"
+        http_methods: "get"
+    con_HostedOn_6:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_7:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_4:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_5:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_10:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_21:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos21"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_20:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos20"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_23:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos23"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_22:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos22"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_25:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos25"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_24:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos24"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_27:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos27"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_26:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos26"
+        http_methods: "get"
+    con_ConnectsTo_22:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_23:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_20:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_21:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_48:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_49:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_46:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_47:
+      type: radon.relationships.ConnectsTo
+    con_HostedOn_44:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_45:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_46:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_47:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_40:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_41:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_42:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_43:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_9:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos9"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_10:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos10"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_8:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos8"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_7:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos7"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_12:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos12"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_6:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos6"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_11:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos11"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_5:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos5"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_14:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos14"
+        http_methods: "get"
+    con_HostedOn_37:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_4:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos4"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_13:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos13"
+        http_methods: "get"
+    con_HostedOn_38:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_3:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos3"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_16:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos16"
+        http_methods: "get"
+    con_HostedOn_39:
+      type: tosca.relationships.HostedOn
+    con_AwsApiGatewayTriggers_2:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos2"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_15:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos15"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_1:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos1"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_0:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos"
+        http_methods: "get"
+    con_ConnectsTo_37:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_38:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_35:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_36:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_39:
+      type: radon.relationships.ConnectsTo
+    con_HostedOn_33:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_34:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_35:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_36:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_30:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_31:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_32:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_26:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_27:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_28:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_29:
+      type: tosca.relationships.HostedOn
+    con_ConnectsTo_40:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_41:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_44:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_45:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_42:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_43:
+      type: radon.relationships.ConnectsTo
+    con_HostedOn_50:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_51:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_48:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_49:
+      type: tosca.relationships.HostedOn
+    con_ConnectsTo_11:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_12:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_10:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_39:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos39"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_43:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos43"
+        http_methods: "get"
+    con_ConnectsTo_2:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_42:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos42"
+        http_methods: "get"
+    con_ConnectsTo_3:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_45:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos45"
+        http_methods: "get"
+    con_ConnectsTo_4:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_44:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos44"
+        http_methods: "get"
+    con_ConnectsTo_5:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_47:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos47"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_46:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos46"
+        http_methods: "get"
+    con_AwsApiGatewayTriggers_49:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos49"
+        http_methods: "get"
+    con_ConnectsTo_0:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_48:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos48"
+        http_methods: "get"
+    con_ConnectsTo_1:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_6:
+      type: radon.relationships.ConnectsTo
+    con_ConnectsTo_7:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_41:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos41"
+        http_methods: "get"
+    con_ConnectsTo_8:
+      type: radon.relationships.ConnectsTo
+    con_AwsApiGatewayTriggers_40:
+      type: radon.relationships.aws.AwsApiGatewayTriggers
+      properties:
+        endpoint: "/todos40"
+        http_methods: "get"
+    con_ConnectsTo_9:
+      type: radon.relationships.ConnectsTo
