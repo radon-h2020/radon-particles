@@ -4,6 +4,6 @@ capability_types:
   radon.capabilities.monitoring.Monitor:
     derived_from: tosca.capabilities.Root
     metadata:
-      targetNamespace: "radon.capabilities"
+      targetNamespace: "radon.capabilities.monitoring"
       abstract: "false"
       final: "false"

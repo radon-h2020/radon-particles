@@ -4,7 +4,7 @@ relationship_types:
   radon.relationships.monitoring.GCPIsMonitoredBy:
     derived_from: tosca.relationships.ConnectsTo
     metadata:
-      targetNamespace: "radon.relationships"
+      targetNamespace: "radon.relationships.monitoring"
       abstract: "false"
       final: "false"
     interfaces:
