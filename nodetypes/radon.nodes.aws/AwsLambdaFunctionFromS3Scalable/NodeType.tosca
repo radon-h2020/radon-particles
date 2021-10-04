@@ -125,7 +125,7 @@ node_types:
           callbackUrlCPU:
             type: string
             required: false
-            default: { get_property: [ radon.policies.scaling.ScaleUp, callbackUrlCPU ] }
+            default: { get_property: [ radon.policies.scaling.ScaleOut, callbackUrlCPU ] }
           lambda_timeout:
             type: integer
             required: true
@@ -161,31 +161,15 @@ node_types:
           cpu_upper_bound:
             type: float
             required: false
-            default: { get_property: [ radon.policies.scaling.ScaleUp, cpu_upper_bound ] }
-          s3_bucket_key:
-            type: string
-            required: true
-            default: { get_property: [ SELF, s3_bucket_key ] }
-          aws_region:
-            type: string
-            required: true
-            default: { get_property: [ SELF, host, region ] }
-          role_arn:
-            type: string
-            required: true
-            default: { get_attribute: [ SELF, host, role_arn ] }
-          function_name:
-            type: string
-            required: true
-            default: { get_property: [ SELF, name ] }
+            default: { get_property: [ radon.policies.scaling.ScaleOut, cpu_upper_bound ] }
           adjustment:
             type: float
             required: false
-            default: { get_property: [ radon.policies.scaling.ScaleUp, adjustment ] }
+            default: { get_property: [ radon.policies.scaling.ScaleOut, adjustment ] }
           ram_upper_bound:
             type: float
             required: false
-            default: { get_property: [ radon.policies.scaling.ScaleUp, ram_upper_bound ] }
+            default: { get_property: [ radon.policies.scaling.ScaleOut, ram_upper_bound ] }
         operations:
           create:
             implementation:
