@@ -14,10 +14,10 @@ Abstract node type representing an object storage independently of the underlyin
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `entries`<sup>[1](#fn1)</sup> | `false` | `map: radon.datatypes.Entry` |   |   | Map of entries |
 
-<sup name="fn1">1</sup> The name of each `Entry` must be prefixed with the name of the operation that it is associated with, e.g. "get", "get_object" and and "getObject". This enables the decomposition tool to compute the operating cost of an `ObjectStorage` on the target cloud platform. The following table summarizes the supported operations for platform-specific node types derived from `ObjectStorage`.
+<sup id="fn1">1</sup> The name of each `Entry` must be prefixed with the name of the operation that it is associated with, e.g. "get", "get_object" or "getObject". This enables the decomposition tool to compute the operating cost of an `ObjectStorage` on the target cloud platform. The following table summarizes the supported operations for platform-specific node types derived from `ObjectStorage`.
 
 | Derived Node Type | Supported Operations |
-|:---- |:-------- |
+|:----------------- |:-------------------- |
 | `radon.nodes.aws.AwsS3Bucket` | get, put, post, list, copy, delete |
 
 ### Requirements

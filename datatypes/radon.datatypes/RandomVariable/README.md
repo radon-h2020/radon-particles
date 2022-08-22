@@ -13,4 +13,4 @@ Data type representing a random variable that always takes non-negative values.
 | `mean`<sup>[1](#fn1)</sup> | `true` | `float` | `greater_or_equal: 0.0` | 1.0 | Mean value |
 | `scv`<sup>[1](#fn1)</sup> | `false` | `float` | `greater_or_equal: 0.0` |   | Squared coefficient of variation |
 
-<sup>[1](#fn1)</sup> The `scv` is only reserved for now due to the limitation of the underlying LQN solver invoked by the decomposition tool. Notably, a zero `mean` implies a zero `scv` and therefore should also be avoided. A workaround for this is to replace zero with a small value like 0.001.
+<sup id="fn1">1</sup> The `scv` is only reserved for now due to the limitation of the underlying LQN solver invoked by the decomposition tool. Notably, a zero `mean` implies a zero `scv` and therefore should also be avoided. A workaround for this is to replace zero with a small value like 0.001.
