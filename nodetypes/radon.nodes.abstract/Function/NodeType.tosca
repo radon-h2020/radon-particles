@@ -17,6 +17,21 @@ node_types:
           type: radon.datatypes.Entry
       name:
         type: string
+      global_utilities:
+        type: list
+        required: false
+        entry_schema:
+          type: string
+      core_elements:
+        type: list
+        required: false
+        entry_schema:
+          type: string
+      local_utilities:
+        type: list
+        required: false
+        entry_schema:
+          type: string
     requirements:
       - host:
           capability: tosca.capabilities.Container
