@@ -10,10 +10,19 @@ data_types:
     properties:
       activities:
         type: map
+        required: false
         entry_schema:
           type: radon.datatypes.Activity
+      description:
+        type: string
+        required: false
       precedences:
         type: list
         required: false
         entry_schema:
           type: radon.datatypes.Precedence
+      class_trace:
+        type: list
+        required: false
+        entry_schema:
+          type: string
