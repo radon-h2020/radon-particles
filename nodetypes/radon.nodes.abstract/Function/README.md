@@ -14,6 +14,9 @@ Abstract node type representing a serverless function independently of the under
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
 | `name` | `true` | `string` |   |   | Name of the function |
 | `entries` | `false` | `map: radon.datatypes.Entry` | `length: 1` |   | Map of entries |
+| `core_elements` | `false` | `list: string` |   |   | List of core elements |
+| `local_utilities` | `false` | `list: string` |   |   | List of local utilities |
+| `global_utilities` | `false` | `list: string` |   |   | List of global utilities |
 
 ### Requirements
 

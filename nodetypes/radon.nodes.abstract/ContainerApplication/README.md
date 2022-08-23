@@ -15,6 +15,8 @@ Abstract node type representing a container application.
 | `name` | `false` | `string` |   |   | Name of the container application |
 | `granularity` | `false` | `string` | `valid_values: [coarse-grained, fine-grained]` |   | Decomposition granularity |
 | `entries` | `false` | `map: radon.datatypes.Entry` |   |   | Map of entries |
+| `core_elements` | `false` | `list: string` |   |   | List of core elements |
+| `global_utilities` | `false` | `list: string` |   |   | List of global utilities |
 
 ### Requirements
 

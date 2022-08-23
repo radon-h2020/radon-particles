@@ -21,6 +21,16 @@ node_types:
       name:
         type: string
         required: false
+      global_utilities:
+        type: list
+        required: false
+        entry_schema:
+          type: string
+      core_elements:
+        type: list
+        required: false
+        entry_schema:
+          type: string
     requirements:
       - host:
           capability: tosca.capabilities.Compute

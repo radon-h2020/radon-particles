@@ -8,19 +8,56 @@ node_types:
       abstract: "false"
       final: "false"
     properties:
+      clustering_parameters:
+        type: map
+        required: false
+        entry_schema:
+          type: string
       entries:
         type: map
         required: false
         entry_schema:
           type: radon.datatypes.Entry
+      dependence_proportion:
+        type: float
+        required: false
+        constraints:
+          - greater_or_equal: 0.5
+          - less_or_equal: 1.0
+      word_embedding:
+        type: string
+        required: false
+        constraints:
+          - valid_values: [ esa, word2vec, glove, fasttext ]
       granularity:
         type: string
         required: false
         constraints:
           - valid_values: [ monolithic, coarse-grained, fine-grained ]
+      validity_index:
+        type: string
+        required: false
+        constraints:
+          - valid_values: [ gamma , silhouette ]
       name:
         type: string
         required: false
+      similarity_tradeoff:
+        type: float
+        required: false
+        constraints:
+          - greater_or_equal: 0.0
+          - less_or_equal: 1.0
+      core_elements:
+        type: list
+        required: false
+        entry_schema:
+          type: string
+      clustering_algorithm:
+        type: string
+        required: false
+        constraints:
+          - valid_values: [ hierarchical, kmedoids, dbscan, spectral ]
     requirements:
       - host:
           capability: tosca.capabilities.Compute

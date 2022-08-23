@@ -10,5 +10,7 @@ Data type representing an entry at a TOSCA node.
 
 | Name | Required | Type | Constraint | Default Value | Description |
 |:---- |:-------- |:---- |:---------- |:------------- |:----------- |
-| `activities` | `true` | `map: radon.datatypes.Activity` |   |   | Map of activities |
+| `description` | `false` | `string` |   |   | Entry description |
+| `class_trace` | `false` | `list: string` |   |   | Class trace |
+| `activities` | `false` | `map: radon.datatypes.Activity` |   |   | Map of activities |
 | `precedences` | `false` | `list: radon.datatypes.Precedence` |   |   | List of precedences |
